@@ -57,19 +57,19 @@ export default function CheckoutPage(){
                             <h3 className="form-title text-brand-02 ps-4">預約課程</h3>
                             <div className="d-flex justify-content-between flex-wrap gap-4">
                                 <div className='w-xs-100 w-lg-40 d-flex flex-column gap-4'>
-                                    <div className="mb-3">
+                                    <div className="mb-3 form-section">
                                         <div className='d-flex justify-content-between align-items-center'>
                                             <label htmlFor="" className="form-label mb-0">日期</label>
                                             <p className='form-control-plaintext w-70 w-md-80  fw-bold'>2025-01-25 (六) ～ 2025-01-27 (一)</p>
                                         </div>
                                     </div>
-                                    <div className="mb-3">
+                                    <div className="mb-3 form-section">
                                         <div className='d-flex justify-content-between align-items-center'>
                                             <label htmlFor="" className="form-label mb-0">時間</label>
                                             <p className='form-control-plaintext w-70 w-md-80  fw-bold'>整天 5hr (09:30 -12:00) (13:00-15:30)</p>
                                         </div>
                                     </div>
-                                    <div className="mb-3">
+                                    <div className="mb-3 form-section">
                                         <div className='d-flex justify-content-between align-items-center'>
                                             <label htmlFor="" className="form-label mb-0">天數</label>
                                             <p className='form-control-plaintext w-70 w-md-80  fw-bold'>3 天</p>
@@ -77,19 +77,19 @@ export default function CheckoutPage(){
                                     </div>
                                 </div>
                                 <div className='w-xs-100 w-lg-40 d-flex flex-column gap-4 lower-part'>
-                                    <div className="mb-3">
+                                    <div className="mb-3 form-section">
                                         <div className='d-flex justify-content-between align-items-center'>
                                             <label htmlFor="" className="form-label mb-0">雪場</label>
                                             <p className='form-control-plaintext w-70 w-md-80  fw-bold'>妙高 休暇村妙高 RunRun滑雪場</p>
                                         </div>
                                     </div>
-                                    <div className="mb-3">
+                                    <div className="mb-3 form-section">
                                         <div className='d-flex justify-content-between align-items-center'>
                                             <label htmlFor="" className="form-label mb-0">類型</label>
                                             <p className='form-control-plaintext w-70 w-md-80  fw-bold'>單板</p>
                                         </div>
                                     </div>
-                                    <div className="mb-3">
+                                    <div className="mb-3 form-section">
                                         <div className='d-flex justify-content-between align-items-center'>
                                             <label htmlFor="" className="form-label mb-0">教練</label>
                                             <p className='form-control-plaintext w-70 w-md-80  fw-bold'>木村拓哉</p>
@@ -104,20 +104,20 @@ export default function CheckoutPage(){
                                 <h3 className="form-title text-brand-02 ps-4 mb-3">學員資料</h3>
                                 <p className=''>同班學員程度需一致，若有明顯差異，教練將以較初階程度為授課基準。</p>
                             </div>
-                            <div className="mb-3">
+                            <div className="mb-3 form-section">
                                 <div className='d-flex justify-content-between align-items-center'>
                                     <label htmlFor="" className="form-label mb-0">上課人數</label>
                                     <p className='form-control-plaintext w-70 w-md-80  fw-bold'>2 人</p>
                                 </div>
                             </div>
-                            <div className="mb-3">
+                            <div className="mb-3 form-section">
                                 <div className='d-flex justify-content-between align-items-center'>
                                     <label htmlFor="" className="form-label mb-0">滑行程度</label>
                                     <p className='form-control-plaintext w-70 w-md-80  fw-bold'>初中階</p>
                                 </div>
                             </div>
                             {/* 區塊：學員資料明細 */}
-                            <div className="mb-3">
+                            <div className="mb-3 form-section">
                                 <div className="row g-3">
                                     <div className="col-12 col-md-6 col-lg-4">
                                         <div className="card border-0">
@@ -222,25 +222,25 @@ export default function CheckoutPage(){
                             <div className="col-lg-8 col-12">
                                 <div className='d-flex flex-column gap-4'> 
                                     <h3 className="form-title text-brand-02 ps-4">付款明細</h3>
-                                    <div className="mb-3">
+                                    <div className="mb-3 form-section">
                                         <div className='d-flex justify-content-between align-items-center'>
                                             <label htmlFor="" className="form-label mb-0">價格/每小時</label>
                                             <p className='form-control-plaintext w-70 w-md-80  fw-bold'>JPY 20,000</p>
                                         </div>
                                     </div>
-                                    <div className="mb-3">
+                                    <div className="mb-3 form-section">
                                         <div className='d-flex justify-content-between align-items-center'>
                                             <label htmlFor="" className="form-label mb-0">時數</label>
                                             <p className='form-control-plaintext w-70 w-md-80  fw-bold'>15 小時</p>
                                         </div>
                                     </div>
-                                    <div className="mb-3">
+                                    <div className="mb-3 form-section">
                                         <div className='d-flex justify-content-between align-items-center'>
                                             <label htmlFor="" className="form-label mb-0">人數</label>
                                             <p className='form-control-plaintext w-70 w-md-80  fw-bold'>2 人</p>
                                         </div>
                                     </div>
-                                    <div className="mb-3">
+                                    <div className="mb-3 form-section">
                                         <div className='d-flex justify-content-between align-items-center'>
                                             <label htmlFor="" className="form-label mb-0 fs-4">總金額</label>
                                             <p className='form-control-plaintext w-70 w-md-80  fw-bold fs-3 text-brand-01'>JPY 600,000</p>
@@ -252,7 +252,7 @@ export default function CheckoutPage(){
                             <div className="col-lg-4 col-12">
                                 <div className='d-flex flex-column gap-4'> 
                                     <h3 className="form-title text-brand-02 ps-4">付款方式</h3>
-                                    <div className="mb-3">
+                                    <div className="mb-3 form-section">
                                         <div className="form-check mb-3">
                                             <input className="form-check-input" type="radio" name="payments" id="payment1" />
                                             <label className="form-check-label" htmlFor="payment1">
@@ -274,7 +274,7 @@ export default function CheckoutPage(){
                             <div className="col-lg-8 col-12">
                                 <div className='d-flex flex-column gap-4'>
                                     <h3 className="form-title text-brand-02 ps-4">聯繫方式</h3>
-                                    <div className="mb-3">
+                                    <div className="mb-3 form-section">
                                         <div className='d-flex justify-content-between align-items-center'>
                                             <label htmlFor="contactLastName" className="form-label mb-0">姓名</label>
                                             <div className='w-70 w-md-80  d-flex'>
@@ -283,31 +283,31 @@ export default function CheckoutPage(){
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="mb-3">
+                                    <div className="mb-3 form-section">
                                         <div className='d-flex justify-content-between align-items-center'>
                                             <label htmlFor="contactPhone" className="form-label mb-0">聯絡電話</label>
                                             <input type="tel" className="form-control w-70 w-md-80 " name="contactPhone" id="contactPhone" placeholder="09xxxxxxxx" />
                                         </div>
                                     </div>
-                                    <div className="mb-3">
+                                    <div className="mb-3 form-section">
                                         <div className='d-flex justify-content-between align-items-center'>
                                             <label htmlFor="email" className="form-label mb-0">E-mail</label>
                                             <input type="email" className="form-control w-70 w-md-80 " name="email" id="email" placeholder="xxx@xxx.xxx" />
                                         </div>
                                     </div>
-                                    <div className="mb-3">
+                                    <div className="mb-3 form-section">
                                         <div className='d-flex justify-content-between align-items-center'>
                                             <label htmlFor="lineID" className="form-label mb-0">LINE ID</label>
                                             <input type="text" className="form-control w-70 w-md-80 " name="lineID" id="lineID" placeholder="" />
                                         </div>
                                     </div>
-                                    <div className="mb-3">
+                                    <div className="mb-3 form-section">
                                         <div className='d-flex justify-content-between align-items-start'>
                                             <label htmlFor="note" className="form-label mb-0">備註</label>
                                             <textarea className="form-control w-70 w-md-80 " id="note" rows="3" placeholder="如有其他特殊需求，可以跟我們說唷！"></textarea>
                                         </div>
                                     </div>
-                                    <div className="mb-3">
+                                    <div className="mb-3 form-section">
                                         <div className='d-flex align-items-center'>
                                             <input className="form-check-input mt-0 me-3" type="checkbox" value="" id="isAgreed" />
                                             <label htmlFor="isAgreed" className="form-label mb-0 w-70 w-md-80 text-nowrap">本人已詳閱並同意
