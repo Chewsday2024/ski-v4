@@ -11,3 +11,9 @@ footer {
     font-size: 14px
   }
 }
+
+.w-md-75 {
+  @media (min-width: 768px) {
+    max-width: 75% ;
+  }
+}

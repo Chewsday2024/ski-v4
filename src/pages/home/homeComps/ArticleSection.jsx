@@ -42,7 +42,7 @@ function ArticleSection() {
             <div className="col-md-8">
               <div className="card-body p-0">
                 <div className="d-flex align-items-center">
-                  <img src="https://images.unsplash.com/photo-1710170599407-618cca3904d6?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" className="img-fluid rounded-circle me-4" alt="" style={{width:"160px", height:"160px", objectFit: "cover"}}/>
+                  <img src="https://images.unsplash.com/photo-1710170599407-618cca3904d6?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" className="img-fluid rounded-circle me-4" alt="" style={{width:"80px", height:"80px", objectFit: "cover"}}/>
                   <div className="d-flex flex-column">
                     <h5 className="card-title">五條老師</h5>
                     <small className="text-muted">單板/雙板</small>
@@ -50,7 +50,7 @@ function ArticleSection() {
                   </div>
                 </div>
                 <div className="d-flex flex-column">
-                  <p className="card-text my-4 py-2">
+                  <p className="card-text my-md-4 py-2">
                     滑雪教學是一種結合運動與樂趣的體驗。從基本技巧到高階挑戰，專業教練將引導學員掌握滑雪技巧，提升自信心與安全意識，讓每次滑雪都成為難忘的回憶，無論是初學者還是進階玩家，都能在雪場中找到屬於自己的節奏，享受速度與自由，感受大自然的美好與挑戰的樂趣<small className="text-gray-02 hover-brand-01">...Read More</small>
                   </p>
 
@@ -62,7 +62,7 @@ function ArticleSection() {
             </div>
           </div>
         </Link>
-        <div className="row col-10 row-cols-2 row-cols-lg-3 g-2 g-lg-3">
+        <div className="row col-10 row-cols-1 row-cols-lg-3 g-2 g-lg-3">
           {imagesData.map((item, index) => (
             <div className="col" key={index}>
               <div style={{ height: "200px", overflow: "hidden" }}> {/* 固定高度容器 */}

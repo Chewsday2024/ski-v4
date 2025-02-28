@@ -1,0 +1,16 @@
+.w-md-25 {
+  @media (min-width: 768px) {
+    max-width: 25% ;
+  }
+}
+
+.w-md-50 {
+  @media (min-width: 768px) {
+    max-width: 50% ;
+  }
+}
+
+.swiper-container {
+  padding-left: 20px;  // 左側空白
+  padding-right: 20px; // 右側空白
+}
