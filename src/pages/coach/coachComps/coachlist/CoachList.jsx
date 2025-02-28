@@ -6,7 +6,7 @@ import axios from 'axios';
 
 
 
-import { InputValue } from './SearchInput';
+import { InputValue } from '../SearchInput';
 
 import './CoachList.scss';
 
@@ -50,9 +50,9 @@ function CoachList() {
     <div className='row row-cols-3 w-100 g-3 mt-1'>
       {filteredCoaches.map((coach, index) => {
         return (
-          <div key={index} className='col d-flex justify-content-center text-white'>
-            <Link type='button' className='btn d-flex justify-content-center p-0 border-0' to={String(coach.id)}>
-              <div className='d-flex flex-column gap-2 border border-0 rounded-5 w-100 bg-primary position-relative co-card'>
+          <div key={index} className='col d-flex justify-content-center text-white coach-col'>
+            <Link type='button' className='btn d-flex justify-content-center p-0 border-0 coach-btn' to={String(coach.id)}>
+              <div className='d-flex flex-column gap-2 border border-0 rounded-5 w-100 bg-brand-02 position-relative co-card'>
                 <img src={coach.profileImg} className='position-absolute translate-middle start-50 co-img' alt="#" />
                 <h2>{coach.name}</h2>
                 <p>⭐⭐⭐{coach.rate.stars}({coach.rate.rateNum})</p>
