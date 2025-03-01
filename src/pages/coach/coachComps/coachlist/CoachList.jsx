@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext, useMemo} from 'react';
 import { Link } from 'react-router';
+import { useDispatch } from 'react-redux';
 import axios from 'axios';
 
 
@@ -9,10 +10,13 @@ import axios from 'axios';
 import { InputValue } from '../SearchInput';
 
 import './CoachList.scss';
+import { setCoachPage, setPageIsOpen } from '../coachPage/coachpageSlice';
 
 
 
 function CoachList() {
+
+  const dispatch = useDispatch();
   const { allValue } = useContext(InputValue);
   const [allCoaches, setAllCoaches] = useState([]);
   
@@ -51,7 +55,14 @@ function CoachList() {
       {filteredCoaches.map((coach, index) => {
         return (
           <div key={index} className='col d-flex justify-content-center text-white coach-col'>
-            <Link type='button' className='btn d-flex justify-content-center p-0 border-0 coach-btn' to={String(coach.id)}>
+            <Link
+              type='button'
+              className='btn d-flex justify-content-center p-0 border-0 coach-btn'
+              to={String(coach.id)}
+              onClick={() => {dispatch(setCoachPage(coach)) 
+                              dispatch(setPageIsOpen(true))
+              }}
+              >
               <div className='d-flex flex-column gap-2 border border-0 rounded-5 w-100 bg-brand-02 position-relative co-card'>
                 <img src={coach.profileImg} className='position-absolute translate-middle start-50 co-img' alt="#" />
                 <h2>{coach.name}</h2>

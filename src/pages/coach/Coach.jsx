@@ -1,41 +1,42 @@
 import { Outlet } from 'react-router';
-import { Provider } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 
 
 
 
 import SerchInput from './coachComps/SearchInput';
-import store from './store';
+
 
 
 
 
 import './Coach.scss';
+import { getPageIsOpenStatus } from './coachComps/coachPage/coachpageSlice';
 
 
 
 
 
 function Coach() {
+
+  const pageIsOpen = useSelector(getPageIsOpenStatus);
   
 
   return (
-    <Provider store={store}>
-      <div className='bg-gray-05'>
-        <div className='container my-3 '>
-          <div className='d-flex flex-column align-items-center'>
-            <h1 className='text-brand-01'>教練總覽</h1>
-            
-            <SerchInput />
-            
-            
-          </div>
+    <div className='bg-gray-05'>
+      <div className={`container my-3 ${pageIsOpen ? 'd-none' : 'd-block'}`}>
+        <div className='d-flex flex-column align-items-center'>
+          <h1 className='text-brand-01'>教練總覽</h1>
+          
+          <SerchInput />
+          
+          
         </div>
-
-        <Outlet />
       </div>
-    </Provider>
+
+      <Outlet />
+    </div>
   )
 }
 
