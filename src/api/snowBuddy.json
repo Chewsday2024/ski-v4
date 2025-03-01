@@ -960,13 +960,16 @@
     }],
   "classTimeType":{
       "allday": {
-          "name": "整天 5hr (09:30 -12:00) (13:00-15:30)"
+          "name": "整天 5hr (09:30 -12:00) (13:00-15:30)",
+          "hours": 5
       },
       "halfDayAM": {
-          "name": "半天 3hr (09:00 -12:00)"            
+          "name": "半天 3hr (09:00 -12:00)",
+          "hours": 3            
       },
       "halfDayPM":{
-          "name": "半天 3hr (13:00 -16:00)"
+          "name": "半天 3hr (13:00 -16:00)",
+          "hours": 3
       }
   },
   "studentSkiLevel":{

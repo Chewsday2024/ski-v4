@@ -6,7 +6,7 @@ export default function CheckoutFail(){
             <div className="h-100 d-flex flex-column justify-content-center mt-4">
                 <div className="d-flex flex-column gap-3 justify-content-center align-items-center">
                     {/* <span className="material-symbols-outlined icon-unfilled">Cancel</span> */}
-                    <img src="../src/assets/images/booking-fail.png" className="result-error-img" alt="預約失敗" />
+                    <img src="/images/booking-fail.png" className="result-error-img" alt="預約失敗" />
                     <h3 className="fs-2 error-text">預約失敗</h3>
                     <p className="text-md-20">404 網路連線問題，請重新嘗試</p>
                 </div>
