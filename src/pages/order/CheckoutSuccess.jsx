@@ -5,22 +5,22 @@ export default function CheckoutSuccess(){
         <div className="container vh-100">
             {/* PC Step flow */}
             <div className="row justify-content-center">
-                <div className='col-lg-8 col'>
-                    <div className='d-none d-md-block'>
-                        <div className='d-flex justify-content-between step-sec'>
-                            <div className='d-flex'>
-                                <span className='step-circle d-flex justify-content-center align-items-center'>1</span>
-                                <h2 className='fs-4 ms-3 text-gray-03'>填寫預約資料</h2>
+                <div className="col-lg-8 col">
+                    <div className="d-none d-md-block">
+                        <div className="d-flex justify-content-between step-sec">
+                            <div className="d-flex">
+                                <span className="step-circle d-flex justify-content-center align-items-center">1</span>
+                                <h2 className="fs-4 ms-3 text-gray-03">填寫預約資料</h2>
                             </div>
                             <span className="material-symbols-outlined d-flex justify-content-center align-items-center  text-gray-03">play_arrow</span>
-                            <div className='d-flex'>
-                                <span className='step-circle d-flex justify-content-center align-items-center'>2</span>
-                                <h2 className='fs-4 ms-3 text-gray-03'>填寫聯繫方式與付款</h2>
+                            <div className="d-flex">
+                                <span className="step-circle d-flex justify-content-center align-items-center">2</span>
+                                <h2 className="fs-4 ms-3 text-gray-03">填寫聯繫方式與付款</h2>
                             </div>
                             <span className="material-symbols-outlined d-flex justify-content-center align-items-center text-gray-03">play_arrow</span>
-                            <div className='d-flex'>
-                                <span className='step-circle active d-flex justify-content-center align-items-center'>3</span>
-                                <h2 className='fs-4 ms-3 text-brand-01'>預約完成</h2>
+                            <div className="d-flex">
+                                <span className="step-circle active d-flex justify-content-center align-items-center">3</span>
+                                <h2 className="fs-4 ms-3 text-brand-01">預約完成</h2>
                             </div>
                         </div>
                     </div>
@@ -29,19 +29,19 @@ export default function CheckoutSuccess(){
             {/* Mobile Step Flow */}
             <div className="row">
                 <div className="col">
-                    <div className='d-md-none'>
-                        <ul className='mobile-steps d-flex mt-20 mb-32'>
-                            <li className='d-flex flex-column align-items-center'>
-                                <span className='step-circle mobile-step-number d-flex justify-content-center align-items-center mb-3'>1</span>
-                                <h2 className='fs-6 text-gray-03 text-nowrap d-none'>填寫預約資料</h2>
+                    <div className="d-md-none">
+                        <ul className="mobile-steps d-flex mt-20 mb-32">
+                            <li className="d-flex flex-column align-items-center">
+                                <span className="step-circle mobile-step-number d-flex justify-content-center align-items-center mb-3">1</span>
+                                <h2 className="fs-6 text-gray-03 text-nowrap d-none">填寫預約資料</h2>
                             </li>
-                            <li className='d-flex flex-column align-items-center'>
-                                <span className='step-circle d-flex justify-content-center align-items-center mb-3'>2</span>
-                                <h2 className='fs-6  text-gray-03 text-nowrap d-none'>填寫聯繫方式與付款</h2>
+                            <li className="d-flex flex-column align-items-center">
+                                <span className="step-circle d-flex justify-content-center align-items-center mb-3">2</span>
+                                <h2 className="fs-6  text-gray-03 text-nowrap d-none">填寫聯繫方式與付款</h2>
                             </li>
-                            <li className='d-flex flex-column align-items-center step-active'>
-                                <span className='step-circle active d-flex justify-content-center align-items-center mb-3'>3</span>
-                                <h2 className='fs-6 text-brand-01 text-nowrap'>預約完成</h2>
+                            <li className="d-flex flex-column align-items-center step-active">
+                                <span className="step-circle active d-flex justify-content-center align-items-center mb-3">3</span>
+                                <h2 className="fs-6 text-brand-01 text-nowrap">預約完成</h2>
                             </li>
                         </ul>
                     </div>

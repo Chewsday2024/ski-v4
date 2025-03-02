@@ -2,6 +2,10 @@ import './Order.scss';
 import { Link } from 'react-router';
 import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
+import { createContext } from 'react';
+
+// 建立共用環境
+export const OrderContext = createContext({});
 
 export default function BookingPage(){
 
@@ -9,8 +13,9 @@ export default function BookingPage(){
     const [allCoaches, setAllCoaches] = useState([]);   // 全部的教練資料
     const [classTime, setClassTime] = useState([]);     // 課程時間選項
     const [skillLevels,setSkillLevels] = useState([]);  // 學員滑雪程度選項
-    const [totalHours,setTotalHours] = useState([]);    // 課程時間總時數
+    const [totalHours,setTotalHours] = useState(0);     // 課程時間總時數
     const [days,setDays] = useState(0);                 // 上課天數
+    const [totalPrice,setTotalPrice] = useState(0);     // 總金額
 
     
     const [selectedSkiHouse, setSelectedSkiHouse] = useState("");  // 下拉選單選中的雪場 value
@@ -81,14 +86,19 @@ export default function BookingPage(){
 
     console.log(selectedCoach);
 
-    let coachImg = "";
-    let coachPrice = 0;
-    if (selectedCoach){
-        const coach = allCoaches.find((coach)=> coach.id == selectedCoach);
-        coachImg = coach.profileImg;
-        coachPrice = coach.charge;
-        console.log("被選到的教練圖片",coachImg,"教練價格",coachPrice);
-    }
+
+    const [selectedCoachPrice,setSelectedCoachPrice] = useState(0);
+    const [coachImg,setCoachImg] = useState("");
+
+    useEffect(()=>{
+        if (selectedCoach){
+            const coach = allCoaches.find((coach)=> coach.id == selectedCoach);
+            setCoachImg(coach.profileImg);
+            setSelectedCoachPrice(coach.charge);
+        }
+    },[selectedCoach]);
+    
+    console.log("被選到的教練圖片",coachImg,"教練價格",selectedCoachPrice);
 
 
     const [startDate,setStartDate] = useState("");      // 開始日期設定
@@ -99,6 +109,8 @@ export default function BookingPage(){
     
     const [selectedStartDate, setSelectedStartDate] = useState("");    // 下拉選單選中的開始日期 value
     const [selectedEndDate,setSelectedEndDate] = useState("");         // 下拉選單選中的結束日期 value
+    const [selectedDate,setSelectedDate] = useState("");               // 下拉選單選中的日期 value
+    
 
     // 控制 Date Picker 最早可選日期 & 最晚可選日期
     const handleDate = ()=>{
@@ -137,25 +149,17 @@ export default function BookingPage(){
         prevSelectedEndDate.current = newEndDate;
     }
     
-    // Ｑ：這邊的天數跟總時數印出來是錯的，待處理
+    // 計算總時數
     const countHours = ()=>{
-        if (selectedClass && selectedStartDate && selectedEndDate){
-            const selectedClassOption = classTime.find((item)=> item[0] == selectedClass);
-            const selectedHours = selectedClassOption[1].hours;   //  選擇上課時間的時數
-            let computedDays = 1;   //預設 1 天
-
-            switch (selectedClassOption[0]){
-                case "alldays": {
-                    computedDays = Math.max(1,(new Date(selectedEndDate) - new Date(selectedStartDate))/(1000 * 60 * 60 * 24));
-                    break;
-                }
-                case "halfDayAM":
-                    computedDays = 1;
-                    break;
-                case "halfDayPM":
-                    computedDays = 1;
-                    break;
-            }
+        if (selectedClass){
+            const selectedHours = classTime.find((item)=> item[0] == selectedClass)[1].hours;   //  選擇上課時間的時數
+            let computedDays = 0;   //預設 1 天
+            
+            if (selectedClass === "allday" && selectedStartDate && selectedEndDate){
+                computedDays = Math.max(1,(new Date(selectedEndDate) - new Date(selectedStartDate))/(1000 * 60 * 60 * 24)+1);
+            } else if (selectedDate) {
+                computedDays = 1;
+            } 
             setDays(computedDays);
             setTotalHours(Number(selectedHours)*computedDays);
         }
@@ -163,30 +167,42 @@ export default function BookingPage(){
 
     useEffect(()=>{
         countHours();
-        console.log("總時數",totalHours,"天數",days);
-    },[selectedClass,selectedStartDate,selectedEndDate]);
+        
+    },[selectedClass,selectedStartDate,selectedEndDate,selectedDate]);
+
+    console.log("總時數",totalHours,"天數",days);
+
+    // 計算總金額
+    const countTotalPrice = ()=>{
+        const total = selectedCoachPrice*totalHours*selectedStudentNum;
+        setTotalPrice(total);
+    }
+
+    useEffect(()=>{
+        countTotalPrice();
+    },[selectedCoachPrice,totalHours,selectedStudentNum])
 
 
     return (
         <div className="container">
             {/* PC Step flow */}
             <div className="row justify-content-center">
-                <div className='col-lg-8 col'>
-                    <div className='d-none d-md-block'>
-                        <div className='d-flex justify-content-between step-sec'>
-                            <div className='d-flex'>
-                                <span className='step-circle active d-flex justify-content-center align-items-center'>1</span>
-                                <h2 className='fs-4 ms-3 text-brand-01'>填寫預約資料</h2>
+                <div className="col-lg-8 col">
+                    <div className="d-none d-md-block">
+                        <div className="d-flex justify-content-between step-sec">
+                            <div className="d-flex">
+                                <span className="step-circle active d-flex justify-content-center align-items-center">1</span>
+                                <h2 className="fs-4 ms-3 text-brand-01">填寫預約資料</h2>
                             </div>
                             <span className="material-symbols-outlined text-brand-01 d-flex justify-content-center align-items-center">play_arrow</span>
-                            <div className='d-flex'>
-                                <span className='step-circle d-flex justify-content-center align-items-center'>2</span>
-                                <h2 className='fs-4 ms-3 text-gray-03'>填寫聯繫方式與付款</h2>
+                            <div className="d-flex">
+                                <span className="step-circle d-flex justify-content-center align-items-center">2</span>
+                                <h2 className="fs-4 ms-3 text-gray-03">填寫聯繫方式與付款</h2>
                             </div>
                             <span className="material-symbols-outlined d-flex justify-content-center align-items-center text-gray-03">play_arrow</span>
-                            <div className='d-flex'>
-                                <span className='step-circle d-flex justify-content-center align-items-center'>3</span>
-                                <h2 className='fs-4 ms-3 text-gray-03'>預約完成</h2>
+                            <div className="d-flex">
+                                <span className="step-circle d-flex justify-content-center align-items-center">3</span>
+                                <h2 className="fs-4 ms-3 text-gray-03">預約完成</h2>
                             </div>
                         </div>
                     </div>
@@ -195,19 +211,19 @@ export default function BookingPage(){
             {/* Mobile Step Flow */}
             <div className="row">
                 <div className="col">
-                    <div className='d-md-none'>
-                        <ul className='mobile-steps d-flex mt-20 mb-32'>
-                            <li className='d-flex flex-column align-items-center step-active'>
-                                <span className='step-circle active mobile-step-number d-flex justify-content-center align-items-center mb-3'>1</span>
-                                <h2 className='fs-6 text-brand-01 text-nowrap'>填寫預約資料</h2>
+                    <div className="d-md-none">
+                        <ul className="mobile-steps d-flex mt-20 mb-32">
+                            <li className="d-flex flex-column align-items-center step-active">
+                                <span className="step-circle active mobile-step-number d-flex justify-content-center align-items-center mb-3">1</span>
+                                <h2 className="fs-6 text-brand-01 text-nowrap">填寫預約資料</h2>
                             </li>
-                            <li className='d-flex flex-column align-items-center'>
-                                <span className='step-circle d-flex justify-content-center align-items-center mb-3'>2</span>
-                                <h2 className='fs-6 text-gray-03 text-nowrap d-none'>填寫聯繫方式與付款</h2>
+                            <li className="d-flex flex-column align-items-center">
+                                <span className="step-circle d-flex justify-content-center align-items-center mb-3">2</span>
+                                <h2 className="fs-6 text-gray-03 text-nowrap d-none">填寫聯繫方式與付款</h2>
                             </li>
-                            <li className='d-flex flex-column align-items-center'>
-                                <span className='step-circle d-flex justify-content-center align-items-center mb-3'>3</span>
-                                <h2 className='fs-6 text-gray-03 text-nowrap d-none'>預約完成</h2>
+                            <li className="d-flex flex-column align-items-center">
+                                <span className="step-circle d-flex justify-content-center align-items-center mb-3">3</span>
+                                <h2 className="fs-6 text-gray-03 text-nowrap d-none">預約完成</h2>
                             </li>
                         </ul>
                     </div>
@@ -298,7 +314,7 @@ export default function BookingPage(){
                                 <div className="d-flex justify-content-between align-items-center">
                                     <label htmlFor="coachPrice" className="form-label mb-0">價格/每小時</label>
                                     <input
-                                        value={`JPY ${coachPrice.toLocaleString()}`}
+                                        value={`JPY ${selectedCoachPrice.toLocaleString()}`}
                                         type="text" 
                                         className="form-control-plaintext w-70 w-md-80  fs-2 text-brand-02 fw-bold" 
                                         id="coachPrice" 
@@ -360,7 +376,10 @@ export default function BookingPage(){
                                     <input
                                         min={startDate}
                                         max={endDate}
-                                        value={startDate}
+                                        value={selectedDate}
+                                        onChange={(e)=>{
+                                            setSelectedDate(e.target.value);
+                                        }}
                                         type="date" 
                                         className="form-control w-70 w-md-80" 
                                         id="date"/>
@@ -381,7 +400,7 @@ export default function BookingPage(){
                                     <select
                                         value={selectedStudentNum}
                                         onChange={(e)=>{
-                                            setSelectedStudentNum(e.target.value);
+                                            setSelectedStudentNum(Number(e.target.value));
                                         }} 
                                         className="form-select w-70 w-md-80" 
                                         name="numOfStudents" 
@@ -472,11 +491,11 @@ export default function BookingPage(){
                                 <tbody>
                                     <tr>
                                         <th scope="row" className="border-0 px-0 pt-4 fw-normal">價格/每小時</th>
-                                        <td className="text-end border-0 px-0 pt-4">{`JPY ${coachPrice.toLocaleString()}`}</td>
+                                        <td className="text-end border-0 px-0 pt-4">{`JPY ${selectedCoachPrice.toLocaleString()}`}</td>
                                     </tr>
                                     <tr>
                                         <th scope="row" className="border-0 px-0 pt-3 fw-normal">時數</th>
-                                        <td className="text-end border-0 px-0 pt-3">0 小時</td>
+                                        <td className="text-end border-0 px-0 pt-3">{totalHours} 小時</td>
                                     </tr>
                                     <tr>
                                         <th scope="row" className="border-0 px-0 pt-3 pb-3 fw-normal">人數</th>
@@ -486,13 +505,13 @@ export default function BookingPage(){
                             </table>
                             <div className="d-flex justify-content-between mt-4">
                                 <p className="mb-0 fs-4">總金額</p>
-                                <p className="mb-0 fs-3 fw-bold text-brand-02">JPY 600,000</p>
+                                <p className="mb-0 fs-3 fw-bold text-brand-02">JPY {totalPrice.toLocaleString()}</p>
                             </div>
                         </div>
                     </div>
                 </div>  
             </div>
-            <div className='d-flex justify-content-center mt-4 mt-lg-5 mb-5 mb-lg-60'>
+            <div className="d-flex justify-content-center mt-4 mt-lg-5 mb-5 mb-lg-60">
                 <Link to='/checkout' className="btn-custom btn-custom-filled w-lg-25 w-md-50 w-xs-100 text-nowrap">下一步</Link>
             </div>
         </div>
