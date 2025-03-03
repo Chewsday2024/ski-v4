@@ -11,16 +11,14 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
-
     "@fullcalendar/daygrid": "^6.1.15",
     "@fullcalendar/interaction": "^6.1.15",
     "@fullcalendar/react": "^6.1.15",
     "@fullcalendar/timegrid": "^6.1.15",
-
     "aos": "^3.0.0-beta.6",
-
     "axios": "^1.7.9",
     "bootstrap": "^5.3.3",
+    "bootstrap-icons": "^1.11.3",
     "fullpage.js": "^4.0.33",
     "json-server": "^0.17.4",
     "prop-types": "^15.8.1",
@@ -28,6 +26,7 @@
     "react-dom": "^18.3.1",
     "react-loading": "^2.0.3",
     "react-router": "^7.1.5",
+    "react-select": "^5.10.0",
     "react-spinners": "^0.15.0",
     "swiper": "^11.2.1"
   },
