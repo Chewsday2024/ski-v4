@@ -10,7 +10,7 @@ function Footer() {
       <footer className='bg-gray-04 py-4'>
         <div className='container d-flex flex-column flex-md-row my-1'>
           <NavLink className="d-flex align-items-center justify-content-center" to=''>
-              <img src="../src/assets/images/logo.png" alt="logo" style={{width:'150px'}}/>
+              <img src="public/logo-2.png" alt="logo" style={{width:'150px'}}/>
           </NavLink>
           <div className='d-flex flex-column w-100 w-md-75 ms-auto'>
 
@@ -23,10 +23,10 @@ function Footer() {
                   <NavLink className="text-brand-01 text-decoration-none" to='skiHouse'>雪場介紹</NavLink>
                 </li>
                 <li>
-                  <NavLink className="text-brand-01 text-decoration-none" to=''>推薦文章</NavLink>
+                  <NavLink className="text-brand-01 text-decoration-none" to='article'>推薦文章</NavLink>
                 </li>
                 <li>
-                  <NavLink className="text-brand-01 text-decoration-none" to=''>安全知識</NavLink>
+                  <NavLink className="text-brand-01 text-decoration-none" to='about-us'>關於我們</NavLink>
                 </li>
               </ul>
               

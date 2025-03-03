@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { NavLink } from 'react-router';
-import logo from '../assets/images/logo-2.png';
 import './Header.scss';
 
 function Header() {
@@ -41,7 +40,7 @@ function Header() {
       <nav className="navbar navbar-expand-lg py-4">
         <div className="container">
           <NavLink className="navbar-brand" to="/">
-            <img src={logo} alt="logo" style={{ width: '200px' }} />
+            <img src="public/logo-2.png" alt="logo" style={{ width: '200px' }} />
           </NavLink>
 
           <button
