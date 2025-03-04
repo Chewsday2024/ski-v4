@@ -33,7 +33,7 @@ export default function SkiResortListPage() {
 
   return(
     <>
-      <div className="container d-flex flex-column align-items-center">
+      <div className="cardsContainer d-flex flex-column align-items-center">
         <div className="w-100 d-flex justify-content-center">
           <select value={resortSelect}
           onChange={handleChange} className="form-select form-select-lg mb-3" aria-label=".form-select-lg example">

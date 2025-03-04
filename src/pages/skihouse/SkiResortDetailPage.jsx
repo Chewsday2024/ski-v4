@@ -13,7 +13,7 @@ export default  function SkiResortDetailPage() {
 
 
   useEffect(() =>{
-    const fetchResort = async() =>{
+    const fetchResort = async(id) =>{
       try {
         const res = await axios.get(`http://localhost:3000/skiResorts/${id}`)
         console.log(res.data);
@@ -23,7 +23,7 @@ export default  function SkiResortDetailPage() {
         alert(`Error: ${error.message}`);
       }
     };
-    fetchResort();
+    fetchResort(id);
   },[id])
 
 

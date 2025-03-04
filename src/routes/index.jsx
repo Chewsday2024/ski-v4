@@ -56,8 +56,8 @@ const routes = [
         element: <SkiResortListPage />,
       },
       {
-        path: 'ski-house/:id',
-        element: <SkiResortDetailPage />
+          path: 'ski-house/:id',
+          element: <SkiResortDetailPage />
       },
       {
         path: 'sign-in',

@@ -13,7 +13,21 @@
     height: 400px;
   }
 
-.card{
+  .cardContainer{
+    perspective: 1000px;
+  }
+
+  .resortCard{
+    transition: all 0.3s ease;
+    transform: translateZ(0) scale(1);
+    box-shadow: 0 0px 10px rgba(0, 0, 0, 0.3);
+    &:hover{
+      transform: translateZ(40px) scale(1.1);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+  }
+
+  .card{
   border-width: .15rem;
 }
 
