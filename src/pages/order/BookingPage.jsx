@@ -1,18 +1,63 @@
 import './Order.scss';
 import { Link } from 'react-router';
-import { useEffect, useRef, useState } from 'react';
+import { createContext, useContext, useEffect, useRef, useState } from 'react';
 import axios from 'axios';
-import { createContext } from 'react';
 
-// 建立共用環境
+// 建立預約教練訂單的共用環境
 export const OrderContext = createContext({});
+
+// 訂單資料 - 初始資料
+export const defaultOrder = {
+    "orderTime": "",
+    "orderStatus":0,
+    "userId": 1,
+    "skiResortId": 0,          
+    "coachId": 0,
+    "class": {
+        "skiType": "",             
+        "timeType": "",                     
+        "date": null,               
+        "startDate": null,    
+        "endDate": null,      
+        "days": 0                     
+    },
+    "studentsData":{
+        "studentNum": 0,
+        "skiLevel": 0,                
+        "students": []
+    },
+    "paymentDetail":{
+        "hours": 0,
+        "studentNum": 0,
+        "total": 0
+    },
+    "contactInfo":{
+        "name": "",
+        "phone": "",
+        "email": "",
+        "lineId": "",
+        "note": ""
+    },
+    "is_checked": false,
+    "paymentMethod": 0, 
+    "isPaid": false
+}
+
 
 export default function BookingPage(){
 
-    const [allSkiHouses, setAllSkiHouses] = useState([]); //全部的雪場資料
-    const [allCoaches, setAllCoaches] = useState([]);   // 全部的教練資料
-    const [classTime, setClassTime] = useState([]);     // 課程時間選項
-    const [skillLevels,setSkillLevels] = useState([]);  // 學員滑雪程度選項
+    // const [allSkiHouses, setAllSkiHouses] = useState([]); //全部的雪場資料
+    const {allSkiHouses, setAllSkiHouses} = useContext(OrderContext);
+
+    // const [allCoaches, setAllCoaches] = useState([]);   // 全部的教練資料
+    const {allCoaches, setAllCoaches} = useContext(OrderContext);
+
+    // const [classTime, setClassTime] = useState([]);     // 課程時間選項
+    const {classTime,setClassTime} = useContext(OrderContext);
+
+    // const [skillLevels,setSkillLevels] = useState([]);  // 學員滑雪程度選項
+    const {skillLevels,setSkillLevels} = useContext(OrderContext);
+
     const [totalHours,setTotalHours] = useState(0);     // 課程時間總時數
     const [days,setDays] = useState(0);                 // 上課天數
     const [totalPrice,setTotalPrice] = useState(0);     // 總金額
@@ -22,14 +67,18 @@ export default function BookingPage(){
     const [selectedCoach, setSelectedCoach] = useState("");        // 下拉選單選中的教練 value
     const [selectedClass, setSelectedClass] = useState("");        // 下拉選單選中的課程時間 value
     const [selectedStudentNum,setSelectedStudentNum] = useState(0);  // 下拉選單選中的上課人數 value
-    
+    const [selectedSkiType,setSelectedSkiType] = useState("");          // 下拉選單選中的雪板類型 value
+    const [selectedSkillLevel,setSelectedSkillLevel] = useState(0);     // 下拉選單選中的滑行程度 value
 
     
-    console.log("全部的雪場資料",allSkiHouses);
-    console.log("全部的教練資料",allCoaches);
-    console.log("課程時間選項",classTime);
+    // console.log("全部的雪場資料",allSkiHouses);
+    // console.log("全部的教練資料",allCoaches);
+    // console.log("課程時間選項",classTime);
 
-    console.log("滑雪程度",skillLevels);
+    // console.log("滑雪程度",skillLevels);
+    // console.log("雪板",selectedSkiType);
+
+    // console.log("選中的滑行程度",selectedSkillLevel);
     
 
     useEffect(()=>{
@@ -84,9 +133,6 @@ export default function BookingPage(){
         console.log("篩選過的教練資料",coachesData);
     }
 
-    console.log(selectedCoach);
-
-
     const [selectedCoachPrice,setSelectedCoachPrice] = useState(0);
     const [coachImg,setCoachImg] = useState("");
 
@@ -98,7 +144,7 @@ export default function BookingPage(){
         }
     },[selectedCoach]);
     
-    console.log("被選到的教練圖片",coachImg,"教練價格",selectedCoachPrice);
+    // console.log("被選到的教練圖片",coachImg,"教練價格",selectedCoachPrice);
 
 
     const [startDate,setStartDate] = useState("");      // 開始日期設定
@@ -110,6 +156,9 @@ export default function BookingPage(){
     const [selectedStartDate, setSelectedStartDate] = useState("");    // 下拉選單選中的開始日期 value
     const [selectedEndDate,setSelectedEndDate] = useState("");         // 下拉選單選中的結束日期 value
     const [selectedDate,setSelectedDate] = useState("");               // 下拉選單選中的日期 value
+
+    console.log("選擇的開始日期",selectedStartDate,"選擇的結束日期",selectedEndDate);
+    
     
 
     // 控制 Date Picker 最早可選日期 & 最晚可選日期
@@ -131,7 +180,7 @@ export default function BookingPage(){
 
     const handleSelectedStartDate = (e) => {
         const newStartDate = e.target.value;
-        if ( selectedStartDate && new Date(newStartDate) > new Date(selectedEndDate)){
+        if ( selectedEndDate && new Date(newStartDate) > new Date(selectedEndDate)){
             alert("開始日期不可晚於結束日期");
             return;
         }
@@ -141,7 +190,7 @@ export default function BookingPage(){
 
     const handleSelectedEndDate = (e) => {
         const newEndDate = e.target.value;
-        if ( selectedEndDate && new Date(newEndDate) < new Date(selectedStartDate)){
+        if ( selectedStartDate && new Date(newEndDate) < new Date(selectedStartDate)){
             alert("結束日期不可早於開始日期");
             return;
         }
@@ -153,7 +202,7 @@ export default function BookingPage(){
     const countHours = ()=>{
         if (selectedClass){
             const selectedHours = classTime.find((item)=> item[0] == selectedClass)[1].hours;   //  選擇上課時間的時數
-            let computedDays = 0;   //預設 1 天
+            let computedDays = 0;
             
             if (selectedClass === "allday" && selectedStartDate && selectedEndDate){
                 computedDays = Math.max(1,(new Date(selectedEndDate) - new Date(selectedStartDate))/(1000 * 60 * 60 * 24)+1);
@@ -183,7 +232,131 @@ export default function BookingPage(){
     },[selectedCoachPrice,totalHours,selectedStudentNum])
 
 
+
+    const [students,setStudents] = useState([]);    //學員資料
+    
+    // 初始化學生資料
+    useEffect(()=>{
+        const defaultStudents = Array.from({length: selectedStudentNum},()=>({
+            lastName: "",
+            firstName: "",
+            name:"",
+            gender: "",
+            age: 0,
+            phone: ""
+        }));
+        setStudents(defaultStudents);
+    },[selectedStudentNum])
+
+    // 更新學生資料：Ｑ：GPT 寫的
+    const handleStudentsData = (index, field, value) => {
+        setStudents((prevStudents) => {
+            // 複製一份學生資料的陣列，避免直接修改原本的資料
+            const updatedStudents = [...prevStudents]; 
+
+            // 更新指定學員的特定欄位
+            updatedStudents[index] = {
+                ...updatedStudents[index], // 保留該學員其他欄位的資料
+                [field]: value,            // 只更新目前正在輸入的欄位
+
+                // 若更新的是 lastName 或 firstName，則更新 name
+                name: field === "lastName" || field === "firstName"
+                ? `${field === "lastName" ? value : updatedStudents[index].lastName}${field === "firstName" ? value : updatedStudents[index].firstName}`
+                : updatedStudents[index].name,
+            };
+
+            // 回傳更新後的新學生陣列，讓 React 更新畫面
+            return updatedStudents;
+        });
+    };
+
+    // 預約教練資料: useContext ()
+    // const [order,setOrder] = useState({
+    //     "orderTime": "",
+    //     "orderStatus":0,
+    //     "userId": 1,
+    //     "skiResortId": 0,          
+    //     "coachId": 0,
+    //     "class": {
+    //         "skiType": "",             
+    //         "timeType": "",                     
+    //         "date": null,               
+    //         "startDate": null,    
+    //         "endDate": null,      
+    //         "days": 0                     
+    //     },
+    //     "studentsData":{
+    //         "studentNum": 0,
+    //         "skiLevel": 0,                
+    //         "students": []
+    //     },
+    //     "paymentDetail":{
+    //         "hours": 0,
+    //         "studentNum": 0,
+    //         "total": 0
+    //     },
+    //     "contactInfo":{
+    //         "name": "",
+    //         "phone": "",
+    //         "email": "",
+    //         "lineId": "",
+    //         "note": ""
+    //     },
+    //     "is_checked": false,
+    //     "paymentMethod": 0, 
+    //     "isPaid": false
+    // })
+    const {order,setOrder} = useContext(OrderContext);
+
+    // 把選擇的資料存到 orders 訂單裡
+    const handleOrder = () => {
+        const tmpOrder = {
+            ...order,
+            skiResortId: selectedSkiHouse,          
+            coachId: selectedCoach,
+            class: {
+                skiType: selectedSkiType,             
+                timeType: selectedClass,                     
+                date: ( selectedClass!== "allday" ? selectedDate: ""),               
+                startDate: ( selectedClass == "allday" ? selectedStartDate: ""),    
+                endDate: ( selectedClass == "allday" ? selectedEndDate: ""),      
+                days: days                     
+            },
+            studentsData:{
+                studentNum: selectedStudentNum,
+                skiLevel: selectedSkillLevel,                
+                students: students
+            },
+            paymentDetail:{
+                hours: totalHours,
+                studentNum: selectedStudentNum,
+                total: totalPrice
+            },
+        }
+        setOrder(tmpOrder);
+    }
+   
+    useEffect(()=>{
+        handleOrder();
+    },[selectedSkiHouse,
+        selectedCoach,
+        selectedSkiType,
+        selectedClass,
+        selectedDate,
+        selectedStartDate,
+        selectedEndDate,
+        days,
+        selectedStudentNum,
+        selectedSkillLevel,
+        students,
+        totalHours,
+        totalPrice
+    ])
+
+    // console.log("預約訂單資料",order);
+
     return (
+        <>
         <div className="container">
             {/* PC Step flow */}
             <div className="row justify-content-center">
@@ -263,7 +436,14 @@ export default function BookingPage(){
                             <div className="mb-3 form-section">
                                 <div className="d-flex justify-content-between align-items-center">
                                     <label htmlFor="snowBoard" className="form-label mb-0">類型</label>
-                                    <select className="form-select w-70 w-md-80 " name="snowBoard" id="snowBoard" defaultValue="">
+                                    <select
+                                        value={selectedSkiType}
+                                        onChange={(e)=>{
+                                            setSelectedSkiType(e.target.value)
+                                        }}
+                                        className="form-select w-70 w-md-80" 
+                                        name="snowBoard" 
+                                        id="snowBoard">
                                         <option value="" disabled>請選擇雪板類型</option>
                                         <option value="single">單板</option>
                                         <option value="double">雙板</option>
@@ -316,8 +496,9 @@ export default function BookingPage(){
                                     <input
                                         value={`JPY ${selectedCoachPrice.toLocaleString()}`}
                                         type="text" 
-                                        className="form-control-plaintext w-70 w-md-80  fs-2 text-brand-02 fw-bold" 
-                                        id="coachPrice" 
+                                        className="form-control-plaintext w-70 w-md-80 fs-2 text-brand-02 fw-bold" 
+                                        id="coachPrice"
+                                        readOnly 
                                         />
                                 </div>
                             </div>
@@ -418,8 +599,15 @@ export default function BookingPage(){
                             <div className="mb-3 form-section">
                                 <div className="d-flex justify-content-between align-items-center">
                                     <label htmlFor="level" className="form-label mb-0">滑行程度</label>
-                                    <select className="form-select w-70 w-md-80 " name='level' id='level' defaultValue="">
-                                        <option value="" disabled>請選擇滑雪程度</option>
+                                    <select
+                                        value={selectedSkillLevel}
+                                        onChange={(e)=>{
+                                            setSelectedSkillLevel(e.target.value)
+                                        }}
+                                        className="form-select w-70 w-md-80" 
+                                        name="level"
+                                        id="level">
+                                        <option value="0" disabled>請選擇滑雪程度</option>
                                         {
                                             skillLevels.map((skillLevel)=>{
                                                 return(<option key={skillLevel[0]} value={skillLevel[0]}>{skillLevel[1]}</option>)
@@ -434,23 +622,45 @@ export default function BookingPage(){
                             </div>
                             {/* 學員資料 */}
                             {
-                                Array(Number(selectedStudentNum)).fill().map((_,index)=>{
+                                students.map((student,index)=>{
                                     return(<>
                                         <div key={index} className="d-flex flex-column gap-4 pt-4 border-top">
                                             <h4 className="form-title text-brand-02 ps-4 mb-3 fs-5">{`學員 ${index+1}`}</h4>
                                             <div className="mb-3 form-section">
                                                 <div className="d-flex justify-content-between align-items-center">
                                                     <label htmlFor="lastName" className="form-label mb-0">姓名</label>
-                                                    <div className="w-70 w-md-80  d-flex">
-                                                        <input type="text" className="form-control w-25 me-3" id="lastName" placeholder="姓氏" />
-                                                        <input type="text" className="form-control w-75" placeholder="姓名" />
+                                                    <div className="w-70 w-md-80 d-flex">
+                                                        <input
+                                                            value={student.lastName}
+                                                            onChange={(e)=>{
+                                                                handleStudentsData(index, "lastName", e.target.value)
+                                                            }}
+                                                            type="text" 
+                                                            className="form-control w-25 me-3" 
+                                                            id="lastName" 
+                                                            placeholder="姓氏" />
+                                                        <input
+                                                            value={student.firstName}
+                                                            onChange={(e)=>{
+                                                                handleStudentsData(index, "firstName", e.target.value)
+                                                            }}
+                                                            type="text" 
+                                                            className="form-control w-75" 
+                                                            placeholder="姓名" />
                                                     </div>
                                                 </div>
                                             </div>
                                             <div className="mb-3 form-section">
                                                 <div className="d-flex justify-content-between align-items-center">
                                                     <label htmlFor="sex" className="form-label mb-0">性別</label>
-                                                    <select className="form-select w-70 w-md-80" name="sex" id="sex" defaultValue="">
+                                                    <select
+                                                        value={student.gender}
+                                                        onChange={(e)=>{
+                                                            handleStudentsData(index, "gender", e.target.value)
+                                                        }}
+                                                        className="form-select w-70 w-md-80" 
+                                                        name="sex" 
+                                                        id="sex" >
                                                         <option value="" disabled>請選擇性別</option>
                                                         <option value="male">男</option>
                                                         <option value="female">女</option>
@@ -461,6 +671,10 @@ export default function BookingPage(){
                                                 <div className="d-flex justify-content-between align-items-center">
                                                     <label htmlFor="age" className="form-label mb-0">年齡</label>
                                                     <input
+                                                        value={student.age}
+                                                        onChange={(e)=>{
+                                                            handleStudentsData(index, "age", e.target.value)
+                                                        }}
                                                         type="number" 
                                                         className="form-control w-70 w-md-80" 
                                                         name="age" 
@@ -471,7 +685,16 @@ export default function BookingPage(){
                                             <div className="mb-3 form-section">
                                                 <div className="d-flex justify-content-between align-items-center">
                                                     <label htmlFor="phone" className="form-label mb-0">聯絡電話</label>
-                                                    <input type="tel" className="form-control w-70 w-md-80" name="phone" id="phone" placeholder="09xxxxxxxx" />
+                                                    <input
+                                                        value={student.phone}
+                                                        onChange={(e)=>{
+                                                            handleStudentsData(index, "phone", e.target.value)
+                                                        }}
+                                                        type="tel" 
+                                                        className="form-control w-70 w-md-80" 
+                                                        name="phone" 
+                                                        id="phone" 
+                                                        placeholder="09xxxxxxxx" />
                                                 </div>
                                             </div>
                                         </div>
@@ -512,8 +735,13 @@ export default function BookingPage(){
                 </div>  
             </div>
             <div className="d-flex justify-content-center mt-4 mt-lg-5 mb-5 mb-lg-60">
-                <Link to='/checkout' className="btn-custom btn-custom-filled w-lg-25 w-md-50 w-xs-100 text-nowrap">下一步</Link>
+                <Link
+                    onClick={handleOrder} 
+                    to='/checkout' 
+                    className="btn-custom btn-custom-filled w-lg-25 w-md-50 w-xs-100 text-nowrap">下一步
+                </Link>
             </div>
         </div>
+        </>
     )
 }
