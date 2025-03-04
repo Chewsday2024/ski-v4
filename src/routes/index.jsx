@@ -54,10 +54,12 @@ const routes = [
       {
         path:'ski-house',
         element: <SkiResortListPage />,
-      },
-      {
-          path: 'ski-house/:id',
-          element: <SkiResortDetailPage />
+        children: [
+          {
+            path: ':id',
+            element: <SkiResortDetailPage />
+          }
+        ]
       },
       {
         path: 'sign-in',

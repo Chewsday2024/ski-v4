@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
+import { Outlet } from 'react-router-dom';
 import './SkiHouse.scss';
 import axios from 'axios';
 import ResortCard from './resortComps/ResortCard';
+
 
 
 
@@ -33,7 +35,7 @@ export default function SkiResortListPage() {
 
   return(
     <>
-      <div className="cardsContainer d-flex flex-column align-items-center">
+      <div className="container d-flex flex-column align-items-center">
         <div className="w-100 d-flex justify-content-center">
           <select value={resortSelect}
           onChange={handleChange} className="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
@@ -45,12 +47,13 @@ export default function SkiResortListPage() {
             })}
           </select>
         </div>
-        <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mx-0 overflow-hidden">
         {filteredSkiResorts.length > 0 ? (<ResortCard skiResorts={filteredSkiResorts} />) : (
             <p className="text-center">❄️ 找不到符合條件的雪場 ❄️</p>
           )}
         </div>
       </div>
+      <Outlet />
     </>
   )
 }
