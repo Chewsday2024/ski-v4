@@ -1,7 +1,16 @@
 @import "bootstrap/scss/functions";
 @import "./variables";
-@import "./variables-dark";
 @import "bootstrap/scss/bootstrap";
 
-@import "../pages/home/Home";
-// @import '../pages/order/Order.scss';
+
+// @import 'bootstrap-icons/font/bootstrap-icons.min.css';
+
+
+
+
+body {
+  line-height: 1.5;
+}
+
+
+

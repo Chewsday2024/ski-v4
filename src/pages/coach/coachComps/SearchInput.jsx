@@ -26,16 +26,16 @@ function SerchInput() {
       <div className='w-100 d-flex justify-content-center gap-3 mt-5'>
         <select className="form-select w-auto" ref={sexRef}>
           <option value=''>性別</option>
-          <option value="male">男性</option>
-          <option value="female">女性</option>
+          <option value="男">男性</option>
+          <option value="女">女性</option>
         </select>
         
         <select className="form-select w-auto" ref={chargeRef}>
           <option value=''>收費</option>
-          <option value="feeLV1">10,000以下</option>
-          <option value="feeLV2">10,000 ~ 15,000</option>
-          <option value="feeLV3">15,000 ~ 20,000</option>
-          <option value="feeLV4">20,000 以上</option>
+          <option value="chargeLV1">10,000以下</option>
+          <option value="chargeLV2">10,000 ~ 15,000</option>
+          <option value="chargeLV3">15,000 ~ 20,000</option>
+          <option value="chargeLV4">20,000 以上</option>
         </select>
 
         <select className="form-select w-auto" ref={boardRef}>
