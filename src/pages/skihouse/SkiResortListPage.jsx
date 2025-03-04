@@ -49,7 +49,6 @@ export default function SkiResortListPage() {
         {filteredSkiResorts.length > 0 ? (<ResortCard skiResorts={filteredSkiResorts} />) : (
             <p className="text-center">❄️ 找不到符合條件的雪場 ❄️</p>
           )}
-
         </div>
       </div>
     </>

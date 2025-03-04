@@ -1,12 +1,12 @@
 import '../../skihouse/SkiHouse.scss';
-import { Navigate, useNavigate } from 'react-router';
+//import { useNavigate } from 'react-router-dom';
 
 
 export default function ResortCard({skiResorts}) {
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
 
-  const handleClick = () =>{
-    navigate(`/ski-house/{id}`)
+  const handleClick = (id) =>{
+    //navigate(`/ski-house/${id}`);
   }
 
 
