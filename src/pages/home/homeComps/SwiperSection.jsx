@@ -71,7 +71,6 @@ function SwiperSection() {
             </div>
           </div>
           <div className="col-md-8 px-0">
-          {/* 超出的範圍無法成功設定，先跳過XP */}
             <section className="text-center my-5 swiper-container" style={{ overflow: 'visible' }}>
               <Swiper
                modules={[Autoplay]}
@@ -81,11 +80,10 @@ function SwiperSection() {
                 delay: 2500
               }}
               breakpoints={{
-                768: { slidesPerView: 3 }, // 768px 以上顯示 3 張
-                480: { slidesPerView: 2 }, // 480px 以上顯示 2 張
-                0: { slidesPerView: 1 } // 0px 以上（手機）顯示 1 張
+                1200: { slidesPerView: 3 },
+                573: { slidesPerView: 2 },
+                0: { slidesPerView: 1 } 
               }}
-              centeredSlides={true}
               loop={true}
               slidesOffsetAfter={500}
               className="d-flex">

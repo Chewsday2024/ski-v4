@@ -28,9 +28,23 @@
   'FILL' 0
 }
 
+.fs-xs {
+  font-size: 14px;
+}
+
+.w-xs {
+  width: 60px;
+}
+
 .hover-brand-01 {
   &:hover {
     color: #475F81 !important;
+  }
+}
+
+.hover-brand-02 {
+  &:hover {
+    color: #779ECB !important;
   }
 }
 

@@ -11,6 +11,7 @@ import SkiResortDetailPage from '../pages/skihouse/SkiResortDetailPage';
 import SignInForm from '../pages/home/homeComps/SignInForm';
 import SignUpForm from '../pages/home/homeComps/SignUpForm';
 import ArticlePage from '../pages/article/ArticlePage';
+import AboutUs from '../pages/about/AboutUs';
 import NotFound from '../components/NotFound';
 import { element } from 'prop-types';
 
@@ -70,6 +71,10 @@ const routes = [
       {
         path: 'article',
         element: <ArticlePage />
+      },
+      {
+        path: 'about-us',
+        element: <AboutUs />
       },
       {
         path:'*',

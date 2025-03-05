@@ -1,3 +1,5 @@
+@import "../../../assets/all.scss";
+
 .w-md-25 {
   @media (min-width: 768px) {
     max-width: 25% ;
@@ -13,4 +15,39 @@
 .swiper-container {
   padding-left: 20px;  // 左側空白
   padding-right: 20px; // 右側空白
+}
+
+/* 定義 CSSTransition 的類 */
+.slideshow-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.1);
+}
+
+.slideshow-image-enter {
+  opacity: 0;
+  transform: scale(1.1) translateX(5%);
+}
+
+.slideshow-image-enter-active {
+  transition-delay: 0.2s;
+  opacity: 1;
+  transform: scale(1.1) translateX(0);
+  transition: all 3s ease-in-out;
+}
+
+.slideshow-image-exit {
+  opacity: 1;
+  transform: scale(1.1) translateX(0);
+}
+
+.slideshow-image-exit-active {
+  opacity: 0;
+  transform: scale(1.1) translateX(-5%);
+  transition: all 2.4s ease-in-out;
 }

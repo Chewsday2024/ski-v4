@@ -31,7 +31,7 @@ import axios from 'axios';
   return (
     <div className="container mb-5">
       <div className="row flex-column align-items-center">
-        <div className="col-4">
+        <div className="col-md-4 col-10">
           <form className="d-flex flex-column text-brand-01 mb-5">
             <h2 className="mb-4 text-brand-02 align-self-center">註冊</h2>
             <div className="form-group mb-2">
@@ -43,6 +43,7 @@ import axios from 'axios';
                 className="form-control mt-3"
                 id="exampleInputEmail2"
                 placeholder="請輸入信箱"
+                autoComplete="current-username"
               />
             </div>
             <div className="form-group my-3">
@@ -54,6 +55,7 @@ import axios from 'axios';
                 className="form-control mt-2"
                 id="exampleInputPassword2"
                 placeholder="請輸入密碼"
+                autoComplete="current-password"
               />
             </div>
             <div className="form-group my-2 mb-4">
