@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import './SkiHouse.scss';
 import axios from 'axios';
 import { NavLink, useParams, useNavigate  } from 'react-router';
+import LevelProgressBar from './resortComps/LevelProgressBar';
 
 
 
@@ -28,7 +29,6 @@ export default  function SkiResortDetailPage() {
       try {
         const res = await axios.get(`http://localhost:3000/coaches`)
         setCoaches(res.data);
-        console.log("教練數據:", res.data);
         
       } catch (error) {
         alert(`Error: ${error.message}`);
@@ -36,6 +36,22 @@ export default  function SkiResortDetailPage() {
     };
     getCoaches();
   },[])
+
+  //格式化tag名稱
+  const formatTagName = (key) => {
+    const tag = {
+      isBeginnerFriendly: "初學者友善",
+      isSkiInOut: "SkiInOut",
+      isTouristHotel: "觀光飯店",
+      isStuntPark: "特技公園",
+      isWildSnowForest: "野雪樹林",
+      hasNightSki: "NightSki",
+      hasNaturalOnsen: "天然溫泉",
+      hasChildCareServices: "托兒服務",
+      hasChildPark: "親子樂園",
+    };
+    return tag[key] || key; 
+  }
 
   // 根據 skiResorts.selectCoach 過濾教練
   const filteredCoaches = coaches.filter(coach => skiResorts.selectCoach?.includes(coach.id));
@@ -66,18 +82,14 @@ export default  function SkiResortDetailPage() {
           </nav>
         </div>
         <img className="resortImg img-fluid vw-100  rounded object-fit-cover"
-        
         src={skiResorts.image} alt={skiResorts.chineseName} />
 
         <div className="resortDetail ">
           <h1 className="resortName text-center my-4 fs-1 fw-bolder">{skiResorts.chineseName}</h1>
           <div className="resortTag d-flex flex-wrap justify-content-center gap-2 mb-3">
-            <button type="button" className="tagBtn btn btn-outline-brand-02 fs-6 fw-bolder">Skin&Out</button>
-            <button type="button" className="tagBtn btn btn-outline-brand-02 fs-6 fw-bolder">觀光設施</button>
-            <button type="button" className="tagBtn btn btn-outline-brand-02 fs-6 fw-bolder">特殊公園</button>
-            <button type="button" className="tagBtn btn btn-outline-brand-02 fs-6 fw-bolder">野雪樹林</button>
-            <button type="button" className="tagBtn btn btn-outline-brand-02 fs-6 fw-bolder">NightSki</button>
-            <button type="button" className="tagBtn btn btn-outline-brand-02 fs-6 fw-bolder">NightSki</button>
+            {Object.entries(skiResorts.tag || {}).filter(([_, value]) => value).map(([key]) =>(<button key={key} type="button" className="tagBtn btn btn-outline-brand-02 fs-6 fw-bolder">{formatTagName(key)}</button>
+            ))}
+            
         </div>
           <p className="my-3 fs-5">{skiResorts.description}</p>
           <div className="row row-cols-2 row-cols-lg-6 gy-1 my-3">
@@ -131,25 +143,7 @@ export default  function SkiResortDetailPage() {
             </div>          
           </div>
           
-          <h5 className="pisteLevel my-3 text-center fs-2 fw-bold">雪道分級</h5>
-          <div className="progress m-3" style={{height: "30px"}}>
-            <div className="progress-bar progress-bar-striped bg-success" role="progressbar" style={{ width: `${skiResorts.pisteClassification?.beginner}%` }} 
-    aria-valuenow={skiResorts.pisteClassification?.beginner} aria-valuemin="0" aria-valuemax="100"></div>
-            <div className="progress-bar progress-bar-striped bg-warning" role="progressbar" style={{ width: `${skiResorts.pisteClassification?.intermediate}%` }} 
-    aria-valuenow={skiResorts.pisteClassification?.intermediate} aria-valuemin="0" aria-valuemax="100"></div>
-            <div className="progress-bar progress-bar-striped bg-danger" role="progressbar" style={{ width: `${skiResorts.pisteClassification?.advanced}%` }} 
-    aria-valuenow={skiResorts.pisteClassification?.advanced} aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
-
-
-          <div className="progress m-3" style={{height: "30px"}}>
-            <div className="progressText progress-bar bg-white text-dark fs-5" role="progressbar" style={{ width: `${skiResorts.pisteClassification?.beginner}%` }} 
-    aria-valuenow={skiResorts.pisteClassification?.beginner} aria-valuemin="0" aria-valuemax="100">{skiResorts.pisteClassification?.beginner}% 初級</div>
-            <div className="progressText progress-bar bg-white text-dark fs-5" role="progressbar" style={{ width: `${skiResorts.pisteClassification?.intermediate}%` }} 
-    aria-valuenow={skiResorts.pisteClassification?.intermediate} aria-valuemin="0" aria-valuemax="100">{skiResorts.pisteClassification?.intermediate}% 中級</div>
-            <div className="progressText progress-bar bg-white text-dark fs-5" role="progressbar" style={{ width: `${skiResorts.pisteClassification?.advanced}%` }} 
-    aria-valuenow={skiResorts.pisteClassification?.advanced} aria-valuemin="0" aria-valuemax="100">{skiResorts.pisteClassification?.advanced}% 高級</div>
-          </div>
+          <LevelProgressBar />
 
 
           <h3 className="orderCoach my-3 pt-5 text-center fs-2 fw-bold">快來預約我們滑雪場的教練吧！</h3>

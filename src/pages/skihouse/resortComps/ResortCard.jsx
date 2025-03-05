@@ -14,7 +14,7 @@ export default function ResortCard({skiResorts}) {
     <>
       {skiResorts.map((skiResort) => (
         <div key={skiResort.id}
-        className="col d-flex justify-content-center"
+        className="col d-flex justify-content-center g-5"
         onClick={() =>handleClick(skiResort.id)}>
           <div className="resortCard card my-3">
             <span className="label bg-brand-02 text-white text-center text-brand-01 fs-5">
