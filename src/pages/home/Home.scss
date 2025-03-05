@@ -1,7 +1,9 @@
 @import "bootstrap/scss/functions";
 @import "../../assets/variables";
-@import "../../assets/variables-dark";
-@import "bootstrap/scss/bootstrap";
+
+
+
+
 
 .mt-xxl {
   margin-top: 120px;
@@ -46,7 +48,6 @@
 }
 
 .services {
-  padding: 95px;
   .material-symbols-outlined {
     font-size: 80px;
     color: $brand-02;
