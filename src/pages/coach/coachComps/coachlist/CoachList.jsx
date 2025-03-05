@@ -61,7 +61,7 @@ function CoachList() {
           <div key={index} className='col d-flex justify-content-center text-white coach-col'>
             <Link
               type='button'
-              className='text-decoration-none p-0 border-0 rounded-5'
+              className='text-decoration-none p-0 border-0 rounded-5 col-8'
               to={coach.id}
               onClick={() => {dispatch(setPageIsOpen(true))}}
               >

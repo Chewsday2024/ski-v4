@@ -11,7 +11,7 @@ import SerchInput from './coachComps/SearchInput';
 
 
 
-import './Coach.scss';
+// import './Coach.scss';
 import { getPageIsOpenStatus } from './coachComps/coachPage/coachpageSlice';
 
 
