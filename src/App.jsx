@@ -11,6 +11,7 @@ import defaultOrder from './pages/order/BookingPage';
 
 
 function App() {
+  
   // 預約教練訂單資料
   // 初始化時，從 localStorage 取得資料，若無則使用預設值
   const [order,setOrder] = useState(()=>{
@@ -27,17 +28,18 @@ function App() {
   const [allCoaches, setAllCoaches] = useState([]);   // 全部的教練資料
   const [classTime, setClassTime] = useState([]);     // 課程時間選項
   const [skillLevels,setSkillLevels] = useState([]);  // 學員滑雪程度選項
+  const [errorMessage,setErrorMessage] = useState("");    //紀錄錯誤訊息
 
   return (
     <div className='d-flex flex-column justify-content-between vh-100'>
       <Header />
           <OrderContext.Provider 
-            value={{order,setOrder,classTime,setClassTime,allCoaches,setAllCoaches,allSkiHouses,setAllSkiHouses,skillLevels,setSkillLevels}}>
+            value={{order,setOrder,classTime,setClassTime,allCoaches,setAllCoaches,allSkiHouses,setAllSkiHouses,skillLevels,setSkillLevels,errorMessage,setErrorMessage}}>
             <Outlet />
             <ScrollToTop/>
             {/* <AboutLoading/> */}
           </OrderContext.Provider>
-      {/* <Footer /> */}
+      <Footer />
     </div>
   )
 }

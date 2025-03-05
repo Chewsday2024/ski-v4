@@ -1,10 +1,12 @@
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import './Order.scss';
 import { useContext, useEffect, useState } from 'react';
 import { OrderContext } from './BookingPage';
 import axios from 'axios';
 
 export default function CheckoutPage(){
+
+    const BASE_URL = "http://localhost:3000";
 
     const { order,setOrder,classTime,allCoaches,allSkiHouses,skillLevels } = useContext(OrderContext);
 
@@ -25,19 +27,22 @@ export default function CheckoutPage(){
         lineId: "",
         note: ""
     })
-    const [isChecked,setIsChecked] = useState(false);   //是否勾選同意條款  
+    const [isChecked,setIsChecked] = useState(false);       //是否勾選同意條款  
+    const { setErrorMessage } = useContext(OrderContext); //錯誤訊息
 
     // console.log("付款方式",payments,"長度",payments.length);
     // console.log("被選中的",checkedPayment);
     // console.log("聯繫方式",inputContactData);
     // console.log("是否同意",isChecked);
     
-    console.log("訂單資料",order);
+    // console.log("訂單資料",order);
+
+    const orderNavigate = useNavigate();
 
     useEffect(()=>{
         const getPayments = async()=>{
             try {
-                const res = await axios.get("http://localhost:3000/paymentWays");             
+                const res = await axios.get(`${BASE_URL}/paymentWays`);             
                 setPayments(Object.entries(res.data));
             } catch (error) {
                 console.log(error);
@@ -84,16 +89,18 @@ export default function CheckoutPage(){
 
     const addOrder = async()=>{
         try {
-            const res = await axios.post("http://localhost:3000/orders",order);
-            console.log("打出去囉",res);
+            const res = await axios.post(`${BASE_URL}/orders`,order);
+            orderNavigate("/checkout-success");
         } catch (error) {
             console.log(error);
+            if (error.response.status === 404){
+                setErrorMessage("404 網路連線問題，請重新嘗試");
+                orderNavigate("/checkout-fail");
+            }
         }
     }
 
-
-    // Ｑ：陣列有？寫法？
-    console.log("step2預約資料",filterCoach);
+    // console.log("step2預約資料",filterCoach);
     return (
         <div className="container">
             {/* PC Step flow */}
@@ -398,7 +405,7 @@ export default function CheckoutPage(){
                                                             <input 
                                                                 value={payment[1].id}
                                                                 onChange={(e)=>{
-                                                                    setCheckedPayment(e.target.value);
+                                                                    setCheckedPayment(Number(e.target.value));
                                                                 }}
                                                                 className="form-check-input" 
                                                                 type="radio" 
@@ -521,7 +528,7 @@ export default function CheckoutPage(){
             </div>
             <div className="d-flex justify-content-center flex-wrap gap-3 mt-4 mt-lg-5 mb-5 mb-lg-60">
                 <Link to='/booking' className="btn-custom btn-custom-unfilled w-lg-25 w-md-50 w-xs-100 text-nowrap">上一步</Link>
-                <Link to='/checkout-success' 
+                <Link 
                     className="btn-custom btn-custom-filled w-lg-25 w-md-50 w-xs-100 text-nowrap"
                     onClick={()=>{
                         addOrder();

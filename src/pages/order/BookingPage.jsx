@@ -46,6 +46,8 @@ export const defaultOrder = {
 
 export default function BookingPage(){
 
+    const BASE_URL = "http://localhost:3000";
+
     // const [allSkiHouses, setAllSkiHouses] = useState([]); //全部的雪場資料
     const {allSkiHouses, setAllSkiHouses} = useContext(OrderContext);
 
@@ -84,7 +86,7 @@ export default function BookingPage(){
     useEffect(()=>{
         const getSkiHouse = async()=>{
             try {
-                const res = await axios.get("http://localhost:3000/skiResorts");             
+                const res = await axios.get(`${BASE_URL}/skiResorts`);             
                 setAllSkiHouses(res.data);
             } catch (error) {
                 console.log(error);
@@ -93,7 +95,7 @@ export default function BookingPage(){
 
         const getCoaches = async()=>{
             try {
-                const res = await axios.get(`http://localhost:3000/coaches`);
+                const res = await axios.get(`${BASE_URL}/coaches`);
                 setAllCoaches(res.data);
             } catch (error) {
                 console.log(error);
@@ -102,7 +104,7 @@ export default function BookingPage(){
 
         const getClassTime = async()=>{
             try {
-                const res = await axios.get("http://localhost:3000/classTimeType");             
+                const res = await axios.get(`${BASE_URL}/classTimeType`);             
                 setClassTime(Object.entries(res.data));
             } catch (error) {
                 console.log(error);
@@ -111,7 +113,7 @@ export default function BookingPage(){
 
         const getSkillLevel = async()=>{
             try {
-                const res = await axios.get("http://localhost:3000/studentSkiLevel");             
+                const res = await axios.get(`${BASE_URL}/studentSkiLevel`);             
                 setSkillLevels(Object.entries(res.data));
             } catch (error) {
                 console.log(error);
@@ -128,9 +130,9 @@ export default function BookingPage(){
     let coachesData = [];
     if (selectedSkiHouse){
         const filteredCoaches = allSkiHouses.filter((skiHouse)=>(skiHouse.id == selectedSkiHouse))[0].selectCoach;
-        console.log("新的 filter",filteredCoaches);
+        // console.log("新的 filter",filteredCoaches);
         coachesData = allCoaches.filter((coach)=>filteredCoaches.includes(coach.id));
-        console.log("篩選過的教練資料",coachesData);
+        // console.log("篩選過的教練資料",coachesData);
     }
 
     const [selectedCoachPrice,setSelectedCoachPrice] = useState(0);
@@ -157,7 +159,7 @@ export default function BookingPage(){
     const [selectedEndDate,setSelectedEndDate] = useState("");         // 下拉選單選中的結束日期 value
     const [selectedDate,setSelectedDate] = useState("");               // 下拉選單選中的日期 value
 
-    console.log("選擇的開始日期",selectedStartDate,"選擇的結束日期",selectedEndDate);
+    // console.log("選擇的開始日期",selectedStartDate,"選擇的結束日期",selectedEndDate);
     
     
 
@@ -175,7 +177,7 @@ export default function BookingPage(){
         setStartDate(formattedMinDate);
         setEndDate(formattedMaxDate);
 
-        console.log("最早可選時間:",formattedMinDate,"最晚可選時間",formattedMaxDate);
+        // console.log("最早可選時間:",formattedMinDate,"最晚可選時間",formattedMaxDate);
     }
 
     const handleSelectedStartDate = (e) => {
@@ -219,7 +221,7 @@ export default function BookingPage(){
         
     },[selectedClass,selectedStartDate,selectedEndDate,selectedDate]);
 
-    console.log("總時數",totalHours,"天數",days);
+    // console.log("總時數",totalHours,"天數",days);
 
     // 計算總金額
     const countTotalPrice = ()=>{
@@ -414,7 +416,7 @@ export default function BookingPage(){
                                     <select
                                         value={selectedSkiHouse}
                                         onChange={(e)=>{
-                                            setSelectedSkiHouse(e.target.value);
+                                            setSelectedSkiHouse(Number(e.target.value));
                                         }}
                                         className="form-select w-70 w-md-80" 
                                         name="snowHouse" 
@@ -467,7 +469,7 @@ export default function BookingPage(){
                                         <select
                                             value={selectedCoach}
                                             onChange={(e)=>{
-                                                setSelectedCoach(e.target.value);
+                                                setSelectedCoach(Number(e.target.value));
                                             }} 
                                             className="form-select" 
                                             name="skiCoach" 
@@ -602,7 +604,7 @@ export default function BookingPage(){
                                     <select
                                         value={selectedSkillLevel}
                                         onChange={(e)=>{
-                                            setSelectedSkillLevel(e.target.value)
+                                            setSelectedSkillLevel(Number(e.target.value))
                                         }}
                                         className="form-select w-70 w-md-80" 
                                         name="level"
