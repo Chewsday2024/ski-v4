@@ -1,6 +1,7 @@
 import AOS from 'aos';
 import 'aos/dist/aos.css'; 
 AOS.init();
+import './homeComps.scss'
 
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -27,11 +28,11 @@ function SkiHouseSection() {
           <h3 className="text-center text-brand-01 pb-4">推薦雪場</h3>
         </div>
         <div>
-          <div className="d-flex justify-content-around mt-4">
+          <div className="d-flex flex-column flex-md-row justify-content-around align-items-center mt-4">
           {
             skiHouse.slice(0, 3).map((item, index) => {
               return (
-                <div className="card border-0 bg-gray-05 position-relative w-25" key={item.id} 
+                <div className="card border-0 bg-gray-05 position-relative w-md-25 w-75" key={item.id} 
                   data-aos="fade-up"
                   data-aos-easing="linear"
                   data-aos-duration="800">

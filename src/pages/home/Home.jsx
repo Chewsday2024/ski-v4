@@ -5,9 +5,9 @@ import SwiperSection from './homeComps/swiperSection';
 import SkiHouseSection from './homeComps/SkiHouseSection';
 import ArticleSection from './homeComps/ArticleSection';
 
-// import '../../assets/all.scss';
 
-// import './Home.scss';
+
+import './Home.scss';
 
 function Home() {
 

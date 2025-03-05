@@ -1,23 +1,22 @@
 {
   "coaches":[
     {
-      "id": 1,
-      "name": "apple男",
-      "profileImg": "https://images.unsplash.com/photo-1735500810691-054f62b7bea1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHx0b3BpYy1mZWVkfDEzfEJuLURqcmNCcndvfHxlbnwwfHx8fHw%3D",
-      "skills": ["單板","雙板"],
-      "sex": "male",
+      "id": "coach01",
+      "name": "Mark",
+      "profileImg": "/coachImges/mark.png",
+      "skills": ["單板"],
+      "sex": "男",
       "LV": 5,
-      "lang": ["華語","日語","英語"],
-      "charge": 17456,
-      "feeLv": "feeLV4",
-      "place": ["藏王溫泉滑雪場", "安比高原滑雪場", "富良野滑雪場"],
+      "lang": ["英語","日語"],
+      "charge": 27455,
+      "chargeLv": "chargeLV4",
       "houses": ["house1", "house2", "house3"],
       "rate": {
         "stars": 4.6,
-        "rateNum": 245
+        "rateNum": 880
       },
-      "tag": ["好吃","紅色","便宜"],
-      "description": "紅色好吃又便宜的蘋果",
+      "tag": ["穩重","幽默","充滿活力","新手推薦"],
+      "description": "我是 Mark，一名熱愛滑雪並擁有多年教學經驗的滑雪教練。我專注於幫助不同程度的學員建立自信，從基礎動作到進階技巧，都能細心指導。我的教學方式生動有趣，讓學員在輕鬆的氛圍中學習，並享受滑雪的樂趣。無論你是初學者還是想提升技巧，我都會根據你的需求調整課程，確保你能安全且自信地在雪道上滑行。期待與你一起探索滑雪的魅力！",
       "exp": ["2017 北海道 札幌國際","2020 北海道 札幌手稻","2023 北海道 富良野"],
       "license": [{
         "licenseName": "指導證照 LV. 3",
@@ -37,30 +36,41 @@
       "reviews": [{
           "id": 1,
           "student": {
-            "name": "cat",
+            "name": "Bob",
             "profileImg": "https://images.unsplash.com/photo-1734671223970-16adb03bedb7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHx0b3BpYy1mZWVkfDE3fHhqUFI0aGxrQkdBfHxlbnwwfHx8fHw%3D",
             "date": "2025 / 11 / 15",
-            "comment": "這怎麼那麼好吃！",
-            "rate": 4.5
+            "comment": "教練的指導超棒的！",
+            "rate": 4
           },
           "response": {
-            "name": "apple",
-            "profileImg": "https://images.unsplash.com/photo-1735500810691-054f62b7bea1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHx0b3BpYy1mZWVkfDEzfEJuLURqcmNCcndvfHxlbnwwfHx8fHw%3D",
+            "date": "2025 / 11 / 15",
+            "comment": "真是太棒了！"
+          }
+        },{
+          "id": 2,
+          "student": {
+            "name": "Bob",
+            "profileImg": "https://images.unsplash.com/photo-1734671223970-16adb03bedb7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHx0b3BpYy1mZWVkfDE3fHhqUFI0aGxrQkdBfHxlbnwwfHx8fHw%3D",
+            "date": "2025 / 11 / 15",
+            "comment": "教練的指導超棒的！",
+            "rate": 4
+          },
+          "response": {
             "date": "2025 / 11 / 15",
             "comment": "真是太棒了！"
           }
         }
       ]
     },{
-      "id": 2,
-      "name": "banana男",
-      "profileImg": "https://images.unsplash.com/photo-1735500810691-054f62b7bea1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHx0b3BpYy1mZWVkfDEzfEJuLURqcmNCcndvfHxlbnwwfHx8fHw%3D",
+      "id": "coach02",
+      "name": "Mia",
+      "profileImg": "/coachImges/mia.png",
       "skills": ["單板"],
-      "sex": "male",
+      "sex": "女",
       "LV": 5,
       "lang": ["華語","日語","英語"],
-      "charge": 17456,
-      "feeLv": "feeLV1",
+      "charge": 8570,
+      "chargeLv": "chargeLV1",
       "place": ["藏王溫泉滑雪場", "富良野滑雪場"],
       "houses": ["house1", "house3"],
       "rate": {
@@ -103,15 +113,15 @@
         }
       ]
     },{
-      "id": 3,
-      "name": "dog男",
-      "profileImg": "https://images.unsplash.com/photo-1735500810691-054f62b7bea1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHx0b3BpYy1mZWVkfDEzfEJuLURqcmNCcndvfHxlbnwwfHx8fHw%3D",
+      "id": "coach03",
+      "name": "Lisa",
+      "profileImg": "/coachImges/lisa.png",
       "skills": ["雙板"],
-      "sex": "male",
+      "sex": "女",
       "LV": 5,
       "lang": ["華語","日語","英語"],
-      "charge": 17456,
-      "feeLv": "feeLV1",
+      "charge": 9325,
+      "chargeLv": "chargeLV1",
       "place": ["藏王溫泉滑雪場"],
       "houses": ["house1"],
       "rate": {
@@ -154,15 +164,15 @@
         }
       ]
     },{
-      "id": 4,
-      "name": "pie女",
-      "profileImg": "https://images.unsplash.com/photo-1735500810691-054f62b7bea1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHx0b3BpYy1mZWVkfDEzfEJuLURqcmNCcndvfHxlbnwwfHx8fHw%3D",
+      "id": "coach04",
+      "name": "Olivia",
+      "profileImg": "/coachImges/olivia.jpg",
       "skills": ["單板","雙板"],
-      "sex": "female",
+      "sex": "女",
       "LV": 5,
       "lang": ["華語","日語","英語"],
-      "charge": 17456,
-      "feeLv": "feeLV4",
+      "charge": 22840,
+      "chargeLv": "chargeLV4",
       "place": ["藏王溫泉滑雪場", "安比高原滑雪場", "富良野滑雪場"],
       "houses": ["house1", "house2", "house3"],
       "rate": {
@@ -205,15 +215,15 @@
         }
       ]
     },{
-      "id": 5,
-      "name": "cat女",
-      "profileImg": "https://images.unsplash.com/photo-1735500810691-054f62b7bea1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHx0b3BpYy1mZWVkfDEzfEJuLURqcmNCcndvfHxlbnwwfHx8fHw%3D",
+      "id": "coach05",
+      "name": "Jack",
+      "profileImg": "/coachImges/jack.jpg",
       "skills": ["單板"],
-      "sex": "female",
+      "sex": "男",
       "LV": 5,
       "lang": ["華語","日語","英語"],
-      "charge": 17456,
-      "feeLv": "feeLV2",
+      "charge": 13845,
+      "chargeLv": "chargeLV2",
       "place": ["富良野滑雪場"],
       "houses": ["house3"],
       "rate": {
@@ -256,15 +266,15 @@
         }
       ]
     },{
-      "id": 6,
-      "name": "ape女",
-      "profileImg": "https://images.unsplash.com/photo-1735500810691-054f62b7bea1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHx0b3BpYy1mZWVkfDEzfEJuLURqcmNCcndvfHxlbnwwfHx8fHw%3D",
+      "id": "coach06",
+      "name": "Sophia",
+      "profileImg": "/coachImges/sophia.jpg",
       "skills": ["單板","雙板"],
-      "sex": "female",
+      "sex": "女",
       "LV": 5,
       "lang": ["華語","日語","英語"],
-      "charge": 17456,
-      "feeLv": "feeLV2",
+      "charge": 14820,
+      "chargeLv": "chargeLV2",
       "place": ["藏王溫泉滑雪場", "安比高原滑雪場"],
       "houses": ["house1", "house2"],
       "rate": {
@@ -307,15 +317,15 @@
         }
       ]
     },{
-      "id": 7,
-      "name": "fish男",
-      "profileImg": "https://images.unsplash.com/photo-1735500810691-054f62b7bea1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHx0b3BpYy1mZWVkfDEzfEJuLURqcmNCcndvfHxlbnwwfHx8fHw%3D",
+      "id": "coach07",
+      "name": "Lucas",
+      "profileImg": "/coachImges/lucas.jpg",
       "skills": ["單板"],
-      "sex": "male",
+      "sex": "男",
       "LV": 5,
       "lang": ["華語","日語","英語"],
-      "charge": 17456,
-      "feeLv": "feeLV4",
+      "charge": 23550,
+      "chargeLv": "chargeLV4",
       "place": ["安比高原滑雪場"],
       "houses": ["house2"],
       "rate": {
@@ -358,15 +368,15 @@
         }
       ]
     },{
-      "id": 8,
-      "name": "cloud女",
-      "profileImg": "https://images.unsplash.com/photo-1735500810691-054f62b7bea1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHx0b3BpYy1mZWVkfDEzfEJuLURqcmNCcndvfHxlbnwwfHx8fHw%3D",
+      "id": "coach08",
+      "name": "Ava",
+      "profileImg": "/coachImges/ava.png",
       "skills": ["單板"],
-      "sex": "female",
+      "sex": "女",
       "LV": 5,
       "lang": ["華語","日語","英語"],
-      "charge": 17456,
-      "feeLv": "feeLV3",
+      "charge": 17450,
+      "chargeLv": "chargeLV3",
       "place": ["藏王溫泉滑雪場", "安比高原滑雪場", "富良野滑雪場", "湯澤中里滑雪場"],
       "houses": ["house1", "house2", "house3", "house4"],
       "rate": {
@@ -409,15 +419,15 @@
         }
       ]
     },{
-      "id": 9,
-      "name": "candy女",
-      "profileImg": "https://images.unsplash.com/photo-1735500810691-054f62b7bea1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHx0b3BpYy1mZWVkfDEzfEJuLURqcmNCcndvfHxlbnwwfHx8fHw%3D",
+      "id": "coach09",
+      "name": "Daniel",
+      "profileImg": "/coachImges/daniel.jpg",
       "skills": ["單板","雙板"],
-      "sex": "female",
+      "sex": "男",
       "LV": 5,
       "lang": ["華語","日語","英語"],
-      "charge": 17456,
-      "feeLv": "feeLV3",
+      "charge": 16880,
+      "feeLv": "chargeLV3",
       "place": ["藏王溫泉滑雪場", "安比高原滑雪場", "富良野滑雪場", "野澤溫泉滑雪場"],
       "houses": ["house1", "house2", "house3", "house5"],
       "rate": {
