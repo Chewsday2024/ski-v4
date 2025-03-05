@@ -1,30 +1,52 @@
 import { useEffect, useState } from 'react';
 import './SkiHouse.scss';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
-import { NavLink } from 'react-router';
+import { NavLink, useParams, useNavigate  } from 'react-router';
+
 
 
 export default  function SkiResortDetailPage() {
-  const[skiResorts, setSkiResorts] = useState({});
-  const{ id } = useParams();
-  console.log("Route param ID:", id);
+  const [skiResorts, setSkiResorts] = useState({});
+  const [coaches, setCoaches] = useState([]);
+  const{ id } = useParams(); 
+  const navigate = useNavigate();
   
-
-
   useEffect(() =>{
     const fetchResort = async(id) =>{
       try {
         const res = await axios.get(`http://localhost:3000/skiResorts/${id}`)
-        console.log(res.data);
         setSkiResorts(res.data);
       } catch (error) {
-        console.error("API請求錯誤", error);
         alert(`Error: ${error.message}`);
       }
     };
     fetchResort(id);
   },[id])
+
+  useEffect(() =>{
+    const getCoaches = async() =>{
+      try {
+        const res = await axios.get(`http://localhost:3000/coaches`)
+        setCoaches(res.data);
+        console.log("教練數據:", res.data);
+        
+      } catch (error) {
+        alert(`Error: ${error.message}`);
+      }
+    };
+    getCoaches();
+  },[])
+
+  // 根據 skiResorts.selectCoach 過濾教練
+  const filteredCoaches = coaches.filter(coach => skiResorts.selectCoach?.includes(coach.id));
+
+  const handleBookingCoach =(id) =>{
+    navigate(`/coach/${id}`);
+  }
+  
+  const handleSeeMore = (id) =>{
+    navigate(`/coach`);
+  }
 
 
 
@@ -37,7 +59,7 @@ export default  function SkiResortDetailPage() {
           <nav aria-label="breadcrumb">
               <ol className="breadcrumb">
                 <li className="breadcrumb-item"><NavLink to="/ski-house">雪場總覽</NavLink></li>
-                <li className="breadcrumb-item"><NavLink to="#">{skiResorts.area}</NavLink></li>
+                <li className="breadcrumb-item"><NavLink to={`/ski-house?area=${encodeURIComponent(skiResorts.area)}`}>{skiResorts.area}</NavLink></li>
                 <li className="breadcrumb-item active" aria-current="page">{skiResorts.chineseName}
                 </li>
               </ol>
@@ -62,49 +84,49 @@ export default  function SkiResortDetailPage() {
             <div className="col">
             <div className="card border-brand-02 mb-3 text-center" >
               <h5 className="cardHeader card-header bg-brand-02 text-light">滑雪道數量</h5>
-              <h5 className="card-body text-dark">
+              <div className="card-body text-dark">
                 <h5 className="card-title">{skiResorts.pisteNum}</h5>
-              </h5>
+              </div>
             </div>
             </div>
             <div className="col">
             <div className="card border-brand-02 mb-3 text-center" >
               <h5 className="cardHeader card-header bg-brand-02 text-light">纜車數量</h5>
-              <h5 className="card-body text-dark">
+              <div className="card-body text-dark">
                 <h5 className="card-title">{skiResorts.cableCarNum}</h5>
-              </h5>
+              </div>
             </div>
             </div>
             <div className="col">
             <div className="card border-brand-02 mb-3 text-center" >
               <h5 className="cardHeader card-header bg-brand-02 text-light">最長坡道</h5>
-              <h5 className="card-body text-dark">
+              <div className="card-body text-dark">
                 <h5 className="card-title">{skiResorts.theLongestRamp}m</h5>
-              </h5>
+              </div>
             </div>
             </div> 
             <div className="col">
             <div className="card border-brand-02 mb-3 text-center" >
               <h5 className="cardHeader card-header bg-brand-02 text-light">最大斜度</h5>
-              <h5 className="card-body text-dark">
+              <div className="card-body text-dark">
                 <h5 className="card-title">{skiResorts.maxSlope}度</h5>
-              </h5>
+              </div>
             </div>
             </div>
             <div className="col">
             <div className="card border-brand-02 mb-3 text-center" >
               <h5 className="cardHeader card-header bg-brand-02 text-light">最低海拔</h5>
-              <h5 className="card-body text-dark">
+              <div className="card-body text-dark">
                 <h5 className="card-title">{skiResorts.lowestAltitude}m</h5>
-              </h5>
+              </div>
             </div>
             </div>
             <div className="col">
             <div className="card border-brand-02 mb-3 text-center" >
               <h5 className="cardHeader card-header bg-brand-02 text-light">最高海拔</h5>
-              <h5 className="card-body text-dark">
+              <div className="card-body text-dark">
                 <h5 className="card-title">{skiResorts.highestAltitude}m</h5>
-              </h5>
+              </div>
             </div>
             </div>          
           </div>
@@ -121,21 +143,19 @@ export default  function SkiResortDetailPage() {
             <div className="progressText progress-bar bg-white text-dark fs-5" role="progressbar" style={{width: "30%", ariaValuenow: "30"}} aria-valuemin="0" aria-valuemax="100">30% 高級</div>
           </div>
 
+
           <h3 className="orderCoach my-3 pt-5 text-center fs-2 fw-bold">快來預約我們滑雪場的教練吧！</h3>
           <div className="row row-cols-1 row-cols-lg-3 justify-content-center pt-3">
-            <div className="col-md-4 d-flex justify-content-around  flex-column align-items-center my-4">
-              <img src="https://images.unsplash.com/photo-1735500810691-054f62b7bea1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHx0b3BpYy1mZWVkfDEzfEJuLURqcmNCcndvfHxlbnwwfHx8fHw%3D" className="img-fluid rounded-circle object-fit-cover mb-3" alt="coachName" style={{height:"200px", width:"200px"}} />
-              <button type="button" className="orderCoachBtn btn btn-brand-01 rounded-5 fs-5" style={{width: "150px"}}>預約教練</button>
-            </div>
-            <div className="col-md-4 d-flex justify-content-around flex-column align-items-center my-4">
-              <img src="https://images.unsplash.com/photo-1735500810691-054f62b7bea1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHx0b3BpYy1mZWVkfDEzfEJuLURqcmNCcndvfHxlbnwwfHx8fHw%3D" className="img-fluid rounded-circle object-fit-cover  mb-3" alt="coachName" style={{height:"200px", width:"200px"}} />
-              <button type="button" className="orderCoachBtn btn btn-brand-01 rounded-5 fs-5" style={{width: "150px"}}>預約教練</button>
-            </div>
-            <div className="col-md-4 d-flex justify-content-around flex-column align-items-center my-4">
-              <img src="https://images.unsplash.com/photo-1735500810691-054f62b7bea1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHx0b3BpYy1mZWVkfDEzfEJuLURqcmNCcndvfHxlbnwwfHx8fHw%3D" className="img-fluid rounded-circle object-fit-cover  mb-3" alt="coachName" style={{height:"200px", width:"200px"}} />
-              <button type="button" className="orderCoachBtn btn btn-brand-01 rounded-5 fs-5" style={{width: "150px"}}>預約教練</button>
-            </div>
-            <button type="button" className="seeMore btn btn-outline-brand-01 rounded-5 m-3 text-center fs-4 fw-bold" style={{width: "200px"}}>查看更多</button>
+              {filteredCoaches.map(coach =>(
+                <div key={coach.id} className="col-md-4 d-flex justify-content-around flex-column align-items-center my-4">
+                <img src={coaches.profileImg} className="img-fluid rounded-circle object-fit-cover  mb-3" alt={coaches.name} style={{height:"200px", width:"200px"}} />
+                <button onClick={handleBookingCoach}
+                type="button" className="orderCoachBtn btn btn-brand-01 rounded-5 fs-5" style={{width: "150px"}}>預約教練</button>
+              </div>
+            ))}
+            <button onClick={handleSeeMore}
+            type="button" className="seeMore btn btn-outline-brand-01 rounded-5 m-5
+            text-center fs-4 fw-bold" style={{width: "200px"}}>查看更多<span className="material-symbols-outlined align-bottom ms-3 mb-1">arrow_circle_right</span></button>
           </div>
         </div>
 

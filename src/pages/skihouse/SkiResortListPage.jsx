@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
+import { useLocation } from 'react-router';
 import './SkiHouse.scss';
 import axios from 'axios';
 import ResortCard from './resortComps/ResortCard';
@@ -11,7 +12,16 @@ export default function SkiResortListPage() {
   const [skiResorts, setSkiResorts] = useState([]); 
   const [resortSelect, setResortSelect]= useState("");
   const areas = ["北海道", "東北", "新潟", "長野"];
+  const location = useLocation();
 
+  //分析 URL 篩選出該區域雪場
+  useEffect(() =>{
+    const sameAreaResort = new URLSearchParams(location.search);
+    const areaFromURL = sameAreaResort.get("area");
+    if (areaFromURL){
+      setResortSelect(areaFromURL);
+    }
+  },[location.search]);
 
   useEffect(() =>{
     const getSkiResorts = async() =>{
@@ -53,7 +63,7 @@ export default function SkiResortListPage() {
           )}
         </div>
       </div>
-      <Outlet />
+      
     </>
   )
 }
