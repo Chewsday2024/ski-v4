@@ -2,6 +2,8 @@ import AOS from 'aos';
 import 'aos/dist/aos.css'; 
 AOS.init();
 
+import './homeComps.scss'
+
 function ServicesSection() {
   
   const services = [
@@ -21,24 +23,26 @@ function ServicesSection() {
   ]
 
   return (
-    <section className="services container d-flex flex-column justify-content-center align-items-center w-100 border border-gray-03 rounded-5 my-3">
-        <div className="border-1 border-bottom border-gray-03 w-50 mb-5">
-          <h3 className="text-center text-brand-01 pb-4">我們提供的服務</h3>
-        </div>
-        <div className="d-flex justify-content-between gap-5">
-          { services.map((item) => {
-            return (          
-              <div key={item.title} className="d-flex flex-column" 
-                data-aos="flip-left"
-                data-aos-duration="800">
-                <span className="material-symbols-outlined align-bottom text-center mb-4">{item.icon}</span>
-                <div className="text-center mt-2">
-                  <h4 className="mb-4">{item.title}</h4>
-                  <p className="text-gray-01">{item.describe}</p>
-                </div>
-              </div>)
-              })
-              }
+    <section className="services container my-3">
+        <div className="d-flex flex-column justify-content-center align-items-center border border-gray-03 rounded-5 p-5">
+          <div className="border-1 border-bottom border-gray-03 mb-5 w-md-50">
+            <h3 className="text-center text-brand-01 pb-4">我們提供的服務</h3>
+          </div>
+          <div className="d-flex flex-column flex-md-row justify-content-between gap-5">
+            { services.map((item) => {
+              return (          
+                <div key={item.title} className="d-flex flex-column" 
+                  data-aos="flip-left"
+                  data-aos-duration="800">
+                  <span className="material-symbols-outlined align-bottom text-center mb-4">{item.icon}</span>
+                  <div className="text-center mt-2">
+                    <h4 className="mb-4">{item.title}</h4>
+                    <p className="text-gray-01">{item.describe}</p>
+                  </div>
+                </div>)
+                })
+                }
+          </div>
         </div>
       </section>
   )
