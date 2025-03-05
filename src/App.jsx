@@ -16,7 +16,7 @@ function App() {
   // 初始化時，從 localStorage 取得資料，若無則使用預設值
   const [order,setOrder] = useState(()=>{
     const localOrder = localStorage.getItem('orderData');
-    return localOrder ? JSON.parse(localOrder) : defaultOrder;
+    return localOrder && localOrder !== 'undefined'  ? JSON.parse(localOrder) : defaultOrder;
   });
 
   // 當 order 更新時，將資料存入 localStorage
