@@ -44,7 +44,7 @@ export default  function SkiResortDetailPage() {
     navigate(`/coach/${id}`);
   }
   
-  const handleSeeMore = (id) =>{
+  const handleSeeMore = () =>{
     navigate(`/coach`);
   }
 
@@ -133,14 +133,22 @@ export default  function SkiResortDetailPage() {
           
           <h5 className="pisteLevel my-3 text-center fs-2 fw-bold">雪道分級</h5>
           <div className="progress m-3" style={{height: "30px"}}>
-            <div className="progress-bar progress-bar-striped bg-success" role="progressbar" style={{width: "30%", ariaValuenow: "30"}} aria-valuemin="0" aria-valuemax="100"></div>
-            <div className="progress-bar progress-bar-striped bg-warning" role="progressbar" style={{width: "40%", ariaValuenow: "40"}} aria-valuemin="0" aria-valuemax="100"></div>
-            <div className="progress-bar progress-bar-striped bg-danger" role="progressbar" style={{width: "30%", ariaValuenow: "30"}} aria-valuemin="0" aria-valuemax="100"></div>
+            <div className="progress-bar progress-bar-striped bg-success" role="progressbar" style={{ width: `${skiResorts.pisteClassification?.beginner}%` }} 
+    aria-valuenow={skiResorts.pisteClassification?.beginner} aria-valuemin="0" aria-valuemax="100"></div>
+            <div className="progress-bar progress-bar-striped bg-warning" role="progressbar" style={{ width: `${skiResorts.pisteClassification?.intermediate}%` }} 
+    aria-valuenow={skiResorts.pisteClassification?.intermediate} aria-valuemin="0" aria-valuemax="100"></div>
+            <div className="progress-bar progress-bar-striped bg-danger" role="progressbar" style={{ width: `${skiResorts.pisteClassification?.advanced}%` }} 
+    aria-valuenow={skiResorts.pisteClassification?.advanced} aria-valuemin="0" aria-valuemax="100"></div>
           </div>
+
+
           <div className="progress m-3" style={{height: "30px"}}>
-            <div className="progressText progress-bar bg-white text-dark fs-5" role="progressbar" style={{width: "30%", ariaValuenow: "30"}} aria-valuemin="0" aria-valuemax="100">30% 初級</div>
-            <div className="progressText progress-bar bg-white text-dark fs-5" role="progressbar" style={{width: "40%", ariaValuenow: "40"}} aria-valuemin="0" aria-valuemax="100">40% 中級</div>
-            <div className="progressText progress-bar bg-white text-dark fs-5" role="progressbar" style={{width: "30%", ariaValuenow: "30"}} aria-valuemin="0" aria-valuemax="100">30% 高級</div>
+            <div className="progressText progress-bar bg-white text-dark fs-5" role="progressbar" style={{ width: `${skiResorts.pisteClassification?.beginner}%` }} 
+    aria-valuenow={skiResorts.pisteClassification?.beginner} aria-valuemin="0" aria-valuemax="100">{skiResorts.pisteClassification?.beginner}% 初級</div>
+            <div className="progressText progress-bar bg-white text-dark fs-5" role="progressbar" style={{ width: `${skiResorts.pisteClassification?.intermediate}%` }} 
+    aria-valuenow={skiResorts.pisteClassification?.intermediate} aria-valuemin="0" aria-valuemax="100">{skiResorts.pisteClassification?.intermediate}% 中級</div>
+            <div className="progressText progress-bar bg-white text-dark fs-5" role="progressbar" style={{ width: `${skiResorts.pisteClassification?.advanced}%` }} 
+    aria-valuenow={skiResorts.pisteClassification?.advanced} aria-valuemin="0" aria-valuemax="100">{skiResorts.pisteClassification?.advanced}% 高級</div>
           </div>
 
 
@@ -148,7 +156,7 @@ export default  function SkiResortDetailPage() {
           <div className="row row-cols-1 row-cols-lg-3 justify-content-center pt-3">
               {filteredCoaches.map(coach =>(
                 <div key={coach.id} className="col-md-4 d-flex justify-content-around flex-column align-items-center my-4">
-                <img src={coaches.profileImg} className="img-fluid rounded-circle object-fit-cover  mb-3" alt={coaches.name} style={{height:"200px", width:"200px"}} />
+                <img src={coach.profileImg} className="img-fluid rounded-circle object-fit-cover  mb-3" alt={coach.name} style={{height:"200px", width:"200px"}} />
                 <button onClick={handleBookingCoach}
                 type="button" className="orderCoachBtn btn btn-brand-01 rounded-5 fs-5" style={{width: "150px"}}>預約教練</button>
               </div>
