@@ -1022,7 +1022,7 @@
     "advanced": "30"
     },
     "tag":{
-    "isBeginner Friendly": false,
+    "isBeginnerFriendly": false,
     "isSkiInOut":false,
     "isTouristHotel":true,
     "isStuntPark":true,
@@ -1054,7 +1054,7 @@
     "advanced": "40"
     },
     "tag":{
-    "isBeginner Friendly": false,
+    "isBeginnerFriendly": false,
     "isSkiInOut":true,
     "isTouristHotel":true,
     "isStuntPark":true,
@@ -1086,7 +1086,7 @@
     "advanced": "20"
     },
     "tag":{
-    "isBeginner Friendly": false,
+    "isBeginnerFriendly": false,
     "isSkiInOut": false,
     "isTouristHotel": false,
     "isStuntPark": false,
@@ -1118,7 +1118,7 @@
     "advanced": "30"
     },
     "tag":{
-    "isBeginner Friendly": true ,
+    "isBeginnerFriendly": true ,
     "isSkiInOut": true,
     "isTouristHotel": true,
     "isStuntPark": true,
@@ -1150,7 +1150,7 @@
     "advanced": "38"
     },
     "tag":{
-    "isBeginner Friendly": true,
+    "isBeginnerFriendly": true,
     "isSkiInOut": true,
     "isTouristHotel": true,
     "isStuntPark": true,
@@ -1182,7 +1182,7 @@
     "advanced": "20"
     },
     "tag":{
-    "isBeginner Friendly": true,
+    "isBeginnerFriendly": true,
     "isSkiInOut": false,
     "isTouristHotel": true,
     "isStuntPark": false,
@@ -1214,7 +1214,7 @@
     "advanced": "40"
     },
     "tag":{
-    "isBeginner Friendly": true,
+    "isBeginnerFriendly": true,
     "isSkiInOut": true,
     "isTouristHotel": true,
     "isStuntPark": true,
@@ -1246,7 +1246,7 @@
     "advanced": "10"
     },
     "tag":{
-    "isBeginner Friendly": true,
+    "isBeginnerFriendly": true,
     "isSkiInOut": true,
     "isTouristHotel": true,
     "isStuntPark": true,
@@ -1278,7 +1278,7 @@
     "advanced": "25"
     },
     "tag":{
-    "isBeginner Friendly": true,
+    "isBeginnerFriendly": true,
     "isSkiInOut": false,
     "isTouristHotel": true,
     "isStuntPark": false,
@@ -1310,7 +1310,7 @@
     "advanced": "35"
     },
     "tag":{
-    "isBeginner Friendly": false,
+    "isBeginnerFriendly": false,
     "isSkiInOut": true,
     "isTouristHotel": false,
     "isStuntPark": false,
@@ -1342,7 +1342,7 @@
     "advanced": "35"
     },
     "tag":{
-    "isBeginner Friendly": true,
+    "isBeginnerFriendly": true,
     "isSkiInOut": false,
     "isTouristHotel": true,
     "isStuntPark": true,
@@ -1374,7 +1374,7 @@
     "advanced": "20"
     },
     "tag":{
-    "isBeginner Friendly": true,
+    "isBeginnerFriendly": true,
     "isSkiInOut": true,
     "isTouristHotel": true,
     "isStuntPark": false,
@@ -1406,7 +1406,7 @@
     "advanced": "20"
     },
     "tag":{
-    "isBeginner Friendly": true,
+    "isBeginnerFriendly": true,
     "isSkiInOut": false,
     "isTouristHotel": true,
     "isStuntPark": true,
@@ -1438,7 +1438,7 @@
     "advanced": "40"
     },
     "tag":{
-    "isBeginner Friendly": true,
+    "isBeginnerFriendly": true,
     "isSkiInOut": true,
     "isTouristHotel": true,
     "isStuntPark": true,
@@ -1470,7 +1470,7 @@
     "advanced": "19"
     },
     "tag":{
-    "isBeginner Friendly": true,
+    "isBeginnerFriendly": true,
     "isSkiInOut": false,
     "isTouristHotel": false,
     "isStuntPark": false,
@@ -1502,7 +1502,7 @@
     "advanced": "16"
     },
     "tag":{
-    "isBeginner Friendly": true,
+    "isBeginnerFriendly": true,
     "isSkiInOut": false,
     "isTouristHotel": true,
     "isStuntPark": false,
@@ -1534,7 +1534,7 @@
     "advanced": "30"
     },
     "tag":{
-    "isBeginner Friendly": true,
+    "isBeginnerFriendly": true,
     "isSkiInOut": false,
     "isTouristHotel": true,
     "isStuntPark": true,
@@ -1566,7 +1566,7 @@
     "advanced": "20"
     },
     "tag":{
-    "isBeginner Friendly": true,
+    "isBeginnerFriendly": true,
     "isSkiInOut": false,
     "isTouristHotel": true,
     "isStuntPark": false,
@@ -1598,7 +1598,7 @@
     "advanced": "30"
     },
     "tag":{
-    "isBeginner Friendly": true,
+    "isBeginnerFriendly": true,
     "isSkiInOut": false,
     "isTouristHotel": false,
     "isStuntPark": false,
@@ -1630,7 +1630,7 @@
     "advanced": "20"
     },
     "tag":{
-    "isBeginner Friendly": true,
+    "isBeginnerFriendly": true,
     "isSkiInOut": false,
     "isTouristHotel": true,
     "isStuntPark": false,
