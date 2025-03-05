@@ -1,9 +1,24 @@
 import { NavLink } from 'react-router';
+import { useDispatch } from 'react-redux';
+
+
+
+
+import { setPageIsOpen } from '../pages/coach/coachComps/coachPage/coachpageSlice';
+
+
 
 
 import './Header.scss';
 
+
+
+
+
+
 function Header() {
+
+  const dispatch = useDispatch();
 
 
   const activeClass = ({ isActive }) => `nav-link text-brand-01 ${ isActive ? "text-brand-02" : "" }`;
@@ -33,8 +48,16 @@ function Header() {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav ms-auto gap-4">
               <li className="nav-item">
-                <NavLink className={ activeClass } to='coach'>
-                <span className="material-symbols-outlined align-bottom me-1">downhill_skiing</span>教練介紹</NavLink>
+                <NavLink
+                  className={ activeClass }
+                  to='coach'
+                  onClick={() => dispatch(setPageIsOpen(false))}
+                  >
+                    <span className="material-symbols-outlined align-bottom me-1">
+                      downhill_skiing
+                    </span>
+                    教練介紹
+                </NavLink>
 
               </li>
 

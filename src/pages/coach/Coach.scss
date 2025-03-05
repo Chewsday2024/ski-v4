@@ -1,0 +1,43 @@
+.bg-mask {
+  position: relative;
+  // overflow: hidden;
+  
+  // mask-image: url('public/coachImges/Rectangle.png');
+  // mask-size: cover;
+  // mask-position: center;
+  
+  // mask-image: radial-gradient(circle, rgba(0, 0, 0, 1) 30%, rgba(0, 0, 0, 0) 70%);
+  // mask-size: cover;
+  // backdrop-filter: blur(8px);
+  // filter: blur(5px);
+  // position: relative;
+  
+  // background-image: url('public/coachImges/lisa.png');
+  // background-size: cover;
+  // background-position: center;
+
+  &::before {
+    content: '';
+    position: absolute;
+    // top: 0;
+    // left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/coachImges/bg-1.png');
+
+    // mask-image: url('/coachImges/Rectangle.png');
+    // mask-size: cover;
+    // mask-position: center;
+
+    
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: blur(5px); 
+    z-index: -1;
+  }
+}
+
+
+
+
