@@ -1,13 +1,15 @@
-footer {
-  ul {
-    list-style-type: none;
-    .text-brand-01 {
-      &:hover {
-        color: #779ECB !important;
-      }
-    }
+.contect {
+  font-size: 16px;
+
+
+
+  @media (min-width: 576px) {
+    font-size: 11px;
   }
-  .text-small {
-    font-size: 14px
+
+
+
+  @media (min-width: 800px) {
+    font-size: 16px;
   }
 }

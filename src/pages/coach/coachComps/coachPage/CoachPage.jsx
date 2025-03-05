@@ -34,7 +34,7 @@ function CoachPage () {
   const { id } = useParams();
 
 
-  console.log(coach);
+
 
 
   const fullStars = Math.floor(coach.rate?.stars);
@@ -94,106 +94,110 @@ function CoachPage () {
           上一頁
       </Link>
 
-      <div className="row row-cols-1 m-auto mt-3 page-box">
-        <div className="col profile-col">
-          <div className="d-flex m-auto gap-4 coach-profile-container">
-            <div
-              className='w-100 rounded-4 position-relative coach-profile-img'
-              style={{backgroundImage: `url(${coach.profileImg})`}}
-              >
-                
-              <i
-                onClick={() => dispatch(setIsMark())}
-                className={`
-                  bi
-                  ${ isMark ? 'bi-bookmark-fill' : 'bi-bookmark'}
-                  fs-3
-                  position-absolute
+      <div className="row row-cols-1 m-auto mt-3  page-box">
+        <div className="col ">
+          <div className='profile-col'>
+            <div className="d-sm-flex m-auto gap-4 h-100 coach-profile-container">
+              <div className='position-relative'>
+                <img
+                  className='w-100  rounded-4  coach-profile-img'
+                  src={coach.profileImg}
+                  
+                  />
+                    
+                  <i
+                    onClick={() => dispatch(setIsMark())}
+                    className={`
+                      bi
+                      ${ isMark ? 'bi-bookmark-fill' : 'bi-bookmark'}
+                      fs-3
+                      position-absolute
 
-                  coach-bookmark
-                `} 
-              />
+                      coach-bookmark
+                    `} 
+                  />
+              </div>
+
+              <ul className="d-flex flex-column justify-content-between gap-3 gap-sm-0 p-0 m-0 mt-3 mt-sm-0 w-100 list-unstyled coach-profile-list">
+                <li>
+                  <h1 className='fw-bold'>{coach.name}</h1>
+                </li>
+
+                <li className='d-flex gap-3'>
+                  <p className='bg-brand-02 text-white px-2 rounded-1'>類型</p>
+                  <p className='fw-bold'>
+                    {coach.skills?.map((skill, index) => (
+                      <span key={index}>
+                        {skill}{index !== coach.skills.length - 1 && " , "}
+                      </span>
+                    ))}
+                  </p>
+                </li>
+
+                <li className='d-flex gap-3'>
+                  <p className='bg-brand-02 text-white px-2 rounded-1'>性別</p>
+                  <p className='fw-bold'>{coach.sex}</p>
+                </li>
+
+                <li className='d-flex gap-3'>
+                  <p className='bg-brand-02 text-white px-2 rounded-1'>證照</p>
+                  <p className='fw-bold'>證照等級 {coach.LV}</p>
+                </li>
+
+                <li className='d-flex gap-3'>
+                  <p className='bg-brand-02 text-white px-2 rounded-1'>語言</p>
+
+                  <p className='fw-bold'>
+                    {coach.lang?.map((lang, index) => (
+                      <span key={index}>
+                        {lang}{index !== coach.lang.length - 1 && " / "}
+                      </span>
+                    ))}
+                  </p>
+                </li>
+
+                <li className='d-flex gap-3'>
+                  <p className='bg-brand-02 text-white px-2 rounded-1'>評價</p>
+                  <p className='fw-bold'>
+                    {Array.from({ length: fullStars }).map((_, i) => (
+                      <i key={i} className="bi bi-star-fill text-brand-02 me-1" />
+                    ))}
+
+                    {halfStar && <i className="bi bi-star-half text-brand-02 me-1"></i>}
+
+                    {Array.from({ length: emptyStars }).map((_, i) => (
+                      <i key={i} className="bi bi-star text-brand-02 me-1" />
+                    ))}
+
+                    {coach.rate?.stars} ({coach.rate?.rateNum})
+                  </p>
+                </li>
+
+                <li>
+                  <p className='fw-bold d-inline'>JPY <span className='fs-2 mx-2'>{coach.charge}</span> /hr 起</p>
+                </li>
+
+                <li>
+                  <button
+                    className='
+                    fw-bold
+                    border-2
+                    border-brand-01
+                    rounded-pill
+                    
+                    order-coach
+                    '>
+                      預約教練
+                  </button>
+                </li>
+
+              </ul>
             </div>
 
-            <ul className="d-flex flex-column justify-content-between p-0 m-0 w-100 list-unstyled coach-profile-list">
-              <li>
-                <h1 className='fw-bold'>{coach.name}</h1>
-              </li>
-
-              <li className='d-flex gap-3'>
-                <p className='bg-brand-02 text-white px-2 rounded-1'>類型</p>
-                <p className='fw-bold'>
-                  {coach.skills?.map((skill, index) => (
-                    <span key={index}>
-                      {skill}{index !== coach.skills.length - 1 && " , "}
-                    </span>
-                  ))}
-                </p>
-              </li>
-
-              <li className='d-flex gap-3'>
-                <p className='bg-brand-02 text-white px-2 rounded-1'>性別</p>
-                <p className='fw-bold'>{coach.sex}</p>
-              </li>
-
-              <li className='d-flex gap-3'>
-                <p className='bg-brand-02 text-white px-2 rounded-1'>證照</p>
-                <p className='fw-bold'>證照等級 {coach.LV}</p>
-              </li>
-
-              <li className='d-flex gap-3'>
-                <p className='bg-brand-02 text-white px-2 rounded-1'>語言</p>
-
-                <p className='fw-bold'>
-                  {coach.lang?.map((lang, index) => (
-                    <span key={index}>
-                      {lang}{index !== coach.lang.length - 1 && " / "}
-                    </span>
-                  ))}
-                </p>
-              </li>
-
-              <li className='d-flex gap-3'>
-                <p className='bg-brand-02 text-white px-2 rounded-1'>評價</p>
-                <p className='fw-bold'>
-                  {Array.from({ length: fullStars }).map((_, i) => (
-                    <i key={i} className="bi bi-star-fill text-brand-02 me-1" />
-                  ))}
-
-                  {halfStar && <i className="bi bi-star-half text-brand-02 me-1"></i>}
-
-                  {Array.from({ length: emptyStars }).map((_, i) => (
-                    <i key={i} className="bi bi-star text-brand-02 me-1" />
-                  ))}
-
-                  {coach.rate?.stars} ({coach.rate?.rateNum})
-                </p>
-              </li>
-
-              <li>
-                <p className='fw-bold d-inline'>JPY <span className='fs-2 mx-2'>{coach.charge}</span> /hr 起</p>
-              </li>
-
-              <li>
-                <button
-                  className='
-                  fw-bold
-                  border-2
-                  border-brand-01
-                  rounded-pill
-                  
-                  order-coach
-                  '>
-                    預約教練
-                </button>
-              </li>
-
+            <ul className='d-flex gap-3 text-gray-02 list-unstyled tag-ul'>
+              {coach.tag?.map(tag => <li key={tag}>#{tag}</li>)}
             </ul>
           </div>
-
-          <ul className='d-flex gap-3 text-gray-02 list-unstyled tag-ul'>
-            {coach.tag?.map(tag => <li key={tag}>#{tag}</li>)}
-          </ul>
           
 
         </div>
@@ -204,25 +208,25 @@ function CoachPage () {
 
 
 
-        <div className='col'>
-          <ul className="nav d-flex justify-content-between mb-5">
-            <li>
+        <div className='col about-coach-col'>
+          <ul className="nav row row-cols-2 row-cols-md-5 g-4 m-auto mb-5 text-center">
+            <li className='col'>
               <a className="active coach-detail-tab" data-bs-toggle="tab" href="#member">會員中心</a>
             </li>
 
-            <li>
+            <li className='col'>
               <a className="coach-detail-tab" onClick={openCalendar} data-bs-toggle="tab" href="#classes">預約課表</a>
             </li>
 
-            <li>
+            <li className='col'>
               <a className="coach-detail-tab" data-bs-toggle="tab" href="#exp">教練經歷</a>
             </li>
 
-            <li>
+            <li className='col'>
               <a className="coach-detail-tab" data-bs-toggle="tab" href="#license">教練證照</a>
             </li>
 
-            <li>
+            <li className='col'>
               <a className="coach-detail-tab" data-bs-toggle="tab" href="#photo">教學日常</a>
             </li>
           </ul>
@@ -235,7 +239,7 @@ function CoachPage () {
               </h6>
             </div>
 
-            <div id="classes" className="tab-pane fade">
+            <div id="classes" className="tab-pane calendar fade ">
               <FullCalendar
                 ref={calendarRef}
                 plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
@@ -246,7 +250,7 @@ function CoachPage () {
                   right: "today",
                 }}
                 events={events}
-                
+                eventBackgroundColor='rgb(4, 59, 107)'
               />
             </div>
 
