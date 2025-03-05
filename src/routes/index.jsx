@@ -7,11 +7,13 @@ import Home from '../pages/home/Home';
 import Coach from '../pages/coach/Coach';
 import CoachPage from '../pages/coach/coachComps/coachPage/CoachPage';
 import SkiResortListPage from '../pages/skihouse/SkiResortListPage';
+import SkiResortDetailPage from '../pages/skihouse/SkiResortDetailPage';
 import SignInForm from '../pages/home/homeComps/SignInForm';
 import SignUpForm from '../pages/home/homeComps/SignUpForm';
 import ArticlePage from '../pages/article/ArticlePage';
 import AboutUs from '../pages/about/AboutUs';
 import NotFound from '../components/NotFound';
+import { element } from 'prop-types';
 
 
 
@@ -52,7 +54,11 @@ const routes = [
       },
       {
         path:'ski-house',
-        element:<SkiResortListPage />
+        element: <SkiResortListPage />
+      },
+      {
+        path: 'ski-house/:id',
+        element: <SkiResortDetailPage />
       },
       {
         path: 'sign-in',

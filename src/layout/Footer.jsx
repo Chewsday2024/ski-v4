@@ -47,7 +47,10 @@ function Footer() {
                   </NavLink>
                 </li>
               </ul>
+
             </div>
+          </div>
+
 
             <div className='d-flex flex-column-reverse flex-md-row align-items-center justify-content-md-between align-items-md-end text-center text-md-start w-100'>
               <div className='text-brand-01 text-small'>
@@ -61,11 +64,13 @@ function Footer() {
                 <span>客服信箱：service@snowbuddy.com</span>
                 <span>服務時間：週一至週日 08:00~17:00</span>
               </div>
+
             </div>
           </div>
         </div>
-      </footer>
-    </>
+      </div>
+
+    </footer>
   )
 }
 

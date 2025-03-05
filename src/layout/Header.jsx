@@ -1,5 +1,9 @@
 import { useState, useEffect } from "react";
 import { NavLink } from 'react-router';
+import { useDispatch } from 'react-redux';
+
+import { setPageIsOpen } from '../pages/coach/coachComps/coachPage/coachpageSlice';
+
 import './Header.scss';
 
 function Header() {
@@ -10,6 +14,8 @@ function Header() {
   const toggleNavbar = () => {
     setIsNavbarOpen(!isNavbarOpen);
   };
+
+  const dispatch = useDispatch();
 
   const handleLinkClick = () => {
     setIsNavbarOpen(false);
@@ -58,8 +64,15 @@ function Header() {
           >
             <ul className="navbar-nav ms-auto mt-5 mt-md-0 gap-4 text-center text-lg-start">
               <li className="nav-item">
-                <NavLink className={activeClass} to="coach" onClick={handleLinkClick}>
-                  <span className="material-symbols-outlined align-bottom me-1">downhill_skiing</span>教練介紹
+                <NavLink
+                  className={ activeClass }
+                  to='coach'
+                  onClick={() => dispatch(setPageIsOpen(false))}
+                  >
+                    <span className="material-symbols-outlined align-bottom me-1">
+                      downhill_skiing
+                    </span>
+                    教練介紹
                 </NavLink>
               </li>
 

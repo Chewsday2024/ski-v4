@@ -6,6 +6,8 @@ import SkiHouseSection from './homeComps/SkiHouseSection';
 import ArticleSection from './homeComps/ArticleSection';
 import FAQ from './homeComps/FAQ';
 
+import './Home.scss';
+
 function Home() {
 
   return (
