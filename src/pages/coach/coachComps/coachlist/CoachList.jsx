@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { InputValue } from '../SearchInput';
 
 import './CoachList.scss';
-import { setPageIsOpen } from '../coachPage/coachpageSlice';
+
 import { getallcoaches, getAllCoaches } from './coachlistSlice';
 
 
@@ -49,7 +49,7 @@ function CoachList() {
   
 
   return (
-    <div className='row row-cols-3 w-100'>
+    <div className='row row-cols-1 row-cols-sm-2 row-cols-lg-3 w-100'>
       {filteredCoaches.map((coach, index) => {
 
         const coachListfullStars = Math.floor(coach.rate?.stars);
@@ -58,12 +58,11 @@ function CoachList() {
 
 
         return (
-          <div key={index} className='col d-flex justify-content-center text-white coach-col'>
+          <div key={index} className='col d-flex justify-content-center coach-col'>
             <Link
               type='button'
-              className='text-decoration-none p-0 border-0 rounded-5 col-8'
-              to={coach.id}
-              onClick={() => {dispatch(setPageIsOpen(true))}}
+              className='text-decoration-none w-100 p-0 border-0 text-dark rounded-5 col-8'
+              to={`/${coach.id}`}
               >
               <div
                 className='
@@ -73,6 +72,7 @@ function CoachList() {
                   align-items-center
                   gap-2
                   rounded-5
+                  m-auto
                   p-3
                   h-100
                   bg-brand-02
@@ -112,7 +112,7 @@ function CoachList() {
 
                 <p>{coach.skills}教練</p>
 
-                <p>{coach.charge} /hr 起</p>
+                <p>¥ {coach.charge} /hr 起</p>
               </div>
             </Link>
           </div>

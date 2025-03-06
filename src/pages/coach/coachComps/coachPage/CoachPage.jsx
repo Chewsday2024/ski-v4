@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 
 
-import { getCoach, getIsMarkStatus, getOneCoach, getPageIsOpenStatus, getPageStatus, setIsMark, setPageIsOpen } from './coachpageSlice';
+import { getCoach, getIsMarkStatus, getOneCoach, getPageIsOpenStatus, getPageStatus, setIsMark } from './coachpageSlice';
 
 
 import './CoachPage.scss';
@@ -86,11 +86,10 @@ function CoachPage () {
 
 
   return (
-    <div className={`container mt-3 ${pageIsOpen ? 'd-block' : 'd-none'}`}>
+    <div className='container mt-3'>
       <Link
         className='btn btn-brand-01'
-        onClick={() => dispatch(setPageIsOpen(false))}
-        to='..'>
+        to='/coach'>
           上一頁
       </Link>
 
@@ -239,7 +238,7 @@ function CoachPage () {
               </h6>
             </div>
 
-            <div id="classes" className="tab-pane calendar fade ">
+            <div id="classes" className="tab-pane fade">
               <FullCalendar
                 ref={calendarRef}
                 plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}

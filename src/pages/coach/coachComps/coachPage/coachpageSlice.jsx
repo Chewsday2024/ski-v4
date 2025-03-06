@@ -31,9 +31,6 @@ const coachpageSlice = createSlice({
   name: 'coachPage',
   initialState,
   reducers: {
-    setPageIsOpen (state, action) {
-      state.pageIsOpen = action.payload;
-    },
     setIsMark (state) {
       state.isMark = state.isMark ? false : true;
     }
@@ -53,7 +50,7 @@ const coachpageSlice = createSlice({
 
 
 
-export const { setPageIsOpen, setIsMark } = coachpageSlice.actions;
+export const { setIsMark } = coachpageSlice.actions;
 
 
 
