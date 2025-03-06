@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Outlet } from 'react-router-dom';
+
 import { useLocation } from 'react-router';
 import './SkiHouse.scss';
 import axios from 'axios';
@@ -26,7 +26,7 @@ export default function SkiResortListPage() {
   useEffect(() =>{
     const getSkiResorts = async() =>{
       try {
-        const res = await axios.get('http://localhost:3000/skiResorts');
+        const res = await axios.get('https://ski-api-m9x9.onrender.com/skiResorts');
         setSkiResorts(res.data);
       } catch (error) {
         alert(`Error: ${error.message}`)

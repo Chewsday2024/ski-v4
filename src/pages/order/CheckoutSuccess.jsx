@@ -2,7 +2,7 @@ import { Link } from "react-router"
 
 export default function CheckoutSuccess(){
     return(
-        <div className="container vh-100">
+        <div className="container h-100">
             {/* PC Step flow */}
             <div className="row justify-content-center">
                 <div className="col-lg-8 col">

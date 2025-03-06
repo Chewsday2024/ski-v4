@@ -5,7 +5,7 @@ import { OrderContext } from "./BookingPage";
 export default function CheckoutFail(){
     const { errorMessage } = useContext(OrderContext); //錯誤訊息
     return(
-        <div className="container vh-100">
+        <div className="container h-100">
             <div className="h-100 d-flex flex-column justify-content-center mt-4">
                 <div className="d-flex flex-column gap-3 justify-content-center align-items-center">
                     {/* <span className="material-symbols-outlined icon-unfilled">Cancel</span> */}
