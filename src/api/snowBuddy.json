@@ -1152,7 +1152,7 @@
     "hasChildCareServices": false,
     "hasChildPark": true
     },
-    "selectCoach":[2,8,10]
+    "selectCoach":[2,8,5]
     },{
     "id": 5,
     "chineseName": "喜樂樂滑雪場",
@@ -1248,7 +1248,7 @@
     "hasChildCareServices": true,
     "hasChildPark": false
     },
-    "selectCoach":[10,9,7]
+    "selectCoach":[2,9,7]
     },{
     "id": 8,
     "chineseName": "青森之泉滑雪場",
@@ -1280,7 +1280,7 @@
     "hasChildCareServices": false,
     "hasChildPark": true
     },
-    "selectCoach":[2,3,10]
+    "selectCoach":[2,3,7]
     },{
     "id": 9,
     "chineseName": "星野貓魔山滑雪場",
@@ -1376,7 +1376,7 @@
     "hasChildCareServices": false,
     "hasChildPark": true
     },
-    "selectCoach":[3,9,10]
+    "selectCoach":[3,9,4]
     },{
     "id": 12,
     "chineseName": "舞子滑雪渡假村",
@@ -1600,7 +1600,7 @@
     "hasChildCareServices": false,
     "hasChildPark": true
     },
-    "selectCoach":[5,2,10]
+    "selectCoach":[5,2,9]
     },{
     "id": 19,
     "chineseName": "菅平高原Pine Beak滑雪場",
