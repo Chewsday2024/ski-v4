@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Outlet } from 'react-router-dom';
+
 import { useLocation } from 'react-router';
 import './SkiHouse.scss';
 import axios from 'axios';

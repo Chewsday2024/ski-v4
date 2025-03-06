@@ -15,7 +15,7 @@ const initialState = {
 
 
 export const getOneCoach = createAsyncThunk('coachPage/getOneCoach', async (id) => {
-  const res = await axios.get(`http://localhost:3000/coaches/${id}`);
+  const res = await axios.get(`https://ski-api-m9x9.onrender.com/coaches/${id}`);
 
 
   return res.data;
