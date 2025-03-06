@@ -2,6 +2,8 @@ import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
+import bootstrap5Plugin from '@fullcalendar/bootstrap5';
+import listPlugin from "@fullcalendar/list";
 import { useEffect, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,7 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 
 
-import { getCoach, getIsMarkStatus, getOneCoach, getPageIsOpenStatus, getPageStatus, setIsMark } from './coachpageSlice';
+import { getCoach, getIsMarkStatus, getOneCoach, getPageStatus, setIsMark } from './coachpageSlice';
 
 
 import './CoachPage.scss';
@@ -23,8 +25,6 @@ function CoachPage () {
 
   const dispatch = useDispatch();
 
-  const pageIsOpen = useSelector(getPageIsOpenStatus);
-
   const isMark = useSelector(getIsMarkStatus);
 
   const coach = useSelector(getCoach);
@@ -32,6 +32,9 @@ function CoachPage () {
   // const pageStatus = useSelector(getPageStatus);
 
   const { id } = useParams();
+
+
+  
 
 
 
@@ -43,23 +46,6 @@ function CoachPage () {
 
 
 
-  
-
-
-  const [events, setEvents] = useState([
-    {
-      title: "數位課程 - 9:00 AM",
-      start: "2025-01-01",
-      end: "2025-01-01",
-    },
-    {
-      title: "線上研討會 - 2:00 PM",
-      start: "2025-02-01",
-      end: "2025-02-01",
-    },
-  ]);
-
-
 
 
   useEffect(() => {
@@ -67,7 +53,26 @@ function CoachPage () {
   }, []);
 
 
+  const [calendarView, setCalendarView] = useState('dayGridMonth');
 
+
+
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.matchMedia("(min-width: 576px)").matches) {
+        setCalendarView('listWeek'); 
+      } else {
+        setCalendarView('dayGridMonth');
+      }
+    };
+
+    handleResize(); 
+
+    window.addEventListener('resize', handleResize); 
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, [calendarView])
 
 
 
@@ -241,15 +246,17 @@ function CoachPage () {
             <div id="classes" className="tab-pane fade">
               <FullCalendar
                 ref={calendarRef}
-                plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-                initialView="dayGridMonth"
+                plugins={[dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin, bootstrap5Plugin]}
+                initialView={calendarView}
                 headerToolbar={{
                   left: "prev,next",
                   center: "title",
                   right: "today",
                 }}
-                events={events}
+                events={coach.teachingSchedule}
                 eventBackgroundColor='rgb(4, 59, 107)'
+                aspectRatio={window.innerWidth < 768 ? 1 : 1.8}
+                themeSystem= 'bootstrap5'
               />
             </div>
 
@@ -269,7 +276,7 @@ function CoachPage () {
 
 
             <div id="license" className="tab-pane fade">
-              <div className='d-flex gap-3'>
+              <div className='d-flex flex-column flex-sm-row gap-3'>
                 {coach.license?.map(license => {
                   return (
                     <div key={license.licenseName} className='d-flex flex-column justify-content-center align-items-center gap-3'>
@@ -287,11 +294,11 @@ function CoachPage () {
 
 
             <div id="photo" className="tab-pane fade">
-              <div className='row row-cols-3 g-2'>
+              <div className='row row-cols-1 row-cols-sm-2 row-cols-md-3 g-2'>
                 {coach.img?.map((img, index) => {
                   return (
-                    <div key={index} className='col'> 
-                      <img src={img} className='w-100' alt="#" />
+                    <div key={index} className='col daily-imges-col'> 
+                      <img src={img} className='w-100 h-100 daily-imges' alt="#" />
                     </div>
                   )
                 })}

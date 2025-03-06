@@ -5,7 +5,6 @@ import axios from 'axios';
  
 const initialState = { 
   coachPage: {},
-  pageIsOpen: false,
   isMark: false,
   status: 'idle',
   error: null
@@ -54,7 +53,6 @@ export const { setIsMark } = coachpageSlice.actions;
 
 
 
-export const getPageIsOpenStatus = state => state.coachPage.pageIsOpen;
 
 export const getIsMarkStatus = state => state.coachPage.isMark;
 
