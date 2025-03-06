@@ -46,7 +46,7 @@ function Header() {
       <nav className="navbar navbar-expand-lg py-4">
         <div className="container">
           <NavLink className="navbar-brand" to="/">
-            <img src="public/logo-2.png" alt="logo" style={{ width: '200px' }} />
+            <img src="logo-2.png" alt="logo" style={{ width: '200px' }} />
           </NavLink>
 
           <button
@@ -77,7 +77,7 @@ function Header() {
               </li>
 
               <li className="nav-item">
-                <NavLink className={activeClass} to="ski-House" onClick={handleLinkClick}>
+                <NavLink className={activeClass} to="ski-house" onClick={handleLinkClick}>
                   <span className="material-symbols-outlined align-bottom me-1">Mountain_flag</span>雪場介紹
                 </NavLink>
               </li>
