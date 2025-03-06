@@ -46,7 +46,7 @@ export const defaultOrder = {
 
 export default function BookingPage(){
 
-    const BASE_URL = "http://localhost:3000";
+    const BASE_URL = "https://ski-api-m9x9.onrender.com";
 
     // const [allSkiHouses, setAllSkiHouses] = useState([]); //全部的雪場資料
     const {allSkiHouses, setAllSkiHouses} = useContext(OrderContext);
@@ -463,7 +463,7 @@ export default function BookingPage(){
                                         <div className="flex-shrink-0 me-3">
                                             <img 
                                                 className="head-shot rounded-circle object-fit-cover" 
-                                                src={selectedCoach ? coachImg : "/images/person-icon.svg"}    
+                                                src={selectedCoach ? coachImg : "https://firebasestorage.googleapis.com/v0/b/kayismeblog.appspot.com/o/2025-SnowBuddy%2Fperson-icon.svg?alt=media&token=36719ef0-2d39-4d70-bf37-c37cb373df29"}    
                                                 alt="教練名"/>
                                         </div>
                                         <select

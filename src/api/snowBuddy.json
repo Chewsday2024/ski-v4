@@ -506,7 +506,7 @@
         "class": {
             "skiType": "single",             
             "timeType": "allday",                     
-            "date": null,               
+            "date": "",               
             "startDate": "2025-01-25",    
             "endDate": "2025-01-27",      
             "days": 3                     
@@ -556,9 +556,9 @@
           "skiType": "double",
           "timeType": "halfDayAM",
           "date": "2025-02-01",
-          "startDate": null,
-          "endDate": null,
-          "days": 0.5
+          "startDate": "",
+          "endDate": "",
+          "days": 1
         },
         "studentsData": {
           "studentNum": 1,
@@ -598,7 +598,7 @@
         "class": {
           "skiType": "single",
           "timeType": "allday",
-          "date": null,
+          "date": "",
           "startDate": "2025-02-10",
           "endDate": "2025-02-14",
           "days": 5
@@ -660,9 +660,9 @@
           "skiType": "double",
           "timeType": "halfDayPM",
           "date": "2025-02-20",
-          "startDate": null,
-          "endDate": null,
-          "days": 0.5
+          "startDate": "",
+          "endDate": "",
+          "days": 1
         },
         "studentsData": {
           "studentNum": 2,
@@ -708,7 +708,7 @@
         "class": {
           "skiType": "double",
           "timeType": "allday",
-          "date": null,
+          "date": "",
           "startDate": "2025-03-01",
           "endDate": "2025-03-02",
           "days": 2
@@ -764,9 +764,9 @@
           "skiType": "single",
           "timeType": "halfDayAM",
           "date": "2025-02-05",
-          "startDate": null,
-          "endDate": null,
-          "days": 0.5
+          "startDate": "",
+          "endDate": "",
+          "days": 1
         },
         "studentsData": {
           "studentNum": 2,
@@ -812,7 +812,7 @@
         "class": {
           "skiType": "double",
           "timeType": "allday",
-          "date": null,
+          "date": "",
           "startDate": "2025-02-15",
           "endDate": "2025-02-17",
           "days": 3
@@ -856,9 +856,9 @@
         "skiType": "single",
         "timeType": "halfDayPM",
         "date": "2025-02-21",
-        "startDate": null,
-        "endDate": null,
-        "days": 0.5
+        "startDate": "",
+        "endDate": "",
+        "days": 1
       },
       "studentsData": {
         "studentNum": 2,
@@ -904,7 +904,7 @@
       "class": {
         "skiType": "double",
         "timeType": "allday",
-        "date": null,
+        "date": "",
         "startDate": "2025-03-05",
         "endDate": "2025-03-06",
         "days": 2
@@ -959,7 +959,7 @@
       "class": {
         "skiType": "single",
         "timeType": "allday",
-        "date": null,
+        "date": "",
         "startDate": "2025-02-25",
         "endDate": "2025-02-27",
         "days": 3
