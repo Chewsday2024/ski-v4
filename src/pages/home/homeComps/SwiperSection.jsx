@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import 'swiper/css'
+import './homeComps.scss'
 
 function SwiperSection() {
   const [coaches] = useState([
@@ -60,24 +61,28 @@ function SwiperSection() {
     <>
     <div className="mt-xxl mb-xxl py-5" style={{background:"url('https://firebasestorage.googleapis.com/v0/b/homework-b5f67.appspot.com/o/homeSection3-bg.png?alt=media&token=99efd315-41d3-433c-8c2e-66bf9af483eb') no-repeat center center/cover"}}>
       <div className="container">
-        <div className="row">
-          <div className="col-4 d-flex flex-column justify-content-center text-white px-0">
+        <div className="row flex-column flex-md-row overflow-hidden">
+          <div className="col-md-4 d-flex flex-column justify-content-center text-white ms-2 ms-md-0">
             <div className="mb-3">
-                <h1 className="text-lg bg-brand-01 d-inline-block px-2 py-1 border-2 border-bottom border-white">預約專屬教練</h1>
+                <h1 className="bg-brand-01 d-inline-block px-2 py-1 border-2 border-bottom border-white">預約專屬教練</h1>
             </div>
-            <div className="mb-5">
+            <div>
                 <h2 className="h1 bg-brand-01 d-inline-block px-2 py-1 border-2 border-bottom border-white">解鎖滑雪新玩法</h2>
             </div>
           </div>
-          <div className="col-8 px-0">
-          {/* 超出的範圍無法成功設定，先跳過XP */}
-            <section className="text-center my-5" style={{ overflow: 'visible' }}>
+          <div className="col-md-8 px-0">
+            <section className="text-center my-5 swiper-container" style={{ overflow: 'visible' }}>
               <Swiper
                modules={[Autoplay]}
                slidesPerView={3}
                spaceBetween={30}
                autoplay={{
                 delay: 2500
+              }}
+              breakpoints={{
+                1200: { slidesPerView: 3 },
+                573: { slidesPerView: 2 },
+                0: { slidesPerView: 1 } 
               }}
               loop={true}
               slidesOffsetAfter={500}

@@ -1,11 +1,10 @@
 import BackToTopButton from '../../components/BackToTopButton';
 import BannerSection from './homeComps/BannerSection';
 import ServicesSection from './homeComps/ServicesSection';
-import SwiperSection from './homeComps/swiperSection';
+import SwiperSection from './homeComps/SwiperSection';
 import SkiHouseSection from './homeComps/SkiHouseSection';
 import ArticleSection from './homeComps/ArticleSection';
-
-
+import FAQ from './homeComps/FAQ';
 
 import './Home.scss';
 
@@ -25,6 +24,8 @@ function Home() {
         <SkiHouseSection />
       {/* 文章 */}
         <ArticleSection />
+      {/* 常見問題 */}
+        <FAQ />
       </main>
     </>
   )

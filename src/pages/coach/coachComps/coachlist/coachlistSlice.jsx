@@ -12,7 +12,9 @@ const initialState = {
 
 
 export const getAllCoaches = createAsyncThunk('coachList/getAllCoaches', async () => {
-  const res = await axios.get('http://localhost:3000/coaches');
+  const res = await axios.get('https://ski-api-m9x9.onrender.com/coaches');
+
+  console.log(res);
 
   return res.data;
 })

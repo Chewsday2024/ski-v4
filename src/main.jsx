@@ -5,6 +5,7 @@ import { createHashRouter, RouterProvider } from 'react-router';
 
 
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'swiper/css/bundle';
 import './assets/all.scss';
 import routes from './routes/index.jsx';

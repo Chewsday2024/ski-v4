@@ -1,15 +1,14 @@
-.contect {
-  font-size: 16px;
-
-
-
-  @media (min-width: 576px) {
-    font-size: 11px;
+.w-md-75 {
+  @media (min-width: 768px) {
+    max-width: 75% ;
   }
+  .text-small {
+    font-size: 14px
+  }
+}
 
-
-
-  @media (min-width: 800px) {
-    font-size: 16px;
+.w-md-75 {
+  @media (min-width: 768px) {
+    max-width: 75% ;
   }
 }

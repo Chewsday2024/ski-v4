@@ -16,19 +16,6 @@
 
 
 
-ul{
-    padding-left: 0;
-}
-
-a {
-    color: black;
-}
-@include media-breakpoint-up(md) {
-    a {
-        font-size: 16px;
-    }
-}
-
 // Material ICON 樣式，預設填滿
 .material-symbols-outlined {
     font-variation-settings:
@@ -50,8 +37,10 @@ a {
     width: 25%;
 }
 
-.w-70{
-    width: 70%;
+.form-section{
+    .w-70{
+        width: 70%;
+    }   
 }
 
 .w-75{
@@ -76,8 +65,10 @@ a {
     .w-md-50{
         width: 50%;
     }
-    .w-md-80{
-        width: 80%;
+    .form-section{
+        .w-md-80{
+            width: 80%;
+        }
     }
   }
 
@@ -186,6 +177,7 @@ a {
 }
 
 .mobile-steps{
+    padding-left: 0;
     li{
         position: relative;
         width: 33.333333%;
@@ -210,7 +202,6 @@ a {
     }
 } 
 
-
 // 表格 title
 .form-title{
     border-left: 13px solid $brand-02;
@@ -222,6 +213,7 @@ a {
 }
 
 .select-info-link{
+    color: black;
     margin-left: 12px;
 }
 
@@ -281,12 +273,24 @@ a {
     }
   }
 
-.success-icon{
+.result-success-img{
+    max-width: 35%;
+    height: auto;
+    object-fit: cover;
+}
+
+.result-error-img{
+    max-width: 25%;
+    height: auto;
+    object-fit: cover;
+}
+
+.success-text{
     color: #77cb93;
     font-size: 160px;
 }
 
-.error-icon{
+.error-text{
     color: #cb7777;
     font-size: 160px;
 }

@@ -30,7 +30,7 @@ function SignInForm() {
   return (
     <div className="container mb-5">
       <div className="row flex-column justify-content-center align-items-center">
-        <div className="col-4">
+        <div className="col-md-4 col-10">
           <form className="d-flex flex-column text-brand-01">
             <h2 className="mb-4 text-brand-02 align-self-center">會員登入</h2>
             <div className="form-group mb-2">
