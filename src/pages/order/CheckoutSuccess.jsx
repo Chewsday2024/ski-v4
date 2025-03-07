@@ -50,7 +50,7 @@ export default function CheckoutSuccess(){
             <div className="d-flex flex-column justify-content-center">
                 <div className="d-flex flex-column gap-3 justify-content-center align-items-center">
                     {/* <span className="material-symbols-outlined icon-unfilled">check_circle</span> */}
-                    <img src="/images/booking-success.png" className="result-success-img" alt="預約成功" />
+                    <img src="https://firebasestorage.googleapis.com/v0/b/kayismeblog.appspot.com/o/Side-Project%2F2025-SnowBuddy%2Fbooking-success.png?alt=media&token=0fc4c233-1367-4473-b24a-69ce8e306114" className="result-success-img" alt="預約成功" />
                     <h3 className="fs-2 success-text">預約成功</h3>
                 </div>
                 <div className='d-flex justify-content-center flex-wrap gap-3 mt-4 mt-lg-5 mb-5 mb-lg-60'>

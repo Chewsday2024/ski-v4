@@ -1,19 +1,22 @@
 import { Link, useNavigate } from 'react-router';
-import './Order.scss';
 import { useContext, useEffect, useState } from 'react';
-import { OrderContext } from './BookingPage';
+
+import './Order.scss';
 import axios from 'axios';
+
+import { defaultOrder, OrderContext } from './BookingPage';
 
 export default function CheckoutPage(){
 
-    const BASE_URL = "https://ski-api-m9x9.onrender.com";
+    // const BASE_URL = "https://ski-api-m9x9.onrender.com";    //正式機
+    const BASE_URL = "http://localhost:3000";                   //測試機
 
-    const { order,setOrder,classTime,allCoaches,allSkiHouses,skillLevels } = useContext(OrderContext);
+    const { order,setOrder } = useContext(OrderContext);
 
-    const filterClassTime = classTime.find((item)=> item[0] === order.class.timeType);
-    const filterCoach = allCoaches.find((coach)=> coach.id == order.coachId );
-    const filterSkiHouse = allSkiHouses.find((skiHouse)=>skiHouse.id == order.skiResortId);
-    const filterSkiLevel = skillLevels.find((skiLevel)=>skiLevel[0] == order.studentsData.skiLevel);
+    // const filterClassTime = classTime.find((item)=> item[0] === order.class.timeType);
+    // const filterCoach = allCoaches.find((coach)=> coach.id == order.coachId );
+    // const filterSkiHouse = allSkiHouses.find((skiHouse)=>skiHouse.id == order.skiResortId);
+    // const filterSkiLevel = skillLevels.find((skiLevel)=>skiLevel[0] == order.studentsData.skiLevel);
 
 
     const [payments,setPayments] = useState([]);    //付款方式
@@ -28,7 +31,7 @@ export default function CheckoutPage(){
         note: ""
     })
     const [isChecked,setIsChecked] = useState(false);       //是否勾選同意條款  
-    const { setErrorMessage } = useContext(OrderContext); //錯誤訊息
+    const { setErrorMessage } = useContext(OrderContext);   //錯誤訊息
 
     // console.log("付款方式",payments,"長度",payments.length);
     // console.log("被選中的",checkedPayment);
@@ -170,7 +173,8 @@ export default function CheckoutPage(){
                                         <div className="d-flex justify-content-between align-items-center">
                                             <label htmlFor="" className="form-label mb-0">時間</label>
                                             <p className="form-control-plaintext w-70 w-md-80  fw-bold">
-                                                {filterClassTime && filterClassTime[1]?.name}
+                                                {/* {filterClassTime && filterClassTime[1]?.name} */}
+                                                {order.class.timeTypeName}
                                             </p>
                                         </div>
                                     </div>
@@ -185,24 +189,28 @@ export default function CheckoutPage(){
                                     <div className="mb-3 form-section">
                                         <div className="d-flex justify-content-between align-items-center">
                                             <label htmlFor="" className="form-label mb-0">雪場</label>
-                                            <p className="form-control-plaintext w-70 w-md-80  fw-bold">
-                                                {filterSkiHouse && filterSkiHouse.chineseName}
+                                            <p className="form-control-plaintext w-70 w-md-80 fw-bold">
+                                                {/* {filterSkiHouse && filterSkiHouse.chineseName} */}
+                                                {order.skiResortName}
                                             </p>
                                         </div>
                                     </div>
                                     <div className="mb-3 form-section">
                                         <div className="d-flex justify-content-between align-items-center">
                                             <label htmlFor="" className="form-label mb-0">類型</label>
-                                            <p className="form-control-plaintext w-70 w-md-80  fw-bold">
-                                                {order.class.skiType === "single" ? "單板":"雙板"}
+                                            <p className="form-control-plaintext w-70 w-md-80 fw-bold">
+                                                { order.class.skiType 
+                                                    ? order.class.skiType === "single" ? "單板":"雙板" 
+                                                    : ""}
                                             </p>
                                         </div>
                                     </div>
                                     <div className="mb-3 form-section">
                                         <div className="d-flex justify-content-between align-items-center">
                                             <label htmlFor="" className="form-label mb-0">教練</label>
-                                            <p className="form-control-plaintext w-70 w-md-80  fw-bold">
-                                                {filterCoach && filterCoach.name}
+                                            <p className="form-control-plaintext w-70 w-md-80 fw-bold">
+                                                {/* {filterCoach && filterCoach.name} */}
+                                                {order.coachName}
                                             </p>
                                         </div>
                                     </div>
@@ -224,7 +232,10 @@ export default function CheckoutPage(){
                             <div className="mb-3 form-section">
                                 <div className="d-flex justify-content-between align-items-center">
                                     <label htmlFor="" className="form-label mb-0">滑行程度</label>
-                                    <p className="form-control-plaintext w-70 w-md-80  fw-bold">{filterSkiLevel?.[1]}</p>
+                                    <p className="form-control-plaintext w-70 w-md-80  fw-bold">
+                                        {/* {filterSkiLevel?.[1]} */}
+                                        {order.studentsData.skiLevelName}
+                                    </p>
                                 </div>
                             </div>
                             {/* 區塊：學員資料明細 */}
@@ -261,99 +272,6 @@ export default function CheckoutPage(){
                                             </>)
                                         })
                                     }
-                                    {/* <div className="col-12 col-md-6 col-lg-4">
-                                        <div className="card border-0">
-                                            <h5 className="card-title text-center border border-brand-02 bg-brand-02 text-white border-radius-top-20 p-3 mb-0">學員 1</h5>
-                                            <div className="card-body border border-brand-02">
-                                                <div className="card-text d-flex justify-content-between align-items-center mb-2">
-                                                    <label htmlFor="" className="form-label mb-0">姓名</label>
-                                                    <p className="form-control-plaintext w-50 fw-bold">周秉倫</p>
-                                                </div>
-                                                <div className="card-text d-flex justify-content-between align-items-center mb-2">
-                                                    <label htmlFor="" className="form-label mb-0">性別</label>
-                                                    <p className="form-control-plaintext w-50 fw-bold">男</p>
-                                                </div>
-                                                <div className="card-text d-flex justify-content-between align-items-center mb-2">
-                                                    <label htmlFor="" className="form-label mb-0">年齡</label>
-                                                    <p className="form-control-plaintext w-50 fw-bold">33</p>
-                                                </div>
-                                                <div className="card-text d-flex justify-content-between align-items-center mb-2">
-                                                    <label htmlFor="" className="form-label mb-0">聯絡電話</label>
-                                                    <p className="form-control-plaintext w-50 fw-bold">0988123456</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="col-12 col-md-6 col-lg-4">
-                                        <div className="card border-0">
-                                            <h5 className="card-title text-center border border-brand-02 bg-brand-02 text-white border-radius-top-20 p-3 mb-0">學員 1</h5>
-                                            <div className="card-body border border-brand-02">
-                                                <div className='card-text d-flex justify-content-between align-items-center mb-2'>
-                                                    <label htmlFor="" className="form-label mb-0">姓名</label>
-                                                    <p className='form-control-plaintext w-50 fw-bold'>周秉倫</p>
-                                                </div>
-                                                <div className='card-text d-flex justify-content-between align-items-center mb-2'>
-                                                    <label htmlFor="" className="form-label mb-0">性別</label>
-                                                    <p className='form-control-plaintext w-50 fw-bold'>男</p>
-                                                </div>
-                                                <div className='card-text d-flex justify-content-between align-items-center mb-2'>
-                                                    <label htmlFor="" className="form-label mb-0">年齡</label>
-                                                    <p className='form-control-plaintext w-50 fw-bold'>33</p>
-                                                </div>
-                                                <div className='card-text d-flex justify-content-between align-items-center mb-2'>
-                                                    <label htmlFor="" className="form-label mb-0">聯絡電話</label>
-                                                    <p className='form-control-plaintext w-50 fw-bold'>0988123456</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="col-12 col-md-6 col-lg-4">
-                                        <div className="card border-0">
-                                            <h5 className="card-title text-center border border-brand-02 bg-brand-02 text-white border-radius-top-20 p-3 mb-0">學員 1</h5>
-                                            <div className="card-body border border-brand-02">
-                                                <div className='card-text d-flex justify-content-between align-items-center mb-2'>
-                                                    <label htmlFor="" className="form-label mb-0">姓名</label>
-                                                    <p className='form-control-plaintext w-50 fw-bold'>周秉倫</p>
-                                                </div>
-                                                <div className='card-text d-flex justify-content-between align-items-center mb-2'>
-                                                    <label htmlFor="" className="form-label mb-0">性別</label>
-                                                    <p className='form-control-plaintext w-50 fw-bold'>男</p>
-                                                </div>
-                                                <div className='card-text d-flex justify-content-between align-items-center mb-2'>
-                                                    <label htmlFor="" className="form-label mb-0">年齡</label>
-                                                    <p className='form-control-plaintext w-50 fw-bold'>33</p>
-                                                </div>
-                                                <div className='card-text d-flex justify-content-between align-items-center mb-2'>
-                                                    <label htmlFor="" className="form-label mb-0">聯絡電話</label>
-                                                    <p className='form-control-plaintext w-50 fw-bold'>0988123456</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="col-12 col-md-6 col-lg-4">
-                                        <div className="card border-0">
-                                            <h5 className="card-title text-center border border-brand-02 bg-brand-02 text-white border-radius-top-20 p-3 mb-0">學員 1</h5>
-                                            <div className="card-body border border-brand-02">
-                                                <div className='card-text d-flex justify-content-between align-items-center mb-2'>
-                                                    <label htmlFor="" className="form-label mb-0">姓名</label>
-                                                    <p className='form-control-plaintext w-50 fw-bold'>周秉倫</p>
-                                                </div>
-                                                <div className='card-text d-flex justify-content-between align-items-center mb-2'>
-                                                    <label htmlFor="" className="form-label mb-0">性別</label>
-                                                    <p className='form-control-plaintext w-50 fw-bold'>男</p>
-                                                </div>
-                                                <div className='card-text d-flex justify-content-between align-items-center mb-2'>
-                                                    <label htmlFor="" className="form-label mb-0">年齡</label>
-                                                    <p className='form-control-plaintext w-50 fw-bold'>33</p>
-                                                </div>
-                                                <div className='card-text d-flex justify-content-between align-items-center mb-2'>
-                                                    <label htmlFor="" className="form-label mb-0">聯絡電話</label>
-                                                    <p className='form-control-plaintext w-50 fw-bold'>0988123456</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> */}
-
                                 </div>
                             </div>
                             
@@ -368,7 +286,8 @@ export default function CheckoutPage(){
                                         <div className='d-flex justify-content-between align-items-center'>
                                             <label htmlFor="" className="form-label mb-0">價格/每小時</label>
                                             <p className='form-control-plaintext w-70 w-md-80  fw-bold'>
-                                                {filterCoach?.charge ? `JPY ${filterCoach.charge.toLocaleString()}` : `JPY 0`}
+                                                {/* {filterCoach?.charge ? `JPY ${filterCoach.charge.toLocaleString()}` : `JPY 0`} */}
+                                                {`JPY ${order.coachPrice.toLocaleString()}`}
                                             </p>
                                         </div>
                                     </div>
@@ -533,6 +452,7 @@ export default function CheckoutPage(){
                     onClick={()=>{
                         addOrder();
                         localStorage.removeItem('orderData');
+                        setOrder(defaultOrder);
                     }}>付款去
                 </Link>
             </div>
