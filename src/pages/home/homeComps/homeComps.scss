@@ -1,4 +1,5 @@
-@import "../../../assets/all.scss";
+@import "bootstrap/scss/functions";
+@import '../../../assets/variables';
 
 .w-md-25 {
   @media (min-width: 768px) {
