@@ -5,7 +5,6 @@ import axios from 'axios';
  
 const initialState = { 
   coachPage: {},
-  pageIsOpen: false,
   isMark: false,
   status: 'idle',
   error: null
@@ -31,9 +30,6 @@ const coachpageSlice = createSlice({
   name: 'coachPage',
   initialState,
   reducers: {
-    setPageIsOpen (state, action) {
-      state.pageIsOpen = action.payload;
-    },
     setIsMark (state) {
       state.isMark = state.isMark ? false : true;
     }
@@ -53,11 +49,10 @@ const coachpageSlice = createSlice({
 
 
 
-export const { setPageIsOpen, setIsMark } = coachpageSlice.actions;
+export const { setIsMark } = coachpageSlice.actions;
 
 
 
-export const getPageIsOpenStatus = state => state.coachPage.pageIsOpen;
 
 export const getIsMarkStatus = state => state.coachPage.isMark;
 

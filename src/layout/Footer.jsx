@@ -1,6 +1,4 @@
 import { NavLink } from 'react-router';
-import { useDispatch } from 'react-redux';
-import { setPageIsOpen } from '../pages/coach/coachComps/coachPage/coachpageSlice';
 
 import './Footer.scss';
 
@@ -25,7 +23,6 @@ function Footer() {
                       <NavLink
                         className="text-brand-01" 
                         to='coach'
-                        onClick={() => dispatch(setPageIsOpen(false))}
                         >
                         教練介紹
                       </NavLink>

@@ -24,17 +24,17 @@ function App() {
     localStorage.setItem('orderData', JSON.stringify(order));
   }, [order]);
 
-  const [allSkiHouses, setAllSkiHouses] = useState([]); //全部的雪場資料
-  const [allCoaches, setAllCoaches] = useState([]);   // 全部的教練資料
-  const [classTime, setClassTime] = useState([]);     // 課程時間選項
-  const [skillLevels,setSkillLevels] = useState([]);  // 學員滑雪程度選項
+  // const [allSkiHouses, setAllSkiHouses] = useState([]); //全部的雪場資料
+  // const [allCoaches, setAllCoaches] = useState([]);   // 全部的教練資料
+  // const [classTime, setClassTime] = useState([]);     // 課程時間選項
+  // const [skillLevels,setSkillLevels] = useState([]);  // 學員滑雪程度選項
   const [errorMessage,setErrorMessage] = useState("");    //紀錄錯誤訊息
 
   return (
-    <div className='d-flex flex-column justify-content-between vh-100'>
+    <div className='d-flex flex-column justify-content-between h-100'>
       <Header />
           <OrderContext.Provider 
-            value={{order,setOrder,classTime,setClassTime,allCoaches,setAllCoaches,allSkiHouses,setAllSkiHouses,skillLevels,setSkillLevels,errorMessage,setErrorMessage}}>
+            value={{order,setOrder,errorMessage,setErrorMessage}}>
             <Outlet />
             <ScrollToTop/>
             {/* <AboutLoading/> */}

@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { NavLink } from 'react-router';
 import { useDispatch } from 'react-redux';
 
-import { setPageIsOpen } from '../pages/coach/coachComps/coachPage/coachpageSlice';
 
 import './Header.scss';
 
@@ -67,7 +66,6 @@ function Header() {
                 <NavLink
                   className={ activeClass }
                   to='coach'
-                  onClick={() => dispatch(setPageIsOpen(false))}
                   >
                     <span className="material-symbols-outlined align-bottom me-1">
                       downhill_skiing
