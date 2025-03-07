@@ -14,6 +14,7 @@ export default function SkiResortListPage() {
   const areas = ["北海道", "東北", "新潟", "長野"];
   const location = useLocation();
 
+
   //分析 URL 篩選出該區域雪場
   useEffect(() =>{
     const sameAreaResort = new URLSearchParams(location.search);
@@ -36,12 +37,19 @@ export default function SkiResortListPage() {
   },[]);
 
   const handleChange =(e) =>{
-    setResortSelect(e.target.value);
-    
+    const value = e.target.value;
+    setResortSelect(value);
   }
 
+
+
   //根據所選區域篩選雪場
-  const filteredSkiResorts = resortSelect ?skiResorts.filter((resort) => resort.area.trim() === resortSelect.trim()) : skiResorts;
+  const filteredSkiResorts = !resortSelect || resortSelect === "all"
+  ? skiResorts
+  : skiResorts.filter((resort) => resort.area.trim() === resortSelect.trim());
+
+
+
 
   return(
     <>
@@ -50,6 +58,7 @@ export default function SkiResortListPage() {
           <select value={resortSelect}
           onChange={handleChange} className="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
             <option value="" disabled>🔎︎ 搜尋雪場</option>
+            <option value="all">所有雪場</option>
             {areas.map((area) =>{
               return(  
                 <option value={area} key={area}>{area}</option>
@@ -59,7 +68,7 @@ export default function SkiResortListPage() {
         </div>
         <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mx-0 overflow-hidden">
         {filteredSkiResorts.length > 0 ? (<ResortCard skiResorts={filteredSkiResorts} />) : (
-            <p className="text-center">❄️ 找不到符合條件的雪場 ❄️</p>
+            <p className="text-center">❄️找不到符合條件的雪場❄️</p>
           )}
         </div>
       </div>
