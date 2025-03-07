@@ -2,76 +2,98 @@ import './Order.scss';
 import { Link } from 'react-router';
 import { createContext, useContext, useEffect, useRef, useState } from 'react';
 import axios from 'axios';
+import { useForm } from 'react-hook-form';
 
 // 建立預約教練訂單的共用環境
 export const OrderContext = createContext({});
 
 // 訂單資料 - 初始資料
 export const defaultOrder = {
-    "orderTime": "",
-    "orderStatus":0,
-    "userId": 1,
-    "skiResortId": 0,          
-    "coachId": 0,
-    "class": {
-        "skiType": "",             
-        "timeType": "",                     
-        "date": null,               
-        "startDate": null,    
-        "endDate": null,      
-        "days": 0                     
+    orderTime: "",
+    orderStatus:0,
+    userId: 1,
+    skiResortId: 0,
+    skiResortName: "",          
+    coachId: 0,
+    coachName: "",
+    coachPrice: 0,
+    class: {
+        skiType: "",             
+        timeType: "",
+        timeTypeName: "",                     
+        date: null,               
+        startDate: null,    
+        endDate: null,      
+        days: 0                     
     },
-    "studentsData":{
-        "studentNum": 0,
-        "skiLevel": 0,                
-        "students": []
+    studentsData:{
+        studentNum: 0,
+        skiLevel: 0,
+        skiLevelName: "",                
+        students: []
     },
-    "paymentDetail":{
-        "hours": 0,
-        "studentNum": 0,
-        "total": 0
+    paymentDetail:{
+        hours: 0,
+        studentNum: 0,
+        total: 0
     },
-    "contactInfo":{
-        "name": "",
-        "phone": "",
-        "email": "",
-        "lineId": "",
-        "note": ""
+    contactInfo:{
+        name: "",
+        phone: "",
+        email: "",
+        lineId: "",
+        note: ""
     },
-    "is_checked": false,
-    "paymentMethod": 0, 
-    "isPaid": false
+    is_checked: false,
+    paymentMethod: 0, 
+    isPaid: false
 }
-
 
 export default function BookingPage(){
 
-    const BASE_URL = "https://ski-api-m9x9.onrender.com";
+    const BASE_URL = "https://ski-api-m9x9.onrender.com";    //正式機
+    // const BASE_URL = "http://localhost:3000";             //測試機
 
-    // const [allSkiHouses, setAllSkiHouses] = useState([]); //全部的雪場資料
-    const {allSkiHouses, setAllSkiHouses} = useContext(OrderContext);
+    // const {
+    //     register,
+    //     handleSubmit,
+    //     formState: { errors },
+    //     reset
+    //   } = useForm({
+    //     mode: "onTouched"
+    //   });
 
-    // const [allCoaches, setAllCoaches] = useState([]);   // 全部的教練資料
-    const {allCoaches, setAllCoaches} = useContext(OrderContext);
+    // const onSubmit = (data) => {
+    //     console.log(data);
+    // }
 
-    // const [classTime, setClassTime] = useState([]);     // 課程時間選項
-    const {classTime,setClassTime} = useContext(OrderContext);
+    const [allSkiHouses, setAllSkiHouses] = useState([]); //全部的雪場資料
+    // const {allSkiHouses, setAllSkiHouses} = useContext(OrderContext);
 
-    // const [skillLevels,setSkillLevels] = useState([]);  // 學員滑雪程度選項
-    const {skillLevels,setSkillLevels} = useContext(OrderContext);
+    const [allCoaches, setAllCoaches] = useState([]);   // 全部的教練資料
+    // const {allCoaches, setAllCoaches} = useContext(OrderContext);
+
+    const [classTime, setClassTime] = useState([]);     // 課程時間選項
+    // const {classTime,setClassTime} = useContext(OrderContext);
+
+    const [skillLevels,setSkillLevels] = useState([]);  // 學員滑雪程度選項
+    // const {skillLevels,setSkillLevels} = useContext(OrderContext);
 
     const [totalHours,setTotalHours] = useState(0);     // 課程時間總時數
     const [days,setDays] = useState(0);                 // 上課天數
     const [totalPrice,setTotalPrice] = useState(0);     // 總金額
 
     
-    const [selectedSkiHouse, setSelectedSkiHouse] = useState("");  // 下拉選單選中的雪場 value
-    const [selectedCoach, setSelectedCoach] = useState("");        // 下拉選單選中的教練 value
-    const [selectedClass, setSelectedClass] = useState("");        // 下拉選單選中的課程時間 value
-    const [selectedStudentNum,setSelectedStudentNum] = useState(0);  // 下拉選單選中的上課人數 value
-    const [selectedSkiType,setSelectedSkiType] = useState("");          // 下拉選單選中的雪板類型 value
-    const [selectedSkillLevel,setSelectedSkillLevel] = useState(0);     // 下拉選單選中的滑行程度 value
-
+    const [selectedSkiHouse, setSelectedSkiHouse] = useState("");           // 下拉選單選中的雪場 value
+    const [selectedSkiHouseName, setSelectedSkiHouseName] = useState("");   // 選中的雪場名稱
+    const [selectedCoach, setSelectedCoach] = useState("");                 // 下拉選單選中的教練 value
+    const [selectedCoachName, setSelectedCoachName] = useState("");         // 選中的教練名稱
+    const [selectedClass, setSelectedClass] = useState("");                 // 下拉選單選中的課程時間 value
+    const [selectedClassName, setSelectedClassName] = useState("");         // 選中的課程時間名稱
+    const [selectedStudentNum,setSelectedStudentNum] = useState(0);         // 下拉選單選中的上課人數 value
+    const [selectedSkiType,setSelectedSkiType] = useState("");              // 下拉選單選中的雪板類型 value
+    const [selectedSkillLevel,setSelectedSkillLevel] = useState(0);         // 下拉選單選中的滑行程度 value
+    const [selectedSkillLevelName,setSelectedSkillLevelName] = useState("");      // 選中的滑行程度名稱
     
     // console.log("全部的雪場資料",allSkiHouses);
     // console.log("全部的教練資料",allCoaches);
@@ -81,44 +103,50 @@ export default function BookingPage(){
     // console.log("雪板",selectedSkiType);
 
     // console.log("選中的滑行程度",selectedSkillLevel);
+    // console.log("選中的課程時間",selectedClass);
+    // console.log("選中的教練",selectedCoach,selectedCoachName);
     
+    // 取得全部的雪場資料
+    const getSkiHouse = async()=>{
+        try {
+            const res = await axios.get(`${BASE_URL}/skiResorts`);             
+            setAllSkiHouses(res.data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    // 取得全部的教練資料
+    const getCoaches = async()=>{
+        try {
+            const res = await axios.get(`${BASE_URL}/coaches`);
+            setAllCoaches(res.data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    // 取得全部的上課時間資料
+    const getClassTime = async()=>{
+        try {
+            const res = await axios.get(`${BASE_URL}/classTimeType`);             
+            setClassTime(Object.entries(res.data));
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    // 取得全部的滑行程度資料
+    const getSkillLevel = async()=>{
+        try {
+            const res = await axios.get(`${BASE_URL}/studentSkiLevel`);             
+            setSkillLevels(Object.entries(res.data));
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     useEffect(()=>{
-        const getSkiHouse = async()=>{
-            try {
-                const res = await axios.get(`${BASE_URL}/skiResorts`);             
-                setAllSkiHouses(res.data);
-            } catch (error) {
-                console.log(error);
-            }
-        }
-
-        const getCoaches = async()=>{
-            try {
-                const res = await axios.get(`${BASE_URL}/coaches`);
-                setAllCoaches(res.data);
-            } catch (error) {
-                console.log(error);
-            }
-        }
-
-        const getClassTime = async()=>{
-            try {
-                const res = await axios.get(`${BASE_URL}/classTimeType`);             
-                setClassTime(Object.entries(res.data));
-            } catch (error) {
-                console.log(error);
-            }
-        }
-
-        const getSkillLevel = async()=>{
-            try {
-                const res = await axios.get(`${BASE_URL}/studentSkiLevel`);             
-                setSkillLevels(Object.entries(res.data));
-            } catch (error) {
-                console.log(error);
-            }
-        }
         getSkiHouse();
         getCoaches();
         getClassTime();
@@ -148,6 +176,56 @@ export default function BookingPage(){
     
     // console.log("被選到的教練圖片",coachImg,"教練價格",selectedCoachPrice);
 
+
+    // 取得雪場名稱
+    const getSkiHouseName = () =>{
+        const filterSkiHouse = allSkiHouses.find((skiHouse)=>skiHouse.id === selectedSkiHouse);
+        if (filterSkiHouse){
+            const { chineseName } = filterSkiHouse;
+            setSelectedSkiHouseName(chineseName);
+        }
+    }
+
+    // 取得教練名稱
+    const getCoachName = () =>{
+        const filterCoach = allCoaches.find((coach)=> coach.id == selectedCoach );
+        if (filterCoach){
+            const { name } = filterCoach;
+            setSelectedCoachName(name);
+        }
+    }
+
+    // 取得課程時間名稱
+    const getClassName = () =>{
+        const filterClassTime = classTime.find((item)=> item[0] === selectedClass);
+        if (filterClassTime){
+            setSelectedClassName(filterClassTime[1].name);
+        }
+    }
+
+    // 取得滑行程度名稱
+    const getSkiLevelName = ()=>{
+        const filterSkiLevel = skillLevels.find((skiLevel)=>skiLevel[0] == selectedSkillLevel);
+        if (filterSkiLevel){
+            setSelectedSkillLevelName(filterSkiLevel[1]);
+        }
+    }
+    // console.log("選中的滑行程度名稱",selectedSkillLevelName);
+
+    useEffect(()=>{
+        getSkiHouseName();
+        getCoachName();
+        getClassName();
+        getSkiLevelName();
+    },[selectedSkiHouse,selectedCoach,selectedClass,selectedSkillLevel])
+
+    // 監測到選擇的雪場更新時，教練資料更新為預設值
+    useEffect(() => {
+        setSelectedCoach("");
+        setSelectedCoachName("");
+        setCoachImg("");
+        setSelectedCoachPrice(0);
+    }, [selectedSkiHouse]);
 
     const [startDate,setStartDate] = useState("");      // 開始日期設定
     const [endDate,setEndDate] = useState("");          // 結束日期設定
@@ -250,7 +328,7 @@ export default function BookingPage(){
         setStudents(defaultStudents);
     },[selectedStudentNum])
 
-    // 更新學生資料：Ｑ：GPT 寫的
+    // 更新學生資料：Ｑ
     const handleStudentsData = (index, field, value) => {
         setStudents((prevStudents) => {
             // 複製一份學生資料的陣列，避免直接修改原本的資料
@@ -272,53 +350,21 @@ export default function BookingPage(){
         });
     };
 
-    // 預約教練資料: useContext ()
-    // const [order,setOrder] = useState({
-    //     "orderTime": "",
-    //     "orderStatus":0,
-    //     "userId": 1,
-    //     "skiResortId": 0,          
-    //     "coachId": 0,
-    //     "class": {
-    //         "skiType": "",             
-    //         "timeType": "",                     
-    //         "date": null,               
-    //         "startDate": null,    
-    //         "endDate": null,      
-    //         "days": 0                     
-    //     },
-    //     "studentsData":{
-    //         "studentNum": 0,
-    //         "skiLevel": 0,                
-    //         "students": []
-    //     },
-    //     "paymentDetail":{
-    //         "hours": 0,
-    //         "studentNum": 0,
-    //         "total": 0
-    //     },
-    //     "contactInfo":{
-    //         "name": "",
-    //         "phone": "",
-    //         "email": "",
-    //         "lineId": "",
-    //         "note": ""
-    //     },
-    //     "is_checked": false,
-    //     "paymentMethod": 0, 
-    //     "isPaid": false
-    // })
     const {order,setOrder} = useContext(OrderContext);
 
     // 把選擇的資料存到 orders 訂單裡
     const handleOrder = () => {
         const tmpOrder = {
             ...order,
-            skiResortId: selectedSkiHouse,          
+            skiResortId: selectedSkiHouse,
+            skiResortName: selectedSkiHouseName,          
             coachId: selectedCoach,
+            coachPrice: selectedCoachPrice,
+            coachName: selectedCoachName,
             class: {
                 skiType: selectedSkiType,             
-                timeType: selectedClass,                     
+                timeType: selectedClass,
+                timeTypeName: selectedClassName,                     
                 date: ( selectedClass!== "allday" ? selectedDate: ""),               
                 startDate: ( selectedClass == "allday" ? selectedStartDate: ""),    
                 endDate: ( selectedClass == "allday" ? selectedEndDate: ""),      
@@ -326,7 +372,8 @@ export default function BookingPage(){
             },
             studentsData:{
                 studentNum: selectedStudentNum,
-                skiLevel: selectedSkillLevel,                
+                skiLevel: selectedSkillLevel,
+                skiLevelName: selectedSkillLevelName,                
                 students: students
             },
             paymentDetail:{
@@ -432,7 +479,7 @@ export default function BookingPage(){
                                 </div>
                                 <div className="form-text d-flex justify-content-end align-items-center select-info">
                                     <span className="material-symbols-outlined icon-unfilled text-brand-02">help</span>
-                                    <Link to='/ski-house' className="select-info-link">查看雪場資訊</Link>
+                                    <Link to={`/ski-house/${selectedSkiHouse}`} className="select-info-link">查看雪場資訊</Link>
                                 </div>
                             </div>
                             <div className="mb-3 form-section">
@@ -459,11 +506,11 @@ export default function BookingPage(){
                             <div className="mb-3 form-section">
                                 <div className="d-flex justify-content-between align-items-center">
                                     <label htmlFor="skiCoach" className="form-label mb-0">教練</label>
-                                    <div className="w-70 w-md-80  d-flex">
+                                    <div className="w-70 w-md-80 d-flex">
                                         <div className="flex-shrink-0 me-3">
                                             <img 
                                                 className="head-shot rounded-circle object-fit-cover" 
-                                                src={selectedCoach ? coachImg : "https://firebasestorage.googleapis.com/v0/b/kayismeblog.appspot.com/o/2025-SnowBuddy%2Fperson-icon.svg?alt=media&token=36719ef0-2d39-4d70-bf37-c37cb373df29"}    
+                                                src={selectedCoach ? coachImg : "person-icon.svg"}    
                                                 alt="教練名"/>
                                         </div>
                                         <select
@@ -495,13 +542,14 @@ export default function BookingPage(){
                             <div className="mb-3 form-section">
                                 <div className="d-flex justify-content-between align-items-center">
                                     <label htmlFor="coachPrice" className="form-label mb-0">價格/每小時</label>
-                                    <input
+                                    <p className="form-control-plaintext w-70 w-md-80 fs-2 text-brand-02 fw-bold">JPY {selectedCoachPrice.toLocaleString()}</p>
+                                    {/* <input
                                         value={`JPY ${selectedCoachPrice.toLocaleString()}`}
                                         type="text" 
                                         className="form-control-plaintext w-70 w-md-80 fs-2 text-brand-02 fw-bold" 
                                         id="coachPrice"
                                         readOnly 
-                                        />
+                                        /> */}
                                 </div>
                             </div>
                             <div className="mb-3 form-section">
