@@ -13,7 +13,7 @@ import SignUpForm from '../pages/home/homeComps/SignUpForm';
 import ArticlePage from '../pages/article/ArticlePage';
 import AboutUs from '../pages/about/AboutUs';
 import NotFound from '../components/NotFound';
-import { element } from 'prop-types';
+
 
 
 
@@ -45,12 +45,10 @@ const routes = [
       {
         path: 'coach',
         element:<Coach />,
-        children: [
-          {
-            path: ':id',
-            element: <CoachPage />
-          }
-        ]
+      },
+      {
+        path: ':id',
+        element: <CoachPage />
       },
       {
         path:'ski-house',
