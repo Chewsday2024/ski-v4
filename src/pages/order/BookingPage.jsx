@@ -51,8 +51,21 @@ export const defaultOrder = {
 
 export default function BookingPage(){
 
-    // const BASE_URL = "https://ski-api-m9x9.onrender.com";    //正式機
-    const BASE_URL = "http://localhost:3000";                   //測試機
+    const BASE_URL = "https://ski-api-m9x9.onrender.com";    //正式機
+    // const BASE_URL = "http://localhost:3000";             //測試機
+
+    // const {
+    //     register,
+    //     handleSubmit,
+    //     formState: { errors },
+    //     reset
+    //   } = useForm({
+    //     mode: "onTouched"
+    //   });
+
+    // const onSubmit = (data) => {
+    //     console.log(data);
+    // }
 
     const [allSkiHouses, setAllSkiHouses] = useState([]); //全部的雪場資料
     // const {allSkiHouses, setAllSkiHouses} = useContext(OrderContext);
@@ -315,7 +328,7 @@ export default function BookingPage(){
         setStudents(defaultStudents);
     },[selectedStudentNum])
 
-    // 更新學生資料：Ｑ：GPT 寫的
+    // 更新學生資料：Ｑ
     const handleStudentsData = (index, field, value) => {
         setStudents((prevStudents) => {
             // 複製一份學生資料的陣列，避免直接修改原本的資料
@@ -441,13 +454,14 @@ export default function BookingPage(){
             
             <div className="row">
                 <div className="col-lg-8 col-12">
-                    <form action="" className="d-flex flex-column gap-5">
+                    <form action="" onSubmit={handleSubmit(onSubmit)} className="d-flex flex-column gap-5">
                         <div className="d-flex flex-column gap-4">
                             <h3 className="form-title text-brand-02 ps-4">預約課程</h3>
                             <div className="mb-3 form-section">
                                 <div className="d-flex justify-content-between align-items-center">
                                     <label htmlFor="snowHouse" className="form-label mb-0">雪場</label>
                                     <select
+                                        {...register("snowHouse")}
                                         value={selectedSkiHouse}
                                         onChange={(e)=>{
                                             setSelectedSkiHouse(Number(e.target.value));
@@ -497,7 +511,7 @@ export default function BookingPage(){
                                         <div className="flex-shrink-0 me-3">
                                             <img 
                                                 className="head-shot rounded-circle object-fit-cover" 
-                                                src={selectedCoach ? coachImg : "https://firebasestorage.googleapis.com/v0/b/kayismeblog.appspot.com/o/Side-Project%2F2025-SnowBuddy%2Fperson-icon.svg?alt=media&token=6b8fe63b-5a79-497e-aba4-3491338f185c"}    
+                                                src={selectedCoach ? coachImg : "person-icon.svg"}    
                                                 alt="教練名"/>
                                         </div>
                                         <select

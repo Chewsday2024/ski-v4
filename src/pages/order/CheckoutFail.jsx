@@ -9,7 +9,7 @@ export default function CheckoutFail(){
             <div className="h-100 d-flex flex-column justify-content-center mt-4">
                 <div className="d-flex flex-column gap-3 justify-content-center align-items-center">
                     {/* <span className="material-symbols-outlined icon-unfilled">Cancel</span> */}
-                    <img src="https://firebasestorage.googleapis.com/v0/b/kayismeblog.appspot.com/o/Side-Project%2F2025-SnowBuddy%2Fbooking-fail.png?alt=media&token=38e70a61-33c9-457a-8c34-89e3815c06b4" className="result-error-img" alt="預約失敗" />
+                    <img src="booking-fail.png" className="result-error-img" alt="預約失敗" />
                     <h3 className="fs-2 error-text">預約失敗</h3>
                     <p className="text-md-20">{errorMessage}</p>
                 </div>

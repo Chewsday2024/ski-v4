@@ -8,16 +8,10 @@ import { defaultOrder, OrderContext } from './BookingPage';
 
 export default function CheckoutPage(){
 
-    // const BASE_URL = "https://ski-api-m9x9.onrender.com";    //正式機
-    const BASE_URL = "http://localhost:3000";                   //測試機
+    const BASE_URL = "https://ski-api-m9x9.onrender.com";    //正式機
+    // const BASE_URL = "http://localhost:3000";             //測試機
 
     const { order,setOrder } = useContext(OrderContext);
-
-    // const filterClassTime = classTime.find((item)=> item[0] === order.class.timeType);
-    // const filterCoach = allCoaches.find((coach)=> coach.id == order.coachId );
-    // const filterSkiHouse = allSkiHouses.find((skiHouse)=>skiHouse.id == order.skiResortId);
-    // const filterSkiLevel = skillLevels.find((skiLevel)=>skiLevel[0] == order.studentsData.skiLevel);
-
 
     const [payments,setPayments] = useState([]);    //付款方式
 
@@ -173,7 +167,6 @@ export default function CheckoutPage(){
                                         <div className="d-flex justify-content-between align-items-center">
                                             <label htmlFor="" className="form-label mb-0">時間</label>
                                             <p className="form-control-plaintext w-70 w-md-80  fw-bold">
-                                                {/* {filterClassTime && filterClassTime[1]?.name} */}
                                                 {order.class.timeTypeName}
                                             </p>
                                         </div>
@@ -190,7 +183,6 @@ export default function CheckoutPage(){
                                         <div className="d-flex justify-content-between align-items-center">
                                             <label htmlFor="" className="form-label mb-0">雪場</label>
                                             <p className="form-control-plaintext w-70 w-md-80 fw-bold">
-                                                {/* {filterSkiHouse && filterSkiHouse.chineseName} */}
                                                 {order.skiResortName}
                                             </p>
                                         </div>
@@ -209,7 +201,6 @@ export default function CheckoutPage(){
                                         <div className="d-flex justify-content-between align-items-center">
                                             <label htmlFor="" className="form-label mb-0">教練</label>
                                             <p className="form-control-plaintext w-70 w-md-80 fw-bold">
-                                                {/* {filterCoach && filterCoach.name} */}
                                                 {order.coachName}
                                             </p>
                                         </div>
@@ -233,7 +224,6 @@ export default function CheckoutPage(){
                                 <div className="d-flex justify-content-between align-items-center">
                                     <label htmlFor="" className="form-label mb-0">滑行程度</label>
                                     <p className="form-control-plaintext w-70 w-md-80  fw-bold">
-                                        {/* {filterSkiLevel?.[1]} */}
                                         {order.studentsData.skiLevelName}
                                     </p>
                                 </div>
@@ -244,7 +234,7 @@ export default function CheckoutPage(){
                                     {
                                         order.studentsData.students.map((student,index)=>{
                                             return (<>
-                                                <div className="col-12 col-md-6 col-lg-4">
+                                                <div key={index} className="col-12 col-md-6 col-lg-4">
                                                     <div className="card border-0">
                                                         <h5 className="card-title text-center border border-brand-02 bg-brand-02 text-white border-radius-top-20 p-3 mb-0">學員 {index+1}</h5>
                                                         <div className="card-body border border-brand-02">
@@ -286,7 +276,6 @@ export default function CheckoutPage(){
                                         <div className='d-flex justify-content-between align-items-center'>
                                             <label htmlFor="" className="form-label mb-0">價格/每小時</label>
                                             <p className='form-control-plaintext w-70 w-md-80  fw-bold'>
-                                                {/* {filterCoach?.charge ? `JPY ${filterCoach.charge.toLocaleString()}` : `JPY 0`} */}
                                                 {`JPY ${order.coachPrice.toLocaleString()}`}
                                             </p>
                                         </div>
