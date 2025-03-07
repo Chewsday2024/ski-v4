@@ -23,7 +23,7 @@ function SerchInput() {
     
   return (
     <InputValue.Provider value={{allValue}}>
-      <div className='w-100 d-flex justify-content-center gap-3 mt-5'>
+      <div className='w-100 d-flex flex-lg-row flex-column justify-content-center gap-3 mt-5'>
         <select className="form-select w-auto" ref={sexRef}>
           <option value=''>性別</option>
           <option value="男">男性</option>
