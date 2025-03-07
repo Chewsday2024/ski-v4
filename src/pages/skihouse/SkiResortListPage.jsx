@@ -44,7 +44,7 @@ export default function SkiResortListPage() {
 
 
   //根據所選區域篩選雪場
-  const filteredSkiResorts = !resortSelect || resortSelect === "all"
+  const filteredSkiResorts = !resortSelect || resortSelect === "al1"
   ? skiResorts
   : skiResorts.filter((resort) => resort.area.trim() === resortSelect.trim());
 
