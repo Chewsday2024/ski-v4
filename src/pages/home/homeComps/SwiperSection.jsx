@@ -111,7 +111,7 @@ function SwiperSection() {
           </div>
         </div>
         <div className="text-center mt-3">
-          <Link to="/" className="btn btn-outline-brand-01 home-btn-hover bg-white rounded-pill fs-4 fw-bold px-middle py-3 z-3"><span className="material-symbols-outlined icon-unfill align-bottom me-3 mb-1">arrow_circle_right</span>找到最適合你的滑雪教練</Link>
+          <Link to="/coach" className="btn btn-outline-brand-01 home-btn-hover bg-white rounded-pill fs-4 fw-bold px-middle py-3 z-3"><span className="material-symbols-outlined icon-unfill align-bottom me-3 mb-1">arrow_circle_right</span>找到最適合你的滑雪教練</Link>
         </div>
       </div>
     </div>
