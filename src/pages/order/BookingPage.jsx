@@ -454,14 +454,13 @@ export default function BookingPage(){
             
             <div className="row">
                 <div className="col-lg-8 col-12">
-                    <form action="" onSubmit={handleSubmit(onSubmit)} className="d-flex flex-column gap-5">
+                    <form action="" className="d-flex flex-column gap-5">
                         <div className="d-flex flex-column gap-4">
                             <h3 className="form-title text-brand-02 ps-4">預約課程</h3>
                             <div className="mb-3 form-section">
                                 <div className="d-flex justify-content-between align-items-center">
                                     <label htmlFor="snowHouse" className="form-label mb-0">雪場</label>
                                     <select
-                                        {...register("snowHouse")}
                                         value={selectedSkiHouse}
                                         onChange={(e)=>{
                                             setSelectedSkiHouse(Number(e.target.value));
