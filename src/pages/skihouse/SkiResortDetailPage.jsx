@@ -15,7 +15,7 @@ export default  function SkiResortDetailPage() {
   useEffect(() =>{
     const fetchResort = async(id) =>{
       try {
-        const res = await axios.get(`http://localhost:3000/skiResorts/${id}`)
+        const res = await axios.get(`https://ski-api-m9x9.onrender.com/skiResorts/${id}`)
         setSkiResorts(res.data);
       } catch (error) {
         alert(`Error: ${error.message}`);
@@ -27,7 +27,7 @@ export default  function SkiResortDetailPage() {
   useEffect(() =>{
     const getCoaches = async() =>{
       try {
-        const res = await axios.get(`http://localhost:3000/coaches`)
+        const res = await axios.get(`https://ski-api-m9x9.onrender.com/skiResorts`)
         setCoaches(res.data);
         
       } catch (error) {

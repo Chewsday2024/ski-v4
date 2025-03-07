@@ -6,7 +6,7 @@ import axios from 'axios';
 
 export default function CheckoutPage(){
 
-    const BASE_URL = "http://localhost:3000";
+    const BASE_URL = "https://ski-api-m9x9.onrender.com";
 
     const { order,setOrder,classTime,allCoaches,allSkiHouses,skillLevels } = useContext(OrderContext);
 
