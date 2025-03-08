@@ -27,14 +27,14 @@ export default  function SkiResortDetailPage() {
   useEffect(() =>{
     const getCoaches = async() =>{
       try {
-        const res = await axios.get(`https://ski-api-m9x9.onrender.com/skiResorts`)
+        const res = await axios.get(`https://ski-api-m9x9.onrender.com/coaches`)
         setCoaches(res.data);
         
       } catch (error) {
         alert(`Error: ${error.message}`);
       }
     };
-    getCoaches();
+    getCoaches(id);
   },[])
 
   //格式化tag名稱
@@ -151,7 +151,7 @@ export default  function SkiResortDetailPage() {
               {filteredCoaches.map(coach =>(
                 <div key={coach.id} className="col-md-4 d-flex justify-content-around flex-column align-items-center my-4">
                 <img src={coach.profileImg} className="img-fluid rounded-circle object-fit-cover  mb-3" alt={coach.name} style={{height:"200px", width:"200px"}} />
-                <button onClick={handleBookingCoach}
+                <button onClick={() =>handleBookingCoach(coach.id)}
                 type="button" className="orderCoachBtn btn btn-brand-01 rounded-5 fs-5" style={{width: "150px"}}>預約教練</button>
               </div>
             ))}

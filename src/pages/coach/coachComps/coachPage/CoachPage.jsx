@@ -183,17 +183,19 @@ function CoachPage () {
                   </li>
 
                   <li>
-                    <button
+                    <Link
                       className='
                       fw-bold
                       border-2
                       border-brand-01
                       rounded-pill
+                      btn
                       
                       order-coach
-                      '>
+                      '
+                      to='/booking'>
                         預約教練
-                    </button>
+                    </Link>
                   </li>
 
                 </ul>
