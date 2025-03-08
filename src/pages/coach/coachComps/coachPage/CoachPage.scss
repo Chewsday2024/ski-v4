@@ -1,0 +1,126 @@
+.page-box {
+  max-width: 856px;
+}
+
+
+.profile-col {
+  padding: 1%;
+}
+
+
+
+
+
+.coach-profile-container {
+  height: 800px;
+}
+
+
+.coach-profile-list {
+  max-width: 368px;
+}
+
+
+
+.coach-bookmark {
+  top: -20px;
+  right: 15px;
+  
+  color: rgb(255, 251, 31);
+  
+  cursor: pointer;
+}
+
+
+
+.order-coach {
+  background-color: #ffffff;
+  border-style: solid;
+  color: #475F81;
+
+  padding: 16px 40px;
+
+  &:hover {
+    background-color: #475F81;
+  
+    color: #ffffff;
+  }
+}
+
+
+
+.tag-ul {
+  margin: 3% 0 0 0;
+}
+
+
+.about-coach-col {
+  padding: 1%;
+}
+
+
+
+.coach-detail-tab {
+  text-decoration: none;
+  color: #888888;
+  font-size: 24px;
+
+  &.active {
+    position: relative;
+    color: #779ECB;
+    padding-bottom: 17px;
+
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      
+      width: 100%;
+      height: 100%;
+      border-bottom: 3px solid #779ECB;
+      z-index: -1;
+    }
+  }
+}
+
+
+
+.tab-p {
+  padding: 24px 36px;
+
+
+  @media (min-width: 576px) {
+    padding: 48px 84px;
+  }
+}
+
+
+.exp-ul {
+  list-style: inside;
+}
+
+
+.daily-imges-col {
+  height: 274px;
+
+
+  .daily-imges {
+    object-position: center;
+    object-fit: cover;
+  }
+}
+
+
+
+
+
+
+.rate-profileImg {
+  width: 100px;
+  height: 100px;
+
+  background-size: cover;
+  background-position: center;
+}

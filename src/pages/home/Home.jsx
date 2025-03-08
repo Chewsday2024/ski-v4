@@ -1,33 +1,33 @@
-
-
-
-import SkiHouse from '../skihouse/SkiHouse';          
-import Coach from '../coach/Coach';                   
-import Order from '../order/Order';                   
-
-
-
+import BackToTopButton from '../../components/BackToTopButton';
+import BannerSection from './homeComps/BannerSection';
+import ServicesSection from './homeComps/ServicesSection';
+import SwiperSection from './homeComps/SwiperSection';
+import SkiHouseSection from './homeComps/SkiHouseSection';
+import ArticleSection from './homeComps/ArticleSection';
+import FAQ from './homeComps/FAQ';
 
 import './Home.scss';
 
-
-
-
-
-
-
 function Home() {
-  
 
   return (
-    <div className='container mb-4'>
-      <div className='d-flex flex-column gap-3 w-50 align-items-center m-auto'>
-        <button className='btn btn-error'>Home-test</button>
-        <Coach />
-        <Order />
-        <SkiHouse />
-      </div>
-    </div>
+    <>
+      <main className="bg-gray-05">
+        <BackToTopButton />
+      {/* banner */}
+        <BannerSection />
+      {/* 提供的服務 */}
+        <ServicesSection />
+      {/* 教練 */}          
+        <SwiperSection />
+      {/* 雪場 */}  
+        <SkiHouseSection />
+      {/* 文章 */}
+        <ArticleSection />
+      {/* 常見問題 */}
+        <FAQ />
+      </main>
+    </>
   )
 }
 

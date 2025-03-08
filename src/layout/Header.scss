@@ -1,0 +1,39 @@
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 1,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
+}
+
+.nav-link {
+  color: #1E1E1E;
+  &:hover {
+    color: #779ECB !important;
+  }
+}
+
+.navbar-toggler-icon {
+  filter: invert(25%) sepia(50%) saturate(200%) hue-rotate(160deg);
+}
+
+.navbar-collapse {
+  // 在桌面斷點時顯示內容
+  @media (min-width: 992px) {
+    display: flex !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  // 在移動設備上實現動畫效果
+  @media (max-width: 991.98px) {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+
+    &.show {
+      max-height: 500px; // 根據實際內容高度調整
+    }
+  }
+}
+

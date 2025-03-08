@@ -1,0 +1,25 @@
+.w-md-75 {
+  @media (min-width: 768px) {
+    max-width: 75% ;
+  }
+  .text-small {
+    font-size: 14px
+  }
+}
+
+.w-md-75 {
+  @media (min-width: 768px) {
+    max-width: 75% ;
+  }
+}
+
+footer {
+  ul {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 0;
+  }
+  a {
+    text-decoration: none;
+  }
+}
