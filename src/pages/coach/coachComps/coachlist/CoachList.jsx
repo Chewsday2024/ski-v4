@@ -61,7 +61,7 @@ function CoachList() {
           <div key={index} className='col d-flex justify-content-center coach-col'>
             <Link
               type='button'
-              className='text-decoration-none w-100 p-0 border-0 text-dark rounded-5 col-8'
+              className='text-decoration-none p-0 border-0 text-dark rounded-5 col-8'
               to={`/${coach.id}`}
               >
               <div
