@@ -84,9 +84,10 @@ export default function CheckoutPage(){
         updateOrder();
     },[inputContactData,isChecked,checkedPayment])
 
-    const addOrder = async()=>{
+    // 送出訂單
+    const submitOrder = async()=>{
         try {
-            const res = await axios.post(`${BASE_URL}/orders`,order);
+            await axios.post(`${BASE_URL}/orders`,order);
             orderNavigate("/checkout-success");
         } catch (error) {
             console.log(error);
@@ -147,7 +148,7 @@ export default function CheckoutPage(){
             
             <div className="row">
                 <div className="col-12">
-                    <form action="" className="d-flex flex-column gap-5">
+                    <form action="" id="contactForm" className="d-flex flex-column gap-5">
                         {/* 區塊：預約課程 */}
                         <div className="d-flex flex-column gap-4">
                             <h3 className="form-title text-brand-02 ps-4">預約課程</h3>
@@ -157,9 +158,9 @@ export default function CheckoutPage(){
                                         <div className="d-flex justify-content-between align-items-center">
                                             <label htmlFor="" className="form-label mb-0">日期</label>
                                             <p className="form-control-plaintext w-70 w-md-80 fw-bold">
-                                                {order.class.timeType === "allday" 
+                                                {order.class?.timeType === "allday" 
                                                     ? (order.class.startDate !== order.class.endDate) ? `${order.class.startDate} ～ ${order.class.endDate}`: order.class.startDate
-                                                    : order.class.date}
+                                                    : order.class?.date}
                                             </p>
                                         </div>
                                     </div>
@@ -167,14 +168,14 @@ export default function CheckoutPage(){
                                         <div className="d-flex justify-content-between align-items-center">
                                             <label htmlFor="" className="form-label mb-0">時間</label>
                                             <p className="form-control-plaintext w-70 w-md-80  fw-bold">
-                                                {order.class.timeTypeName}
+                                                {order.class?.timeTypeName}
                                             </p>
                                         </div>
                                     </div>
                                     <div className="mb-3 form-section">
                                         <div className="d-flex justify-content-between align-items-center">
                                             <label htmlFor="" className="form-label mb-0">天數</label>
-                                            <p className="form-control-plaintext w-70 w-md-80  fw-bold">{order.class.days} 天</p>
+                                            <p className="form-control-plaintext w-70 w-md-80  fw-bold">{order.class?.days} 天</p>
                                         </div>
                                     </div>
                                 </div>
@@ -191,7 +192,7 @@ export default function CheckoutPage(){
                                         <div className="d-flex justify-content-between align-items-center">
                                             <label htmlFor="" className="form-label mb-0">類型</label>
                                             <p className="form-control-plaintext w-70 w-md-80 fw-bold">
-                                                { order.class.skiType 
+                                                { order.class?.skiType 
                                                     ? order.class.skiType === "single" ? "單板":"雙板" 
                                                     : ""}
                                             </p>
@@ -217,14 +218,14 @@ export default function CheckoutPage(){
                             <div className="mb-3 form-section">
                                 <div className="d-flex justify-content-between align-items-center">
                                     <label htmlFor="" className="form-label mb-0">上課人數</label>
-                                    <p className="form-control-plaintext w-70 w-md-80  fw-bold">{order.studentsData.studentNum} 人</p>
+                                    <p className="form-control-plaintext w-70 w-md-80  fw-bold">{order.studentsData?.studentNum} 人</p>
                                 </div>
                             </div>
                             <div className="mb-3 form-section">
                                 <div className="d-flex justify-content-between align-items-center">
                                     <label htmlFor="" className="form-label mb-0">滑行程度</label>
                                     <p className="form-control-plaintext w-70 w-md-80  fw-bold">
-                                        {order.studentsData.skiLevelName}
+                                        {order.studentsData?.skiLevelName}
                                     </p>
                                 </div>
                             </div>
@@ -232,7 +233,7 @@ export default function CheckoutPage(){
                             <div className="mb-3 form-section">
                                 <div className="row g-3">
                                     {
-                                        order.studentsData.students.map((student,index)=>{
+                                        order.studentsData?.students.map((student,index)=>{
                                             return (<>
                                                 <div key={index} className="col-12 col-md-6 col-lg-4">
                                                     <div className="card border-0">
@@ -275,27 +276,27 @@ export default function CheckoutPage(){
                                     <div className="mb-3 form-section">
                                         <div className='d-flex justify-content-between align-items-center'>
                                             <label htmlFor="" className="form-label mb-0">價格/每小時</label>
-                                            <p className='form-control-plaintext w-70 w-md-80  fw-bold'>
-                                                {`JPY ${order.coachPrice.toLocaleString()}`}
+                                            <p className="form-control-plaintext w-70 w-md-80 fw-bold">
+                                                {`JPY ${order.coachPrice?.toLocaleString()}`}
                                             </p>
                                         </div>
                                     </div>
                                     <div className="mb-3 form-section">
                                         <div className='d-flex justify-content-between align-items-center'>
                                             <label htmlFor="" className="form-label mb-0">時數</label>
-                                            <p className='form-control-plaintext w-70 w-md-80  fw-bold'>{order.paymentDetail.hours} 小時</p>
+                                            <p className="form-control-plaintext w-70 w-md-80 fw-bold">{order.paymentDetail?.hours} 小時</p>
                                         </div>
                                     </div>
                                     <div className="mb-3 form-section">
-                                        <div className='d-flex justify-content-between align-items-center'>
+                                        <div className="d-flex justify-content-between align-items-center">
                                             <label htmlFor="" className="form-label mb-0">人數</label>
-                                            <p className='form-control-plaintext w-70 w-md-80  fw-bold'>{order.studentsData.studentNum} 人</p>
+                                            <p className="form-control-plaintext w-70 w-md-80 fw-bold">{order.studentsData?.studentNum} 人</p>
                                         </div>
                                     </div>
                                     <div className="mb-3 form-section">
-                                        <div className='d-flex justify-content-between align-items-center'>
+                                        <div className="d-flex justify-content-between align-items-center">
                                             <label htmlFor="" className="form-label mb-0 fs-4">總金額</label>
-                                            <p className='form-control-plaintext w-70 w-md-80  fw-bold fs-3 text-brand-01'>JPY {order.paymentDetail.total.toLocaleString()}</p>
+                                            <p className="form-control-plaintext w-70 w-md-80 fw-bold fs-3 text-brand-01">{`JPY ${order.paymentDetail?.total.toLocaleString()}`}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -419,7 +420,8 @@ export default function CheckoutPage(){
                                                 className="form-check-input mt-0 me-3" 
                                                 type="checkbox"
                                                 name="isAgreed" 
-                                                id="isAgreed" />
+                                                id="isAgreed" 
+                                                required/>
                                             <label htmlFor="isAgreed" className="form-label mb-0 w-70 w-md-80 text-nowrap">本人已詳閱並同意
                                                 <Link to='/' className="text-brand-02 text-md-20">預約訂單注意事項</Link>
                                             </label>
@@ -436,14 +438,24 @@ export default function CheckoutPage(){
             </div>
             <div className="d-flex justify-content-center flex-wrap gap-3 mt-4 mt-lg-5 mb-5 mb-lg-60">
                 <Link to='/booking' className="btn-custom btn-custom-unfilled w-lg-25 w-md-50 w-xs-100 text-nowrap">上一步</Link>
-                <Link 
+                <button 
+                    type="submit"
+                    form="contactForm"
+                    className="btn-custom btn-custom-filled w-lg-25 w-md-50 w-xs-100 text-nowrap"
+                    onClick={()=>{
+                        submitOrder();
+                        localStorage.removeItem('orderData');
+                        setOrder(defaultOrder);
+                    }}
+                    >付款去</button>
+                {/* <Link 
                     className="btn-custom btn-custom-filled w-lg-25 w-md-50 w-xs-100 text-nowrap"
                     onClick={()=>{
                         addOrder();
                         localStorage.removeItem('orderData');
                         setOrder(defaultOrder);
                     }}>付款去
-                </Link>
+                </Link> */}
             </div>
         </div>
     )

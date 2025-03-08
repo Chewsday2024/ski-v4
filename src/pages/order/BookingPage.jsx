@@ -166,20 +166,16 @@ export default function BookingPage(){
     const [selectedCoachPrice,setSelectedCoachPrice] = useState(0);
     const [coachImg,setCoachImg] = useState("");
 
-    useEffect(()=>{
-        if (selectedCoach){
-            const coach = allCoaches.find((coach)=> coach.id == selectedCoach);
-            setCoachImg(coach.profileImg);
-            setSelectedCoachPrice(coach.charge);
-        }
-    },[selectedCoach]);
-    
-    // console.log("被選到的教練圖片",coachImg,"教練價格",selectedCoachPrice);
-
+    // 取得教練其他資訊(圖片、價格)
+    const getCoachOtherData = (id)=>{
+        const coach = allCoaches.find((coach)=> coach.id == id);
+        setCoachImg(coach.profileImg);
+        setSelectedCoachPrice(coach.charge);
+    }
 
     // 取得雪場名稱
-    const getSkiHouseName = () =>{
-        const filterSkiHouse = allSkiHouses.find((skiHouse)=>skiHouse.id === selectedSkiHouse);
+    const getSkiHouseName = (id) =>{
+        const filterSkiHouse = allSkiHouses.find((skiHouse)=>skiHouse.id === id);
         if (filterSkiHouse){
             const { chineseName } = filterSkiHouse;
             setSelectedSkiHouseName(chineseName);
@@ -187,8 +183,8 @@ export default function BookingPage(){
     }
 
     // 取得教練名稱
-    const getCoachName = () =>{
-        const filterCoach = allCoaches.find((coach)=> coach.id == selectedCoach );
+    const getCoachName = (id) =>{
+        const filterCoach = allCoaches.find((coach)=> coach.id == id );
         if (filterCoach){
             const { name } = filterCoach;
             setSelectedCoachName(name);
@@ -196,28 +192,20 @@ export default function BookingPage(){
     }
 
     // 取得課程時間名稱
-    const getClassName = () =>{
-        const filterClassTime = classTime.find((item)=> item[0] === selectedClass);
+    const getClassName = (classId) =>{
+        const filterClassTime = classTime.find((item)=> item[0] === classId);
         if (filterClassTime){
             setSelectedClassName(filterClassTime[1].name);
         }
     }
 
     // 取得滑行程度名稱
-    const getSkiLevelName = ()=>{
-        const filterSkiLevel = skillLevels.find((skiLevel)=>skiLevel[0] == selectedSkillLevel);
+    const getSkiLevelName = (id)=>{
+        const filterSkiLevel = skillLevels.find((skiLevel)=>skiLevel[0] == id);
         if (filterSkiLevel){
             setSelectedSkillLevelName(filterSkiLevel[1]);
         }
     }
-    // console.log("選中的滑行程度名稱",selectedSkillLevelName);
-
-    useEffect(()=>{
-        getSkiHouseName();
-        getCoachName();
-        getClassName();
-        getSkiLevelName();
-    },[selectedSkiHouse,selectedCoach,selectedClass,selectedSkillLevel])
 
     // 監測到選擇的雪場更新時，教練資料更新為預設值
     useEffect(() => {
@@ -464,6 +452,7 @@ export default function BookingPage(){
                                         value={selectedSkiHouse}
                                         onChange={(e)=>{
                                             setSelectedSkiHouse(Number(e.target.value));
+                                            getSkiHouseName(Number(e.target.value));
                                         }}
                                         className="form-select w-70 w-md-80" 
                                         name="snowHouse" 
@@ -517,6 +506,8 @@ export default function BookingPage(){
                                             value={selectedCoach}
                                             onChange={(e)=>{
                                                 setSelectedCoach(Number(e.target.value));
+                                                getCoachName(Number(e.target.value));
+                                                getCoachOtherData(Number(e.target.value));
                                             }} 
                                             className="form-select" 
                                             name="skiCoach" 
@@ -559,6 +550,7 @@ export default function BookingPage(){
                                         value={selectedClass}
                                         onChange={(e)=>{
                                             setSelectedClass(e.target.value);
+                                            getClassName(e.target.value);
                                         }} 
                                         className="form-select w-70 w-md-80" 
                                         name='classTime' 
@@ -652,7 +644,8 @@ export default function BookingPage(){
                                     <select
                                         value={selectedSkillLevel}
                                         onChange={(e)=>{
-                                            setSelectedSkillLevel(Number(e.target.value))
+                                            setSelectedSkillLevel(Number(e.target.value));
+                                            getSkiLevelName(Number(e.target.value));
                                         }}
                                         className="form-select w-70 w-md-80" 
                                         name="level"
