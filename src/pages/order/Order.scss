@@ -103,6 +103,10 @@
 .mb-60{
     margin-bottom: 60px;
 }
+
+.ms-60{
+    margin-left: 60px;
+}
 @include media-breakpoint-up(lg) {
     .mb-lg-60{
         margin-bottom: 60px;

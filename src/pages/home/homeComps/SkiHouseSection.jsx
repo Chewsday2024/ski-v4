@@ -13,10 +13,11 @@ function SkiHouseSection() {
   useEffect(() => {
     const getData = async () => {
       try {
-        const res = await axios.get('http://localhost:3000/skiResorts');
+        const res = await axios.get('https://ski-api-m9x9.onrender.com/skiResorts');
+        console.log(res.data)
         setSkiHouse(res.data)
       } catch (error) {
-        alert(`Error: ${error.message}`);
+        console.log(`Error: ${error.message}`);
       }
     };
     getData();
@@ -58,7 +59,7 @@ function SkiHouseSection() {
           </div>
         </div>
         <div className="text-center mt-5">
-          <Link to="/" className="btn btn-outline-brand-01 home-btn-hover bg-white rounded-pill fs-4 fw-bold px-middle py-3 z-3"><span className="material-symbols-outlined icon-unfill align-bottom me-3 mb-1">arrow_circle_right</span>查看更多雪場</Link>
+          <Link to="/ski-house" className="btn btn-outline-brand-01 home-btn-hover bg-white rounded-pill fs-4 fw-bold px-middle py-3 z-3"><span className="material-symbols-outlined icon-unfill align-bottom me-3 mb-1">arrow_circle_right</span>查看更多雪場</Link>
         </div>
       </section>
   </>)

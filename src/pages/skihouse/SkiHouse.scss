@@ -2,10 +2,6 @@
 @import '../../assets/variables';
 
 
-
-
-
-
 .material-symbols-rounded {
   font-variation-settings:
   'FILL' 1,
@@ -14,28 +10,45 @@
   'opsz' 24
 }
 
+//雪場總覽
+.allResort {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.allResort::before {
+  content: "";
+  display: block;
+  width: 120px;
+  height: 3px;
+  background: linear-gradient(to right, $brand-01, $brand-02);
+  margin: 0 15px;
+}
+
+.allResort::after {
+  content: "";
+  display: block;
+  width: 120px;
+  height: 3px;
+  background: linear-gradient(to left, $brand-01, $brand-02);
+  margin: 0 15px;
+}
+
+
+//雪場內頁
 .resortImg{
     height: 400px;
     transition: transform 0.3s ease-in-out;
     transform-origin: center;
     will-change: transform;
     &:hover{
-      transform: scale(1.05);
-      //box-shadow: 10px 20px 20px rgba(0, 0, 0, 0.2);
+      box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.2);
     }
   }
 
-  .resortCard{
-    transition: transform 0.3s ease-in-out;
-    transform-origin: center;
-    will-change: transform;
-    &:hover{
-      transform: scale(1.05);
-      //box-shadow: 10px 20px 20px rgba(0, 0, 0, 0.2);
-    }
-  }
-
-  .card{
+.card{
   border-width: .15rem;
 }
 
@@ -46,6 +59,17 @@
   }
 }
 
+.coachProfileImg{
+  transition: transform 0.3s ease-in-out;
+    transform-origin: center;
+    will-change: transform;
+    &:hover{
+      opacity: 70%;
+      transform: scale(1.05);
+      box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.2);
+    }
+}
+
 .orderCoachBtn{
   background-color: $brand-01;
   border: none;
@@ -54,19 +78,26 @@
   }
 }
 
+//Card 元件
 .resortCard{
   width: 24rem;
   position: relative;
   border-color: $brand-02 !important;
+  transition: transform 0.3s ease-in-out;
+  transform-origin: center;
+  will-change: transform;
   &:hover{
     opacity: 70%;
+    transform: scale(1.05);
   }
+  
   .card-img-top{
     width: 100%;
     height: 250px;
     object-fit: cover;
   }
 }
+
 .label{
   position: absolute;
   top: 15px;
@@ -74,5 +105,4 @@
   width: 90px;
   padding: 5px;
   border-radius: 0 20px 20px 0;
-  
 }
