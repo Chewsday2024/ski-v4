@@ -5,17 +5,19 @@ import './Order.scss';
 import axios from 'axios';
 
 import { defaultOrder, OrderContext } from './BookingPage';
+import { useForm } from 'react-hook-form';
 
 export default function CheckoutPage(){
 
     const BASE_URL = "https://ski-api-m9x9.onrender.com";    //正式機
-    // const BASE_URL = "http://localhost:3000";             //測試機
+    // const BASE_URL = "http://localhost:3000";                   //測試機
 
     const { order,setOrder } = useContext(OrderContext);
 
     const [payments,setPayments] = useState([]);    //付款方式
 
     const [checkedPayment,setCheckedPayment] = useState("");   //勾選中的付款方式 value
+
     const [inputContactData,setInputContactData] = useState({
         lastName: "",
         firstName: "",
@@ -27,20 +29,32 @@ export default function CheckoutPage(){
     const [isChecked,setIsChecked] = useState(false);       //是否勾選同意條款  
     const { setErrorMessage } = useContext(OrderContext);   //錯誤訊息
 
-    // console.log("付款方式",payments,"長度",payments.length);
-    // console.log("被選中的",checkedPayment);
-    // console.log("聯繫方式",inputContactData);
-    // console.log("是否同意",isChecked);
-    
-    // console.log("訂單資料",order);
-
     const orderNavigate = useNavigate();
+
+    const {
+            register,
+            handleSubmit,
+            setValue,
+            formState: { errors },
+          } = useForm({
+            mode: "onChange"
+          });
+    
+    const onSubmit = async () => {
+        try {
+            await submitOrder();
+            localStorage.removeItem('orderData');
+            setOrder(defaultOrder);
+        } catch (errors) {
+            console.log(errors);
+        }
+    }    
 
     useEffect(()=>{
         const getPayments = async()=>{
             try {
                 const res = await axios.get(`${BASE_URL}/paymentWays`);             
-                setPayments(Object.entries(res.data));
+                setPayments(res.data);
             } catch (error) {
                 console.log(error);
             }
@@ -74,7 +88,7 @@ export default function CheckoutPage(){
                 note: inputContactData.note
             },
             is_checked: isChecked,
-            paymentMethod: checkedPayment,
+            paymentMethod: Number(checkedPayment),
             isPaid: true
         }
         setOrder(tmpOrder);
@@ -84,9 +98,10 @@ export default function CheckoutPage(){
         updateOrder();
     },[inputContactData,isChecked,checkedPayment])
 
-    const addOrder = async()=>{
+    // 送出訂單
+    const submitOrder = async()=>{
         try {
-            const res = await axios.post(`${BASE_URL}/orders`,order);
+            await axios.post(`${BASE_URL}/orders`,order);
             orderNavigate("/checkout-success");
         } catch (error) {
             console.log(error);
@@ -97,7 +112,6 @@ export default function CheckoutPage(){
         }
     }
 
-    // console.log("step2預約資料",filterCoach);
     return (
         <div className="container">
             {/* PC Step flow */}
@@ -147,7 +161,7 @@ export default function CheckoutPage(){
             
             <div className="row">
                 <div className="col-12">
-                    <form action="" className="d-flex flex-column gap-5">
+                    <form id="contactForm" onSubmit={(e)=> e.preventDefault()} className="d-flex flex-column gap-5">
                         {/* 區塊：預約課程 */}
                         <div className="d-flex flex-column gap-4">
                             <h3 className="form-title text-brand-02 ps-4">預約課程</h3>
@@ -157,9 +171,9 @@ export default function CheckoutPage(){
                                         <div className="d-flex justify-content-between align-items-center">
                                             <label htmlFor="" className="form-label mb-0">日期</label>
                                             <p className="form-control-plaintext w-70 w-md-80 fw-bold">
-                                                {order.class.timeType === "allday" 
+                                                {order.class?.timeType === "allday" 
                                                     ? (order.class.startDate !== order.class.endDate) ? `${order.class.startDate} ～ ${order.class.endDate}`: order.class.startDate
-                                                    : order.class.date}
+                                                    : order.class?.date}
                                             </p>
                                         </div>
                                     </div>
@@ -167,14 +181,14 @@ export default function CheckoutPage(){
                                         <div className="d-flex justify-content-between align-items-center">
                                             <label htmlFor="" className="form-label mb-0">時間</label>
                                             <p className="form-control-plaintext w-70 w-md-80  fw-bold">
-                                                {order.class.timeTypeName}
+                                                {order.class?.timeTypeName}
                                             </p>
                                         </div>
                                     </div>
                                     <div className="mb-3 form-section">
                                         <div className="d-flex justify-content-between align-items-center">
                                             <label htmlFor="" className="form-label mb-0">天數</label>
-                                            <p className="form-control-plaintext w-70 w-md-80  fw-bold">{order.class.days} 天</p>
+                                            <p className="form-control-plaintext w-70 w-md-80  fw-bold">{order.class?.days} 天</p>
                                         </div>
                                     </div>
                                 </div>
@@ -191,7 +205,7 @@ export default function CheckoutPage(){
                                         <div className="d-flex justify-content-between align-items-center">
                                             <label htmlFor="" className="form-label mb-0">類型</label>
                                             <p className="form-control-plaintext w-70 w-md-80 fw-bold">
-                                                { order.class.skiType 
+                                                { order.class?.skiType 
                                                     ? order.class.skiType === "single" ? "單板":"雙板" 
                                                     : ""}
                                             </p>
@@ -217,14 +231,14 @@ export default function CheckoutPage(){
                             <div className="mb-3 form-section">
                                 <div className="d-flex justify-content-between align-items-center">
                                     <label htmlFor="" className="form-label mb-0">上課人數</label>
-                                    <p className="form-control-plaintext w-70 w-md-80  fw-bold">{order.studentsData.studentNum} 人</p>
+                                    <p className="form-control-plaintext w-70 w-md-80  fw-bold">{order.studentsData?.studentNum} 人</p>
                                 </div>
                             </div>
                             <div className="mb-3 form-section">
                                 <div className="d-flex justify-content-between align-items-center">
                                     <label htmlFor="" className="form-label mb-0">滑行程度</label>
                                     <p className="form-control-plaintext w-70 w-md-80  fw-bold">
-                                        {order.studentsData.skiLevelName}
+                                        {order.studentsData?.skiLevelName}
                                     </p>
                                 </div>
                             </div>
@@ -232,8 +246,8 @@ export default function CheckoutPage(){
                             <div className="mb-3 form-section">
                                 <div className="row g-3">
                                     {
-                                        order.studentsData.students.map((student,index)=>{
-                                            return (<>
+                                        order.studentsData?.students.map((student,index)=>{
+                                            return (
                                                 <div key={index} className="col-12 col-md-6 col-lg-4">
                                                     <div className="card border-0">
                                                         <h5 className="card-title text-center border border-brand-02 bg-brand-02 text-white border-radius-top-20 p-3 mb-0">學員 {index+1}</h5>
@@ -259,7 +273,7 @@ export default function CheckoutPage(){
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </>)
+                                            )
                                         })
                                     }
                                 </div>
@@ -275,27 +289,27 @@ export default function CheckoutPage(){
                                     <div className="mb-3 form-section">
                                         <div className='d-flex justify-content-between align-items-center'>
                                             <label htmlFor="" className="form-label mb-0">價格/每小時</label>
-                                            <p className='form-control-plaintext w-70 w-md-80  fw-bold'>
-                                                {`JPY ${order.coachPrice.toLocaleString()}`}
+                                            <p className="form-control-plaintext w-70 w-md-80 fw-bold">
+                                                {`JPY ${order.coachPrice?.toLocaleString()}`}
                                             </p>
                                         </div>
                                     </div>
                                     <div className="mb-3 form-section">
                                         <div className='d-flex justify-content-between align-items-center'>
                                             <label htmlFor="" className="form-label mb-0">時數</label>
-                                            <p className='form-control-plaintext w-70 w-md-80  fw-bold'>{order.paymentDetail.hours} 小時</p>
+                                            <p className="form-control-plaintext w-70 w-md-80 fw-bold">{order.paymentDetail?.hours} 小時</p>
                                         </div>
                                     </div>
                                     <div className="mb-3 form-section">
-                                        <div className='d-flex justify-content-between align-items-center'>
+                                        <div className="d-flex justify-content-between align-items-center">
                                             <label htmlFor="" className="form-label mb-0">人數</label>
-                                            <p className='form-control-plaintext w-70 w-md-80  fw-bold'>{order.studentsData.studentNum} 人</p>
+                                            <p className="form-control-plaintext w-70 w-md-80 fw-bold">{order.studentsData?.studentNum} 人</p>
                                         </div>
                                     </div>
                                     <div className="mb-3 form-section">
-                                        <div className='d-flex justify-content-between align-items-center'>
+                                        <div className="d-flex justify-content-between align-items-center">
                                             <label htmlFor="" className="form-label mb-0 fs-4">總金額</label>
-                                            <p className='form-control-plaintext w-70 w-md-80  fw-bold fs-3 text-brand-01'>JPY {order.paymentDetail.total.toLocaleString()}</p>
+                                            <p className="form-control-plaintext w-70 w-md-80 fw-bold fs-3 text-brand-01">{`JPY ${order.paymentDetail?.total.toLocaleString()}`}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -306,27 +320,35 @@ export default function CheckoutPage(){
                                     <h3 className="form-title text-brand-02 ps-4">付款方式</h3>
                                     <div className="mb-3 form-section">
                                         {
-                                            payments.map((payment,index)=>{
+                                            payments.map((payment)=>{
                                                 return(
-                                                    <>
-                                                        <div key={index} className="form-check mb-3">
-                                                            <input 
-                                                                value={payment[1].id}
-                                                                onChange={(e)=>{
-                                                                    setCheckedPayment(Number(e.target.value));
-                                                                }}
-                                                                className="form-check-input" 
-                                                                type="radio" 
-                                                                name="payments" 
-                                                                id={`payment${index+1}`} />
-                                                            <label className="form-check-label" htmlFor={`payment${index+1}`}>
-                                                                {payment[1].name}
-                                                            </label>
-                                                        </div>
-                                                    </>
+                                                    <div key={payment.id} className="form-check mb-3">
+                                                        <input
+                                                            {...register("payments",{
+                                                                required: "必選",
+                                                            })}
+                                                            value={String(payment.id)}
+                                                            checked={ checkedPayment === String(payment.id) ? true: false}
+                                                            onChange={(e)=>{
+                                                                setCheckedPayment(e.target.value);
+                                                                setValue("payments", e.target.value,{ shouldValidate: true });
+                                                            }}
+                                                            className={`form-check-input ${errors.payments && 'is-invalid'}`}
+                                                            type="radio" 
+                                                            name="payments" 
+                                                            id={payment.id} />
+                                                        <label className="form-check-label" htmlFor={payment.id}>
+                                                            {payment.name}
+                                                        </label>
+                                                    </div>
                                                 )
                                             })
                                         }
+                                        <div className="d-flex align-items-center w-70 w-md-80">
+                                            {
+                                                errors.payments && <p className="text-danger mt-1">{errors.payments.message}</p>
+                                            }
+                                        </div>
                                     </div>
                                 </div>    
                             </div>
@@ -334,67 +356,133 @@ export default function CheckoutPage(){
                         {/* 區塊：聯繫方式 */}
                         <div className="row">
                             <div className="col-lg-8 col-12">
-                                <div className='d-flex flex-column gap-4'>
+                                <div className="d-flex flex-column gap-4">
                                     <h3 className="form-title text-brand-02 ps-4">聯繫方式</h3>
                                     <div className="mb-3 form-section">
                                         <div className="d-flex justify-content-between align-items-center">
                                             <label htmlFor="contactLastName" className="form-label mb-0">姓名</label>
                                             <div className="w-70 w-md-80 d-flex">
                                                 <input
+                                                    {...register("contactLastName",{
+                                                        required: "必填",
+                                                    })}
                                                     value={inputContactData.lastName}
-                                                    onChange={handleContact} 
+                                                    onChange={(e)=>{
+                                                        handleContact(e);
+                                                        setValue("contactLastName", e.target.value,{ shouldValidate: true });
+                                                    }} 
                                                     name="lastName" 
                                                     type="text" 
-                                                    className="form-control w-25 me-3" 
+                                                    className={`form-control w-25 me-3 ${errors.contactLastName && 'is-invalid'}`} 
                                                     id="contactLastName"
                                                     placeholder="姓氏" />
                                                 <input
+                                                    {...register("contactFirstName",{
+                                                        required: "必填",
+                                                    })}
                                                     value={inputContactData.firstName}
-                                                    onChange={handleContact} 
-                                                    name="firstName"  
+                                                    onChange={(e)=>{
+                                                        handleContact(e);
+                                                        setValue("contactFirstName", e.target.value,{ shouldValidate: true });
+                                                    }} 
+                                                    name="firstName"
+                                                    id="contactFirstName"  
                                                     type="text"
-                                                    className="form-control w-75" 
+                                                    className={`form-control w-75 ${errors.contactFirstName && 'is-invalid'}`} 
                                                     placeholder="姓名" />
                                             </div>
+                                        </div>
+                                        <div className="w-70 w-md-80 d-flex ms-auto">
+                                            {
+                                                errors.contactLastName && <p className="text-danger w-25 me-3 mt-1">{errors.contactLastName.message}</p>
+                                            }
+                                            {
+                                                errors.contactFirstName && <p className="text-danger ms-auto mt-1" style={{width:"calc(75% - 16px)"}}>{errors.contactFirstName.message}</p>
+                                            }
                                         </div>
                                     </div>
                                     <div className="mb-3 form-section">
                                         <div className="d-flex justify-content-between align-items-center">
                                             <label htmlFor="contactPhone" className="form-label mb-0">聯絡電話</label>
                                             <input
+                                                {...register("contactPhone",{
+                                                    required: "必填",
+                                                    pattern: {
+                                                        value: /^(0[2-8]\d{7,8}|09\d{8})$/,
+                                                        message: '格式錯誤'
+                                                    }
+                                                })}
                                                 value={inputContactData.phone}
-                                                onChange={handleContact} 
+                                                onChange={(e)=>{
+                                                    handleContact(e);
+                                                    setValue("contactPhone", e.target.value,{ shouldValidate: true });
+                                                }}
                                                 name="phone"   
                                                 type="tel" 
-                                                className="form-control w-70 w-md-80"  
+                                                className={`form-control w-70 w-md-80 ${errors.contactPhone && 'is-invalid'}`}
                                                 id="contactPhone" 
-                                                placeholder="09xxxxxxxx" />
+                                                placeholder="請輸入手機號碼09或市話" />
+                                        </div>
+                                        <div className="d-flex align-items-center w-70 w-md-80 ms-auto">
+                                            {
+                                                errors.contactPhone && <p className="text-danger mt-1">{errors.contactPhone.message}</p>
+                                            }
                                         </div>
                                     </div>
                                     <div className="mb-3 form-section">
                                         <div className="d-flex justify-content-between align-items-center">
                                             <label htmlFor="email" className="form-label mb-0">E-mail</label>
                                             <input
+                                                {...register("email",{
+                                                    required: "必填",
+                                                    pattern: {
+                                                        value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                                                        message: '格式錯誤'
+                                                    }
+                                                })}
                                                 value={inputContactData.email}
-                                                onChange={handleContact}  
+                                                onChange={(e)=>{
+                                                    handleContact(e);
+                                                    setValue("email", e.target.value,{ shouldValidate: true });
+                                                }}
                                                 type="email" 
-                                                className="form-control w-70 w-md-80" 
+                                                className={`form-control w-70 w-md-80 ${errors.email && 'is-invalid'}`}
                                                 name="email" 
                                                 id="email" 
                                                 placeholder="xxx@xxx.xxx" />
+                                        </div>
+                                        <div className="d-flex align-items-center w-70 w-md-80 ms-auto">
+                                            {
+                                                errors.email && <p className="text-danger mt-1">{errors.email.message}</p>
+                                            }
                                         </div>
                                     </div>
                                     <div className="mb-3 form-section">
                                         <div className="d-flex justify-content-between align-items-center">
                                             <label htmlFor="lineId" className="form-label mb-0">LINE ID</label>
                                             <input
+                                                {...register("lineId",{
+                                                    required: "必填",
+                                                    pattern: {
+                                                        value: /^[a-z0-9._-]{2,20}$/,
+                                                        message: '格式錯誤'
+                                                    }
+                                                })}
                                                 value={inputContactData.lineId}
-                                                onChange={handleContact} 
+                                                onChange={(e)=>{
+                                                    handleContact(e);
+                                                    setValue("lineId", e.target.value,{ shouldValidate: true });
+                                                }}
                                                 type="text" 
-                                                className="form-control w-70 w-md-80" 
+                                                className={`form-control w-70 w-md-80 ${errors.lineId && 'is-invalid'}`} 
                                                 name="lineId" 
                                                 id="lineId" 
                                                 placeholder="" />
+                                        </div>
+                                        <div className="d-flex align-items-center w-70 w-md-80 ms-auto">
+                                            {
+                                                errors.lineId && <p className="text-danger mt-1">{errors.lineId.message}</p>
+                                            }
                                         </div>
                                     </div>
                                     <div className="mb-3 form-section">
@@ -412,17 +500,27 @@ export default function CheckoutPage(){
                                     </div>
                                     <div className="mb-3 form-section">
                                         <div className="d-flex align-items-center">
-                                            <input 
+                                            <input
+                                                {...register("isAgreed",{
+                                                    required: "請勾選",
+                                                })}
                                                 onChange={(e)=>{
-                                                    setIsChecked(e.target.checked)
+                                                    setIsChecked(e.target.checked);
+                                                    setValue("isAgreed", e.target.checked,{ shouldValidate: true });
                                                 }} 
-                                                className="form-check-input mt-0 me-3" 
+                                                className={`form-check-input mt-0 me-3 ${errors.isAgreed && 'is-invalid'}`}  
                                                 type="checkbox"
                                                 name="isAgreed" 
-                                                id="isAgreed" />
+                                                id="isAgreed" 
+                                                required/>
                                             <label htmlFor="isAgreed" className="form-label mb-0 w-70 w-md-80 text-nowrap">本人已詳閱並同意
                                                 <Link to='/' className="text-brand-02 text-md-20">預約訂單注意事項</Link>
                                             </label>
+                                        </div>
+                                        <div className="d-flex align-items-center w-70 w-md-80">
+                                            {
+                                                errors.isAgreed && <p className="text-danger mt-1" style={{marginLeft:"36px"}}>{errors.isAgreed.message}</p>
+                                            }
                                         </div>
                                     </div>
                                 </div>
@@ -436,14 +534,14 @@ export default function CheckoutPage(){
             </div>
             <div className="d-flex justify-content-center flex-wrap gap-3 mt-4 mt-lg-5 mb-5 mb-lg-60">
                 <Link to='/booking' className="btn-custom btn-custom-unfilled w-lg-25 w-md-50 w-xs-100 text-nowrap">上一步</Link>
-                <Link 
+                <button 
+                    type="button"
+                    form="contactForm"
                     className="btn-custom btn-custom-filled w-lg-25 w-md-50 w-xs-100 text-nowrap"
                     onClick={()=>{
-                        addOrder();
-                        localStorage.removeItem('orderData');
-                        setOrder(defaultOrder);
-                    }}>付款去
-                </Link>
+                        handleSubmit(onSubmit)();
+                    }}
+                    >付款去</button>
             </div>
         </div>
     )
