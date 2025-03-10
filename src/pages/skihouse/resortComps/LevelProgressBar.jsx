@@ -10,15 +10,17 @@ export default function(){
   useEffect(() =>{
     const fetchResort = async(id) =>{
       try {
-        const res = await axios.get(`http://localhost:3000/skiResorts/${id}`)
+        const res = await axios.get(`https://ski-api-m9x9.onrender.com/skiResorts/${id}`)
+        console.log(res.data);
         setSkiResorts(res.data);
       } catch (error) {
-        alert(`Error: ${error.message}`);
+        console.log(`Error: ${error.message}`);
       }
     };
     fetchResort(id);
   },[id])
 
+  
   return(
     <>
     <div data-aos="fade-up" data-aos-duration="2500" data-aos-delay="200">
