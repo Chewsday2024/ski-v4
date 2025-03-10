@@ -22,7 +22,7 @@ export default  function SkiResortDetailPage() {
         const res = await axios.get(`https://ski-api-m9x9.onrender.com/skiResorts/${id}`)
         setSkiResorts(res.data);
       } catch (error) {
-        alert(`Error: ${error.message}`);
+        console.log(`Error: ${error.message}`);
       }
     };
     fetchResort(id);
@@ -64,7 +64,7 @@ export default  function SkiResortDetailPage() {
 
   const handleBookingCoach =(id) =>{
     console.log("Navigating to coach ID:", id);
-    navigate(`/coach/${id}`);
+    navigate(`/${id}`);
   }
   
   const handleSeeMore = () =>{
