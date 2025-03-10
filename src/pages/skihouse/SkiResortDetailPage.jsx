@@ -64,7 +64,7 @@ export default  function SkiResortDetailPage() {
 
   const handleBookingCoach =(id) =>{
     console.log("Navigating to coach ID:", id);
-    navigate(`/id`);
+    navigate(`/${id}`);
   }
   
   const handleSeeMore = () =>{
