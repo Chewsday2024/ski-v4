@@ -2,6 +2,7 @@ import '../../skihouse/SkiHouse.scss';
 import { useNavigate } from 'react-router';
 
 
+
 export default function ResortCard({skiResorts}) {
   const navigate = useNavigate();
 
