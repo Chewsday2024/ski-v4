@@ -47,7 +47,7 @@ const routes = [
         element:<Coach />,
       },
       {
-        path: 'coach/:id',
+        path: ':id',
         element: <CoachPage />
       },
       {
