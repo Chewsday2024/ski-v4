@@ -13,8 +13,7 @@ import SignUpForm from '../pages/home/homeComps/SignUpForm';
 import ArticlePage from '../pages/article/ArticlePage';
 import AboutUs from '../pages/about/AboutUs';
 import NotFound from '../components/NotFound';
-
-
+import UserCenter from '../pages/center/UserCenter';
 
 
 const routes = [
@@ -73,6 +72,10 @@ const routes = [
       {
         path: 'about-us',
         element: <AboutUs />
+      },
+      {
+        path: 'user-center',
+        element: <UserCenter />
       },
       {
         path:'*',

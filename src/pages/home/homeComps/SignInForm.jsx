@@ -1,32 +1,45 @@
 import { useState } from "react";
-import { Link } from 'react-router';
-import axios from 'axios';
+import { Link, useNavigate } from "react-router";
+import axios from "axios";
 
 function SignInForm() {
-  const [emailSignIn, setEmailSignIn] = useState('exam@mail.com');
-  const [passwordSignIn, setPasswordSignIn] = useState('00000000');
-  const [responseMessage, setResponseMessage] = useState('');
+  const [emailSignIn, setEmailSignIn] = useState("ming@ggmail.com");
+  const [passwordSignIn, setPasswordSignIn] = useState("123123");
+  const [responseMessage, setResponseMessage] = useState("");
   const [isErrorMessage, setIsErrorMessage] = useState(false);
-  const [token, setToken] = useState('');
+  const [user, setUser] = useState(null);
 
-  const api = 'https://todolist-api.hexschool.io';
-  
-  // 練習區塊
+  const api = "http://localhost:3000";
+
+  const navigate = useNavigate();
+
   const signIn = async () => {
     try {
-    const res = await axios.post(`${api}/users/sign_in`, {
-      email: emailSignIn,
-      password: passwordSignIn,
-    });
-      setResponseMessage('登入成功');
-      setIsErrorMessage(false);
+      // 取得所有會員資料
+      const res = await axios.get(`${api}/users`);
+      const users = res.data;
+
+      // 查找是否有對應的會員
+      const foundUser = users.find(
+        (u) => u.email === emailSignIn && u.password === passwordSignIn
+      );
+
+      if (foundUser) {
+        setResponseMessage("登入成功！");
+        setIsErrorMessage(false);
+        setUser(foundUser); // 設定登入的用戶資訊
+        localStorage.setItem("user", JSON.stringify(foundUser)); // 存入 localStorage
+        navigate("/booking");
+      } else {
+        setResponseMessage("帳號或密碼錯誤");
+        setIsErrorMessage(true);
+      }
     } catch (error) {
-      setResponseMessage(`登入失敗: ${error.response?.data?.message || '未知錯誤'}`);
+      setResponseMessage(`登入失敗: ${error.message}`);
       setIsErrorMessage(true);
     }
   };
-  // 區塊結束
-  
+
   return (
     <div className="container mb-5">
       <div className="row flex-column justify-content-center align-items-center">
@@ -55,23 +68,34 @@ function SignInForm() {
                 placeholder="請輸入密碼"
               />
               <div className="text-end">
-                <Link to="*" className="text-gray-02 text-decoration-none"><small>忘記密碼？</small></Link>
+                <Link to="*" className="text-gray-02 text-decoration-none">
+                  <small>忘記密碼？</small>
+                </Link>
               </div>
             </div>
-            {/* <button type="button" className="btn btn-brand-01 home-btn-hover rounded-pill align-self-center w-25 mb-4" onClick={signIn}>
+            <button
+              type="button"
+              className="btn btn-brand-01 home-btn-hover rounded-pill align-self-center w-25 mb-4"
+              onClick={signIn}
+            >
               登入
-            </button> */}
-            {/* 功能未完成前先用連結前往預約頁面 */}
-            <Link to='/booking' className="btn btn-brand-01 home-btn-hover rounded-pill align-self-center w-25 mb-4">登入</Link>
-            <Link to='/sign-up' className="text-brand-02 text-decoration-none align-self-center">註冊</Link>
+            </button>
+            <Link to="/sign-up" className="text-brand-02 text-decoration-none align-self-center">
+              註冊
+            </Link>
           </form>
           {responseMessage && (
-            <p className={`h3 my-3 ${isErrorMessage ? 'text-danger' : 'text-success'}`}>
+            <p className={`h3 my-3 ${isErrorMessage ? "text-danger" : "text-success"}`}>
               {responseMessage}
             </p>
           )}
+          {/* {user && (
+            <div className="mt-3">
+              <h3>歡迎, {user.user}!</h3>
+              <p>身份: {user.identity ? "管理員" : "普通用戶"}</p>
+            </div>
+          )} */}
         </div>
-          
       </div>
     </div>
   );
