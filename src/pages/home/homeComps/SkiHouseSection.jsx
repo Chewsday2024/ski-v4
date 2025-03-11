@@ -5,16 +5,20 @@ import './homeComps.scss'
 
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 
 function SkiHouseSection() {
   const [skiHouse , setSkiHouse] = useState([])
+  const navigate = useNavigate();
+
+  const handleClick = (id) =>{
+    navigate(`/ski-house/${id}`);
+  }
 
   useEffect(() => {
     const getData = async () => {
       try {
         const res = await axios.get('https://ski-api-m9x9.onrender.com/skiResorts');
-        console.log(res.data)
         setSkiHouse(res.data)
       } catch (error) {
         console.log(`Error: ${error.message}`);
@@ -31,12 +35,13 @@ function SkiHouseSection() {
         <div>
           <div className="d-flex flex-column flex-md-row justify-content-around align-items-center mt-4">
           {
-            skiHouse.slice(0, 3).map((item, index) => {
+            skiHouse.slice(0, 3).map((item) => {
               return (
-                <div className="card border-0 bg-gray-05 position-relative w-md-25 w-75" key={item.id} 
+                <Link key={item.id} className="card border-0 bg-gray-05 position-relative text-decoration-none w-md-25 w-75 floating-bounce my-4"
                   data-aos="fade-up"
                   data-aos-easing="linear"
-                  data-aos-duration="800">
+                  data-aos-duration="800"
+                  onClick={() =>handleClick(item.id)}>
                   <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-brand-02 fs-6 fw-normal p-3">{item.area}</span>
                   <img src={item.image} className="card-img-top rounded-bottom" alt={item.englishName} />
                   <div className="card-body p-3 mb-2">
@@ -52,7 +57,7 @@ function SkiHouseSection() {
                     {item.description}
                   </p>
                   </div>
-                </div>
+                </Link>
               );
             })
           }
