@@ -85,16 +85,9 @@ export default function BookingPage(){
     }
     
     const [allSkiHouses, setAllSkiHouses] = useState([]); //全部的雪場資料
-    // const {allSkiHouses, setAllSkiHouses} = useContext(OrderContext);
-
     const [allCoaches, setAllCoaches] = useState([]);   // 全部的教練資料
-    // const {allCoaches, setAllCoaches} = useContext(OrderContext);
-
     const [classTime, setClassTime] = useState([]);     // 課程時間選項
-    // const {classTime,setClassTime} = useContext(OrderContext);
-
     const [skillLevels,setSkillLevels] = useState([]);  // 學員滑雪程度選項
-    // const {skillLevels,setSkillLevels} = useContext(OrderContext);
 
     const [totalHours,setTotalHours] = useState(0);     // 課程時間總時數
     const [days,setDays] = useState(0);                 // 上課天數
@@ -113,6 +106,8 @@ export default function BookingPage(){
     const [selectedSkillLevelName,setSelectedSkillLevelName] = useState("");      // 選中的滑行程度名稱
 
     
+    
+
     // 取得全部的雪場資料
     const getSkiHouse = async()=>{
         try {
@@ -165,7 +160,7 @@ export default function BookingPage(){
     let coachesData = [];
     // 篩選對應的雪場教練
     if (selectedSkiHouse){
-        const filteredCoaches = allSkiHouses.filter((skiHouse)=>(skiHouse.id == selectedSkiHouse))[0].selectCoach;
+        const filteredCoaches = allSkiHouses.filter((skiHouse)=>(skiHouse.id == selectedSkiHouse))[0]?.selectCoach;
         coachesData = allCoaches.filter((coach)=>filteredCoaches.includes(coach.id));
     }
 
@@ -270,7 +265,7 @@ export default function BookingPage(){
     // 計算總時數
     const countHours = ()=>{
         if (selectedClass){
-            const selectedHours = classTime.find((item)=> item[0] == selectedClass)[1].hours;   //  選擇上課時間的時數
+            const selectedHours = classTime.find((item)=> item[0] == selectedClass)?.[1].hours;   //  選擇上課時間的時數
             let computedDays = 0;
             
             if (selectedClass === "allday" && selectedStartDate && selectedEndDate){
@@ -390,6 +385,31 @@ export default function BookingPage(){
         totalHours,
         totalPrice
     ])
+
+    // 當 Storage 有資料時，則回填 -- 還沒寫完
+    // const getStorage = ()=>{
+    //     const storageOrder = JSON.parse(localStorage.getItem('orderData'));
+    //     if (order.skiResortId !== 0){
+    //         setSelectedSkiHouse(storageOrder.skiResortId);
+    //         setSelectedSkiHouseName(storageOrder.skiResortName);
+    //         setSelectedCoach(storageOrder.coachId);
+    //         setSelectedCoachName(storageOrder.coachName);
+    //         setSelectedSkiType(storageOrder.class.skiType);
+    //         setSelectedClass(storageOrder.class.timeType);
+    //         setSelectedClassName(storageOrder.class.timeTypeName)
+    //         setSelectedDate(storageOrder.class.date);
+    //         setSelectedStartDate(storageOrder.class.startDate);
+    //         setSelectedEndDate(storageOrder.class.endDate);
+    //         setSelectedStudentNum(storageOrder.studentsData.studentNum);
+    //         setSelectedSkillLevel(storageOrder.studentsData.skiLevel);
+    //         setStudents(storageOrder.studentsData.students);
+    //         setTotalPrice(storageOrder.paymentDetail.total);
+    //     }
+    // }
+
+    // useEffect(()=>{
+    //     getStorage();
+    // },[])
 
     return (
         <>
@@ -912,7 +932,7 @@ export default function BookingPage(){
                             </table>
                             <div className="d-flex justify-content-between mt-4">
                                 <p className="mb-0 fs-4">總金額</p>
-                                <p className="mb-0 fs-3 fw-bold text-brand-02">JPY {totalPrice.toLocaleString()}</p>
+                                <p className="mb-0 fs-3 fw-bold text-brand-02">JPY {totalPrice?.toLocaleString()}</p>
                             </div>
                         </div>
                     </div>
@@ -925,7 +945,6 @@ export default function BookingPage(){
                     onClick={()=>{
                         handleSubmit(onSubmit)();
                         handleOrder();
-                        // orderNavigate("/checkout");
                     }}
                     className="btn-custom btn-custom-filled w-lg-25 w-md-50 w-xs-100 text-nowrap">
                     下一步

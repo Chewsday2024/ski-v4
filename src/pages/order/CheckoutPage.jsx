@@ -533,7 +533,13 @@ export default function CheckoutPage(){
                 </div>  
             </div>
             <div className="d-flex justify-content-center flex-wrap gap-3 mt-4 mt-lg-5 mb-5 mb-lg-60">
-                <Link to='/booking' className="btn-custom btn-custom-unfilled w-lg-25 w-md-50 w-xs-100 text-nowrap">上一步</Link>
+                {/* <Link to='/booking' className="btn-custom btn-custom-unfilled w-lg-25 w-md-50 w-xs-100 text-nowrap">上一步</Link> */}
+                <button
+                    type="button"
+                    onClick={()=>{
+                        orderNavigate("/booking");
+                    }} 
+                    className="btn-custom btn-custom-unfilled w-lg-25 w-md-50 w-xs-100 text-nowrap">上一步</button>
                 <button 
                     type="button"
                     form="contactForm"

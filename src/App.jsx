@@ -24,10 +24,6 @@ function App() {
     localStorage.setItem('orderData', JSON.stringify(order));
   }, [order]);
 
-  // const [allSkiHouses, setAllSkiHouses] = useState([]); //全部的雪場資料
-  // const [allCoaches, setAllCoaches] = useState([]);   // 全部的教練資料
-  // const [classTime, setClassTime] = useState([]);     // 課程時間選項
-  // const [skillLevels,setSkillLevels] = useState([]);  // 學員滑雪程度選項
   const [errorMessage,setErrorMessage] = useState("");    //紀錄錯誤訊息
 
   return (
