@@ -17,6 +17,7 @@ import AdminLogin from '../pages/admin/AdminLogin';
 import OrderListPage from '../pages/admin/OrderListPage';
 import OrderDetailPage from '../pages/admin/OrderDetailPage';
 import AdminLayout from '../layout/AdminLayout';
+import UserCenter from '../pages/center/UserCenter';
 
 
 const routes = [
@@ -75,6 +76,10 @@ const routes = [
       {
         path: 'about-us',
         element: <AboutUs />
+      },
+      {
+        path: 'user-center',
+        element: <UserCenter />
       },
       {
         path:'*',

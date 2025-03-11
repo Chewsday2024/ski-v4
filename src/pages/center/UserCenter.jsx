@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
 
-function NotFound() {
+export default function UserCenter() {
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -16,12 +16,10 @@ function NotFound() {
     <>
       <div className='container'>
         <div className='d-flex flex-column align-items-center p-5'>
-          <img className="w-50 mb-4 px-md-5" src="choju93_0030_9.png" alt="error" />
-          <h6>啊呀。･ﾟ･(つд`ﾟ)･ﾟ･雪道路線錯誤。即將為您傳送回到山頂重新導航...</h6>
+          <h6 className="mb-3">你已成功登入，但會員中心還沒做好...請你先回到首頁</h6>
+          <img className="w-50 mb-4 px-md-5" src="choju32_0015_11.png" alt="error" />
         </div>
       </div>
     </>
   )
 }
-
-export default NotFound;

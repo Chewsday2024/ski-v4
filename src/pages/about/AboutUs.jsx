@@ -42,7 +42,14 @@ function AboutUs() {
       </ul>
       `,
       text: `
+      <h5 class="text-brand-01 mb-2">團隊合作</h5>
       <p class="mb-3">覺得自己很幸運可以遇到這麼棒的組員們，除了都非常優秀之外每當有夥伴提出問題時，大家總是能集思廣益找出辦法，而我好像只是受益者。希望我也能成為替別人解答的小幫手！</p>
+      <h5 class="text-brand-01 mb-2">個人學習</h5>
+      <p>第一次接觸未知的React世界，從一開始覺得懷疑自己是否學得會到現在逐漸覺得有點有趣。</p>
+      <p class="mb-3">在專案中除了應用課堂上學到的知識點之外，還觀摩了其他夥伴是如何檔案管理以及程式碼撰寫模式，並且學習到如何使用git 版本控制。</p>
+      <h5 class="text-brand-01 mb-2">個人期許</h5>
+      <p>回頭檢視自己不太熟悉的地方，並持續學習、嘗試練習不同的Hooks</p>
+      <p class="mb-3">希望自己可以從0開始，做出真正屬於自己的side project！</p>
       <h5 class="text-brand-01 mb-2">開發困境</h5>
       <p>上課的時候都覺得有聽懂，寫作業跟著助教的步驟去做感覺有理解那麼一點點，</p>
       <p>可是真正自己在開發時，才發現自己根本懵懵懂懂</p>
@@ -51,7 +58,7 @@ function AboutUs() {
     {
       id: 3,
       name: "卡卡",
-      image: "member-kaka.png",
+      image: "member-kaka.svg",
       discord: "kaka_945",
       mail: "superkay0101@gmail.com",
       level: [{ css: "LV.4", js: "LV.3", react: "LV.3", git: "LV.3" }],
@@ -87,7 +94,7 @@ function AboutUs() {
     {
       id: 4,
       name: "雪粒",
-      image: "member-sherry.png",
+      image: "member-sherry.svg",
       discord: "queque6086",
       mail: "shw18731@gmail.com",
       level: [{ css: "LV.5", js: "LV.6", react: "LV.4", git: "LV.3" }],
@@ -182,6 +189,7 @@ function AboutUs() {
                             className="card-img-top border border-secondary-subtle rounded rounded-4"
                             alt="..."
                             style={{
+                              // maxWidth: "220px",
                               width: "220px",
                               height: "220px",
                               objectFit: "cover",
@@ -258,26 +266,26 @@ function AboutUs() {
                 aria-label="Close"
               ></button>
             </div>
-            <div className="modal-body px-4 my-3">
+            <div className="modal-body px-4 my-md-3">
               {selectedMember && (
                 <>
-                  <div className="d-flex align-items-stretch mb-4">
+                  <div className="d-flex flex-column align-items-center flex-lg-row align-items-lg-stretch mb-4">
                     <img
                       src={selectedMember.image}
-                      className="card-img-top border border-secondary-subtle rounded rounded-circle me-4"
+                      className="card-img-top border border-secondary-subtle rounded rounded-circle me-md-4"
                       alt="..."
                       style={{
-                        width: "220px",
+                        maxWidth: "220px",
+                        // width: "220px",
                         height: "220px",
                         objectFit: "cover",
                       }}
                     />
-                    <div>
+                    <div className="">
                       <h3 className="text-brand-01">
                         {selectedMember.name}
                       </h3>
-                      <div className="d-flex">
-                        
+                      <div className="d-flex flex-column flex-lg-row">
                         <a
                           className="d-inline-flex align-items-center text-decoration-none text-brand-01 hover-brand-02 fs-xs"
                           href={`mailto:${selectedMember.mail}`}
@@ -288,10 +296,10 @@ function AboutUs() {
                           {selectedMember.mail}
                         </a>
                         <button
-                          className="btn btn-link d-flex align-items-center text-decoration-none text-brand-01 hover-brand-02 fs-xs"
+                          className="btn btn-link d-flex align-items-center text-decoration-none text-brand-01 hover-brand-02 fs-xs px-0"
                           onClick={() => copyToClipboard(selectedMember.discord)}
                         >
-                          <i className="fs-4 bi bi-discord me-2"></i>
+                          <i className="fs-4 bi bi-discord me-2 mx-lg-2"></i>
                           <div className="d-flex">
                               {selectedMember.discord}<i className="fs-6 bi bi-copy mx-1"></i>
                           </div>

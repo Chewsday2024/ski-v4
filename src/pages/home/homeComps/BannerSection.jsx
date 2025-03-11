@@ -80,7 +80,7 @@ function BannerSection() {
           <h2 className="h1 bg-brand-01 d-inline-block px-2 py-1 border-2 border-bottom border-white typing-effect">找到你最貼心的雪地夥伴</h2>
         </div>
         <div className="z-3" data-aos="fade-right">
-          <Link to="/" className="btn btn-outline-brand-01 home-btn-hover bg-white rounded-pill fs-4 fw-bold px-middle py-3 z-3">
+          <Link to="/coach" className="btn btn-outline-brand-01 home-btn-hover bg-white rounded-pill fs-4 fw-bold px-middle py-3 z-3">
             <span className="material-symbols-outlined icon-unfill align-bottom me-3 mb-1">arrow_circle_right</span>馬上預約
           </Link>
         </div>
