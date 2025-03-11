@@ -35,7 +35,7 @@ function ArticleSection() {
     <section className="py-5" style={{background:"url('https://firebasestorage.googleapis.com/v0/b/homework-b5f67.appspot.com/o/Rectangle%204.png?alt=media&token=573736d0-99bf-4e55-9b40-2217764e23db') no-repeat center center/cover"}}>
       <div className="container d-flex flex-column align-items-center">
         <div className="border-1 border-bottom border-gray-03 w-50 mb-5">
-          <h3 className="text-center text-brand-01 pb-4">推薦文章</h3>
+          <h3 className="text-center text-brand-01 fw-bold pb-4">推薦文章</h3>
         </div>
         <Link to="/article" className="card border-0 col-10 mb-3 p-4 text-decoration-none">
           <div className="row g-4">
@@ -44,7 +44,7 @@ function ArticleSection() {
                 <div className="d-flex align-items-center">
                   <img src="https://images.unsplash.com/photo-1710170599407-618cca3904d6?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" className="img-fluid rounded-circle me-4" alt="" style={{width:"80px", height:"80px", objectFit: "cover"}}/>
                   <div className="d-flex flex-column">
-                    <h5 className="card-title">五條老師</h5>
+                    <h5 className="card-title fw-bold">五條老師</h5>
                     <small className="text-muted">單板/雙板</small>
                     <small className="text-muted">輕井澤王子飯店滑雪場</small>
                   </div>

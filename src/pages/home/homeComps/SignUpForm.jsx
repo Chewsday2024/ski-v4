@@ -9,12 +9,12 @@ import axios from 'axios';
     const [isErrorMessage, setIsErrorMessage] = useState(false);
     const [token, setToken] = useState('');
   
-    const api = 'https://todolist-api.hexschool.io';
+    const api = 'https://ski-api-m9x9.onrender.com';
     
     // 練習區塊
     const signUp = async () => {
       try {
-      const res = await axios.post(`${api}/users/sign_up`, {
+      const res = await axios.post(`${api}/users`, {
         email: emailSignIn,
         password: passwordSignIn,
         nickname: nickName
