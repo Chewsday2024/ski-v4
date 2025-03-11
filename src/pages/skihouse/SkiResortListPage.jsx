@@ -60,7 +60,7 @@ export default function SkiResortListPage() {
         <div className="w-100 d-flex justify-content-center">
           <select value={resortSelect}
           onChange={handleChange} className="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-            <option value="" disabled>🔎︎ 搜尋雪場</option>
+            <option value="" disabled>🔎︎ 選擇雪場地區</option>
             <option value="all">所有雪場</option>
             {areas.map((area) =>{
               return(  
