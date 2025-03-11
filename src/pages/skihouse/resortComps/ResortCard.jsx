@@ -17,12 +17,12 @@ export default function ResortCard({skiResorts}) {
         <div key={skiResort.id}
         className="col d-flex justify-content-center g-5"
         onClick={() =>handleClick(skiResort.id)}>
-          <div className="resortCard card my-3">
+          <div className="resortCard card my-3 border border-3">
             <span className="label bg-brand-02 text-white text-center text-brand-01 fs-5">
               {skiResort.area}
             </span>
             <img
-              className="card-img-top"
+              className="card-img-top rounded-top"
               src={skiResort.image}
               alt={skiResort.chineseName}
             />

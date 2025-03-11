@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import './SkiHouse.scss';
 import axios from 'axios';
-import { NavLink, useParams, useNavigate  } from 'react-router';
+import { NavLink, useParams, useNavigate } from 'react-router';
 import LevelProgressBar from './resortComps/LevelProgressBar';
 import BackToTopButton from '../../components/BackToTopButton';
 import AOS from "aos";
@@ -63,7 +63,7 @@ export default  function SkiResortDetailPage() {
   const filteredCoaches = coaches.filter(coach => skiResorts.selectCoach?.includes(coach.id));
 
   const handleBookingCoach =(id) =>{
-    console.log("Navigating to coach ID:", id);
+    //console.log("Navigating to coach ID:", id);
     navigate(`/${id}`);
   }
   
@@ -77,14 +77,14 @@ export default  function SkiResortDetailPage() {
 
   return (
     <>
-      <div className="container mt-4">
+      <div className="container container-fluid mt-4 ">
         <BackToTopButton />
         <div className="breadcrumb">
           <nav aria-label="breadcrumb">
               <ol className="breadcrumb">
-                <li className="breadcrumb-item"><NavLink to="/ski-house">雪場總覽</NavLink></li>
-                <li className="breadcrumb-item"><NavLink to={`/ski-house?area=${encodeURIComponent(skiResorts.area)}`}>{skiResorts.area}</NavLink></li>
-                <li className="breadcrumb-item active" aria-current="page">{skiResorts.chineseName}
+                <li className="breadcrumb-item text-gray-03"><NavLink to="/ski-house">雪場總覽</NavLink></li>
+                <li className="breadcrumb-item text-gray-03"><NavLink to={`/ski-house?area=${encodeURIComponent(skiResorts.area)}`}>{skiResorts.area}</NavLink></li>
+                <li className="breadcrumb-item active text-brand-02" aria-current="page">{skiResorts.chineseName}
                 </li>
               </ol>
           </nav>
@@ -102,12 +102,13 @@ export default  function SkiResortDetailPage() {
           />
           <div className="resortTag d-flex flex-wrap justify-content-center gap-2 mb-3 "
           data-aos="fade-right" data-aos-duration="2500" data-aos-delay="300">
-            {Object.entries(skiResorts.tag || {}).filter(([_, value]) => value).map(([key]) =>(<button key={key} type="button" className="tagBtn btn btn-outline-brand-02 fs-6 fw-bolder">{formatTagName(key)}</button>
+            {Object.entries(skiResorts.tag || {}).filter(([_, value]) => value).map(([key]) =>(<h2 key={key}><span className="badge border border-brand-02 text-brand-02">{formatTagName(key)}</span></h2>
+              /*<button key={key} type="button" className="tagBtn btn btn-outline-brand-02 fs-6 fw-bolder">{formatTagName(key)}</button>*/
             ))}
             
         </div>
           <p className="my-3 fs-5 m-3" data-aos="fade-left" data-aos-duration="2500" data-aos-delay="200">{skiResorts.description}</p>
-          <div className="row row-cols-2 row-cols-lg-6 gy-1 my-3">
+          <div className="infoRow row row-cols-2 row-cols-lg-6 gy-1 my-3">
             <div className="col" data-aos="flip-down" data-aos-duration="2500"
             data-aos-delay="100">
             <div className="card border-brand-02 mb-3 text-center" >
@@ -167,7 +168,7 @@ export default  function SkiResortDetailPage() {
           <LevelProgressBar />
 
           <h3 className="orderCoach my-3 pt-5 text-center text-brand-01 fs-2 fw-bold" data-aos="zoom-out-up" data-aos-duration="2500" data-aos-delay="200">快來預約我們滑雪場的教練吧！</h3>
-          <div className="row row-cols-1 row-cols-lg-3 justify-content-center pt-3">
+          <div className="bookingRow row row-cols-1 row-cols-lg-3 justify-content-center pt-3">
               {filteredCoaches.map(coach =>(
                 <div key={coach.id} className="col-md-4 d-flex justify-content-around flex-column align-items-center my-4" data-aos="zoom-out-up" data-aos-duration="2500" data-aos-delay="200">
                 <img src={coach.profileImg} className="coachProfileImg img-fluid rounded-circle object-fit-cover  mb-3" alt={coach.name} style={{height:"200px", width:"200px"}} />
