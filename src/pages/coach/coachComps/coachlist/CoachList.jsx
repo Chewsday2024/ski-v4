@@ -50,7 +50,12 @@ function CoachList() {
 
   return (
     <div className='row row-cols-1 row-cols-sm-2 row-cols-lg-3 w-100'>
-      {filteredCoaches.map((coach, index) => {
+      {filteredCoaches.length <= 0 
+        ? <div className='d-flex flex-column align-items-center gap-5 m-auto mt-5'>
+            <h1>目前沒有符合的教練！</h1>
+            <img className='w-50' src="/coach-notfound.png" alt="coach-notfound" />
+          </div>
+        : filteredCoaches.map((coach, index) => {
 
         const coachListfullStars = Math.floor(coach.rate?.stars);
         const coachListhalfStar = coach.rate?.stars % 1 !== 0;

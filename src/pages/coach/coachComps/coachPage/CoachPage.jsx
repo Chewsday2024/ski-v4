@@ -72,7 +72,7 @@ function CoachPage () {
     window.addEventListener('resize', handleResize); 
 
     return () => window.removeEventListener('resize', handleResize);
-  }, [calendarView])
+  }, [window.innerWidth])
 
 
 
@@ -93,11 +93,17 @@ function CoachPage () {
   return (
     <div className='bg-gray-05'>
       <div className='container mt-3'>
-        <Link
-          className='btn btn-brand-01'
-          to='/coach'>
-            上一頁
-        </Link>
+        <nav aria-label="breadcrumb">
+          <ol className="breadcrumb">
+            <li className='breadcrumb-item'>
+              <Link className='text-gray-03 coach-page-breadcrumb' to="/coach">教練介紹</Link>
+            </li>
+            
+            <li className="breadcrumb-item text-brand-02">
+              {coach.name}
+            </li>
+          </ol>
+        </nav>
 
         <div className="row row-cols-1 m-auto mt-3  page-box">
           <div className="col ">
@@ -259,7 +265,6 @@ function CoachPage () {
                   events={coach.teachingSchedule}
                   eventBackgroundColor='rgb(4, 59, 107)'
                   aspectRatio={window.innerWidth < 768 ? 1 : 1.8}
-                  themeSystem= 'bootstrap5'
                 />
               </div>
 
