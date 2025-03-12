@@ -53,7 +53,7 @@ function CoachList() {
       {filteredCoaches.length <= 0 
         ? <div className='d-flex flex-column align-items-center gap-5 m-auto mt-5'>
             <h1>目前沒有符合的教練！</h1>
-            <img className='w-50' src="/coach-notfound.png" alt="coach-notfound" />
+            <img className='w-50' src="coach-notfound.png" alt="coach-notfound" />
           </div>
         : filteredCoaches.map((coach, index) => {
 
