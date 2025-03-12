@@ -161,7 +161,7 @@ export default function BookingPage(){
     // 篩選對應的雪場教練
     if (selectedSkiHouse){
         const filteredCoaches = allSkiHouses.filter((skiHouse)=>(skiHouse.id == selectedSkiHouse))[0]?.selectCoach;
-        coachesData = allCoaches.filter((coach)=>filteredCoaches.includes(coach.id));
+        coachesData = allCoaches.filter((coach)=>filteredCoaches?.includes(coach.id));
     }
 
     const [selectedCoachPrice,setSelectedCoachPrice] = useState(0);
@@ -208,13 +208,13 @@ export default function BookingPage(){
         }
     }
 
-    // 監測到選擇的雪場更新時，教練資料更新為預設值
-    useEffect(() => {
+    // 監測到選擇的雪場更新時，教練資料更新為預設值-bbb
+    const clearSkiHouseData = () => {
         setSelectedCoach("");
         setSelectedCoachName("");
         setCoachImg("");
         setSelectedCoachPrice(0);
-    }, [selectedSkiHouse]);
+    }
 
     const [startDate,setStartDate] = useState("");      // 開始日期設定
     const [endDate,setEndDate] = useState("");          // 結束日期設定
@@ -386,25 +386,46 @@ export default function BookingPage(){
         totalPrice
     ])
 
-    // 當 Storage 有資料時，則回填 -- 還沒寫完
+    // 當 Storage 有資料時，則回填 -- 還沒寫完啦...
     // const getStorage = ()=>{
     //     const storageOrder = JSON.parse(localStorage.getItem('orderData'));
-    //     if (order.skiResortId !== 0){
-    //         setSelectedSkiHouse(storageOrder.skiResortId);
-    //         setSelectedSkiHouseName(storageOrder.skiResortName);
-    //         setSelectedCoach(storageOrder.coachId);
-    //         setSelectedCoachName(storageOrder.coachName);
-    //         setSelectedSkiType(storageOrder.class.skiType);
-    //         setSelectedClass(storageOrder.class.timeType);
-    //         setSelectedClassName(storageOrder.class.timeTypeName)
-    //         setSelectedDate(storageOrder.class.date);
-    //         setSelectedStartDate(storageOrder.class.startDate);
-    //         setSelectedEndDate(storageOrder.class.endDate);
-    //         setSelectedStudentNum(storageOrder.studentsData.studentNum);
-    //         setSelectedSkillLevel(storageOrder.studentsData.skiLevel);
-    //         setStudents(storageOrder.studentsData.students);
-    //         setTotalPrice(storageOrder.paymentDetail.total);
+    //     if (storageOrder && storageOrder !== undefined){
+    //         if (order.skiResortId !== 0){
+    //             setSelectedSkiHouse(storageOrder.skiResortId);
+    //             setSelectedSkiHouseName(storageOrder.skiResortName);
+    //             setSelectedCoach(Number(storageOrder.coachId));
+                
+    //             setSelectedCoachName(storageOrder.coachName);
+    //             setSelectedSkiType(storageOrder.class.skiType);
+    //             setSelectedClass(storageOrder.class.timeType);
+    //             setSelectedClassName(storageOrder.class.timeTypeName)
+    //             setSelectedDate(storageOrder.class.date);
+    //             setSelectedStartDate(storageOrder.class.startDate);
+    //             setSelectedEndDate(storageOrder.class.endDate);
+    //             setSelectedStudentNum(storageOrder.studentsData.studentNum);
+    //             setSelectedSkillLevel(storageOrder.studentsData.skiLevel);
+    //             setStudents(storageOrder.studentsData.students);
+    //             setTotalPrice(storageOrder.paymentDetail.total);
+                
+    //             setValue("snowHouse", Number(storageOrder.skiResortId),{ shouldValidate: true });
+    //             setValue("skiCoach", Number(storageOrder.coachId),{ shouldValidate: true });
+
+    //             setValue("skiHouseName", storageOrder.skiResortName, {shouldValidate: true});
+    //             setValue("coachId", storageOrder.coachId, {shouldValidate: true});
+    //             setValue("coachName", storageOrder.coachName, {shouldValidate: true});
+    //             setValue("skiType", storageOrder.class.skiType, {shouldValidate: true});
+    //             setValue("class", storageOrder.class.timeType, {shouldValidate: true});
+    //             setValue("className", storageOrder.class.timeTypeNam, {shouldValidate: true})
+    //             setValue("date", storageOrder.class.date, {shouldValidate: true});
+    //             setValue("startDate", storageOrder.class.startDate, {shouldValidate: true});
+    //             setValue("endDate", storageOrder.class.endDate, {shouldValidate: true});
+    //             setValue("studentNum", storageOrder.studentsData.studentNum, {shouldValidate: true});
+    //             setValue("skillLevel", storageOrder.studentsData.skiLevel, {shouldValidate: true});
+    //             setValue("students", storageOrder.studentsData.students, {shouldValidate: true});
+    //             setValue("totalPrice", storageOrder.paymentDetail.total, {shouldValidate: true});
+    //         }
     //     }
+    //     console.log(storageOrder);
     // }
 
     // useEffect(()=>{
@@ -477,6 +498,7 @@ export default function BookingPage(){
                                         onChange={(e)=>{
                                             setSelectedSkiHouse(Number(e.target.value));
                                             getSkiHouseName(Number(e.target.value));
+                                            clearSkiHouseData();
                                             setValue("snowHouse", Number(e.target.value),{ shouldValidate: true });
                                         }}
                                         className={`form-select w-70 w-md-80 ${errors.snowHouse && 'is-invalid'}`}
@@ -497,7 +519,7 @@ export default function BookingPage(){
                                     }
                                     <div className="form-text d-flex justify-content-end align-items-center select-info ms-auto">
                                         <span className="material-symbols-outlined icon-unfilled text-brand-02">help</span>
-                                        <Link to={`/ski-house/${selectedSkiHouse}`} className="select-info-link">查看雪場資訊</Link>
+                                        <Link to={`/ski-house/${selectedSkiHouse}`} className="select-info-link" target="_blank">查看雪場資訊</Link>
                                     </div>
                                 </div>
                             </div>
@@ -527,7 +549,7 @@ export default function BookingPage(){
                                     }
                                     <div className="form-text d-flex justify-content-end align-items-center select-info ms-auto">
                                         <span className="material-symbols-outlined icon-unfilled text-brand-02">help</span>
-                                        <Link to='/' className="select-info-link">如何挑選</Link>
+                                        <Link to='/' className="select-info-link" target="_blank">如何挑選</Link>
                                     </div>
                                 </div>
                             </div>
@@ -574,7 +596,7 @@ export default function BookingPage(){
                                     }
                                     <div className="form-text d-flex justify-content-end align-items-center select-info ms-auto">
                                         <span className="material-symbols-outlined icon-unfilled text-brand-02">help</span>
-                                        <Link to={`/${selectedCoach}`} className="select-info-link">查看教練資訊</Link>
+                                        <Link to={`/${selectedCoach}`} className="select-info-link" target="_blank">查看教練資訊</Link>
                                     </div>
                                 </div>
                             </div>
@@ -761,7 +783,7 @@ export default function BookingPage(){
                                     }
                                     <div className="form-text d-flex justify-content-end align-items-center select-info ms-auto">
                                         <span className="material-symbols-outlined icon-unfilled text-brand-02">help</span>
-                                        <Link to='/' className="select-info-link">如何判定滑行程度</Link>
+                                        <Link to='/' className="select-info-link" target="_blank">如何判定滑行程度</Link>
                                     </div>
                                 </div>
                                 
