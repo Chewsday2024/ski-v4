@@ -13,8 +13,11 @@ import SignUpForm from '../pages/home/homeComps/SignUpForm';
 import ArticlePage from '../pages/article/ArticlePage';
 import AboutUs from '../pages/about/AboutUs';
 import NotFound from '../components/NotFound';
-
-
+import AdminLogin from '../pages/admin/AdminLogin';
+import OrderListPage from '../pages/admin/OrderListPage';
+import OrderDetailPage from '../pages/admin/OrderDetailPage';
+import AdminLayout from '../layout/AdminLayout';
+import UserCenter from '../pages/center/UserCenter';
 
 
 const routes = [
@@ -75,14 +78,33 @@ const routes = [
         element: <AboutUs />
       },
       {
+        path: 'user-center',
+        element: <UserCenter />
+      },
+      {
         path:'*',
         element:<NotFound />
       }
     ]
   },
   {
-    path:'/admin'
-  }
+    path: '/adminLogin',
+    element: <AdminLogin />
+  },
+  {
+    path: '/admin',
+    element: <AdminLayout />,
+    children: [
+        {
+            path: '',
+            element: <OrderListPage />
+        },
+        {
+            path: 'orders',
+            element: <OrderListPage />
+        }
+    ]
+  },
 ]
 
 export default routes;

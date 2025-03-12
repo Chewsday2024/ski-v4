@@ -1,19 +1,6 @@
 @import "bootstrap/scss/functions";
 @import '../../assets/variables';
-
-
-
 @import "bootstrap/scss/mixins";
-
-
-// @import "bootstrap/scss/bootstrap";
-
-
-
-
-
-
-
 
 
 // Material ICON 樣式，預設填滿
@@ -139,23 +126,6 @@
     background-color: $brand-02;
     border-color: $brand-02;
 } 
-
-// .step{
-//     position: relative;
-// }
-
-// .step::after{
-//     position: absolute;
-//     content: "\e037";
-//     font-family: "Material Symbols Outlined";
-//     font-variation-settings:
-//         'FILL' 1,
-//         'wght' 400,
-//         'GRAD' 0,
-//         'opsz' 24;
-//     font-size: 20px;
-//     line-height: 20px;
-// }
 
 .step-sec{
     margin-top: 20px;

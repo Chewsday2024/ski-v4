@@ -85,16 +85,9 @@ export default function BookingPage(){
     }
     
     const [allSkiHouses, setAllSkiHouses] = useState([]); //全部的雪場資料
-    // const {allSkiHouses, setAllSkiHouses} = useContext(OrderContext);
-
     const [allCoaches, setAllCoaches] = useState([]);   // 全部的教練資料
-    // const {allCoaches, setAllCoaches} = useContext(OrderContext);
-
     const [classTime, setClassTime] = useState([]);     // 課程時間選項
-    // const {classTime,setClassTime} = useContext(OrderContext);
-
     const [skillLevels,setSkillLevels] = useState([]);  // 學員滑雪程度選項
-    // const {skillLevels,setSkillLevels} = useContext(OrderContext);
 
     const [totalHours,setTotalHours] = useState(0);     // 課程時間總時數
     const [days,setDays] = useState(0);                 // 上課天數
@@ -113,6 +106,8 @@ export default function BookingPage(){
     const [selectedSkillLevelName,setSelectedSkillLevelName] = useState("");      // 選中的滑行程度名稱
 
     
+    
+
     // 取得全部的雪場資料
     const getSkiHouse = async()=>{
         try {
@@ -165,8 +160,8 @@ export default function BookingPage(){
     let coachesData = [];
     // 篩選對應的雪場教練
     if (selectedSkiHouse){
-        const filteredCoaches = allSkiHouses.filter((skiHouse)=>(skiHouse.id == selectedSkiHouse))[0].selectCoach;
-        coachesData = allCoaches.filter((coach)=>filteredCoaches.includes(coach.id));
+        const filteredCoaches = allSkiHouses.filter((skiHouse)=>(skiHouse.id == selectedSkiHouse))[0]?.selectCoach;
+        coachesData = allCoaches.filter((coach)=>filteredCoaches?.includes(coach.id));
     }
 
     const [selectedCoachPrice,setSelectedCoachPrice] = useState(0);
@@ -213,13 +208,13 @@ export default function BookingPage(){
         }
     }
 
-    // 監測到選擇的雪場更新時，教練資料更新為預設值
-    useEffect(() => {
+    // 監測到選擇的雪場更新時，教練資料更新為預設值-bbb
+    const clearSkiHouseData = () => {
         setSelectedCoach("");
         setSelectedCoachName("");
         setCoachImg("");
         setSelectedCoachPrice(0);
-    }, [selectedSkiHouse]);
+    }
 
     const [startDate,setStartDate] = useState("");      // 開始日期設定
     const [endDate,setEndDate] = useState("");          // 結束日期設定
@@ -270,7 +265,7 @@ export default function BookingPage(){
     // 計算總時數
     const countHours = ()=>{
         if (selectedClass){
-            const selectedHours = classTime.find((item)=> item[0] == selectedClass)[1].hours;   //  選擇上課時間的時數
+            const selectedHours = classTime.find((item)=> item[0] == selectedClass)?.[1].hours;   //  選擇上課時間的時數
             let computedDays = 0;
             
             if (selectedClass === "allday" && selectedStartDate && selectedEndDate){
@@ -391,6 +386,52 @@ export default function BookingPage(){
         totalPrice
     ])
 
+    // 當 Storage 有資料時，則回填 -- 還沒寫完啦...
+    // const getStorage = ()=>{
+    //     const storageOrder = JSON.parse(localStorage.getItem('orderData'));
+    //     if (storageOrder && storageOrder !== undefined){
+    //         if (order.skiResortId !== 0){
+    //             setSelectedSkiHouse(storageOrder.skiResortId);
+    //             setSelectedSkiHouseName(storageOrder.skiResortName);
+    //             setSelectedCoach(Number(storageOrder.coachId));
+                
+    //             setSelectedCoachName(storageOrder.coachName);
+    //             setSelectedSkiType(storageOrder.class.skiType);
+    //             setSelectedClass(storageOrder.class.timeType);
+    //             setSelectedClassName(storageOrder.class.timeTypeName)
+    //             setSelectedDate(storageOrder.class.date);
+    //             setSelectedStartDate(storageOrder.class.startDate);
+    //             setSelectedEndDate(storageOrder.class.endDate);
+    //             setSelectedStudentNum(storageOrder.studentsData.studentNum);
+    //             setSelectedSkillLevel(storageOrder.studentsData.skiLevel);
+    //             setStudents(storageOrder.studentsData.students);
+    //             setTotalPrice(storageOrder.paymentDetail.total);
+                
+    //             setValue("snowHouse", Number(storageOrder.skiResortId),{ shouldValidate: true });
+    //             setValue("skiCoach", Number(storageOrder.coachId),{ shouldValidate: true });
+
+    //             setValue("skiHouseName", storageOrder.skiResortName, {shouldValidate: true});
+    //             setValue("coachId", storageOrder.coachId, {shouldValidate: true});
+    //             setValue("coachName", storageOrder.coachName, {shouldValidate: true});
+    //             setValue("skiType", storageOrder.class.skiType, {shouldValidate: true});
+    //             setValue("class", storageOrder.class.timeType, {shouldValidate: true});
+    //             setValue("className", storageOrder.class.timeTypeNam, {shouldValidate: true})
+    //             setValue("date", storageOrder.class.date, {shouldValidate: true});
+    //             setValue("startDate", storageOrder.class.startDate, {shouldValidate: true});
+    //             setValue("endDate", storageOrder.class.endDate, {shouldValidate: true});
+    //             setValue("studentNum", storageOrder.studentsData.studentNum, {shouldValidate: true});
+    //             setValue("skillLevel", storageOrder.studentsData.skiLevel, {shouldValidate: true});
+    //             setValue("students", storageOrder.studentsData.students, {shouldValidate: true});
+    //             setValue("totalPrice", storageOrder.paymentDetail.total, {shouldValidate: true});
+    //         }
+    //     }
+    //     console.log(storageOrder);
+    // }
+
+    // useEffect(()=>{
+    //     getStorage();
+    // },[])
+
     return (
         <>
         <div className="container">
@@ -457,6 +498,7 @@ export default function BookingPage(){
                                         onChange={(e)=>{
                                             setSelectedSkiHouse(Number(e.target.value));
                                             getSkiHouseName(Number(e.target.value));
+                                            clearSkiHouseData();
                                             setValue("snowHouse", Number(e.target.value),{ shouldValidate: true });
                                         }}
                                         className={`form-select w-70 w-md-80 ${errors.snowHouse && 'is-invalid'}`}
@@ -477,7 +519,7 @@ export default function BookingPage(){
                                     }
                                     <div className="form-text d-flex justify-content-end align-items-center select-info ms-auto">
                                         <span className="material-symbols-outlined icon-unfilled text-brand-02">help</span>
-                                        <Link to={`/ski-house/${selectedSkiHouse}`} className="select-info-link">查看雪場資訊</Link>
+                                        <Link to={`/ski-house/${selectedSkiHouse}`} className="select-info-link" target="_blank">查看雪場資訊</Link>
                                     </div>
                                 </div>
                             </div>
@@ -507,7 +549,7 @@ export default function BookingPage(){
                                     }
                                     <div className="form-text d-flex justify-content-end align-items-center select-info ms-auto">
                                         <span className="material-symbols-outlined icon-unfilled text-brand-02">help</span>
-                                        <Link to='/' className="select-info-link">如何挑選</Link>
+                                        <Link to='/' className="select-info-link" target="_blank">如何挑選</Link>
                                     </div>
                                 </div>
                             </div>
@@ -554,7 +596,7 @@ export default function BookingPage(){
                                     }
                                     <div className="form-text d-flex justify-content-end align-items-center select-info ms-auto">
                                         <span className="material-symbols-outlined icon-unfilled text-brand-02">help</span>
-                                        <Link to={`/${selectedCoach}`} className="select-info-link">查看教練資訊</Link>
+                                        <Link to={`/${selectedCoach}`} className="select-info-link" target="_blank">查看教練資訊</Link>
                                     </div>
                                 </div>
                             </div>
@@ -741,7 +783,7 @@ export default function BookingPage(){
                                     }
                                     <div className="form-text d-flex justify-content-end align-items-center select-info ms-auto">
                                         <span className="material-symbols-outlined icon-unfilled text-brand-02">help</span>
-                                        <Link to='/' className="select-info-link">如何判定滑行程度</Link>
+                                        <Link to='/' className="select-info-link" target="_blank">如何判定滑行程度</Link>
                                     </div>
                                 </div>
                                 
@@ -912,7 +954,7 @@ export default function BookingPage(){
                             </table>
                             <div className="d-flex justify-content-between mt-4">
                                 <p className="mb-0 fs-4">總金額</p>
-                                <p className="mb-0 fs-3 fw-bold text-brand-02">JPY {totalPrice.toLocaleString()}</p>
+                                <p className="mb-0 fs-3 fw-bold text-brand-02">JPY {totalPrice?.toLocaleString()}</p>
                             </div>
                         </div>
                     </div>
@@ -925,7 +967,6 @@ export default function BookingPage(){
                     onClick={()=>{
                         handleSubmit(onSubmit)();
                         handleOrder();
-                        // orderNavigate("/checkout");
                     }}
                     className="btn-custom btn-custom-filled w-lg-25 w-md-50 w-xs-100 text-nowrap">
                     下一步

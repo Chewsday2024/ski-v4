@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { NavLink } from 'react-router';
+import { NavLink, useLocation } from 'react-router';
 import { useDispatch } from 'react-redux';
 
 
@@ -9,6 +9,8 @@ function Header() {
   const activeClass = ({ isActive }) => `nav-link text-brand-01 ${isActive ? "text-brand-02" : ""}`;
 
   const [isNavbarOpen, setIsNavbarOpen] = useState(false);
+  const [user, setUser] = useState(null); 
+  const location = useLocation();
 
   const toggleNavbar = () => {
     setIsNavbarOpen(!isNavbarOpen);
@@ -40,6 +42,19 @@ function Header() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  useEffect(() => {
+    // 检查是否有存储的用户信息
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, [location]);
+
+  const handleLogout = () => {
+    localStorage.removeItem("user"); // 清除登录信息
+    setUser(null); // 更新状态
+  };
+
   return (
     <>
       <nav className="navbar navbar-expand-lg py-4">
@@ -61,10 +76,11 @@ function Header() {
             className={`navbar-collapse ${isNavbarOpen ? "show" : ""}`}
             id="navbarNav"
           >
-            <ul className="navbar-nav ms-auto mt-5 mt-md-0 gap-4 text-center text-lg-start">
+            <ul className="navbar-nav ms-auto mt-5 mt-md-0 gap-3 text-center text-lg-start">
               <li className="nav-item">
                 <NavLink
                   className={ activeClass }
+                  onClick={handleLinkClick}
                   to='coach'
                   >
                     <span className="material-symbols-outlined align-bottom me-1">
@@ -87,13 +103,31 @@ function Header() {
               </li>
 
               <li className="nav-item">
-                <NavLink className={activeClass} to="about-us" onClick={handleLinkClick}><span className="material-symbols-outlined align-bottom me-1"><span className="material-symbols-outlined">group</span></span>關於我們
+                <NavLink className={activeClass} to="about-us" onClick={handleLinkClick}>
+                <span className="material-symbols-outlined align-bottom me-1">group</span>關於我們
                 </NavLink>
               </li>
 
+              {user ? (
+              <>
+                <li className="nav-item">
+                  <NavLink className="nav-link text-brand-01" to="user-center" onClick={handleLinkClick}>
+                  <span className="material-symbols-outlined align-bottom me-1">home</span>會員中心
+                  </NavLink>
+                </li>
+                <li className="nav-item align-self-center">
+                  <button className="btn btn-link nav-link text-brand-01" onClick={handleLogout}>
+                  <span className="material-symbols-outlined align-bottom me-1">exit_to_app</span>登出
+                  </button>
+                </li>
+              </>
+            ) : (
               <li className="nav-item">
-                <NavLink className="nav-link text-brand-01" to="sign-in" onClick={handleLinkClick}>登入</NavLink>
+                <NavLink className="nav-link text-brand-01" to="sign-in" onClick={handleLinkClick}>
+                  登入
+                </NavLink>
               </li>
+            )}
             </ul>
           </div>
         </div>

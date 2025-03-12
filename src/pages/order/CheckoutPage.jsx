@@ -514,7 +514,7 @@ export default function CheckoutPage(){
                                                 id="isAgreed" 
                                                 required/>
                                             <label htmlFor="isAgreed" className="form-label mb-0 w-70 w-md-80 text-nowrap">本人已詳閱並同意
-                                                <Link to='/' className="text-brand-02 text-md-20">預約訂單注意事項</Link>
+                                                <Link to='/' className="text-brand-02 text-md-20" target="_blank">預約訂單注意事項</Link>
                                             </label>
                                         </div>
                                         <div className="d-flex align-items-center w-70 w-md-80">
@@ -533,7 +533,13 @@ export default function CheckoutPage(){
                 </div>  
             </div>
             <div className="d-flex justify-content-center flex-wrap gap-3 mt-4 mt-lg-5 mb-5 mb-lg-60">
-                <Link to='/booking' className="btn-custom btn-custom-unfilled w-lg-25 w-md-50 w-xs-100 text-nowrap">上一步</Link>
+                {/* <Link to='/booking' className="btn-custom btn-custom-unfilled w-lg-25 w-md-50 w-xs-100 text-nowrap">上一步</Link> */}
+                <button
+                    type="button"
+                    onClick={()=>{
+                        orderNavigate("/booking");
+                    }} 
+                    className="btn-custom btn-custom-unfilled w-lg-25 w-md-50 w-xs-100 text-nowrap">上一步</button>
                 <button 
                     type="button"
                     form="contactForm"

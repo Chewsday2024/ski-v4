@@ -26,7 +26,7 @@ function ServicesSection() {
     <section className="services container my-3">
         <div className="d-flex flex-column justify-content-center align-items-center border border-gray-03 rounded-5 p-5">
           <div className="border-1 border-bottom border-gray-03 mb-5 w-md-50">
-            <h3 className="text-center text-brand-01 pb-4">我們提供的服務</h3>
+            <h3 className="text-center text-brand-01 fw-bold pb-4">我們提供的服務</h3>
           </div>
           <div className="d-flex flex-column flex-md-row justify-content-between gap-5">
             { services.map((item) => {
@@ -36,7 +36,7 @@ function ServicesSection() {
                   data-aos-duration="800">
                   <span className="material-symbols-outlined align-bottom text-center mb-4">{item.icon}</span>
                   <div className="text-center mt-2">
-                    <h4 className="mb-4">{item.title}</h4>
+                    <h4 className="fw-bold mb-4">{item.title}</h4>
                     <p className="text-gray-01">{item.describe}</p>
                   </div>
                 </div>)

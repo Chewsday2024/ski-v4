@@ -52,3 +52,12 @@
   transform: scale(1.1) translateX(-5%);
   transition: all 2.4s ease-in-out;
 }
+
+.floating-bounce {
+  transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
+
+  &:hover {
+    transform: translateY(-5px) !important;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+  }
+}

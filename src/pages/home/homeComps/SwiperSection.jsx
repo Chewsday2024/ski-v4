@@ -64,10 +64,10 @@ function SwiperSection() {
         <div className="row flex-column flex-md-row overflow-hidden">
           <div className="col-md-4 d-flex flex-column justify-content-center text-white ms-2 ms-md-0">
             <div className="mb-3">
-                <h1 className="bg-brand-01 d-inline-block px-2 py-1 border-2 border-bottom border-white">預約專屬教練</h1>
+                <h2 className="h1 fw-bold bg-brand-01 d-inline-block px-2 py-1 border-2 border-bottom border-white">預約專屬教練</h2>
             </div>
             <div>
-                <h2 className="h1 bg-brand-01 d-inline-block px-2 py-1 border-2 border-bottom border-white">解鎖滑雪新玩法</h2>
+                <h2 className="h1 fw-bold bg-brand-01 d-inline-block px-2 py-1 border-2 border-bottom border-white">解鎖滑雪新玩法</h2>
             </div>
           </div>
           <div className="col-md-8 px-0">
@@ -92,7 +92,7 @@ function SwiperSection() {
                     <SwiperSlide className="" key={item.id}>
                       <div className="card bg-white bg-opacity-75 border-0 mb-3">
                         <div className="card-body text-start">
-                          <h5 className="card-title h2">{item.name}</h5>
+                          <h5 className="card-title fs-2 fw-semibold">{item.name}</h5>
                           <p className="card-text">{item.place}</p>
                           <p className="card-text">
                             <small className="text-body-secondary">
@@ -111,7 +111,7 @@ function SwiperSection() {
           </div>
         </div>
         <div className="text-center mt-3">
-          <Link to="/coach" className="btn btn-outline-brand-01 home-btn-hover bg-white rounded-pill fs-4 fw-bold px-middle py-3 z-3"><span className="material-symbols-outlined icon-unfill align-bottom me-3 mb-1">arrow_circle_right</span>找到最適合你的滑雪教練</Link>
+          <Link to="/coach" className="btn btn-outline-brand-01 home-btn-hover bg-white rounded-pill fw-bold fs-4 fw-bold px-middle py-3 z-3"><span className="material-symbols-outlined icon-unfill align-bottom me-3 mb-1">arrow_circle_right</span>找到最適合你的滑雪教練</Link>
         </div>
       </div>
     </div>

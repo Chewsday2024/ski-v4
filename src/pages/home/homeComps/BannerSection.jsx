@@ -74,13 +74,13 @@ function BannerSection() {
 
       <div className='container text-white d-flex flex-column justify-content-center vh-100'>
         <div className="mb-3 z-3" data-aos="fade-right">
-          <h1 className="text-lg bg-brand-01 d-inline-block px-2 py-1 border-2 border-bottom border-white typing-effect">想滑雪？</h1>
+          <h1 className="text-lg fw-bold bg-brand-01 d-inline-block px-2 py-1 border-2 border-bottom border-white typing-effect">想滑雪？</h1>
         </div>
         <div className="mb-5 z-3" data-aos="fade-right">
-          <h2 className="h1 bg-brand-01 d-inline-block px-2 py-1 border-2 border-bottom border-white typing-effect">找到你最貼心的雪地夥伴</h2>
+          <h2 className="h1 bg-brand-01 fw-bold d-inline-block px-2 py-1 border-2 border-bottom border-white">找到你最貼心的雪地夥伴</h2>
         </div>
         <div className="z-3" data-aos="fade-right">
-          <Link to="/coach" className="btn btn-outline-brand-01 home-btn-hover bg-white rounded-pill fs-4 fw-bold px-middle py-3 z-3">
+          <Link to="/coach" className="btn btn-outline-brand-01 home-btn-hover bg-white rounded-pill fw-bold fs-4 fw-bold px-middle py-3 z-3">
             <span className="material-symbols-outlined icon-unfill align-bottom me-3 mb-1">arrow_circle_right</span>馬上預約
           </Link>
         </div>
