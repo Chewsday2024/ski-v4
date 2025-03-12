@@ -40,7 +40,7 @@ export default function AdminLogin(){
                     <label htmlFor="password" className="form-label">Password</label>
                     <input type="password" name="password" value={account.password} onChange={handleInputChange} className="form-control" id="password" placeholder="Password" />
                 </div>
-                <button className="btn btn-custom btn-custom-filled">登入</button>
+                <button className="btn btn-custom btn-custom-filled" onClick={navigate("/admin")}>登入</button>
             </form>
             <p className="mt-5 mb-3 text-muted">&copy; 2025~∞ - 雪伴 SnowBuddy</p>
         </div>

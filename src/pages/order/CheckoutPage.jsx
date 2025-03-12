@@ -514,7 +514,7 @@ export default function CheckoutPage(){
                                                 id="isAgreed" 
                                                 required/>
                                             <label htmlFor="isAgreed" className="form-label mb-0 w-70 w-md-80 text-nowrap">本人已詳閱並同意
-                                                <Link to='/' className="text-brand-02 text-md-20">預約訂單注意事項</Link>
+                                                <Link to='/' className="text-brand-02 text-md-20" target="_blank">預約訂單注意事項</Link>
                                             </label>
                                         </div>
                                         <div className="d-flex align-items-center w-70 w-md-80">
