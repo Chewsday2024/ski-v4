@@ -276,7 +276,6 @@ function AboutUs() {
                       alt="..."
                       style={{
                         maxWidth: "220px",
-                        // width: "220px",
                         height: "220px",
                         objectFit: "cover",
                       }}
@@ -314,38 +313,38 @@ function AboutUs() {
                         <div className="ms-3">
                           {selectedMember.level.map((lv, index) => (
                             <div key={index}>
-                              <div className="d-flex">
+                              <div className="d-flex align-center">
                                 <div className="w-xs me-2 mb-1">
                                   <p>CSS：</p>
                                 </div>
                                 <div>
-                                  <span className="btn btn-sm btn-warning py-0">{lv.css}</span>
+                                  <h6 className="badge text-bg-warning badge-warning">{lv.css}</h6>
                                 </div>
                               </div>
-                              <div className="d-flex">
+                              <div className="d-flex align-center">
                                 <div className="w-xs me-2 mb-1">
                                   <p>JS：</p>
                                 </div>
                                 <div>
-                                  <span className="btn btn-sm btn-warning py-0">{lv.js}</span>
+                                  <span className="badge text-bg-warning badge-warning">{lv.js}</span>
                                 </div>
                               </div>
-                              <div className="d-flex">
+                              <div className="d-flex align-center">
                                 <div className="w-xs me-2 mb-1">
                                   <p>React：</p>
                                 </div>
                                 <div>
-                                  <span className="btn btn-sm btn-warning py-0">
+                                  <span className="badge text-bg-warning badge-warning">
                                     {lv.react}
                                   </span>
                                 </div>
                               </div>
-                              <div className="d-flex">
+                              <div className="d-flex align-center">
                                 <div className="w-xs me-2 mb-1">
                                   <p>Git：</p>
                                 </div>
                                 <div>
-                                  <span className="btn btn-sm btn-warning py-0">
+                                  <span className="badge text-bg-warning badge-warning">
                                     {lv.git}
                                   </span>
                                 </div>

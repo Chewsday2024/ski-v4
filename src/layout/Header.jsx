@@ -80,6 +80,7 @@ function Header() {
               <li className="nav-item">
                 <NavLink
                   className={ activeClass }
+                  onClick={handleLinkClick}
                   to='coach'
                   >
                     <span className="material-symbols-outlined align-bottom me-1">
