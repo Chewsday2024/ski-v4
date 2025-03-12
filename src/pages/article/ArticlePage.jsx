@@ -38,10 +38,10 @@ function ArticlePage() {
             <p className="pb-3 mb-4">如今，作為一名滑雪教練，我最大的樂趣就是將這份感動傳遞給我的學員。每當看到他們從最初的緊張不安，到後來在雪地上自如滑行，臉上洋溢著自信與喜悅的笑容，我就感到無比滿足。滑雪教會了我如何面對挑戰，如何與自然和諧共處，也讓我明白，真正的自由，來自於對自己的信任與對生活的熱愛。</p>
             <p className="pb-3 mb-4">滑雪是一場沒有終點的旅程，每一次的滑行都是一次新的探索。無論你是初學者還是進階者，只要你願意踏出第一步，雪地就會為你敞開懷抱，帶你體驗那份獨一無二的自由與快樂。希望有一天，我們能在雪地上相遇，一起分享這份屬於滑雪的美好。</p>
             <img className="w-100 object-fit-cover object-position-center pb-3 mb-4" src="https://images.unsplash.com/photo-1507492147080-3d1b3e5cd0aa?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="滑雪照片" />
-            <div className="">
-              <span className="btn btn-brand-02 text-white px-1 py-0 me-2 fw-light">#滑雪</span>
-              <span className="btn btn-brand-02 text-white px-1 py-0 me-2 fw-light">#冬季旅遊</span>
-              <span className="btn btn-brand-02 text-white px-1 py-0 fw-light">#教練很帥</span>
+            <div className="d-flex">
+              <h5><span className="badge text-bg-brand-02 text-white me-2 fw-light">#滑雪</span></h5>
+              <h5><span className="badge text-bg-brand-02 text-white me-2 fw-light">#冬季旅遊</span></h5>
+              <h5><span className="badge text-bg-brand-02 text-white me-2 fw-light">#教練很帥</span></h5>
             </div>
           </div>
         </div>
