@@ -117,7 +117,7 @@ function CoachList() {
 
                 <p>{coach.skills}教練</p>
 
-                <p>¥ {coach.charge} /hr 起</p>
+                <p>¥ {coach.charge.toLocaleString()} /hr 起</p>
               </div>
             </Link>
           </div>

@@ -185,7 +185,7 @@ function CoachPage () {
                   </li>
 
                   <li>
-                    <p className='fw-bold d-inline'>JPY <span className='fs-2 mx-2'>{coach.charge}</span> /hr 起</p>
+                    <p className='fw-bold d-inline'>JPY <span className='fs-2 mx-2'>{coach.charge?.toLocaleString()}</span> /hr 起</p>
                   </li>
 
                   <li>
