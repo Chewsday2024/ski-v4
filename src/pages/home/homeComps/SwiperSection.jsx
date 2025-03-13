@@ -9,7 +9,7 @@ function SwiperSection() {
   const [coaches] = useState([
     {
       id: 1,
-      name: "Rocky Wang",
+      name: "Rocky Wu",
       image: "https://firebasestorage.googleapis.com/v0/b/homework-b5f67.appspot.com/o/skiing-coach-1.png?alt=media&token=ce325143-e55e-4ff1-a967-b3c398a1c745",
       description: "充滿活力的滑雪教練，用速度與挑戰點燃你的滑雪熱情，讓你越滑越快、越玩越嗨！",
       skills: ["單板","雙板"],
@@ -33,7 +33,7 @@ function SwiperSection() {
     },
     {
       id: 4,
-      name: "Rocky Wang",
+      name: "Rocky Wu",
       image: "https://firebasestorage.googleapis.com/v0/b/homework-b5f67.appspot.com/o/skiing-coach-1.png?alt=media&token=ce325143-e55e-4ff1-a967-b3c398a1c745",
       description: "充滿活力的滑雪教練，用速度與挑戰點燃你的滑雪熱情，讓你越滑越快、越玩越嗨！",
       skills: ["單板","雙板"],
