@@ -72,7 +72,8 @@ export default function CheckoutPage(){
 
     const getSubmitTime = ()=>{
         const now = new Date();
-        return now.toLocaleString();
+        // return now.toLocaleString();
+        return now.toISOString();
     }
 
     // 把填入的資料更新存到 orders 訂單裡

@@ -65,13 +65,13 @@ export default function AdminLayout(){
                     <div className="flex-grow-1 ms-3">
                         <div className="dropdown dropend">
                             <Link className="dropdown-toggle text-black text-decoration-none" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                雪粒
+                                內湖朴寶劍
                             </Link>
                             <ul className="dropdown-menu">
                                 <li><Link onClick={handleLogout} className="dropdown-item">登出</Link></li>
                             </ul>
                         </div>
-                        <Link className="text-secondary login-user-email" to="mailto:andy0401@mail.com">andy0401@mail.com</Link>
+                        <Link className="text-secondary login-user-email" to="mailto:jerry@gmail.com">jerry@gmail.com</Link>
                     </div>
                 </div>
             </div>
