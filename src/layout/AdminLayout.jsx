@@ -1,5 +1,6 @@
 import './AdminLayout.scss';
-import { Link, NavLink, Outlet, useLocation } from "react-router";
+import { useState, useEffect } from "react";
+import { Link, NavLink, Outlet, useLocation, useNavigate } from "react-router";
 
 export default function AdminLayout(){
 
@@ -9,7 +10,23 @@ export default function AdminLayout(){
         {path: "/admin/member-list",name: "會員列表"},
     ]
 
+    const [user, setUser] = useState(null); 
+    const navigate = useNavigate();
     const location = useLocation();
+
+    useEffect(() => {
+        const storedUser = localStorage.getItem("user");
+        if (storedUser) {
+          setUser(JSON.parse(storedUser));
+        }
+      }, [location]);
+    
+      const handleLogout = () => {
+        localStorage.removeItem("user");
+        setUser(null);
+        navigate("/adminLogin");
+    };
+
     
 
     return(
@@ -51,7 +68,7 @@ export default function AdminLayout(){
                                 雪粒
                             </Link>
                             <ul className="dropdown-menu">
-                                <li><Link to="/" className="dropdown-item">登出</Link></li>
+                                <li><Link onClick={handleLogout} className="dropdown-item">登出</Link></li>
                             </ul>
                         </div>
                         <Link className="text-secondary login-user-email" to="mailto:andy0401@mail.com">andy0401@mail.com</Link>
