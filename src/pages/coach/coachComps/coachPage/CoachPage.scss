@@ -1,3 +1,14 @@
+.coach-page-breadcrumb {
+  
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+
+
+
+
 .page-box {
   max-width: 856px;
 }
@@ -69,19 +80,7 @@
     position: relative;
     color: #779ECB;
     padding-bottom: 17px;
-
-
-    &::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      right: 0;
-      
-      width: 100%;
-      height: 100%;
-      border-bottom: 3px solid #779ECB;
-      z-index: -1;
-    }
+    border-bottom: 3px solid #779ECB;
   }
 }
 

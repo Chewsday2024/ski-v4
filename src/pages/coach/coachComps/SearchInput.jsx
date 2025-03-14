@@ -4,6 +4,11 @@ import CoachList from './coachlist/CoachList';
 
 
 
+
+
+import './SearchInput.scss'
+
+
 export const InputValue = createContext({});
 
 function SerchInput() {
@@ -54,9 +59,9 @@ function SerchInput() {
         </select>
 
 
-        <input defaultValue='' type="text" placeholder='🔎關鍵字...' ref={keyWordRef} />
+        <input className='form-control' defaultValue='' type="text" placeholder='🔎關鍵字...' ref={keyWordRef} />
 
-        <button className='btn btn-primary w-auto' onClick={() => {
+        <button className='btn btn-brand-01 search-btn' onClick={() => {
           setAllValue(pre => ({
             ...pre,
             sex : sexRef.current.value,
