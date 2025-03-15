@@ -309,19 +309,6 @@ export default function BookingPage(){
 
 
     const [students,setStudents] = useState([]);    //學員資料
-    
-    // 初始化學生資料
-    useEffect(()=>{
-        const defaultStudents = Array.from({length: selectedStudentNum},()=>({
-            lastName: "",
-            firstName: "",
-            name:"",
-            gender: "",
-            age: "",
-            phone: ""
-        }));
-        setStudents(defaultStudents);
-    },[selectedStudentNum])
 
     // 更新學生資料
     const handleStudentsData = (index, field, value) => {
@@ -401,46 +388,38 @@ export default function BookingPage(){
         totalPrice
     ])
 
-    // 當 Storage 有資料時，則回填 -- 還沒寫完啦...
+    // 當 Storage 有資料時，則回填
     const getStorage = ()=>{
         const localOrder = localStorage.getItem('orderData');
         const storageOrder = localOrder && localOrder !=='undefined'? JSON.parse(localOrder): undefined;
         if (storageOrder && storageOrder !== undefined){
             if (order.skiResortId !== 0){
+
                 setSelectedSkiHouse(storageOrder.skiResortId);
                 setSelectedSkiHouseName(storageOrder.skiResortName);
                 setSelectedCoach(Number(storageOrder.coachId));
                 setSelectedSkiType(storageOrder.class?.skiType);
-                
-                setSelectedCoachName(storageOrder.coachName);
-                
-                setSelectedClass(storageOrder.class?.timeType);
                 setSelectedClassName(storageOrder.class?.timeTypeName)
+                setSelectedClass(storageOrder.class?.timeType);
+                setSelectedStudentNum(storageOrder.studentsData?.studentNum);
+                setSelectedSkillLevel(storageOrder.studentsData?.skiLevel);
+                setSelectedSkillLevelName(storageOrder.studentsData?.skiLevelName);
+                setStudents(storageOrder.studentsData?.students);
                 setSelectedDate(storageOrder.class?.date);
                 setSelectedStartDate(storageOrder.class?.startDate);
                 setSelectedEndDate(storageOrder.class?.endDate);
-                setSelectedStudentNum(storageOrder.studentsData?.studentNum);
-                setSelectedSkillLevel(storageOrder.studentsData?.skiLevel);
-                setStudents(storageOrder.studentsData?.students);
+                setSelectedCoachName(storageOrder.coachName);
                 setTotalPrice(storageOrder.paymentDetail?.total);
                 
                 setValue("snowHouse", Number(storageOrder.skiResortId),{ shouldValidate: true });
                 setValue("skiCoach", Number(storageOrder.coachId),{ shouldValidate: true });
                 setValue("snowBoard", storageOrder.class?.skiType, {shouldValidate: true});
-
-                setValue("skiHouseName", storageOrder.skiResortName, {shouldValidate: true});
-                setValue("coachId", storageOrder.coachId, {shouldValidate: true});
-                setValue("coachName", storageOrder.coachName, {shouldValidate: true});
-                
-                setValue("class", storageOrder.class?.timeType, {shouldValidate: true});
-                setValue("className", storageOrder.class?.timeTypeNam, {shouldValidate: true})
+                setValue("classTime", storageOrder.class?.timeType, {shouldValidate: true});
+                setValue("numOfStudents", storageOrder.studentsData?.studentNum, {shouldValidate: true});
+                setValue("level", storageOrder.studentsData?.skiLevel, {shouldValidate: true});
                 setValue("date", storageOrder.class?.date, {shouldValidate: true});
                 setValue("startDate", storageOrder.class?.startDate, {shouldValidate: true});
                 setValue("endDate", storageOrder.class?.endDate, {shouldValidate: true});
-                setValue("studentNum", storageOrder.studentsData?.studentNum, {shouldValidate: true});
-                setValue("skillLevel", storageOrder.studentsData?.skiLevel, {shouldValidate: true});
-                setValue("students", storageOrder.studentsData?.students, {shouldValidate: true});
-                setValue("totalPrice", storageOrder.paymentDetail?.total, {shouldValidate: true});
 
                 getCoachOtherData(Number(storageOrder.coachId))
             }
@@ -747,6 +726,30 @@ export default function BookingPage(){
                                         })}
                                         value={selectedStudentNum}
                                         onChange={(e)=>{
+                                            let newStudents
+                                            if (Number(e.target.value) > Number(selectedStudentNum)) {
+                                                let addCount =  Number(e.target.value) - Number(selectedStudentNum)
+                                                newStudents = [...students, ...Array.from({length: addCount},()=>({
+                                                    lastName: "",
+                                                    firstName: "",
+                                                    name:"",
+                                                    gender: "",
+                                                    age: "",
+                                                    phone: ""
+                                                }))]
+                                            } else {
+                                                newStudents = Array.from({length: Number(e.target.value)},()=>({
+                                                    lastName: "",
+                                                    firstName: "",
+                                                    name:"",
+                                                    gender: "",
+                                                    age: "",
+                                                    phone: ""
+                                                }));
+                                            }
+                                            
+                                            setStudents(newStudents);
+
                                             setSelectedStudentNum(Number(e.target.value));
                                             setValue("numOfStudents", Number(e.target.value),{ shouldValidate: true });
                                         }}

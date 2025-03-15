@@ -17,7 +17,6 @@ export default function OrderListPage(){
     const [selectedCategory,setSelectedCategory] = useState("");    //選中的分類
     const [inputWords,setInputWords] = useState("");                //輸入的搜尋關鍵字
 
-
     // 取得訂單資料
     const getOrders = async()=>{
         try {
@@ -59,7 +58,9 @@ export default function OrderListPage(){
             
             // 沒有選日期 or 有選日期
             ((!selectedStartDate || !selectedEndDate) ||
-                ((selectedStartDate && selectedEndDate) && new Date(order.orderTime) >= new Date(selectedStartDate) && new Date(order.orderTime) <= new Date(new Date(selectedEndDate).setDate(new Date(selectedEndDate).getDate() + 1)))
+                ((selectedStartDate && selectedEndDate) && 
+                new Date(order.orderTime) >= new Date(new Date(selectedStartDate).setHours(0,0,0,0)) && 
+                new Date(order.orderTime) <= new Date(new Date(selectedEndDate).setHours(23,59,59,0)))
             )
         );
         setFilteredOrders(result);
@@ -71,7 +72,7 @@ export default function OrderListPage(){
         await Promise.all (allOrders.map(async(order)=>{
             const end = new Date(order.class.endDate);
             const date = new Date(order.class.date);
-            if ( end <= now || date <= now ){
+            if (order.orderStatus === 0 && ( end <= now || date <= now )){
                 order.orderStatus = 1;
                 await changeStatus(order.id, order);
             }
