@@ -56,6 +56,8 @@ export default function BookingPage(){
 
     const orderNavigate = useNavigate();
 
+    const [user,setUser] = useState(null);
+
     const {
         register,
         handleSubmit,
@@ -151,6 +153,15 @@ export default function BookingPage(){
     }
 
     useEffect(()=>{
+
+        const storedUser = localStorage.getItem("user");
+        if (storedUser) {
+            setUser(JSON.parse(storedUser));
+        }else{
+            orderNavigate("/sign-in");
+            alert('請先登入！');
+        }
+
         init()
     },[]);
 
@@ -339,7 +350,7 @@ export default function BookingPage(){
         const tmpOrder = {
             ...order,
             orderStatus:0,
-            userId: 6,
+            userId: user.id,
             skiResortId: selectedSkiHouse,
             skiResortName: selectedSkiHouseName,          
             coachId: selectedCoach,
