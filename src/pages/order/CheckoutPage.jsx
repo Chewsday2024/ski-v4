@@ -12,6 +12,8 @@ export default function CheckoutPage(){
     const BASE_URL = "https://ski-api-m9x9.onrender.com";    //正式機
     // const BASE_URL = "http://localhost:3000";                   //測試機
 
+    const [user,setUser] = useState(null);
+
     const { order,setOrder } = useContext(OrderContext);
 
     const [payments,setPayments] = useState([]);    //付款方式
@@ -51,6 +53,15 @@ export default function CheckoutPage(){
     }    
 
     useEffect(()=>{
+        
+        const storedUser = localStorage.getItem("user");
+        if (storedUser) {
+            setUser(JSON.parse(storedUser));
+        }else{
+            orderNavigate("/sign-in");
+            alert('請先登入！');
+        }
+
         const getPayments = async()=>{
             try {
                 const res = await axios.get(`${BASE_URL}/paymentWays`);             

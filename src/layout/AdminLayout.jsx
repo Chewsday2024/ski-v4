@@ -35,7 +35,7 @@ export default function AdminLayout(){
 
     return(
     <div className="d-flex">
-        <aside className="aside-navbar navbar bg-body-tertiary align-items-start vh-100">
+        <aside className="aside-navbar navbar bg-body-tertiary align-items-start vh-100 position-fixed">
             <div className="navbar-content container-fluid flex-column align-items-start h-100">
                 <div className="w-100">
                     <NavLink to="/" className="navbar-brand">
