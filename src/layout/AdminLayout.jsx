@@ -10,18 +10,22 @@ export default function AdminLayout(){
         {path: "/admin/member-list",name: "會員列表"},
     ]
 
-    const [user, setUser] = useState(null); 
+    const [user, setUser] = useState(null);
+
     const navigate = useNavigate();
     const location = useLocation();
 
     useEffect(() => {
         const storedUser = localStorage.getItem("user");
         if (storedUser) {
-          setUser(JSON.parse(storedUser));
+            setUser(JSON.parse(storedUser));
+        } else {
+            navigate("/adminLogin");
+            setTimeout(()=> alert('請先登入！'), 0);
         }
-      }, [location]);
+    }, []);
     
-      const handleLogout = () => {
+    const handleLogout = () => {
         localStorage.removeItem("user");
         setUser(null);
         navigate("/adminLogin");
@@ -65,13 +69,13 @@ export default function AdminLayout(){
                     <div className="flex-grow-1 ms-3">
                         <div className="dropdown dropend">
                             <Link className="dropdown-toggle text-black text-decoration-none" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                內湖朴寶劍
+                                {user && user.user}
                             </Link>
                             <ul className="dropdown-menu">
                                 <li><Link onClick={handleLogout} className="dropdown-item">登出</Link></li>
                             </ul>
                         </div>
-                        <Link className="text-secondary login-user-email" to="mailto:jerry@gmail.com">jerry@gmail.com</Link>
+                        <Link className="text-secondary login-user-email" to="mailto:jerry@gmail.com">{ user && user.email}</Link>
                     </div>
                 </div>
             </div>
