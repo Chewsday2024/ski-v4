@@ -77,7 +77,7 @@ export default  function SkiResortDetailPage() {
 
   return (
     <>
-      <div className="container container-fluid mt-4 ">
+      <div className="container mt-4 ">
         <BackToTopButton />
         <div className="breadcrumb">
           <nav aria-label="breadcrumb">
@@ -89,7 +89,7 @@ export default  function SkiResortDetailPage() {
               </ol>
           </nav>
         </div>
-        <img className="resortImg img-fluid vw-100  rounded object-fit-cover" data-aos="flip-left"
+        <img className="resortImg img-fluid vw-100 rounded object-fit-cover" data-aos="flip-left"
         src={skiResorts.image} alt={skiResorts.chineseName} />
 
         <div className="resortDetail ">

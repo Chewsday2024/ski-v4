@@ -44,6 +44,9 @@
 
 
 //雪場內頁
+body, html {
+  overflow-x: hidden;
+}
 
 .breadcrumb-item a {
   text-decoration: none;
