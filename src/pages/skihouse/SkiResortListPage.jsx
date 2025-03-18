@@ -69,7 +69,7 @@ export default function SkiResortListPage() {
             })}
           </select>
         </div>
-        <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mx-0 pb-3 overflow-hidden">
+        <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3">
         {filteredSkiResorts.length > 0 ? (<ResortCard skiResorts={filteredSkiResorts} />) : (
             <div className="d-flex flex-column align-items-center justify-content-center">
               <img className="w-100" src="loading.gif" alt="loading" />
