@@ -10,6 +10,7 @@ export default function AdminLayout(){
         {path: "/admin/member-list",name: "會員列表"},
     ]
 
+    // eslint-disable-next-line no-unused-vars
     const [user, setUser] = useState(null); 
     const navigate = useNavigate();
     const location = useLocation();
