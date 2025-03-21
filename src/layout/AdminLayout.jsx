@@ -11,7 +11,6 @@ export default function AdminLayout(){
     ]
 
     const [user, setUser] = useState(null);
-
     const navigate = useNavigate();
     const location = useLocation();
 

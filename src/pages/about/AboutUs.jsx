@@ -169,7 +169,6 @@ function AboutUs() {
               <div className="text-brand-01 text-center fs-5 mb-5 py-5">
                 <p>專題緣起於成員在雪場的親身經歷，在沒有良好學習的情況下差點受傷</p>
                 <p>希望所有想滑雪的朋友都能找到一個優秀、合適的教練，讓大家在雪山上都能夠玩得安全！玩得開心！</p>
-                {/* <p>讓大家在雪山上都能夠玩得安全！玩得開心！</p> */}
               </div>
               <div className="d-flex flex-column align-items-center">
                 <h3 className="text-center border-bottom text-brand-01 pb-1 mb-3 w-75">開發團隊</h3>
