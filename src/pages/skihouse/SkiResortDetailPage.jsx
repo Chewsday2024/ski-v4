@@ -102,11 +102,10 @@ export default  function SkiResortDetailPage() {
           />
           <div className="resortTag d-flex flex-wrap justify-content-center gap-2 mb-3 "
           data-aos="fade-right" data-aos-duration="2500" data-aos-delay="300">
-            {Object.entries(skiResorts.tag || {}).filter(([_, value]) => value).map(([key]) =>(<h2 key={key}><span className="badge border border-brand-02 text-brand-02">{formatTagName(key)}</span></h2>
+            {Object.entries(skiResorts.tag || {}).filter(([, value]) => value).map(([key]) =>(<h2 key={key}><span className="badge border border-brand-02 text-brand-02">{formatTagName(key)}</span></h2>
               /*<button key={key} type="button" className="tagBtn btn btn-outline-brand-02 fs-6 fw-bolder">{formatTagName(key)}</button>*/
             ))}
-            
-        </div>
+          </div>
           <p className="my-3 fs-5 m-3" data-aos="fade-left" data-aos-duration="2500" data-aos-delay="200">{skiResorts.description}</p>
           <div className="infoRow row row-cols-2 row-cols-lg-6 gy-1 my-3">
             <div className="col" data-aos="flip-down" data-aos-duration="2500"

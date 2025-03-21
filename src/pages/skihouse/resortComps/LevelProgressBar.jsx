@@ -3,7 +3,7 @@ import axios from 'axios';
 import '../../skihouse/SkiHouse.scss';
 import { useParams } from 'react-router';
 
-export default function(){
+export default function LevelProgressBar(){
   const [skiResorts, setSkiResorts] = useState({});
   const{ id } = useParams(); 
 
