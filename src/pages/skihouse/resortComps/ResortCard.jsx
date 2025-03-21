@@ -1,9 +1,10 @@
+import PropTypes from 'prop-types';
 import '../../skihouse/SkiHouse.scss';
 import { useNavigate } from 'react-router';
 
 
 
-export default function ResortCard({skiResorts}) {
+export default function ResortCard({ skiResorts }) {
   const navigate = useNavigate();
 
   const handleClick = (id) =>{
@@ -37,3 +38,15 @@ export default function ResortCard({skiResorts}) {
     </>
   )
 }
+
+// 加入 PropTypes 驗證
+ResortCard.propTypes = {
+  skiResorts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+      area: PropTypes.string.isRequired,
+      image: PropTypes.string.isRequired,
+      chineseName: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+};
