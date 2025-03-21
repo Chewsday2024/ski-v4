@@ -19,7 +19,6 @@ import OrderDetailPage from '../pages/admin/OrderDetailPage';
 import AdminLayout from '../layout/AdminLayout';
 import UserCenter from '../pages/center/UserCenter';
 import MemberListPage from '../pages/admin/MemberListPage';
-import { element } from 'prop-types';
 
 
 const routes = [

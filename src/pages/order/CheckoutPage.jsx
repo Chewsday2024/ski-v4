@@ -12,7 +12,7 @@ export default function CheckoutPage(){
     const BASE_URL = "https://ski-api-m9x9.onrender.com";    //正式機
     // const BASE_URL = "http://localhost:3000";                   //測試機
 
-    const [user,setUser] = useState(null);
+    const [,setUser] = useState(null);
 
     const { order,setOrder } = useContext(OrderContext);
 
