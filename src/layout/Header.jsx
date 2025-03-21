@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { NavLink, useLocation } from 'react-router';
+import { NavLink, useLocation, useNavigate } from 'react-router';
+
 import './Header.scss';
 
 function Header() {
