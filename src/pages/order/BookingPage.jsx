@@ -56,6 +56,8 @@ export default function BookingPage(){
 
     const orderNavigate = useNavigate();
 
+    const [user,setUser] = useState(null);
+
     const {
         register,
         handleSubmit,
@@ -84,6 +86,8 @@ export default function BookingPage(){
         }
     }
     
+    const [apiFinish, setApiFinish] = useState(false);
+    const [initFinish, setInitFinish] = useState(false);
     const [allSkiHouses, setAllSkiHouses] = useState([]); //全部的雪場資料
     const [allCoaches, setAllCoaches] = useState([]);   // 全部的教練資料
     const [classTime, setClassTime] = useState([]);     // 課程時間選項
@@ -114,7 +118,7 @@ export default function BookingPage(){
             const res = await axios.get(`${BASE_URL}/skiResorts`);             
             setAllSkiHouses(res.data);
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
     }
 
@@ -124,7 +128,7 @@ export default function BookingPage(){
             const res = await axios.get(`${BASE_URL}/coaches`);
             setAllCoaches(res.data);
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
     }
 
@@ -134,7 +138,7 @@ export default function BookingPage(){
             const res = await axios.get(`${BASE_URL}/classTimeType`);             
             setClassTime(Object.entries(res.data));
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
     }
 
@@ -144,18 +148,38 @@ export default function BookingPage(){
             const res = await axios.get(`${BASE_URL}/studentSkiLevel`);             
             setSkillLevels(Object.entries(res.data));
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
     }
 
     useEffect(()=>{
-        getSkiHouse();
-        getCoaches();
-        getClassTime();
-        getSkillLevel();
-        handleDate();
+
+        const storedUser = localStorage.getItem("user");
+        if (storedUser) {
+            setUser(JSON.parse(storedUser));
+        }else{
+            orderNavigate("/sign-in");
+            alert('請先登入！');
+        }
+
+        init()
     },[]);
 
+    useEffect(()=> {
+        if (apiFinish) {
+            getStorage();
+            setInitFinish(true)
+        }
+    }, [apiFinish])
+    
+    const init = async () => {
+        await getSkiHouse();
+        await getCoaches();
+        await getClassTime();
+        await getSkillLevel();
+        handleDate();
+        setApiFinish(true)
+    }
 
     let coachesData = [];
     // 篩選對應的雪場教練
@@ -170,8 +194,8 @@ export default function BookingPage(){
     // 取得教練其他資訊(圖片、價格)
     const getCoachOtherData = (id)=>{
         const coach = allCoaches.find((coach)=> coach.id == id);
-        setCoachImg(coach.profileImg);
-        setSelectedCoachPrice(coach.charge);
+        setCoachImg(coach?.profileImg);
+        setSelectedCoachPrice(coach?.charge);
     }
 
     // 取得雪場名稱
@@ -280,7 +304,6 @@ export default function BookingPage(){
 
     useEffect(()=>{
         countHours();
-        
     },[selectedClass,selectedStartDate,selectedEndDate,selectedDate]);
 
 
@@ -297,19 +320,6 @@ export default function BookingPage(){
 
 
     const [students,setStudents] = useState([]);    //學員資料
-    
-    // 初始化學生資料
-    useEffect(()=>{
-        const defaultStudents = Array.from({length: selectedStudentNum},()=>({
-            lastName: "",
-            firstName: "",
-            name:"",
-            gender: "",
-            age: "",
-            phone: ""
-        }));
-        setStudents(defaultStudents);
-    },[selectedStudentNum])
 
     // 更新學生資料
     const handleStudentsData = (index, field, value) => {
@@ -339,7 +349,8 @@ export default function BookingPage(){
     const handleOrder = () => {
         const tmpOrder = {
             ...order,
-            userId: 3,
+            orderStatus:0,
+            userId: user.id,
             skiResortId: selectedSkiHouse,
             skiResortName: selectedSkiHouseName,          
             coachId: selectedCoach,
@@ -370,7 +381,9 @@ export default function BookingPage(){
     }
    
     useEffect(()=>{
-        handleOrder();
+        if (initFinish) {
+            handleOrder();
+        }
     },[selectedSkiHouse,
         selectedCoach,
         selectedSkiType,
@@ -386,51 +399,43 @@ export default function BookingPage(){
         totalPrice
     ])
 
-    // 當 Storage 有資料時，則回填 -- 還沒寫完啦...
-    // const getStorage = ()=>{
-    //     const storageOrder = JSON.parse(localStorage.getItem('orderData'));
-    //     if (storageOrder && storageOrder !== undefined){
-    //         if (order.skiResortId !== 0){
-    //             setSelectedSkiHouse(storageOrder.skiResortId);
-    //             setSelectedSkiHouseName(storageOrder.skiResortName);
-    //             setSelectedCoach(Number(storageOrder.coachId));
-                
-    //             setSelectedCoachName(storageOrder.coachName);
-    //             setSelectedSkiType(storageOrder.class.skiType);
-    //             setSelectedClass(storageOrder.class.timeType);
-    //             setSelectedClassName(storageOrder.class.timeTypeName)
-    //             setSelectedDate(storageOrder.class.date);
-    //             setSelectedStartDate(storageOrder.class.startDate);
-    //             setSelectedEndDate(storageOrder.class.endDate);
-    //             setSelectedStudentNum(storageOrder.studentsData.studentNum);
-    //             setSelectedSkillLevel(storageOrder.studentsData.skiLevel);
-    //             setStudents(storageOrder.studentsData.students);
-    //             setTotalPrice(storageOrder.paymentDetail.total);
-                
-    //             setValue("snowHouse", Number(storageOrder.skiResortId),{ shouldValidate: true });
-    //             setValue("skiCoach", Number(storageOrder.coachId),{ shouldValidate: true });
+    // 當 Storage 有資料時，則回填
+    const getStorage = ()=>{
+        const localOrder = localStorage.getItem('orderData');
+        const storageOrder = localOrder && localOrder !=='undefined'? JSON.parse(localOrder): undefined;
+        if (storageOrder && storageOrder !== undefined){
+            if (order.skiResortId !== 0){
 
-    //             setValue("skiHouseName", storageOrder.skiResortName, {shouldValidate: true});
-    //             setValue("coachId", storageOrder.coachId, {shouldValidate: true});
-    //             setValue("coachName", storageOrder.coachName, {shouldValidate: true});
-    //             setValue("skiType", storageOrder.class.skiType, {shouldValidate: true});
-    //             setValue("class", storageOrder.class.timeType, {shouldValidate: true});
-    //             setValue("className", storageOrder.class.timeTypeNam, {shouldValidate: true})
-    //             setValue("date", storageOrder.class.date, {shouldValidate: true});
-    //             setValue("startDate", storageOrder.class.startDate, {shouldValidate: true});
-    //             setValue("endDate", storageOrder.class.endDate, {shouldValidate: true});
-    //             setValue("studentNum", storageOrder.studentsData.studentNum, {shouldValidate: true});
-    //             setValue("skillLevel", storageOrder.studentsData.skiLevel, {shouldValidate: true});
-    //             setValue("students", storageOrder.studentsData.students, {shouldValidate: true});
-    //             setValue("totalPrice", storageOrder.paymentDetail.total, {shouldValidate: true});
-    //         }
-    //     }
-    //     console.log(storageOrder);
-    // }
+                setSelectedSkiHouse(storageOrder.skiResortId);
+                setSelectedSkiHouseName(storageOrder.skiResortName);
+                setSelectedCoach(Number(storageOrder.coachId));
+                setSelectedSkiType(storageOrder.class?.skiType);
+                setSelectedClassName(storageOrder.class?.timeTypeName)
+                setSelectedClass(storageOrder.class?.timeType);
+                setSelectedStudentNum(storageOrder.studentsData?.studentNum);
+                setSelectedSkillLevel(storageOrder.studentsData?.skiLevel);
+                setSelectedSkillLevelName(storageOrder.studentsData?.skiLevelName);
+                setStudents(storageOrder.studentsData?.students);
+                setSelectedDate(storageOrder.class?.date);
+                setSelectedStartDate(storageOrder.class?.startDate);
+                setSelectedEndDate(storageOrder.class?.endDate);
+                setSelectedCoachName(storageOrder.coachName);
+                setTotalPrice(storageOrder.paymentDetail?.total);
+                
+                setValue("snowHouse", Number(storageOrder.skiResortId),{ shouldValidate: true });
+                setValue("skiCoach", Number(storageOrder.coachId),{ shouldValidate: true });
+                setValue("snowBoard", storageOrder.class?.skiType, {shouldValidate: true});
+                setValue("classTime", storageOrder.class?.timeType, {shouldValidate: true});
+                setValue("numOfStudents", storageOrder.studentsData?.studentNum, {shouldValidate: true});
+                setValue("level", storageOrder.studentsData?.skiLevel, {shouldValidate: true});
+                setValue("date", storageOrder.class?.date, {shouldValidate: true});
+                setValue("startDate", storageOrder.class?.startDate, {shouldValidate: true});
+                setValue("endDate", storageOrder.class?.endDate, {shouldValidate: true});
 
-    // useEffect(()=>{
-    //     getStorage();
-    // },[])
+                getCoachOtherData(Number(storageOrder.coachId))
+            }
+        }
+    }
 
     return (
         <>
@@ -603,7 +608,7 @@ export default function BookingPage(){
                             <div className="mb-3 form-section">
                                 <div className="d-flex justify-content-between align-items-center">
                                     <label htmlFor="coachPrice" className="form-label mb-0">價格/每小時</label>
-                                    <p className="form-control-plaintext w-70 w-md-80 fs-2 text-brand-02 fw-bold">JPY {selectedCoachPrice.toLocaleString()}</p>
+                                    <p className="form-control-plaintext w-70 w-md-80 fs-2 text-brand-02 fw-bold">JPY {selectedCoachPrice?.toLocaleString()}</p>
                                 </div>
                             </div>
                             <div className="mb-3 form-section">
@@ -732,6 +737,30 @@ export default function BookingPage(){
                                         })}
                                         value={selectedStudentNum}
                                         onChange={(e)=>{
+                                            let newStudents
+                                            if (Number(e.target.value) > Number(selectedStudentNum)) {
+                                                let addCount =  Number(e.target.value) - Number(selectedStudentNum)
+                                                newStudents = [...students, ...Array.from({length: addCount},()=>({
+                                                    lastName: "",
+                                                    firstName: "",
+                                                    name:"",
+                                                    gender: "",
+                                                    age: "",
+                                                    phone: ""
+                                                }))]
+                                            } else {
+                                                newStudents = Array.from({length: Number(e.target.value)},()=>({
+                                                    lastName: "",
+                                                    firstName: "",
+                                                    name:"",
+                                                    gender: "",
+                                                    age: "",
+                                                    phone: ""
+                                                }));
+                                            }
+                                            
+                                            setStudents(newStudents);
+
                                             setSelectedStudentNum(Number(e.target.value));
                                             setValue("numOfStudents", Number(e.target.value),{ shouldValidate: true });
                                         }}
@@ -790,7 +819,7 @@ export default function BookingPage(){
                             </div>
                             {/* 學員資料 */}
                             {
-                                students.map((student,index)=>{
+                                students?.map((student,index)=>{
                                     return(
                                         <div key={index} className="d-flex flex-column gap-4 pt-4 border-top">
                                             <h4 className="form-title text-brand-02 ps-4 mb-3 fs-5">{`學員 ${index+1}`}</h4>
@@ -940,7 +969,7 @@ export default function BookingPage(){
                                 <tbody>
                                     <tr>
                                         <th scope="row" className="border-0 px-0 pt-4 fw-normal">價格/每小時</th>
-                                        <td className="text-end border-0 px-0 pt-4">{`JPY ${selectedCoachPrice.toLocaleString()}`}</td>
+                                        <td className="text-end border-0 px-0 pt-4">{`JPY ${selectedCoachPrice?.toLocaleString()}`}</td>
                                     </tr>
                                     <tr>
                                         <th scope="row" className="border-0 px-0 pt-3 fw-normal">時數</th>

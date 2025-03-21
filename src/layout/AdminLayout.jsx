@@ -10,19 +10,21 @@ export default function AdminLayout(){
         {path: "/admin/member-list",name: "會員列表"},
     ]
 
-    // eslint-disable-next-line no-unused-vars
-    const [user, setUser] = useState(null); 
+    const [user, setUser] = useState(null);
     const navigate = useNavigate();
     const location = useLocation();
 
     useEffect(() => {
         const storedUser = localStorage.getItem("user");
         if (storedUser) {
-          setUser(JSON.parse(storedUser));
+            setUser(JSON.parse(storedUser));
+        } else {
+            navigate("/adminLogin");
+            setTimeout(()=> alert('請先登入！'), 0);
         }
-      }, [location]);
+    }, []);
     
-      const handleLogout = () => {
+    const handleLogout = () => {
         localStorage.removeItem("user");
         setUser(null);
         navigate("/adminLogin");
@@ -32,7 +34,7 @@ export default function AdminLayout(){
 
     return(
     <div className="d-flex">
-        <aside className="aside-navbar navbar bg-body-tertiary align-items-start vh-100">
+        <aside className="aside-navbar navbar bg-body-tertiary align-items-start vh-100 position-fixed">
             <div className="navbar-content container-fluid flex-column align-items-start h-100">
                 <div className="w-100">
                     <NavLink to="/" className="navbar-brand">
@@ -66,13 +68,13 @@ export default function AdminLayout(){
                     <div className="flex-grow-1 ms-3">
                         <div className="dropdown dropend">
                             <Link className="dropdown-toggle text-black text-decoration-none" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                雪粒
+                                {user && user.user}
                             </Link>
                             <ul className="dropdown-menu">
                                 <li><Link onClick={handleLogout} className="dropdown-item">登出</Link></li>
                             </ul>
                         </div>
-                        <Link className="text-secondary login-user-email" to="mailto:andy0401@mail.com">andy0401@mail.com</Link>
+                        <Link className="text-secondary login-user-email" to="mailto:jerry@gmail.com">{ user && user.email}</Link>
                     </div>
                 </div>
             </div>

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useRef, useEffect, useState } from 'react';
 import { useSprings, animated } from '@react-spring/web';
 

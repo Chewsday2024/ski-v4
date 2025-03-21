@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { NavLink, useLocation } from 'react-router';
-
 import './Header.scss';
 
 function Header() {
@@ -9,6 +8,8 @@ function Header() {
   const [isNavbarOpen, setIsNavbarOpen] = useState(false);
   const [user, setUser] = useState(null); 
   const location = useLocation();
+
+  const navigate = useNavigate();
 
   const toggleNavbar = () => {
     setIsNavbarOpen(!isNavbarOpen);
@@ -48,7 +49,9 @@ function Header() {
 
   const handleLogout = () => {
     localStorage.removeItem("user"); // 清除登录信息
+    localStorage.removeItem("orderData"); // 清除預約資料
     setUser(null); // 更新状态
+    navigate("/");  //登出後回到首頁
   };
 
   return (
