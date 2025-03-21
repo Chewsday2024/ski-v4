@@ -27,7 +27,7 @@ function App() {
   const [errorMessage,setErrorMessage] = useState("");    //紀錄錯誤訊息
 
   return (
-    <div className='d-flex flex-column justify-content-between h-100'>
+    <div className='d-flex flex-column justify-content-between min-vh-100'>
       <Header />
           <OrderContext.Provider 
             value={{order,setOrder,errorMessage,setErrorMessage}}>

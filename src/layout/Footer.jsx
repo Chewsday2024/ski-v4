@@ -30,6 +30,7 @@ function Footer() {
                     <li><NavLink className="text-brand-01" to='ski-house'>雪場介紹</NavLink></li>
                     <li><NavLink className="text-brand-01" to='article'>推薦文章</NavLink></li>
                     <li><NavLink className="text-brand-01" to='about-us'>關於我們</NavLink></li>
+                    <li><NavLink className="text-brand-01" to='adminLogin'>後台登入</NavLink></li>
                   </ul>
                   <ul className='d-flex justify-content-start grid gap-0 column-gap-4 mb-lg-4'>
                     <li><NavLink><i className="fs-4 text-brand-01 bi bi-facebook"></i></NavLink></li>

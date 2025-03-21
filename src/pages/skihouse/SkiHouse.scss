@@ -21,19 +21,25 @@
 .allResort::before {
   content: "";
   display: block;
-  width: 120px;
+  width: 80px;
   height: 3px;
   background: linear-gradient(to right, $brand-01, $brand-02);
-  margin: 0 15px;
+  margin: 0 10px;
 }
 
 .allResort::after {
   content: "";
   display: block;
-  width: 120px;
+  width: 80px;
   height: 3px;
   background: linear-gradient(to left, $brand-01, $brand-02);
-  margin: 0 15px;
+  margin: 0 10px;
+}
+
+.resortFormSelect{
+  font-size: 16px;
+  line-height: 1.5; 
+  padding-right: 2rem;
 }
 
 
@@ -102,7 +108,6 @@ body, html {
 
 //Card 元件
 .resortCard{
-  width: 24rem;
   position: relative;
   border-color: $brand-02 !important;
   border-radius:0.5rem;
