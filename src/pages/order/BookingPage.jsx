@@ -3,51 +3,52 @@ import { Link, useNavigate } from 'react-router';
 import { createContext, useContext, useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
+import { OrderContext } from './OrderContext';
 
 // 建立預約教練訂單的共用環境
-export const OrderContext = createContext({});
+// export const OrderContext = createContext({});
 
-// 訂單資料 - 初始資料
-export const defaultOrder = {
-    orderTime: "",
-    orderStatus:0,
-    userId: 1,
-    skiResortId: 0,
-    skiResortName: "",          
-    coachId: 0,
-    coachName: "",
-    coachPrice: 0,
-    class: {
-        skiType: "",             
-        timeType: "",
-        timeTypeName: "",                     
-        date: null,               
-        startDate: null,    
-        endDate: null,      
-        days: 0                     
-    },
-    studentsData:{
-        studentNum: 0,
-        skiLevel: 0,
-        skiLevelName: "",                
-        students: []
-    },
-    paymentDetail:{
-        hours: 0,
-        studentNum: 0,
-        total: 0
-    },
-    contactInfo:{
-        name: "",
-        phone: "",
-        email: "",
-        lineId: "",
-        note: ""
-    },
-    is_checked: false,
-    paymentMethod: 0, 
-    isPaid: false
-}
+// // 訂單資料 - 初始資料
+// export const defaultOrder = {
+//     orderTime: "",
+//     orderStatus:0,
+//     userId: 1,
+//     skiResortId: 0,
+//     skiResortName: "",          
+//     coachId: 0,
+//     coachName: "",
+//     coachPrice: 0,
+//     class: {
+//         skiType: "",             
+//         timeType: "",
+//         timeTypeName: "",                     
+//         date: null,               
+//         startDate: null,    
+//         endDate: null,      
+//         days: 0                     
+//     },
+//     studentsData:{
+//         studentNum: 0,
+//         skiLevel: 0,
+//         skiLevelName: "",                
+//         students: []
+//     },
+//     paymentDetail:{
+//         hours: 0,
+//         studentNum: 0,
+//         total: 0
+//     },
+//     contactInfo:{
+//         name: "",
+//         phone: "",
+//         email: "",
+//         lineId: "",
+//         note: ""
+//     },
+//     is_checked: false,
+//     paymentMethod: 0, 
+//     isPaid: false
+// }
 
 export default function BookingPage(){
 
