@@ -4,7 +4,7 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import bootstrap5Plugin from '@fullcalendar/bootstrap5';
 import listPlugin from "@fullcalendar/list";
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { Link, useParams } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -48,35 +48,7 @@ function CoachPage () {
 
   useEffect(() => {
     dispatch(getOneCoach(id));
-  }, []);
-
-
-  const [calendarView, setCalendarView] = useState('dayGridMonth');
-
-
-
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.matchMedia("(min-width: 576px)").matches) {
-        setCalendarView('listWeek'); 
-      } else {
-        setCalendarView('dayGridMonth');
-      }
-    };
-
-    handleResize(); 
-
-    window.addEventListener('resize', handleResize); 
-
-    return () => window.removeEventListener('resize', handleResize);
-  }, [window.innerWidth])
-
-
-
-
-
-
+  }, [dispatch, id]);
 
 
 
@@ -254,7 +226,6 @@ function CoachPage () {
                 <FullCalendar
                   ref={calendarRef}
                   plugins={[dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin, bootstrap5Plugin]}
-                  initialView={calendarView}
                   headerToolbar={{
                     left: "prev,next",
                     center: "title",

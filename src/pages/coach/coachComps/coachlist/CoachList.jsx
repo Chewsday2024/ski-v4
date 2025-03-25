@@ -24,14 +24,14 @@ function CoachList() {
 
 
   const { allValue } = useContext(InputValue);
-  // const [allCoaches, setAllCoaches] = useState([]);
+  
   
 
   
 
   useEffect(() => {
     dispatch(getAllCoaches());
-  }, []);
+  }, [dispatch]);
     
   
 
