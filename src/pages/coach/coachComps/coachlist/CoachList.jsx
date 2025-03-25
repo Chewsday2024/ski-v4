@@ -6,8 +6,9 @@ import { useDispatch, useSelector } from 'react-redux';
 
 
 
+import { InputValue } from '../../coachContext';
 
-import { InputValue } from '../SearchInput';
+
 
 import './CoachList.scss';
 
