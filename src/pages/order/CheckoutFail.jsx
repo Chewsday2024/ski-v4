@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { Link } from "react-router"
-import { OrderContext } from "./BookingPage";
+// import { OrderContext } from "./BookingPage";
+import { OrderContext } from "./OrderContext";
 
 export default function CheckoutFail(){
     const { errorMessage } = useContext(OrderContext); //錯誤訊息

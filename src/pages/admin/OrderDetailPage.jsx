@@ -21,17 +21,17 @@ export default function OrderDetailPage(){
         const res = await axios.get(`${BASE_URL}/orders/${id}?_expand=user&_expand=skiResort&_expand=coach`);
         setOrder(res.data);
     }
-
+    
     const getTimeType = async()=>{
         const res = await axios.get(`${BASE_URL}/classTimeType`);
         setTimeType(Object.entries(res.data));
     }
-
+    
     const getSkiLevel = async()=>{
         const res = await axios.get(`${BASE_URL}/studentSkiLevel`);
         setSkiLevel(Object.entries(res.data));
     }
-
+    
     useEffect(()=>{
         getOrder();
         getTimeType();

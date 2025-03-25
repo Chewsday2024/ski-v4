@@ -4,8 +4,10 @@ import { useContext, useEffect, useState } from 'react';
 import './Order.scss';
 import axios from 'axios';
 
-import { defaultOrder, OrderContext } from './BookingPage';
+// import { defaultOrder, OrderContext } from './BookingPage';
 import { useForm } from 'react-hook-form';
+import { OrderContext } from './OrderContext';
+import { defaultOrder } from './DefaultOrder';
 
 export default function CheckoutPage(){
 
