@@ -1,15 +1,16 @@
-import { createContext, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import CoachList from './coachlist/CoachList';
 
 
 
+import { InputValue } from '../coachContext';
 
 
 
 import './SearchInput.scss'
 
 
-export const InputValue = createContext({});
+
 
 function SerchInput() {
   const sexRef = useRef(null);
