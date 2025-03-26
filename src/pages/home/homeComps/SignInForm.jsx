@@ -7,7 +7,6 @@ function SignInForm() {
   const [passwordSignIn, setPasswordSignIn] = useState("123123");
   const [responseMessage, setResponseMessage] = useState("");
   const [isErrorMessage, setIsErrorMessage] = useState(false);
-  // eslint-disable-next-line no-unused-vars
   const [user, setUser] = useState(null);
 
   const api = "https://ski-api-m9x9.onrender.com";
