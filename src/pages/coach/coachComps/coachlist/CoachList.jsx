@@ -68,7 +68,7 @@ function CoachList() {
             <Link
               type='button'
               className='text-decoration-none p-0 border-0 text-dark rounded-5 col col-sm-10'
-              to={`/${coach.id}`}
+              to={`${coach.id}`}
               >
               <div
                 className='
@@ -81,7 +81,6 @@ function CoachList() {
                   m-auto
                   p-3
                   h-100
-                  bg-brand-02
                   position-relative
 
                   co-card
