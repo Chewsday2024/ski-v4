@@ -3,10 +3,12 @@
 
 
 .co-card {
-  filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.7));
+  filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.3));
   transition: transform 0.3s ease, filter 0.2s ease;
 
   max-width: 16rem;
+
+  background-color: rgb(139, 193, 255);
   
 
   &:hover {

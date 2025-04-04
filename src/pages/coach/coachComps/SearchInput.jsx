@@ -8,6 +8,7 @@ import { InputValue } from '../coachContext';
 
 
 import './SearchInput.scss'
+import { Link } from 'react-router';
 
 
 
@@ -73,6 +74,14 @@ function SerchInput() {
             
           }));
         }}>搜尋</button>
+
+
+        <Link 
+          to='favorites'
+          className='btn btn btn-brand-01 py-2 search-btn'
+        >
+          收藏的教練
+        </Link>
       </div>
 
       

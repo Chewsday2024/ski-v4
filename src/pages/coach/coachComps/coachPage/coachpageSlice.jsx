@@ -1,11 +1,20 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
+
+
+const loadFavorites = () => {
+  const savedFavorites = localStorage.getItem("favorites");
+
+  console.log(savedFavorites);
+  return savedFavorites ? JSON.parse(savedFavorites) : [];
+};
+
  
  
  
 const initialState = { 
   coachPage: {},
-  isMark: false,
+  favorites: loadFavorites(),
   status: 'idle',
   error: null
 };
@@ -30,8 +39,14 @@ const coachpageSlice = createSlice({
   name: 'coachPage',
   initialState,
   reducers: {
-    setIsMark (state) {
-      state.isMark = state.isMark ? false : true;
+    setIsFavorite (state, action) {
+      const isFavorite = state.favorites.find( item => item.id === action.payload.id);
+
+      if (isFavorite) {
+        state.favorites = state.favorites.filter( item => item.id !== action.payload.id);
+      } else {
+        state.favorites.push(action.payload);
+      }
     }
   },
   extraReducers ( bulider ) {
@@ -49,12 +64,12 @@ const coachpageSlice = createSlice({
 
 
 
-export const { setIsMark } = coachpageSlice.actions;
+export const { setIsFavorite } = coachpageSlice.actions;
 
 
 
 
-export const getIsMarkStatus = state => state.coachPage.isMark;
+export const getFavorites = state => state.coachPage.favorites;
 
 export const getCoach = state => state.coachPage.coachPage;
 
