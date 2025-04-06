@@ -172,14 +172,13 @@ export default function CheckoutPage(){
         </div>
       </div>
         
-      <div className="row">
-        <div className="col-12">
+      <div className="row justify-content-center">
+        <div className="col-lg-8">
           <form id="contactForm" onSubmit={(e)=> e.preventDefault()} className="d-flex flex-column gap-5">
             {/* 區塊：預約課程 */}
             <div className="d-flex flex-column gap-4">
               <h3 className="form-title text-brand-02 ps-4">預約課程</h3>
-              <div className="d-flex justify-content-between flex-wrap gap-4">
-                <div className="w-xs-100 w-lg-40 d-flex flex-column gap-4">
+                <div className="d-flex flex-column gap-4">
                   <div className="mb-3 form-section">
                     <div className="d-flex justify-content-between align-items-center">
                       <label htmlFor="" className="form-label mb-0">日期</label>
@@ -204,8 +203,6 @@ export default function CheckoutPage(){
                       <p className="form-control-plaintext w-70 w-md-80  fw-bold">{order.class?.days} 天</p>
                     </div>
                   </div>
-                </div>
-                <div className="w-xs-100 w-lg-40 d-flex flex-column gap-4 lower-part">
                   <div className="mb-3 form-section">
                     <div className="d-flex justify-content-between align-items-center">
                       <label htmlFor="" className="form-label mb-0">雪場</label>
@@ -233,7 +230,6 @@ export default function CheckoutPage(){
                     </div>
                   </div>
                 </div>
-              </div>   
             </div>
             {/* 區塊：學員資料 */}
             <div className="d-flex flex-column gap-4">
@@ -261,7 +257,7 @@ export default function CheckoutPage(){
                   {
                     order.studentsData?.students.map((student,index)=>{
                       return (
-                        <div key={index} className="col-md-6 col-lg-4">
+                        <div key={index} className="col-md-6">
                           <div className="card border-0">
                             <h5 className="card-title text-center border border-brand-02 bg-brand-02 text-white border-radius-top-20 p-3 mb-0">學員 {index+1}</h5>
                             <div className="card-body border border-brand-02">
@@ -295,7 +291,7 @@ export default function CheckoutPage(){
             {/* 區塊：付款 */}
             <div className="row gap-4">
               {/* 付款明細 */}
-              <div className="col-lg-8">
+              <div className="col-12">
                 <div className='d-flex flex-column gap-4'> 
                   <h3 className="form-title text-brand-02 ps-4">付款明細</h3>
                   <div className="mb-3 form-section">
@@ -327,7 +323,7 @@ export default function CheckoutPage(){
                 </div>
               </div>
               {/* 區塊：付款方式 */}
-              <div className="col-lg-4">
+              <div className="col-12">
                 <div className='d-flex flex-column gap-4'> 
                   <h3 className="form-title text-brand-02 ps-4">付款方式</h3>
                   <div className="mb-3 form-section">
@@ -367,7 +363,7 @@ export default function CheckoutPage(){
             </div>
             {/* 區塊：聯繫方式 */}
             <div className="row">
-              <div className="col-lg-8">
+              <div className="col-12">
                 <div className="d-flex flex-column gap-4">
                   <h3 className="form-title text-brand-02 ps-4">聯繫方式</h3>
                   <div className="mb-3 form-section">

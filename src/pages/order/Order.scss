@@ -227,22 +227,6 @@
   }
 }
 
-// 結帳頁右半部樣式
-@include media-breakpoint-up(lg) {
-  .lower-part{
-    position: relative;
-    &::before{
-      position: absolute;
-      content: '';
-      width: 2px;
-      height: 90%;
-      background-color: $gray-300;
-      top: 0;
-      left: -25%;
-    }
-  }
-}
-
 .result-success-img{
   max-width: 35%;
   height: auto;
