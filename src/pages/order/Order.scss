@@ -5,266 +5,268 @@
 
 // Material ICON 樣式，預設填滿
 .material-symbols-outlined {
-    font-variation-settings:
-    'FILL' 1,
-    'wght' 400,
-    'GRAD' 0,
-    'opsz' 24
+  font-variation-settings:
+  'FILL' 1,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
 }
   
 .icon-unfilled {
-    font-variation-settings:
-    'FILL' 0,
-    'wght' 400,
-    'GRAD' 0,
-    'opsz' 24
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
 }
 
 .w-25{
-    width: 25%;
+  width: 25%;
 }
 
 .form-section{
-    .w-70{
-        width: 70%;
-    }   
+  .w-70{
+    width: 70%;
+  }   
 }
 
 .w-75{
-    width: 75%;
+  width: 75%;
 }
 
 .w-80{
-    width: 80% !important;
+  width: 80% !important;
 }
 
 .w-100{
-    width: 100%;
+  width: 100%;
 }
 
 @include media-breakpoint-up(xs) {
-    .w-xs-100{
-        width: 100%;
-    }
+  .w-xs-100{
+    width: 100%;
   }
+}
 
 @include media-breakpoint-up(md) {
-    .w-md-50{
-        width: 50%;
-    }
-    .form-section{
-        .w-md-80{
-            width: 80%;
-        }
+  .w-md-50{
+    width: 50%;
+  }
+  .form-section{
+    .w-md-80{
+      width: 80%;
     }
   }
+}
 
 @include media-breakpoint-up(lg) {
-    .w-lg-25{
-        width: 25%;
-    }
-    .w-lg-40{
-        width: 40%;
-    }
+  .w-lg-25{
+    width: 25%;
   }
-
+  .w-lg-40{
+    width: 40%;
+  }
+}
 
 .text-20{
-    font-size: 20px;
+  font-size: 20px;
 }
 @include media-breakpoint-up(md) {
-    .text-md-20{
-        font-size: 20px;
-    }
+  .text-md-20{
+    font-size: 20px;
   }
+}
 
 
 .mt-20{
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
 .mb-32{
-    margin-bottom: 32px;
+  margin-bottom: 32px;
 }
 
 .mb-60{
-    margin-bottom: 60px;
+  margin-bottom: 60px;
 }
 
 .ms-60{
-    margin-left: 60px;
+  margin-left: 60px;
 }
 @include media-breakpoint-up(lg) {
-    .mb-lg-60{
-        margin-bottom: 60px;
-    }
+  .mb-lg-60{
+    margin-bottom: 60px;
   }
+}
 
 
 .border-radius-top-20{
-    border-radius: 20px 20px 0 0;
+  border-radius: 20px 20px 0 0;
 }
 .border-radius-bottom-20{
-    border-radius: 0 0 20px 20px;
+  border-radius: 0 0 20px 20px;
 }
 
 
 // 變更 bootstrap 定義的 form-selet 字型大小
 @include media-breakpoint-up(md) {
-    .form-select, .form-control, .form-control-plaintext, .form-check-input {
-        font-size: 20px;
-    }
+  .form-select, .form-control, .form-control-plaintext, .form-check-input {
+    font-size: 20px;
+  }
     
-    form {
-        label{
-            font-size: 20px;
-        }
+  form {
+    label{
+      font-size: 20px;
     }
   }
+}
   
 .form-check-input:checked {
-    background-color: $brand-02;
-    border-color: $brand-02;
+  background-color: $brand-02;
+  border-color: $brand-02;
 } 
 
 .step-sec{
-    margin-top: 20px;
-    margin-bottom: 32px;
+  margin-top: 20px;
+  margin-bottom: 32px;
 }
 
 @include media-breakpoint-up(lg) {
-    .step-sec{
-        margin-top: 70px;
-        margin-bottom: 70px;
-    }
+  .step-sec{
+    margin-top: 70px;
+    margin-bottom: 70px;
+  }
   }
 
 .step-circle{
-    background-color: $gray-03; 
-    border-radius: 50%;
-    width: 32px;
-    height: 32px;
-    color: white;
-    &.active{
-        background-color: $brand-01; 
-    }
+  background-color: $gray-03; 
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  color: white;
+  &.active{
+    background-color: $brand-01; 
+  }
 }
 
 .mobile-steps{
-    padding-left: 0;
-    li{
-        position: relative;
-        width: 33.333333%;
-        &::after{
-            position: absolute;
-            content: '';
-            width: 100%;
-            height: 4px;
-            top: 16px;
-            right: -50%;
-            background-color: $gray-03;
-            z-index: -1;
-        }
-        &:last-child::after{
-            content: none;
-        }
+  padding-left: 0;
+  li{
+    position: relative;
+    width: 33.333333%;
+    &::after{
+      position: absolute;
+      content: '';
+      width: 100%;
+      height: 4px;
+      top: 16px;
+      right: -50%;
+      background-color: $gray-03;
+      z-index: -1;
     }
-    .step-active{
-        &::after{
-            background-color: $brand-01;
-        }
+    &:last-child::after{
+      content: none;
     }
+  }
+  .step-active{
+    &::after{
+      background-color: $brand-01;
+    }
+  }
 } 
 
 // 表格 title
 .form-title{
-    border-left: 13px solid $brand-02;
+  border-left: 13px solid $brand-02;
 }
 
 // 欄位說明
 .select-info{
-    margin-top: 8px;
+  margin-top: 8px;
 }
 
 .select-info-link{
-    color: black;
-    margin-left: 12px;
+  color: black;
+  margin-left: 4px;
 }
-
-
-
 
 // 教練大頭貼
 .head-shot{
-    width: 40px;
-    height: 40px;
+  width: 40px;
+  height: 40px;
 }
 
 
 // 按鈕樣式
 .btn-custom{
-    padding: 16px 40px;
-    font-weight: 500;
-    border-radius: 40px;
-    border: 1px solid $brand-01;
-    text-decoration: none;
-    text-align: center;
-    &:hover{
-        border: 1px solid $brand-02;
-    }
+  padding: 16px 40px;
+  font-weight: 500;
+  border-radius: 40px;
+  border: 1px solid $brand-01;
+  text-decoration: none;
+  text-align: center;
+  &:hover{
+    border: 1px solid $brand-02;
+  }
 }
 
 .btn-custom-filled{
-    color: white;
-    background-color: $brand-01;
-    &:hover{
-        background-color: $brand-02;
-    }
+  color: white;
+  background-color: $brand-01;
+  &:hover{
+    background-color: $brand-02;
+  }
 }
 
 .btn-custom-unfilled{
-    color: $brand-01;
-    background-color: white;
-    &:hover{
-        color: white;
-        background-color: $brand-01;
-    }
+  color: $brand-01;
+  background-color: white;
+  &:hover{
+    color: white;
+    background-color: $brand-01;
+  }
 }
 
 // 結帳頁右半部樣式
 @include media-breakpoint-up(lg) {
-    .lower-part{
-        position: relative;
-        &::before{
-            position: absolute;
-            content: '';
-            width: 2px;
-            height: 90%;
-            background-color: $gray-300;
-            top: 0;
-            left: -25%;
-        }
+  .lower-part{
+    position: relative;
+    &::before{
+      position: absolute;
+      content: '';
+      width: 2px;
+      height: 90%;
+      background-color: $gray-300;
+      top: 0;
+      left: -25%;
     }
   }
+}
 
 .result-success-img{
-    max-width: 35%;
-    height: auto;
-    object-fit: cover;
+  max-width: 35%;
+  height: auto;
+  object-fit: cover;
 }
 
 .result-error-img{
-    max-width: 25%;
-    height: auto;
-    object-fit: cover;
+  max-width: 25%;
+  height: auto;
+  object-fit: cover;
 }
 
 .success-text{
-    color: #77cb93;
-    font-size: 160px;
+  color: #77cb93;
+  font-size: 160px;
 }
 
 .error-text{
-    color: #cb7777;
-    font-size: 160px;
+  color: #cb7777;
+  font-size: 160px;
+}
+
+.date-select{
+  .form-select{
+    --bs-form-select-bg-img: none;
+  }
 }
