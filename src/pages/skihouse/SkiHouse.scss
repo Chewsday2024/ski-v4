@@ -42,6 +42,12 @@
   padding-right: 2rem;
 }
 
+.resortCard{
+  cursor: pointer;
+}
+
+
+
 
 //雪場內頁
 body, html {
@@ -87,15 +93,39 @@ body, html {
   }
 }
 
-.coachProfileImg{
-  transition: transform 0.3s ease-in-out;
-    transform-origin: center;
-    will-change: transform;
-    &:hover{
-      opacity: 70%;
-      transform: scale(1.05);
-      box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.2);
-    }
+// .coachProfileImg{
+//   transition: transform 0.3s ease-in-out;
+//     transform-origin: center;
+//     will-change: transform;
+//     &:hover{
+//       opacity: 70%;
+//       transform: scale(1.05);
+//       //box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.2);
+//     }
+// }
+
+.imgWrapper {
+  position: relative;
+  display: inline-block;
+
+  .coachNameOverlay {
+    position: absolute;
+    bottom: 10px; // 貼齊圖片底部
+    left: 0;
+    width: 100%; // 占滿整個圖片寬度
+    padding: 10px 0;
+    background-color: rgba(255, 255, 255, 0.7); // 半透明白底
+    text-align: center;
+    font-weight: bold;
+    font-size: 24px;
+    color: $brand-01;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  &:hover .coachNameOverlay {
+    opacity: 1;
+  }
 }
 
 .orderCoachBtn{
