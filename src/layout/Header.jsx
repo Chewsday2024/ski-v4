@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
 import { NavLink, useLocation, useNavigate } from 'react-router';
-import { useDispatch } from 'react-redux';
-
 
 import './Header.scss';
 
@@ -17,8 +15,6 @@ function Header() {
   const toggleNavbar = () => {
     setIsNavbarOpen(!isNavbarOpen);
   };
-
-  const dispatch = useDispatch();
 
   const handleLinkClick = () => {
     setIsNavbarOpen(false);

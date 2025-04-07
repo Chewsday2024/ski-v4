@@ -4,14 +4,14 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import bootstrap5Plugin from '@fullcalendar/bootstrap5';
 import listPlugin from "@fullcalendar/list";
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { Link, useParams } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 
 
 
 
-import { getCoach, getIsMarkStatus, getOneCoach, setIsMark } from './coachpageSlice';
+import { getCoach, getFavorites, getOneCoach, setIsFavorite } from './coachpageSlice';
 
 
 import './CoachPage.scss';
@@ -25,9 +25,11 @@ function CoachPage () {
 
   const dispatch = useDispatch();
 
-  const isMark = useSelector(getIsMarkStatus);
-
   const coach = useSelector(getCoach);
+  
+  const favorites = useSelector(getFavorites);
+  
+  const isFavorite = favorites.find( item => item.id === coach.id);
 
   const { id } = useParams();
 
@@ -48,35 +50,7 @@ function CoachPage () {
 
   useEffect(() => {
     dispatch(getOneCoach(id));
-  }, []);
-
-
-  const [calendarView, setCalendarView] = useState('dayGridMonth');
-
-
-
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.matchMedia("(min-width: 576px)").matches) {
-        setCalendarView('listWeek'); 
-      } else {
-        setCalendarView('dayGridMonth');
-      }
-    };
-
-    handleResize(); 
-
-    window.addEventListener('resize', handleResize); 
-
-    return () => window.removeEventListener('resize', handleResize);
-  }, [window.innerWidth])
-
-
-
-
-
-
+  }, [dispatch, id]);
 
 
 
@@ -91,17 +65,27 @@ function CoachPage () {
   return (
     <div className='bg-gray-05'>
       <div className='container mt-3'>
-        <nav aria-label="breadcrumb">
-          <ol className="breadcrumb">
-            <li className='breadcrumb-item'>
-              <Link className='text-gray-03 coach-page-breadcrumb' to="/coach">教練介紹</Link>
-            </li>
-            
-            <li className="breadcrumb-item text-brand-02">
-              {coach.name}
-            </li>
-          </ol>
-        </nav>
+        <div className='d-flex justify-content-between align-items-center'>
+          <nav aria-label="breadcrumb">
+            <ol className="breadcrumb m-0">
+              <li className='breadcrumb-item'>
+                <Link className='text-gray-03 coach-page-breadcrumb' to="/coach">教練介紹</Link>
+              </li>
+              
+              <li className="breadcrumb-item text-brand-02">
+                {coach.name}
+              </li>
+            </ol>
+          </nav>
+
+          <Link 
+            to='/coach/favorites'
+            className='btn btn btn-brand-01 py-2'
+          >
+            收藏的教練
+          </Link>
+        </div>
+        
 
         <div className="row row-cols-1 m-auto mt-3  page-box">
           <div className="col ">
@@ -112,18 +96,6 @@ function CoachPage () {
                     className='w-100  rounded-4  coach-profile-img'
                     src={coach.profileImg}
                     
-                    />
-                      
-                    <i
-                      onClick={() => dispatch(setIsMark())}
-                      className={`
-                        bi
-                        ${ isMark ? 'bi-bookmark-fill' : 'bi-bookmark'}
-                        fs-3
-                        position-absolute
-
-                        coach-bookmark
-                      `} 
                     />
                 </div>
 
@@ -186,7 +158,7 @@ function CoachPage () {
                     <p className='fw-bold d-inline'>JPY <span className='fs-2 mx-2'>{coach.charge?.toLocaleString()}</span> /hr 起</p>
                   </li>
 
-                  <li>
+                  <li className='d-flex align-items-center gap-3'>
                     <Link
                       className='
                       fw-bold
@@ -200,6 +172,18 @@ function CoachPage () {
                       to='/booking'>
                         預約教練
                     </Link>
+
+                    <i
+                      onClick={() => dispatch(setIsFavorite(coach))}
+                      className={`
+                        bi
+                        ${ isFavorite ? 'bi-bookmark-fill' : 'bi-bookmark'}
+
+                        text-brand-01
+
+                        coach-bookmark
+                      `} 
+                    />
                   </li>
 
                 </ul>
@@ -254,7 +238,6 @@ function CoachPage () {
                 <FullCalendar
                   ref={calendarRef}
                   plugins={[dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin, bootstrap5Plugin]}
-                  initialView={calendarView}
                   headerToolbar={{
                     left: "prev,next",
                     center: "title",
@@ -339,7 +322,7 @@ function CoachPage () {
                     </p>
 
                     <div className='d-flex flex-column gap-3'>
-                      <h4>{review.student.comment}</h4>
+                      <h5>{review.student.comment}</h5>
 
                       <div className='d-flex align-items-center gap-3'>
                         <div className='rounded-circle rate-profileImg' style={{backgroundImage: `url(${review.student.profileImg})`}}></div>
@@ -355,13 +338,13 @@ function CoachPage () {
                     <div className='d-flex flex-column gap-3 border-start border-error ps-3'>
                       <p className='text-gray-03'>教練回覆</p>
 
-                      <h3>{review.response.comment}</h3>
+                      <h5>{review.response.comment}</h5>
 
                       <div className='d-flex align-items-center gap-3'>
                         <div className='rounded-circle rate-profileImg' style={{backgroundImage: `url(${coach.profileImg})`}}></div>
 
                         <div>
-                          <p>{coach.name}<span className='ms-3 bg-error text-white py-1 px-3 rounded-3'>教練</span></p>
+                          <p>{coach.name}<span className='ms-3 bg-brand-02 text-white py-1 px-3 rounded-3'>教練</span></p>
 
                           <p className='mt-3 text-gray-03'>2025/12/25</p>
                         </div>
