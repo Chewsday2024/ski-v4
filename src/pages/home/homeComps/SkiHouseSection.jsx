@@ -21,7 +21,7 @@ function SkiHouseSection() {
         const res = await axios.get('https://ski-api-m9x9.onrender.com/skiResorts');
         setSkiHouse(res.data)
       } catch (error) {
-        console.log(`Error: ${error.message}`);
+        alert(`Error: ${error.message}`);
       }
     };
     getData();

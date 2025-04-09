@@ -87,12 +87,12 @@ const routes = [
       {
         path: 'user-center',
         element: <UserCenter />
-      },
-      {
-        path:'*',
-        element:<NotFound />
       }
     ]
+  },
+  {
+    path:'*',
+    element:<NotFound />
   },
   {
     path: '/adminLogin',
@@ -102,22 +102,22 @@ const routes = [
     path: '/admin',
     element: <AdminLayout />,
     children: [
-        {
-            path: '',
-            element: <OrderListPage />
-        },
-        {
-            path: 'orders',
-            element: <OrderListPage />
-        },
-        {
-          path: 'orders/:id',
-          element: <OrderDetailPage />
-        },
-        {
-            path: 'member-list',
-            element: <MemberListPage />
-        }
+      {
+        path: '',
+        element: <OrderListPage />
+      },
+      {
+        path: 'orders',
+        element: <OrderListPage />
+      },
+      {
+        path: 'orders/:id',
+        element: <OrderDetailPage />
+      },
+      {
+        path: 'member-list',
+        element: <MemberListPage />
+      }
     ]
   },
 ]
