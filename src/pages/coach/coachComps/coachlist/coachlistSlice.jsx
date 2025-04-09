@@ -46,6 +46,8 @@ const coachlistSlice = createSlice({
 
 export const getallcoaches = state => state.coachList.coaches;
 
+export const getCoachListStatus = state => state.coachList.status;
+
 
 
 export default coachlistSlice.reducer;

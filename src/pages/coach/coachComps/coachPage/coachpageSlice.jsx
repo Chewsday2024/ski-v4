@@ -5,7 +5,6 @@ import axios from 'axios';
 const loadFavorites = () => {
   const savedFavorites = localStorage.getItem("favorites");
 
-  console.log(savedFavorites);
   return savedFavorites ? JSON.parse(savedFavorites) : [];
 };
 
