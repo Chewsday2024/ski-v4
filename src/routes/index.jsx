@@ -19,6 +19,8 @@ import OrderDetailPage from '../pages/admin/OrderDetailPage';
 import AdminLayout from '../layout/AdminLayout';
 import UserCenter from '../pages/center/UserCenter';
 import MemberListPage from '../pages/admin/MemberListPage';
+import FavoritePage from '../pages/coach/coachComps/favoritePage/FavoritePage';
+
 
 
 const routes = [
@@ -53,6 +55,10 @@ const routes = [
       {
         path: 'coach/:id',
         element: <CoachPage />
+      },
+      {
+        path: 'coach/favorites',
+        element: <FavoritePage />
       },
       {
         path:'ski-house',

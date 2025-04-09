@@ -6,8 +6,9 @@ import { useDispatch, useSelector } from 'react-redux';
 
 
 
+import { InputValue } from '../../coachContext';
 
-import { InputValue } from '../SearchInput';
+
 
 import './CoachList.scss';
 
@@ -24,14 +25,14 @@ function CoachList() {
 
 
   const { allValue } = useContext(InputValue);
-  // const [allCoaches, setAllCoaches] = useState([]);
+  
   
 
   
 
   useEffect(() => {
     dispatch(getAllCoaches());
-  }, []);
+  }, [dispatch]);
     
   
 
@@ -67,7 +68,7 @@ function CoachList() {
             <Link
               type='button'
               className='text-decoration-none p-0 border-0 text-dark rounded-5 col col-sm-10'
-              to={`/${coach.id}`}
+              to={`${coach.id}`}
               >
               <div
                 className='
@@ -80,7 +81,6 @@ function CoachList() {
                   m-auto
                   p-3
                   h-100
-                  bg-brand-02
                   position-relative
 
                   co-card

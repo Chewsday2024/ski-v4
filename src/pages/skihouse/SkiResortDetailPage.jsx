@@ -169,11 +169,32 @@ export default  function SkiResortDetailPage() {
           <h3 className="orderCoach my-3 pt-5 text-center text-brand-01 fs-2 fw-bold" data-aos="zoom-out-up" data-aos-duration="2500" data-aos-delay="200">快來預約我們滑雪場的教練吧！</h3>
           <div className="bookingRow row row-cols-1 row-cols-lg-3 justify-content-center pt-3">
               {filteredCoaches.map(coach =>(
-                <div key={coach.id} className="col-md-4 d-flex justify-content-around flex-column align-items-center my-4" data-aos="zoom-out-up" data-aos-duration="2500" data-aos-delay="200">
-                <img src={coach.profileImg} className="coachProfileImg img-fluid rounded-circle object-fit-cover  mb-3" alt={coach.name} style={{height:"200px", width:"200px"}} />
-                <button onClick={() =>handleBookingCoach(coach.id)}
-                type="button" className="orderCoachBtn btn btn-brand-01 rounded-5 fs-5" style={{width: "150px"}}>預約教練</button>
-              </div>
+                <div key={coach.id} 
+                  className="col-md-4 d-flex justify-content-around flex-column align-items-center my-4 position-relative coachCard"
+                  data-aos="zoom-out-up" 
+                  data-aos-duration="2500" 
+                  data-aos-delay="200"
+                >
+                <div className="imgWrapper position-relative">
+                  <img 
+                    src={coach.profileImg} 
+                    className="coachProfileImg img-fluid rounded-circle object-fit-cover mb-3" 
+                    alt={coach.name} 
+                    style={{ height: "200px", width: "200px"}} 
+                  />
+                  <div className="coachNameOverlay position-absolute start-50 translate-middle-x">
+                    {coach.name}
+                  </div>
+                </div>
+                  <button 
+                    onClick={() => handleBookingCoach(coach.id)}
+                    type="button" 
+                    className="orderCoachBtn btn btn-brand-01 rounded-5 fs-5" 
+                    style={{ width: "150px" }}
+                  >
+                    預約教練
+                  </button>
+                </div>
             ))}
             <button onClick={handleSeeMore}
             type="button" className="seeMore btn btn-outline-brand-01 rounded-5 m-5
