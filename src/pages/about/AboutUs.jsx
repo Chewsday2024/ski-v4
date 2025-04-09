@@ -186,7 +186,7 @@ function AboutUs() {
                             onClick={() => setSelectedMember(item)}
                             src={item.image}
                             className="card-img-top border border-secondary-subtle rounded rounded-4"
-                            alt="..."
+                            alt={item.name}
                             style={{
                               // maxWidth: "220px",
                               width: "220px",
@@ -197,18 +197,18 @@ function AboutUs() {
                         </div>
                         <div className="card-body p-4">
                           <h5 className="card-title text-brand-01 fs-3">{item.name}</h5>
-                          <p className="card-text">
-                          <p>
-                            <a
-                              className="d-flex align-items-center text-decoration-none text-brand-01 hover-brand-02 fs-xs"
-                              href={`mailto:${item.mail}`}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              <i className="fs-4 bi bi-envelope-fill me-2"></i>
-                              {item.mail}
-                            </a>
-                          </p>
+                          <div className="card-text">
+                            <p>
+                              <a
+                                className="d-flex align-items-center text-decoration-none text-brand-01 hover-brand-02 fs-xs"
+                                href={`mailto:${item.mail}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                              >
+                                <i className="fs-4 bi bi-envelope-fill me-2"></i>
+                                {item.mail}
+                              </a>
+                            </p>
                             <div
                               className="btn btn-link d-flex align-items-center text-decoration-none text-brand-01 hover-brand-02 fs-xs px-0"
                               onClick={() => copyToClipboard(item.discord)}>
@@ -220,8 +220,7 @@ function AboutUs() {
                                   {copied === item.discord && ( <span className="text-success fs-xs ms-1"> ✔ 已複製！</span> )}
                               </div>
                             </div>
-                            
-                          </p>
+                          </div>
                           
                           <div className="d-flex justify-content-center mt-2">
                             <button
@@ -272,7 +271,7 @@ function AboutUs() {
                     <img
                       src={selectedMember.image}
                       className="card-img-top border border-secondary-subtle rounded rounded-circle me-md-4"
-                      alt="..."
+                      alt={selectedMember.name}
                       style={{
                         maxWidth: "220px",
                         height: "220px",

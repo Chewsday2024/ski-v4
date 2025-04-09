@@ -100,7 +100,7 @@ function SwiperSection() {
                             {item.skills.length > 1 ? ` / ${item.skills[1]}` : ""}</small>
                           </p>
                         </div>
-                        <img src={item.image} className="card-img-top rounded-end" alt="..." />
+                        <img src={item.image} className="card-img-top rounded-end" alt={item.name} />
                       </div>
                     </SwiperSlide>
                   ))

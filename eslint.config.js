@@ -29,11 +29,16 @@ export default [
       ...react.configs['jsx-runtime'].rules,
       ...reactHooks.configs.recommended.rules,
       'react/jsx-no-target-blank': 'off',
+      "no-unused-vars": "warn",
+      'react-hooks/exhaustive-deps': 'off',
+      'react/prop-types': 'warn',
       'react-refresh/only-export-components': [
         'warn',
         { allowConstantExport: true },
       ],
-      'react/prop-type': 'off'
+      'react/no-unknown-property': ['error', { ignore: ['for'] }],  // 檢查是否有出現不符合 jsx 的屬性
+      'no-console': 'warn', // 檢查是否有出現console
+      indent: ["error", 2], // 檢查文件縮排，不包含 css
     },
   },
 ]
