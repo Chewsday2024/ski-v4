@@ -20,11 +20,13 @@ function SerchInput() {
   const houseRef = useRef(null);
   const keyWordRef = useRef(null);
 
-  const [ allValue, setAllValue ] = useState({sex : '',
-                                              charge : '',
-                                              board : '',
-                                              house : '',
-                                              keyWord : ''});
+  const [ allValue, setAllValue ] = useState({
+    sex : '',
+    charge : '',
+    board : '',
+    house : '',
+    keyWord : ''
+  });
 
   
     
