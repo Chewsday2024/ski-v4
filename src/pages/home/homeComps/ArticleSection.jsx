@@ -58,7 +58,7 @@ function ArticleSection() {
               </div>
             </div>
             <div className="col-md-4">
-              <img src="https://images.unsplash.com/photo-1596473536056-91eadf31189e?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" className="img-fluid rounded" alt="..." style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+              <img src="https://images.unsplash.com/photo-1596473536056-91eadf31189e?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" className="img-fluid rounded" alt="滑雪照" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
             </div>
           </div>
         </Link>
@@ -68,7 +68,7 @@ function ArticleSection() {
               <div style={{ height: "200px", overflow: "hidden" }}> {/* 固定高度容器 */}
                 <img
                   src={item.url}
-                  alt=""
+                  alt="滑雪照"
                   className="img-fluid rounded w-100 h-100 hover-zoom object-fit-cover" // 撑满容器
                   style={{ objectFit: "cover" }} // 保持图片比例
                 />

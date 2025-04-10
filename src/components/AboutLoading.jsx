@@ -23,7 +23,7 @@ function AboutLoading() {
     try {
       await promiseSetTimeout(true)
     } catch (error) {
-      console.log(error);
+      alert(`Error: ${error.message}`);
     } finally {
       setLoadingState(false)
     }
