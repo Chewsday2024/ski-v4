@@ -9,8 +9,8 @@ export default function CheckoutSuccess(){
           <div className="d-none d-md-block">
             <div className="d-flex justify-content-between step-sec">
               <div className="d-flex">
-                  <span className="step-circle d-flex justify-content-center align-items-center">1</span>
-                  <h2 className="fs-4 ms-3 text-gray-03">填寫預約資料</h2>
+                <span className="step-circle d-flex justify-content-center align-items-center">1</span>
+                <h2 className="fs-4 ms-3 text-gray-03">填寫預約資料</h2>
               </div>
               <span className="material-symbols-outlined d-flex justify-content-center align-items-center  text-gray-03">play_arrow</span>
               <div className="d-flex">
