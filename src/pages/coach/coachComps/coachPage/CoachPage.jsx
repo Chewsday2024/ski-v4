@@ -56,8 +56,8 @@ function CoachPage () {
 
 
   const openCalendar = () => {
-      calendarRef.current.getApi().updateSize();
-    }
+    calendarRef.current.getApi().updateSize();
+  }
 
 
 
@@ -95,8 +95,8 @@ function CoachPage () {
                   <img
                     className='w-100  rounded-4  coach-profile-img'
                     src={coach.profileImg}
-                    
-                    />
+                    alt={coach.name}
+                  />
                 </div>
 
                 <ul className="d-flex flex-column justify-content-between gap-3 gap-sm-0 p-0 m-0 mt-3 mt-sm-0 w-100 list-unstyled coach-profile-list">
@@ -269,7 +269,7 @@ function CoachPage () {
                   {coach.license?.map(license => {
                     return (
                       <div key={license.licenseName} className='d-flex flex-column justify-content-center align-items-center gap-3'>
-                        <img src={license.licenseImg} className='w-100' alt="#" />
+                        <img src={license.licenseImg} className='w-100' alt='lincense-picture' />
 
                         <h3>{license.licenseName}</h3>
                       </div>
@@ -287,7 +287,7 @@ function CoachPage () {
                   {coach.img?.map((img, index) => {
                     return (
                       <div key={index} className='col daily-imges-col'> 
-                        <img src={img} className='w-100 h-100 daily-imges' alt="#" />
+                        <img src={img} className='w-100 h-100 daily-imges' alt='daily-picture' />
                       </div>
                     )
                   })}
@@ -325,7 +325,7 @@ function CoachPage () {
                       <h5>{review.student.comment}</h5>
 
                       <div className='d-flex align-items-center gap-3'>
-                        <div className='rounded-circle rate-profileImg' style={{backgroundImage: `url(${review.student.profileImg})`}}></div>
+                        <div className='rounded-circle rate-profileImg' style={{backgroundImage: `url(${review.student.profileImg})`}} />
 
                         <div>
                           <p>{review.student.name}<span className='ms-3 bg-brand-02 text-white py-1 px-3 rounded-3'>學員</span></p>
@@ -341,7 +341,7 @@ function CoachPage () {
                       <h5>{review.response.comment}</h5>
 
                       <div className='d-flex align-items-center gap-3'>
-                        <div className='rounded-circle rate-profileImg' style={{backgroundImage: `url(${coach.profileImg})`}}></div>
+                        <div className='rounded-circle rate-profileImg' style={{backgroundImage: `url(${coach.profileImg})`}} />
 
                         <div>
                           <p>{coach.name}<span className='ms-3 bg-brand-02 text-white py-1 px-3 rounded-3'>教練</span></p>

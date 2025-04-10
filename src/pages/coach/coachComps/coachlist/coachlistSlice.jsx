@@ -39,12 +39,16 @@ const coachlistSlice = createSlice({
         state.status = 'failed';
 
         state.error = action.error.message;
+
+        alert('請求資訊錯誤！');
       })
   }
 });
 
 
 export const getallcoaches = state => state.coachList.coaches;
+
+export const getCoachListStatus = state => state.coachList.status;
 
 
 

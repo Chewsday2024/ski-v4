@@ -38,7 +38,8 @@ export default function AdminLogin(){
       }
     } catch (error) {
       setError("輸入錯誤，請重新輸入");
-      console.error(error);
+      // console.error(error);
+      alert("輸入錯誤，請重新輸入");
     }
   }
 
