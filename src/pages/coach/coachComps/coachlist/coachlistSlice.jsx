@@ -39,6 +39,8 @@ const coachlistSlice = createSlice({
         state.status = 'failed';
 
         state.error = action.error.message;
+
+        alert('請求資訊錯誤！');
       })
   }
 });
