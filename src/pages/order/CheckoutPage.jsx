@@ -49,7 +49,7 @@ export default function CheckoutPage() {
       setOrder(defaultOrder);
     } catch (error) {
       // console.error(error);
-      alert(error);
+      alert("預約資料送出失敗");
     }
   };
 
@@ -68,7 +68,7 @@ export default function CheckoutPage() {
         setPayments(res.data);
       } catch (error) {
         // console.error(error);
-        alert(error);
+        alert("取得付款方式資料失敗");
       }
     };
     getPayments();
@@ -118,7 +118,7 @@ export default function CheckoutPage() {
       orderNavigate("/checkout-success");
     } catch (error) {
       // console.error(error);
-      alert(error);
+      alert("送出訂單失敗");
       if (error.response.status === 404) {
         setErrorMessage("404 網路連線問題，請重新嘗試");
         orderNavigate("/checkout-fail");

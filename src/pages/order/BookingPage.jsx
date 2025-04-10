@@ -71,7 +71,7 @@ export default function BookingPage() {
       setAllSkiHouses(res.data);
     } catch (error) {
       // console.error(error);
-      alert(error);
+      alert("取得雪場資料失敗");
     }
   };
 
@@ -82,7 +82,7 @@ export default function BookingPage() {
       setAllCoaches(res.data);
     } catch (error) {
       // console.error(error);
-      alert(error);
+      alert("取得教練資料失敗");
     }
   };
 
@@ -93,7 +93,7 @@ export default function BookingPage() {
       setClassTime(Object.entries(res.data));
     } catch (error) {
       // console.error(error);
-      alert(error);
+      alert("取得上課時間資料失敗");
     }
   };
 
@@ -104,7 +104,7 @@ export default function BookingPage() {
       setSkillLevels(Object.entries(res.data));
     } catch (error) {
       // console.error(error);
-      alert(error);
+      alert("取得滑行程度資料失敗");
     }
   };
 
