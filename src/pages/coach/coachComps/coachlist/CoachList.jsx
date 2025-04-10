@@ -54,7 +54,11 @@ function CoachList() {
   return (
     <div className='row row-cols-1 row-cols-sm-2 row-cols-lg-3 w-100'>
       {coachListStatus === 'loading'
-        ? <img src='loading.gif' alt="loading" />
+        ? 
+        <div className='text-center w-100 mt-5'>
+          <img src='loading.gif' alt="loading" />
+        </div>
+          
         : filteredCoaches.length <= 0 
           ? <div className='d-flex flex-column align-items-center gap-5 m-auto mt-5'>
             <h1>目前沒有符合的教練！</h1>
