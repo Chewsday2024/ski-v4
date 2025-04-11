@@ -4,8 +4,10 @@ import Header from './layout/Header';
 import Footer from './layout/Footer';
 import ScrollToTop from './components/ScrollToTop';
 import { useEffect, useState } from 'react';
-import { OrderContext } from './pages/order/BookingPage';
-import defaultOrder from './pages/order/BookingPage';
+// import { OrderContext } from './pages/order/BookingPage';
+// import defaultOrder from './pages/order/BookingPage';
+import { OrderContext } from './pages/order/OrderContext';
+import { defaultOrder } from './pages/order/DefaultOrder';
 
 // import AboutLoading from './component/AboutLoading';
 
