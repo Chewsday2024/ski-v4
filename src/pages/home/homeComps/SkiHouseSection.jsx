@@ -29,11 +29,11 @@ function SkiHouseSection() {
 
   return (<>
     <section className="container d-flex flex-column mb-xxl">
-        <div className="align-self-center border-1 border-bottom border-gray-03 w-50 mb-5">
-          <h3 className="text-center text-brand-01 fw-bold pb-4">推薦雪場</h3>
-        </div>
-        <div>
-          <div className="d-flex flex-column flex-md-row justify-content-around align-items-center mt-4">
+      <div className="align-self-center border-1 border-bottom border-gray-03 w-50 mb-5">
+        <h3 className="text-center text-brand-01 fw-bold pb-4">推薦雪場</h3>
+      </div>
+      <div>
+        <div className="d-flex flex-column flex-md-row justify-content-around align-items-center mt-4">
           {
             skiHouse.slice(0, 3).map((item) => {
               return (
@@ -45,28 +45,28 @@ function SkiHouseSection() {
                   <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-brand-02 fs-6 fw-normal p-3">{item.area}</span>
                   <img src={item.image} className="card-img-top rounded-bottom" alt={item.englishName} />
                   <div className="card-body p-3 mb-2">
-                  <h5 className="fw-bold mt-1 mb-3">{item.chineseName}</h5>
-                  <p className="card-text" style={{
-                    display: "-webkit-box",
-                    WebkitBoxOrient: "vertical",
-                    WebkitLineClamp: 2,
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
-                    height: "3rem"
-                  }}>
-                    {item.description}
-                  </p>
+                    <h5 className="fw-bold mt-1 mb-3">{item.chineseName}</h5>
+                    <p className="card-text" style={{
+                      display: "-webkit-box",
+                      WebkitBoxOrient: "vertical",
+                      WebkitLineClamp: 2,
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      height: "3rem"
+                    }}>
+                      {item.description}
+                    </p>
                   </div>
                 </Link>
               );
             })
           }
-          </div>
         </div>
-        <div className="text-center mt-5">
-          <Link to="/ski-house" className="btn btn-outline-brand-01 home-btn-hover bg-white rounded-pill fs-4 fw-bold px-middle py-3 z-3"><span className="material-symbols-outlined icon-unfill align-bottom me-3 mb-1">arrow_circle_right</span>查看更多雪場</Link>
-        </div>
-      </section>
+      </div>
+      <div className="text-center mt-5">
+        <Link to="/ski-house" className="btn btn-outline-brand-01 home-btn-hover bg-white rounded-pill fs-4 fw-bold px-middle py-3 z-3"><span className="material-symbols-outlined icon-unfill align-bottom me-3 mb-1">arrow_circle_right</span>查看更多雪場</Link>
+      </div>
+    </section>
   </>)
 }
 

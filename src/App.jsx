@@ -29,12 +29,12 @@ function App() {
   return (
     <div className='d-flex flex-column justify-content-between min-vh-100'>
       <Header />
-          <OrderContext.Provider 
-            value={{order,setOrder,errorMessage,setErrorMessage}}>
-            <Outlet />
-            <ScrollToTop/>
-            {/* <AboutLoading/> */}
-          </OrderContext.Provider>
+      <OrderContext.Provider 
+        value={{order,setOrder,errorMessage,setErrorMessage}}>
+        <Outlet />
+        <ScrollToTop/>
+        {/* <AboutLoading/> */}
+      </OrderContext.Provider>
       <Footer />
     </div>
   )

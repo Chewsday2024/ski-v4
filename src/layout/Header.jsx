@@ -82,10 +82,10 @@ function Header() {
                   className={ activeClass }
                   onClick={handleLinkClick}
                   to='coach'
-                  >
-                    <span className="material-symbols-outlined align-bottom me-1">
-                      downhill_skiing
-                    </span>
+                >
+                  <span className="material-symbols-outlined align-bottom me-1">
+                    downhill_skiing
+                  </span>
                     教練介紹
                 </NavLink>
               </li>
@@ -104,30 +104,30 @@ function Header() {
 
               <li className="nav-item">
                 <NavLink className={activeClass} to="about-us" onClick={handleLinkClick}>
-                <span className="material-symbols-outlined align-bottom me-1">group</span>關於我們
+                  <span className="material-symbols-outlined align-bottom me-1">group</span>關於我們
                 </NavLink>
               </li>
 
               {user ? (
-              <>
+                <>
+                  <li className="nav-item">
+                    <NavLink className="nav-link text-brand-01" to="user-center" onClick={handleLinkClick}>
+                      <span className="material-symbols-outlined align-bottom me-1">home</span>會員中心
+                    </NavLink>
+                  </li>
+                  <li className="nav-item align-self-center">
+                    <button className="btn btn-link nav-link text-brand-01" onClick={handleLogout}>
+                      <span className="material-symbols-outlined align-bottom me-1">exit_to_app</span>登出
+                    </button>
+                  </li>
+                </>
+              ) : (
                 <li className="nav-item">
-                  <NavLink className="nav-link text-brand-01" to="user-center" onClick={handleLinkClick}>
-                  <span className="material-symbols-outlined align-bottom me-1">home</span>會員中心
+                  <NavLink className="nav-link text-brand-01" to="sign-in" onClick={handleLinkClick}>
+                    登入
                   </NavLink>
                 </li>
-                <li className="nav-item align-self-center">
-                  <button className="btn btn-link nav-link text-brand-01" onClick={handleLogout}>
-                  <span className="material-symbols-outlined align-bottom me-1">exit_to_app</span>登出
-                  </button>
-                </li>
-              </>
-            ) : (
-              <li className="nav-item">
-                <NavLink className="nav-link text-brand-01" to="sign-in" onClick={handleLinkClick}>
-                  登入
-                </NavLink>
-              </li>
-            )}
+              )}
             </ul>
           </div>
         </div>

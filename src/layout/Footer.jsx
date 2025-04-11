@@ -12,7 +12,7 @@ function Footer() {
           <div className='row row-cols-1 row-cols-lg-2'>
             <div className="col-lg-3 d-flex justify-content-center justify-content-lg-start align-items-lg-center">
               <NavLink to=''>
-                  <img src="logo.png" alt="logo" style={{width:'150px'}}/>
+                <img src="logo.png" alt="logo" style={{width:'150px'}}/>
               </NavLink>
             </div>
             <div className='col-lg-9'>
@@ -23,7 +23,7 @@ function Footer() {
                       <NavLink
                         className="text-brand-01" 
                         to='coach'
-                        >
+                      >
                         教練介紹
                       </NavLink>
                     </li>
