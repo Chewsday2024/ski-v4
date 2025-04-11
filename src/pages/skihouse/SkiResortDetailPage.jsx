@@ -63,7 +63,6 @@ export default  function SkiResortDetailPage() {
   const filteredCoaches = coaches.filter(coach => skiResorts.selectCoach?.includes(coach.id));
 
   const handleBookingCoach =(id) =>{
-    //console.log("Navigating to coach ID:", id);
     navigate(`/${id}`);
   }
   
