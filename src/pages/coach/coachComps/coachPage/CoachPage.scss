@@ -1,77 +1,57 @@
 .coach-page-breadcrumb {
-  
   &:hover {
     cursor: pointer;
   }
 }
 
-
-
-
-
 .page-box {
   max-width: 856px;
 }
-
 
 .profile-col {
   padding: 1%;
 }
 
-
-
-
-
 .coach-profile-container {
   height: 800px;
 }
 
-
 .coach-profile-list {
   max-width: 368px;
 }
-
-
 
 .coach-bookmark {
   top: -20px;
   right: 15px;
 
   font-size: 48px;
-  
+
   color: rgb(255, 251, 31);
-  
+
   cursor: pointer;
 }
-
-
 
 .order-coach {
   background-color: #ffffff;
   border-style: solid;
-  color: #475F81;
+  color: #475f81;
 
   padding: 16px 40px;
 
   &:hover {
-    background-color: #475F81;
-  
+    background-color: #475f81;
+
     color: #ffffff;
   }
 }
-
-
 
 .tag-ul {
   margin: 3% 0 0 0;
 }
 
-
 .about-coach-col {
   padding: 1%;
 }
-
-
 
 .coach-detail-tab {
   text-decoration: none;
@@ -80,43 +60,32 @@
 
   &.active {
     position: relative;
-    color: #779ECB;
+    color: #779ecb;
     padding-bottom: 17px;
-    border-bottom: 3px solid #779ECB;
+    border-bottom: 3px solid #779ecb;
   }
 }
 
-
-
 .tab-p {
   padding: 24px 36px;
-
 
   @media (min-width: 576px) {
     padding: 48px 84px;
   }
 }
 
-
 .exp-ul {
   list-style: inside;
 }
 
-
 .daily-imges-col {
   height: 274px;
-
 
   .daily-imges {
     object-position: center;
     object-fit: cover;
   }
 }
-
-
-
-
-
 
 .rate-profileImg {
   width: 70px;

@@ -57,7 +57,7 @@ function Header() {
 
   return (
     <>
-      <nav className="navbar navbar-expand-lg py-4">
+      <nav className="navbar navbar-expand-lg py-4 fixed-top bg-white shadow-sm">
         <div className="container">
           <NavLink className="navbar-brand" to="/">
             <img src="logo-2.png" alt="logo" style={{ width: '200px' }} />

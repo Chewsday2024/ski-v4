@@ -1,15 +1,17 @@
+@import "../assets/all.scss";
+
 .w-md-75 {
-  @media (min-width: 768px) {
-    max-width: 75% ;
+  @include media-breakpoint-up(md) {
+    max-width: 75%;
   }
   .text-small {
-    font-size: 14px
+    font-size: 14px;
   }
 }
 
 .w-md-75 {
-  @media (min-width: 768px) {
-    max-width: 75% ;
+  @include media-breakpoint-up(md) {
+    max-width: 75%;
   }
 }
 

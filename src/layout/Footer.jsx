@@ -7,8 +7,8 @@ function Footer() {
 
   return (
     <>
-      <footer className='bg-gray-04 py-4'>
-        <div className="container py-lg-4">
+      <footer className='bg-gray-04 py-5 py-lg-4'>
+        <div className="container py-lg-4 my-lg-0 my-2">
           <div className='row row-cols-1 row-cols-lg-2'>
             <div className="col-lg-3 d-flex justify-content-center justify-content-lg-start align-items-lg-center">
               <NavLink to=''>

@@ -51,7 +51,7 @@ function ArticleSection() {
                   </div>
                   <div className="d-flex flex-column">
                     <p className="card-text my-md-4 py-2">
-                      滑雪教學是一種結合運動與樂趣的體驗。從基本技巧到高階挑戰，專業教練將引導學員掌握滑雪技巧，提升自信心與安全意識，讓每次滑雪都成為難忘的回憶，無論是初學者還是進階玩家，都能在雪場中找到屬於自己的節奏，享受速度與自由，感受大自然的美好與挑戰的樂趣<small className="text-gray-02 hover-brand-01">...Read More</small>
+                      滑雪教學是一種結合運動與樂趣的體驗。從基本技巧到高階挑戰，專業教練將引導學員掌握滑雪技巧，提升自信心與安全意識，讓每次滑雪都成為難忘的回憶，無論是初學者還是進階玩家，都能在雪場中找到屬於自己的節奏，享受速度與自由，感受大自然的美好與挑戰的樂趣<small className="text-gray-02 hover-brand-01">...閱讀更多</small>
                     </p>
 
                   </div>

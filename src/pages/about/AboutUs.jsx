@@ -156,7 +156,7 @@ function AboutUs() {
       <section>
         <div className="background-overlay mb-5">
           <div className="container d-flex justify-content-start h-100">
-            <div className="d-flex flex-column justify-content-center align-items-start text-white fs-2 lh-1 z-3">
+            <div className="d-flex flex-column justify-content-center align-items-start text-white fs-2 z-3">
               <p>Snow Buddy </p>
               <p>希望成為你滑雪旅程中的知心夥伴</p>
             </div>
@@ -267,10 +267,10 @@ function AboutUs() {
             <div className="modal-body px-4 my-md-3">
               {selectedMember && (
                 <>
-                  <div className="d-flex flex-column align-items-center flex-lg-row align-items-lg-stretch mb-4">
+                  <div className="d-flex flex-column flex-lg-row align-items-lg-stretch mb-4">
                     <img
                       src={selectedMember.image}
-                      className="card-img-top border border-secondary-subtle rounded rounded-circle me-md-4"
+                      className="card-img-top border border-secondary-subtle align-self-md-start align-self-center rounded rounded-circle me-md-4"
                       alt={selectedMember.name}
                       style={{
                         maxWidth: "220px",
@@ -278,7 +278,7 @@ function AboutUs() {
                         objectFit: "cover",
                       }}
                     />
-                    <div className="">
+                    <div className="p-3">
                       <h3 className="text-brand-01">
                         {selectedMember.name}
                       </h3>
@@ -306,43 +306,43 @@ function AboutUs() {
                         </button>
                         
                       </div>
-                      <div className="mb-2">
+                      <div className="mb-4">
                         <p className="text-brand-01">等級</p>
                         <div className="ms-3">
                           {selectedMember.level.map((lv, index) => (
-                            <div key={index}>
+                            <div className="d-flex mb-2 text-nowrap overflow-auto" key={index}>
                               <div className="d-flex align-center">
-                                <div className="w-xs me-2 mb-1">
+                                <div className="">
                                   <p>CSS：</p>
                                 </div>
                                 <div>
-                                  <h6 className="badge text-bg-warning badge-warning">{lv.css}</h6>
+                                  <h6 className="badge text-bg-warning badge-warning me-3">{lv.css}</h6>
                                 </div>
                               </div>
                               <div className="d-flex align-center">
-                                <div className="w-xs me-2 mb-1">
+                                <div className="">
                                   <p>JS：</p>
                                 </div>
                                 <div>
-                                  <span className="badge text-bg-warning badge-warning">{lv.js}</span>
+                                  <span className="badge text-bg-warning badge-warning me-3">{lv.js}</span>
                                 </div>
                               </div>
                               <div className="d-flex align-center">
-                                <div className="w-xs me-2 mb-1">
+                                <div className="">
                                   <p>React：</p>
                                 </div>
                                 <div>
-                                  <span className="badge text-bg-warning badge-warning">
+                                  <span className="badge text-bg-warning badge-warning me-3">
                                     {lv.react}
                                   </span>
                                 </div>
                               </div>
                               <div className="d-flex align-center">
-                                <div className="w-xs me-2 mb-1">
+                                <div className="">
                                   <p>Git：</p>
                                 </div>
                                 <div>
-                                  <span className="badge text-bg-warning badge-warning">
+                                  <span className="badge text-bg-warning badge-warning me-3">
                                     {lv.git}
                                   </span>
                                 </div>

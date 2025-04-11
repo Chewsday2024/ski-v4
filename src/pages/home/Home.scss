@@ -1,5 +1,4 @@
-@import "bootstrap/scss/functions";
-@import "../../assets/variables";
+@import "../../assets/all.scss";
 
 .mt-xxl {
   margin-top: 120px;
@@ -15,13 +14,11 @@
 }
 
 .icon-fill {
-  font-variation-settings:
-  'FILL' 1
+  font-variation-settings: "FILL" 1;
 }
 
 .icon-unfill {
-  font-variation-settings:
-  'FILL' 0
+  font-variation-settings: "FILL" 0;
 }
 
 .fs-xs {
@@ -34,20 +31,20 @@
 
 .hover-brand-01 {
   &:hover {
-    color: #475F81 !important;
+    color: #475f81 !important;
   }
 }
 
 .hover-brand-02 {
   &:hover {
-    color: #779ECB !important;
+    color: #779ecb !important;
   }
 }
 
 .home-btn-hover {
   &:hover {
-    background: #475F81 !important;
-    color: #779ECB !important;
+    background: #475f81 !important;
+    color: #fff !important;
   }
 }
 

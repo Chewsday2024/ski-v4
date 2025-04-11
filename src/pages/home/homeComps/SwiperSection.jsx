@@ -10,7 +10,7 @@ function SwiperSection() {
     {
       id: 1,
       name: "Rocky Wu",
-      image: "https://firebasestorage.googleapis.com/v0/b/homework-b5f67.appspot.com/o/skiing-coach-1.png?alt=media&token=ce325143-e55e-4ff1-a967-b3c398a1c745",
+      image: "https://firebasestorage.googleapis.com/v0/b/homework-b5f67.appspot.com/o/skiing-coach-male-C-1.png?alt=media&token=a3fbb246-15b8-497e-ad39-9e9f61e8dddc",
       description: "充滿活力的滑雪教練，用速度與挑戰點燃你的滑雪熱情，讓你越滑越快、越玩越嗨！",
       skills: ["單板","雙板"],
       place: "輕井澤王子飯店滑雪場"
@@ -18,7 +18,7 @@ function SwiperSection() {
     {
       id: 2,
       name: "Luna Chen",
-      image: "https://firebasestorage.googleapis.com/v0/b/homework-b5f67.appspot.com/o/skiing-coach-2.png?alt=media&token=2821bb5b-f26b-4b7a-9d7b-abf8a8a09640",
+      image: "https://firebasestorage.googleapis.com/v0/b/homework-b5f67.appspot.com/o/skiing-coach-male-C-2.png?alt=media&token=a85ddc74-810d-403e-8ccc-dd10b0592519",
       description: "細心又有耐心的滑雪教練，專門幫助初學者建立自信，讓你優雅自在地享受滑雪！",
       skills: ["雙板"],
       place: "北海道二世谷滑雪場"
@@ -34,7 +34,7 @@ function SwiperSection() {
     {
       id: 4,
       name: "Rocky Wu",
-      image: "https://firebasestorage.googleapis.com/v0/b/homework-b5f67.appspot.com/o/skiing-coach-1.png?alt=media&token=ce325143-e55e-4ff1-a967-b3c398a1c745",
+      image: "https://firebasestorage.googleapis.com/v0/b/homework-b5f67.appspot.com/o/skiing-coach-male-C-1.png?alt=media&token=a3fbb246-15b8-497e-ad39-9e9f61e8dddc",
       description: "充滿活力的滑雪教練，用速度與挑戰點燃你的滑雪熱情，讓你越滑越快、越玩越嗨！",
       skills: ["單板","雙板"],
       place: "輕井澤王子飯店滑雪場"
@@ -42,7 +42,7 @@ function SwiperSection() {
     {
       id: 5,
       name: "Luna Chen",
-      image: "https://firebasestorage.googleapis.com/v0/b/homework-b5f67.appspot.com/o/skiing-coach-2.png?alt=media&token=2821bb5b-f26b-4b7a-9d7b-abf8a8a09640",
+      image: "https://firebasestorage.googleapis.com/v0/b/homework-b5f67.appspot.com/o/skiing-coach-male-C-2.png?alt=media&token=a85ddc74-810d-403e-8ccc-dd10b0592519",
       description: "細心又有耐心的滑雪教練，專門幫助初學者建立自信，讓你優雅自在地享受滑雪！",
       skills: ["雙板"],
       place: "北海道二世谷滑雪場"
