@@ -18,7 +18,6 @@ export default function LevelProgressBar(){
     };
     fetchResort(id);
   },[id])
-
   
   return(
     <div data-aos="fade-up" data-aos-duration="2500" data-aos-delay="200">

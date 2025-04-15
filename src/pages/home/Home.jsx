@@ -14,17 +14,17 @@ function Home() {
     <>
       <main className="bg-gray-05">
         <BackToTopButton />
-      {/* banner */}
+        {/* banner */}
         <BannerSection />
-      {/* 提供的服務 */}
+        {/* 提供的服務 */}
         <ServicesSection />
-      {/* 教練 */}          
+        {/* 教練 */}          
         <SwiperSection />
-      {/* 雪場 */}  
+        {/* 雪場 */}  
         <SkiHouseSection />
-      {/* 文章 */}
+        {/* 文章 */}
         <ArticleSection />
-      {/* 常見問題 */}
+        {/* 常見問題 */}
         <FAQ />
       </main>
     </>

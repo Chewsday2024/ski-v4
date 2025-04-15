@@ -56,7 +56,7 @@ export default function AdminLogin(){
           <input type="password" name="password" value={account.password} onChange={handleInputChange} className="form-control" id="password" placeholder="Password" />
         </div>
         {error && <p className="text-danger">{error}</p>}
-        <button className="btn btn-custom btn-custom-filled" type="submit">登入</button>
+        <button className="btn btn-brand-01" type="submit">登入</button>
       </form>
       <p className="mt-5 mb-3 text-muted">&copy; 2025~∞ - 雪伴 SnowBuddy</p>
     </div>
