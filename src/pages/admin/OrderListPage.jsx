@@ -3,6 +3,8 @@ import "./Admin.scss";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { twFormatter } from "./adminUtils/TimeFormat";
+import Swal from "sweetalert2";
+
 export default function OrderListPage() {
   const BASE_URL = "https://ski-api-m9x9.onrender.com"; //正式機
   // const BASE_URL = "http://localhost:3000";             //測試機
@@ -23,8 +25,12 @@ export default function OrderListPage() {
       setAllOrders(res.data);
       setFilteredOrders(res.data);
     } catch (error) {
-      // console.error(error);
-      alert("取得訂單資料失敗");
+      console.error(error);
+      Swal.fire({
+        title: "取得訂單資料失敗",
+        icon: "error",
+        confirmButtonText: "確定"
+      });
     }
   };
 
@@ -52,7 +58,7 @@ export default function OrderListPage() {
           (selectedCategory === "orderId" &&
             String(order.id).toLowerCase().includes(keywords)) ||
           (selectedCategory === "member" &&
-            order.user.user.toLowerCase().includes(keywords))) &&
+            order.user?.user.toLowerCase().includes(keywords))) &&
         // 沒有選訂單狀態 or 訂單狀態有選
         (!selectedStatus ||
           (selectedStatus && order.orderStatus === Number(selectedStatus))) &&
@@ -90,8 +96,12 @@ export default function OrderListPage() {
       await axios.put(`${BASE_URL}/orders/${id}`, order);
       // alert("資料更新完畢!");
     } catch (error) {
-      // console.error(error);
-      alert("資料更新失敗");
+      console.error(error);
+      Swal.fire({
+        title: "資料更新失敗",
+        icon: "error",
+        confirmButtonText: "確定"
+      });
     }
   };
 
@@ -221,7 +231,7 @@ export default function OrderListPage() {
                       <tr key={order.id}>
                         <td>{twFormatter.format(new Date(order.orderTime))}</td>
                         <td>{order.id}</td>
-                        <td>{order.user.user}</td>
+                        <td>{order.user?.user}</td>
                         <td>{order.paymentDetail.total.toLocaleString()}</td>
                         <td
                           className={
