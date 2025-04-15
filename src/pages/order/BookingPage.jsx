@@ -1,9 +1,11 @@
 import "./Order.scss";
 import { Link, useNavigate } from "react-router";
-import { createContext, useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { OrderContext } from "./OrderContext";
+import Swal from "sweetalert2";
+import StepFlow from "./orderComps/StepFlow";
 
 export default function BookingPage() {
   const BASE_URL = "https://ski-api-m9x9.onrender.com"; //正式機
@@ -27,8 +29,7 @@ export default function BookingPage() {
     try {
       orderNavigate("/checkout");
     } catch (errors) {
-      // console.error(errors);
-      alert(errors);
+      console.error(errors);
     }
   };
 
@@ -70,8 +71,12 @@ export default function BookingPage() {
       const res = await axios.get(`${BASE_URL}/skiResorts`);
       setAllSkiHouses(res.data);
     } catch (error) {
-      // console.error(error);
-      alert("取得雪場資料失敗");
+      console.error(error);
+      Swal.fire({
+        title: "取得雪場資料失敗",
+        icon: "error",
+        confirmButtonText: "確定"
+      });
     }
   };
 
@@ -81,8 +86,12 @@ export default function BookingPage() {
       const res = await axios.get(`${BASE_URL}/coaches`);
       setAllCoaches(res.data);
     } catch (error) {
-      // console.error(error);
-      alert("取得教練資料失敗");
+      console.error(error);
+      Swal.fire({
+        title: "取得教練資料失敗",
+        icon: "error",
+        confirmButtonText: "確定"
+      });
     }
   };
 
@@ -92,8 +101,12 @@ export default function BookingPage() {
       const res = await axios.get(`${BASE_URL}/classTimeType`);
       setClassTime(Object.entries(res.data));
     } catch (error) {
-      // console.error(error);
-      alert("取得上課時間資料失敗");
+      console.error(error);
+      Swal.fire({
+        title: "取得上課時間資料失敗",
+        icon: "error",
+        confirmButtonText: "確定"
+      });
     }
   };
 
@@ -103,8 +116,12 @@ export default function BookingPage() {
       const res = await axios.get(`${BASE_URL}/studentSkiLevel`);
       setSkillLevels(Object.entries(res.data));
     } catch (error) {
-      // console.error(error);
-      alert("取得滑行程度資料失敗");
+      console.error(error);
+      Swal.fire({
+        title: "取得滑行程度資料失敗",
+        icon: "error",
+        confirmButtonText: "確定"
+      });
     }
   };
 
@@ -114,9 +131,13 @@ export default function BookingPage() {
       setUser(JSON.parse(storedUser));
     } else {
       orderNavigate("/sign-in");
-      alert("請先登入！");
+      // alert("請先登入！");
+      Swal.fire({
+        title: "請先登入！",
+        icon: "error",
+        confirmButtonText: "確定"
+      });
     }
-
     init();
   }, []);
 
@@ -227,7 +248,12 @@ export default function BookingPage() {
   const handleSelectedStartDate = (e) => {
     const newStartDate = e.target.value;
     if (selectedEndDate && new Date(newStartDate) > new Date(selectedEndDate)) {
-      alert("開始日期不可晚於結束日期");
+      // alert("開始日期不可晚於結束日期");
+      Swal.fire({
+        title: "開始日期不可晚於結束日期",
+        icon: "error",
+        confirmButtonText: "確定"
+      });
       return;
     }
     setSelectedStartDate(newStartDate);
@@ -240,7 +266,12 @@ export default function BookingPage() {
       selectedStartDate &&
       new Date(newEndDate) < new Date(selectedStartDate)
     ) {
-      alert("結束日期不可早於開始日期");
+      Swal.fire({
+        title: "結束日期不可早於開始日期",
+        icon: "error",
+        confirmButtonText: "確定"
+      });
+      // alert("結束日期不可早於開始日期");
       return;
     }
     setSelectedEndDate(newEndDate);
@@ -425,71 +456,7 @@ export default function BookingPage() {
 
   return (
     <div className="container">
-      {/* PC Step flow */}
-      <div className="row justify-content-center">
-        <div className="col-lg-8 col">
-          <div className="d-none d-md-block">
-            <div className="d-flex justify-content-between step-sec">
-              <div className="d-flex">
-                <span className="step-circle active d-flex justify-content-center align-items-center">
-                  1
-                </span>
-                <h2 className="fs-4 ms-3 text-brand-01">填寫預約資料</h2>
-              </div>
-              <span className="material-symbols-outlined text-brand-01 d-flex justify-content-center align-items-center">
-                play_arrow
-              </span>
-              <div className="d-flex">
-                <span className="step-circle d-flex justify-content-center align-items-center">
-                  2
-                </span>
-                <h2 className="fs-4 ms-3 text-gray-03">填寫聯繫方式與付款</h2>
-              </div>
-              <span className="material-symbols-outlined d-flex justify-content-center align-items-center text-gray-03">
-                play_arrow
-              </span>
-              <div className="d-flex">
-                <span className="step-circle d-flex justify-content-center align-items-center">
-                  3
-                </span>
-                <h2 className="fs-4 ms-3 text-gray-03">預約完成</h2>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      {/* Mobile Step Flow */}
-      <div className="row">
-        <div className="col">
-          <div className="d-md-none">
-            <ul className="mobile-steps d-flex mt-20 mb-32">
-              <li className="d-flex flex-column align-items-center step-active">
-                <span className="step-circle active mobile-step-number d-flex justify-content-center align-items-center mb-3">
-                  1
-                </span>
-                <h2 className="fs-6 text-brand-01 text-nowrap">填寫預約資料</h2>
-              </li>
-              <li className="d-flex flex-column align-items-center">
-                <span className="step-circle d-flex justify-content-center align-items-center mb-3">
-                  2
-                </span>
-                <h2 className="fs-6 text-gray-03 text-nowrap d-none">
-                  填寫聯繫方式與付款
-                </h2>
-              </li>
-              <li className="d-flex flex-column align-items-center">
-                <span className="step-circle d-flex justify-content-center align-items-center mb-3">
-                  3
-                </span>
-                <h2 className="fs-6 text-gray-03 text-nowrap d-none">
-                  預約完成
-                </h2>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
+      <StepFlow currentStep={1}/>
       <div className="row">
         <div className="col-lg-8">
           <form id="bookingForm" className="d-flex flex-column gap-5">
@@ -498,7 +465,7 @@ export default function BookingPage() {
               <div className="mb-3 form-section">
                 <div className="d-flex justify-content-between align-items-center">
                   <label htmlFor="snowHouse" className="form-label mb-0">
-                    雪場
+                    <span className="text-danger">*</span> 雪場
                   </label>
                   <select
                     {...register("snowHouse", {
@@ -552,7 +519,7 @@ export default function BookingPage() {
               <div className="mb-3 form-section">
                 <div className="d-flex justify-content-between align-items-center">
                   <label htmlFor="snowBoard" className="form-label mb-0">
-                    類型
+                    <span className="text-danger">*</span> 類型
                   </label>
                   <select
                     {...register("snowBoard", {
@@ -595,7 +562,7 @@ export default function BookingPage() {
               <div className="mb-3 form-section">
                 <div className="d-flex justify-content-between align-items-center">
                   <label htmlFor="skiCoach" className="form-label mb-0">
-                    教練
+                    <span className="text-danger">*</span> 教練
                   </label>
                   <div className="w-70 w-md-80 d-flex">
                     <div className="flex-shrink-0 me-3">
@@ -670,7 +637,7 @@ export default function BookingPage() {
               <div className="mb-3 form-section">
                 <div className="d-flex justify-content-between align-items-center">
                   <label htmlFor="classTime" className="form-label mb-0">
-                    時間
+                    <span className="text-danger">*</span> 時間
                   </label>
                   <select
                     {...register("classTime", {
@@ -715,7 +682,7 @@ export default function BookingPage() {
                   <div className="mb-3 form-section">
                     <div className="d-flex justify-content-between align-items-center date-select">
                       <label htmlFor="startDate" className="form-label mb-0">
-                        開始日期
+                        <span className="text-danger">*</span> 開始日期
                       </label>
                       <input
                         {...register("startDate", {
@@ -753,7 +720,7 @@ export default function BookingPage() {
                   <div className="mb-3 form-section">
                     <div className="d-flex justify-content-between align-items-center date-select">
                       <label htmlFor="endDate" className="form-label mb-0">
-                        結束日期
+                        <span className="text-danger">*</span> 結束日期
                       </label>
                       <input
                         {...register("endDate", {
@@ -775,6 +742,9 @@ export default function BookingPage() {
                           errors.endDate && "is-invalid"
                         }`}
                         id="endDate"
+                        onClick={() =>
+                          document.getElementById("endDate").showPicker()
+                        }
                       />
                     </div>
                     <div className="d-flex align-items-center w-70 w-md-80 ms-auto">
@@ -790,7 +760,7 @@ export default function BookingPage() {
                 <div className="mb-3 form-section">
                   <div className="d-flex justify-content-between align-items-center date-select">
                     <label htmlFor="date" className="form-label mb-0">
-                      日期
+                      <span className="text-danger">*</span> 日期
                     </label>
                     <input
                       {...register("date", {
@@ -811,6 +781,9 @@ export default function BookingPage() {
                         errors.date && "is-invalid"
                       }`}
                       id="date"
+                      onClick={() =>
+                        document.getElementById("date").showPicker()
+                      }
                     />
                   </div>
                   <div className="d-flex align-items-center w-70 w-md-80 ms-auto">
@@ -831,7 +804,7 @@ export default function BookingPage() {
               <div className="mb-3 form-section">
                 <div className="d-flex justify-content-between align-items-center">
                   <label htmlFor="numOfStudents" className="form-label mb-0">
-                    上課人數
+                    <span className="text-danger">*</span> 上課人數
                   </label>
                   <select
                     {...register("numOfStudents", {
@@ -901,7 +874,7 @@ export default function BookingPage() {
               <div className="mb-3 form-section">
                 <div className="d-flex justify-content-between align-items-center">
                   <label htmlFor="level" className="form-label mb-0">
-                    滑行程度
+                    <span className="text-danger">*</span> 滑行程度
                   </label>
                   <select
                     {...register("level", {
@@ -963,7 +936,7 @@ export default function BookingPage() {
                           htmlFor={`lastName${index + 1}`}
                           className="form-label mb-0"
                         >
-                          姓名
+                          <span className="text-danger">*</span> 姓名
                         </label>
                         <div className="w-70 w-md-80 d-flex">
                           <input
@@ -1036,7 +1009,7 @@ export default function BookingPage() {
                           htmlFor={`sex${index + 1}`}
                           className="form-label mb-0"
                         >
-                          性別
+                          <span className="text-danger">*</span> 性別
                         </label>
                         <select
                           {...register(`sex${index + 1}`, {
@@ -1076,7 +1049,7 @@ export default function BookingPage() {
                           htmlFor={`age${index + 1}`}
                           className="form-label mb-0"
                         >
-                          年齡
+                          <span className="text-danger">*</span> 年齡
                         </label>
                         <input
                           {...register(`age${index + 1}`, {
@@ -1122,7 +1095,7 @@ export default function BookingPage() {
                           htmlFor={`phone${index + 1}`}
                           className="form-label mb-0"
                         >
-                          聯絡電話
+                          <span className="text-danger">*</span> 聯絡電話
                         </label>
                         <input
                           {...register(`phone${index + 1}`, {

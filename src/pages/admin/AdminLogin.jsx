@@ -1,6 +1,7 @@
 import './Admin.scss';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Swal from "sweetalert2";
 
 export default function AdminLogin(){
   const navigate = useNavigate();
@@ -38,8 +39,12 @@ export default function AdminLogin(){
       }
     } catch (error) {
       setError("輸入錯誤，請重新輸入");
-      // console.error(error);
-      alert("輸入錯誤，請重新輸入");
+      console.error(error);
+      Swal.fire({
+        title: "輸入錯誤，請重新輸入",
+        icon: "error",
+        confirmButtonText: "確定"
+      });
     }
   }
 

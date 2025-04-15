@@ -1,6 +1,7 @@
 import './AdminLayout.scss';
 import { useState, useEffect } from "react";
 import { Link, NavLink, Outlet, useLocation, useNavigate } from "react-router";
+import Swal from "sweetalert2";
 
 export default function AdminLayout(){
 
@@ -20,7 +21,13 @@ export default function AdminLayout(){
       setUser(JSON.parse(storedUser));
     } else {
       navigate("/adminLogin");
-      setTimeout(()=> alert('請先登入！'), 0);
+      setTimeout(()=> {
+        Swal.fire({
+          title: "請先登入！",
+          icon: "error",
+          confirmButtonText: "確定"
+        });  
+      }, 0);
     }
   }, []);
 
@@ -29,8 +36,6 @@ export default function AdminLayout(){
     setUser(null);
     navigate("/adminLogin");
   };
-
-    
 
   return(
     <div className="d-flex">
