@@ -156,7 +156,7 @@ function AboutUs() {
       <section>
         <div className="background-overlay mb-5">
           <div className="container d-flex justify-content-start h-100">
-            <div className="d-flex flex-column justify-content-center align-items-start text-white fs-2 lh-1 z-3">
+            <div className="d-flex flex-column justify-content-center align-items-start text-white fs-2 z-3">
               <p>Snow Buddy </p>
               <p>希望成為你滑雪旅程中的知心夥伴</p>
             </div>
@@ -215,9 +215,9 @@ function AboutUs() {
                               <i className="fs-4 bi bi-discord me-2"></i>
                               <div className="d-flex flex-column">
                                 <div className="d-flex">
-                                    {item.discord}<i className="fs-6 bi bi-copy mx-1"></i>
+                                  {item.discord}<i className="fs-6 bi bi-copy mx-1"></i>
                                 </div>
-                                  {copied === item.discord && ( <span className="text-success fs-xs ms-1"> ✔ 已複製！</span> )}
+                                {copied === item.discord && ( <span className="text-success fs-xs ms-1"> ✔ 已複製！</span> )}
                               </div>
                             </div>
                           </div>
@@ -267,10 +267,10 @@ function AboutUs() {
             <div className="modal-body px-4 my-md-3">
               {selectedMember && (
                 <>
-                  <div className="d-flex flex-column align-items-center flex-lg-row align-items-lg-stretch mb-4">
+                  <div className="d-flex flex-column flex-lg-row align-items-lg-stretch mb-4">
                     <img
                       src={selectedMember.image}
-                      className="card-img-top border border-secondary-subtle rounded rounded-circle me-md-4"
+                      className="card-img-top border border-secondary-subtle align-self-md-start align-self-center rounded rounded-circle me-md-4"
                       alt={selectedMember.name}
                       style={{
                         maxWidth: "220px",
@@ -278,7 +278,7 @@ function AboutUs() {
                         objectFit: "cover",
                       }}
                     />
-                    <div className="">
+                    <div className="p-3">
                       <h3 className="text-brand-01">
                         {selectedMember.name}
                       </h3>
@@ -298,51 +298,51 @@ function AboutUs() {
                         >
                           <i className="fs-4 bi bi-discord me-2 mx-lg-2"></i>
                           <div className="d-flex">
-                              {selectedMember.discord}<i className="fs-6 bi bi-copy mx-1"></i>
+                            {selectedMember.discord}<i className="fs-6 bi bi-copy mx-1"></i>
                           </div>
                           {copied === selectedMember.discord && (
-                          <span className="text-success fs-xs"> ✔ 已複製！</span>
-                        )}
+                            <span className="text-success fs-xs"> ✔ 已複製！</span>
+                          )}
                         </button>
                         
                       </div>
-                      <div className="mb-2">
+                      <div className="mb-4">
                         <p className="text-brand-01">等級</p>
                         <div className="ms-3">
                           {selectedMember.level.map((lv, index) => (
-                            <div key={index}>
+                            <div className="d-flex mb-2 text-nowrap overflow-auto" key={index}>
                               <div className="d-flex align-center">
-                                <div className="w-xs me-2 mb-1">
+                                <div className="">
                                   <p>CSS：</p>
                                 </div>
                                 <div>
-                                  <h6 className="badge text-bg-warning badge-warning">{lv.css}</h6>
+                                  <h6 className="badge text-bg-warning badge-warning me-3">{lv.css}</h6>
                                 </div>
                               </div>
                               <div className="d-flex align-center">
-                                <div className="w-xs me-2 mb-1">
+                                <div className="">
                                   <p>JS：</p>
                                 </div>
                                 <div>
-                                  <span className="badge text-bg-warning badge-warning">{lv.js}</span>
+                                  <span className="badge text-bg-warning badge-warning me-3">{lv.js}</span>
                                 </div>
                               </div>
                               <div className="d-flex align-center">
-                                <div className="w-xs me-2 mb-1">
+                                <div className="">
                                   <p>React：</p>
                                 </div>
                                 <div>
-                                  <span className="badge text-bg-warning badge-warning">
+                                  <span className="badge text-bg-warning badge-warning me-3">
                                     {lv.react}
                                   </span>
                                 </div>
                               </div>
                               <div className="d-flex align-center">
-                                <div className="w-xs me-2 mb-1">
+                                <div className="">
                                   <p>Git：</p>
                                 </div>
                                 <div>
-                                  <span className="badge text-bg-warning badge-warning">
+                                  <span className="badge text-bg-warning badge-warning me-3">
                                     {lv.git}
                                   </span>
                                 </div>
@@ -350,44 +350,42 @@ function AboutUs() {
                             </div>
                           ))}
                           <button type="button" className="btn btn-sm btn-gray-03 text-white py-0 mt-1" onClick={() => setIsOpen(!isOpen)}>等級參考資料</button>
-                            <div
-                              className={`fs-xs text-gray-02 p-1 collapse ${isOpen ? "show" : ""}`}>
-                              <div className="mb-2">
-                                <p className="text-dark-emphasis fw-medium">CSS 等級表</p>
-                                <p>LV1： 會使用 flexbox 來做元素並排</p>
-                                <p>Lv2 ：可以手刻 RWD</p>
-                                <p>LV3 ：學習 Bootstrap or Tailwind 框架</p>
-                                <p>LV4 ：熟悉 Bootstrap or Tailwind 框架</p>
-                                <p>LV5 ：使用過 Vite 來建立前端框架的 Router，並整合 BS5 </p>
-                              </div>
-                              <div className="mb-2">
-                                <p className="text-dark-emphasis fw-medium">JS 等級表</p>
-                                <p>LV1： 會一些基礎 JS（變數、if 流程判斷、函式）</p>
-                                <p>Lv2 ：了解物件、陣列、DOM</p>
-                                <p>LV3 ：可以介接第三方資料 GET API</p>
-                                <p>LV4 ：介接 RESTful API，例如做 Todolist API 的 GET 取得、POST 新增</p>
-                                <p>LV5 ：整合第三方套件，例如：C3.js、D3.js</p>
-                                <p>LV6 ：會使用基本 React Hook（useState、useEffect 等）</p>
-                              </div>
-                              <div className="mb-2">
-                                <p className="text-dark-emphasis fw-medium">React 等級表</p>
-                                <p>LV1： 使用過前端框架的狀態管理（useState, ref, state）</p>
-                                <p>Lv2 ：使用過前端框架的元件等知識（Component, Props, Emits）</p>
-                                <p>LV3 ：使用過前端框架的路由工具，例如 VueRouter、ReactRouter</p>
-                                <p>LV4 ：使用框架完成過作品或專案</p>
-                                <p>LV5 ：整合第三方套件，例如：C3.js、D3.js</p>
-                                <p>LV6 ：使用過框架狀態管理工具（Pinia、Vuex、Redux）</p>
-                              </div>
-                              <div className="mb-2">
-                                <p className="text-dark-emphasis fw-medium">Git 等級表</p>
-                                <p>LV1： 會使用 git init、git add、git commit、git push</p>
-                                <p>Lv2 ：會使用 git pull、git merge</p>
-                                <p>LV3 ：有解決過版本衝突</p>
-                              </div>
+                          <div
+                            className={`fs-xs text-gray-02 p-1 collapse ${isOpen ? "show" : ""}`}>
+                            <div className="mb-2">
+                              <p className="text-dark-emphasis fw-medium">CSS 等級表</p>
+                              <p>LV1： 會使用 flexbox 來做元素並排</p>
+                              <p>Lv2 ：可以手刻 RWD</p>
+                              <p>LV3 ：學習 Bootstrap or Tailwind 框架</p>
+                              <p>LV4 ：熟悉 Bootstrap or Tailwind 框架</p>
+                              <p>LV5 ：使用過 Vite 來建立前端框架的 Router，並整合 BS5 </p>
+                            </div>
+                            <div className="mb-2">
+                              <p className="text-dark-emphasis fw-medium">JS 等級表</p>
+                              <p>LV1： 會一些基礎 JS（變數、if 流程判斷、函式）</p>
+                              <p>Lv2 ：了解物件、陣列、DOM</p>
+                              <p>LV3 ：可以介接第三方資料 GET API</p>
+                              <p>LV4 ：介接 RESTful API，例如做 Todolist API 的 GET 取得、POST 新增</p>
+                              <p>LV5 ：整合第三方套件，例如：C3.js、D3.js</p>
+                              <p>LV6 ：會使用基本 React Hook（useState、useEffect 等）</p>
+                            </div>
+                            <div className="mb-2">
+                              <p className="text-dark-emphasis fw-medium">React 等級表</p>
+                              <p>LV1： 使用過前端框架的狀態管理（useState, ref, state）</p>
+                              <p>Lv2 ：使用過前端框架的元件等知識（Component, Props, Emits）</p>
+                              <p>LV3 ：使用過前端框架的路由工具，例如 VueRouter、ReactRouter</p>
+                              <p>LV4 ：使用框架完成過作品或專案</p>
+                              <p>LV5 ：整合第三方套件，例如：C3.js、D3.js</p>
+                              <p>LV6 ：使用過框架狀態管理工具（Pinia、Vuex、Redux）</p>
+                            </div>
+                            <div className="mb-2">
+                              <p className="text-dark-emphasis fw-medium">Git 等級表</p>
+                              <p>LV1： 會使用 git init、git add、git commit、git push</p>
+                              <p>Lv2 ：會使用 git pull、git merge</p>
+                              <p>LV3 ：有解決過版本衝突</p>
                             </div>
                           </div>
                         </div>
-                        <div>
                       </div>
                       <p className="text-brand-01 mt-2">本專題製作內容：</p>
                       <div className="ms-3" dangerouslySetInnerHTML={{ __html: selectedMember?.responsible }}></div>

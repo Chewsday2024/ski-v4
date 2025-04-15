@@ -1,15 +1,11 @@
 .material-symbols-outlined {
-  font-variation-settings:
-  'FILL' 1,
-  'wght' 400,
-  'GRAD' 0,
-  'opsz' 24
+  font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 24;
 }
 
 .nav-link {
-  color: #1E1E1E;
+  color: #1e1e1e;
   &:hover {
-    color: #779ECB !important;
+    color: #779ecb !important;
   }
 }
 
@@ -36,4 +32,3 @@
     }
   }
 }
-

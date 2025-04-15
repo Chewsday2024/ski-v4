@@ -39,29 +39,29 @@ function BannerSection() {
     <section className="banner position-relative overflow-hidden">
       {images.map((image, index) => (
         <div key={image.id}>
-        <CSSTransition
-          in={currentImageIndex === index}
-          timeout={3500} // 過渡時間
-          classNames="slideshow-image" // 使用統一的類名前綴
-          unmountOnExit
-          nodeRef={nodeRefs.current[index]}
-        >
-          <div
-            ref={nodeRefs.current[index]}
-            className="slideshow-image"
-            style={{
-              backgroundImage: `url(${image.image})`,
-              zIndex: index,
-            }}
+          <CSSTransition
+            in={currentImageIndex === index}
+            timeout={3500} // 過渡時間
+            classNames="slideshow-image" // 使用統一的類名前綴
+            unmountOnExit
+            nodeRef={nodeRefs.current[index]}
+          >
+            <div
+              ref={nodeRefs.current[index]}
+              className="slideshow-image"
+              style={{
+                backgroundImage: `url(${image.image})`,
+                zIndex: index,
+              }}
+            />
+            
+          </CSSTransition>
+          <img
+            src="https://firebasestorage.googleapis.com/v0/b/homework-b5f67.appspot.com/o/Rectangle%2030.svg?alt=media&token=54561703-cab9-4812-8483-019b85bb0cdc"
+            alt="overlay"
+            className="position-absolute bottom-0 start-0 w-100 z-3"
           />
-          
-        </CSSTransition>
-        <img
-        src="https://firebasestorage.googleapis.com/v0/b/homework-b5f67.appspot.com/o/Rectangle%2030.svg?alt=media&token=54561703-cab9-4812-8483-019b85bb0cdc"
-        alt="overlay"
-        className="position-absolute bottom-0 start-0 w-100 z-3"
-      />
-      </div>
+        </div>
       ))}
 
       {/* 深色遮罩 */}

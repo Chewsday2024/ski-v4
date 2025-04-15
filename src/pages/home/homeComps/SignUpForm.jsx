@@ -1,32 +1,32 @@
 import { useState } from "react";
 import axios from 'axios';
 
-  function SignUpForm() {
-    const [emailSignIn, setEmailSignIn] = useState('');
-    const [passwordSignIn, setPasswordSignIn] = useState('');
-    const [nickName, setNickName] = useState('');
-    const [responseMessage, setResponseMessage] = useState('');
-    const [isErrorMessage, setIsErrorMessage] = useState(false);
-    const [token, setToken] = useState('');
+function SignUpForm() {
+  const [emailSignIn, setEmailSignIn] = useState('');
+  const [passwordSignIn, setPasswordSignIn] = useState('');
+  const [nickName, setNickName] = useState('');
+  const [responseMessage, setResponseMessage] = useState('');
+  const [isErrorMessage, setIsErrorMessage] = useState(false);
+  const [token, setToken] = useState('');
+
+  const api = 'https://ski-api-m9x9.onrender.com';
   
-    const api = 'https://ski-api-m9x9.onrender.com';
-    
-    // 練習區塊
-    const signUp = async () => {
-      try {
+  // 練習區塊
+  const signUp = async () => {
+    try {
       const res = await axios.post(`${api}/users`, {
         email: emailSignIn,
         password: passwordSignIn,
         nickname: nickName
       });
-        setResponseMessage('註冊成功');
-        setToken(res.data.token);
-        setIsErrorMessage(false);
-      } catch (error) {
-        setResponseMessage(`註冊失敗: ${error.response?.data?.message || '未知錯誤'}`);
-        setIsErrorMessage(true);
-      }
-    };
+      setResponseMessage('註冊成功');
+      setToken(res.data.token);
+      setIsErrorMessage(false);
+    } catch (error) {
+      setResponseMessage(`註冊失敗: ${error.response?.data?.message || '未知錯誤'}`);
+      setIsErrorMessage(true);
+    }
+  };
     
   return (
     <div className="container mb-5">
