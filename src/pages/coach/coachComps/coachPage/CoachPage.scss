@@ -16,6 +16,17 @@
   height: 800px;
 }
 
+
+
+.coach-profile-img {
+  width: 100%;
+  object-fit: cover;
+
+  @media (min-width: 576px) {
+    width: 50%;
+  }
+}
+
 .coach-profile-list {
   max-width: 368px;
 }
@@ -24,10 +35,9 @@
   top: -20px;
   right: 15px;
 
-  font-size: 48px;
 
-  color: rgb(255, 251, 31);
-
+  font-size: 1.5rem;
+  
   cursor: pointer;
 }
 
@@ -56,13 +66,22 @@
 .coach-detail-tab {
   text-decoration: none;
   color: #888888;
-  font-size: 24px;
+  font-size: 1rem;
 
   &.active {
     position: relative;
-    color: #779ecb;
-    padding-bottom: 17px;
-    border-bottom: 3px solid #779ecb;
+
+    color: #779ECB;
+    padding-bottom: 0.5rem;
+    border-bottom: 3px solid #779ECB;
+  }
+
+  @media (min-width: 768px) {
+    font-size: 1.5rem;
+
+    &.active {
+      padding-bottom: 1rem;
+    }
   }
 }
 

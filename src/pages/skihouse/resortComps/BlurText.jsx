@@ -1,19 +1,22 @@
 import { useRef, useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import { useSprings, animated } from '@react-spring/web';
 
-const BlurText = ({
-  text = '',
-  delay = 200,
-  className = '',
-  animateBy = 'words', // 'words' or 'letters'
-  direction = 'bottom', // 'top' or 'bottom'
-  threshold = 0.1,
-  rootMargin = '0px',
-  animationFrom,
-  animationTo,
-  easing = 'easeOutCubic',
-  onAnimationComplete,
-}) => {
+const BlurText = (props) => {
+  const {
+    text = '',
+    delay = 200,
+    className = '',
+    animateBy = 'words',
+    direction = 'bottom',
+    threshold = 0.1,
+    rootMargin = '0px',
+    animationFrom,
+    animationTo,
+    easing = 'easeOutCubic',
+    onAnimationComplete,
+  } = props;
+
   const elements = animateBy === 'words' ? text.split(' ') : text.split('');
   const [inView, setInView] = useState(false);
   const ref = useRef();
@@ -38,8 +41,8 @@ const BlurText = ({
       ([entry]) => {
         if (entry.isIntersecting) {
           setInView(true);
-        }else{
-          setInView(false); 
+        } else {
+          setInView(false);
           animatedCount.current = 0;
         }
       },
@@ -57,7 +60,7 @@ const BlurText = ({
       from: animationFrom || defaultFrom,
       to: inView
         ? async (next) => {
-          for (const step of (animationTo || defaultTo)) {
+          for (const step of animationTo || defaultTo) {
             await next(step);
           }
           animatedCount.current += 1;
@@ -88,6 +91,21 @@ const BlurText = ({
       ))}
     </p>
   );
+};
+
+// ✅ PropTypes 驗證
+BlurText.propTypes = {
+  text: PropTypes.string,
+  delay: PropTypes.number,
+  className: PropTypes.string,
+  animateBy: PropTypes.oneOf(['words', 'letters']),
+  direction: PropTypes.oneOf(['top', 'bottom']),
+  threshold: PropTypes.number,
+  rootMargin: PropTypes.string,
+  animationFrom: PropTypes.object,
+  animationTo: PropTypes.arrayOf(PropTypes.object),
+  easing: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+  onAnimationComplete: PropTypes.func,
 };
 
 export default BlurText;
