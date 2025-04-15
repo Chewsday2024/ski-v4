@@ -8,8 +8,6 @@ import AOS from "aos";
 import "aos/dist/aos.css"; // 引入 AOS 的 CSS 样式
 import BlurText from './resortComps/BlurText';
 
-
-
 export default  function SkiResortDetailPage() {
   const [skiResorts, setSkiResorts] = useState({});
   const [coaches, setCoaches] = useState([]);
@@ -39,7 +37,7 @@ export default  function SkiResortDetailPage() {
       }
     };
     getCoaches(id);
-  },[])
+  },[id])
 
   AOS.init();
 
@@ -61,18 +59,12 @@ export default  function SkiResortDetailPage() {
 
   // 根據 skiResorts.selectCoach 過濾教練
   const filteredCoaches = coaches.filter(coach => skiResorts.selectCoach?.includes(coach.id));
-
   const handleBookingCoach =(id) =>{
-    navigate(`/${id}`);
+    navigate(`/coach/${id}`);
   }
-  
   const handleSeeMore = () =>{
     navigate(`/coach`);
   }
-
-
-
-
 
   return (
     <div className="container mt-4 ">
