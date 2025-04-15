@@ -7,6 +7,7 @@ function SignUpForm() {
   const [nickName, setNickName] = useState('');
   const [responseMessage, setResponseMessage] = useState('');
   const [isErrorMessage, setIsErrorMessage] = useState(false);
+  // eslint-disable-next-line no-unused-vars
   const [token, setToken] = useState('');
 
   const api = 'https://ski-api-m9x9.onrender.com';

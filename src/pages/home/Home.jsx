@@ -1,7 +1,7 @@
 import BackToTopButton from '../../components/BackToTopButton';
 import BannerSection from './homeComps/BannerSection';
 import ServicesSection from './homeComps/ServicesSection';
-import SwiperSection from './homeComps/SwiperSection';
+import CoachesSection from './homeComps/CoachesSection';
 import SkiHouseSection from './homeComps/SkiHouseSection';
 import ArticleSection from './homeComps/ArticleSection';
 import FAQ from './homeComps/FAQ';
@@ -19,7 +19,7 @@ function Home() {
         {/* 提供的服務 */}
         <ServicesSection />
         {/* 教練 */}          
-        <SwiperSection />
+        <CoachesSection />
         {/* 雪場 */}  
         <SkiHouseSection />
         {/* 文章 */}

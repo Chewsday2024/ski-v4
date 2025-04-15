@@ -5,7 +5,7 @@ import { Autoplay } from 'swiper/modules';
 import 'swiper/css'
 import './homeComps.scss'
 
-function SwiperSection() {
+function CoachesSection() {
   const [coaches] = useState([
     {
       id: 1,
@@ -119,4 +119,4 @@ function SwiperSection() {
   )
 }
 
-export default SwiperSection;
+export default CoachesSection;
