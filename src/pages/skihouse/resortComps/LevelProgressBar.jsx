@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import '../../skihouse/SkiHouse.scss';
 import { useParams } from 'react-router';
+import Swal from "sweetalert2";
 
 export default function LevelProgressBar(){
   const [skiResorts, setSkiResorts] = useState({});
@@ -13,7 +14,12 @@ export default function LevelProgressBar(){
         const res = await axios.get(`https://ski-api-m9x9.onrender.com/skiResorts/${id}`)
         setSkiResorts(res.data);
       } catch (error) {
-        alert(`Error: ${error.message}`);
+        console.error(error);
+        Swal.fire({
+          title: "取得雪道分級資料失敗",
+          icon: "error",
+          confirmButtonText: "確定"
+        });
       }
     };
     fetchResort(id);

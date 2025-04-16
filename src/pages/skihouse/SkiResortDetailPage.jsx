@@ -7,6 +7,7 @@ import BackToTopButton from '../../components/BackToTopButton';
 import AOS from "aos";
 import "aos/dist/aos.css"; // 引入 AOS 的 CSS 样式
 import BlurText from './resortComps/BlurText';
+import Swal from "sweetalert2";
 
 export default  function SkiResortDetailPage() {
   const [skiResorts, setSkiResorts] = useState({});
@@ -20,7 +21,13 @@ export default  function SkiResortDetailPage() {
         const res = await axios.get(`https://ski-api-m9x9.onrender.com/skiResorts/${id}`)
         setSkiResorts(res.data);
       } catch (error) {
-        alert(`Error: ${error.message}`);
+        //alert(`Error: ${error.message}`);
+        console.error(error);
+        Swal.fire({
+          title: "取得雪場資料失敗",
+          icon: "error",
+          confirmButtonText: "確定"
+        });
       }
     };
     fetchResort(id);
@@ -33,7 +40,13 @@ export default  function SkiResortDetailPage() {
         setCoaches(res.data);
         
       } catch (error) {
-        alert(`Error: ${error.message}`);
+        //alert(`Error: ${error.message}`);
+        console.error(error);
+        Swal.fire({
+          title: "取得教練資料失敗",
+          icon: "error",
+          confirmButtonText: "確定"
+        });
       }
     };
     getCoaches(id);
