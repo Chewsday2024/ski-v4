@@ -1,4 +1,4 @@
-// import App from '../App';
+import App from '../App';
 import BookingPage from '../pages/order/BookingPage';
 import CheckoutFail from '../pages/order/CheckoutFail';
 import CheckoutPage from '../pages/order/CheckoutPage';
@@ -20,14 +20,14 @@ import AdminLayout from '../layout/AdminLayout';
 import UserCenter from '../pages/center/UserCenter';
 import MemberListPage from '../pages/admin/MemberListPage';
 import FavoritePage from '../pages/coach/coachComps/favoritePage/FavoritePage';
-import FrontLayout from '../layout/FrontLayout';
+// import FrontLayout from '../layout/FrontLayout';
 
 
 
 const routes = [
   {
     path: '/',
-    element: <FrontLayout />,
+    element: <App />,
     children: [
       {
         index: true,

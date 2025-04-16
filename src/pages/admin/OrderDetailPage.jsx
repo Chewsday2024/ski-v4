@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from "react-router";
 import "./Admin.scss";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import { twFormatter } from "./adminUtils/TimeFormat";
 
@@ -15,12 +15,12 @@ export default function OrderDetailPage() {
   const [timeType, setTimeType] = useState([]); //  上課時間
   const [skiLevel, setSkiLevel] = useState([]); //  滑行程度
 
-  const getOrder = async () => {
+  const getOrder = useCallback (async () => {
     const res = await axios.get(
       `${BASE_URL}/orders/${id}?_expand=user&_expand=skiResort&_expand=coach`
     );
     setOrder(res.data);
-  };
+  },[id]);
 
   const getTimeType = async () => {
     const res = await axios.get(`${BASE_URL}/classTimeType`);
@@ -36,7 +36,7 @@ export default function OrderDetailPage() {
     getOrder();
     getTimeType();
     getSkiLevel();
-  }, [id]);
+  }, [id,getOrder]);
 
   return (
     <>

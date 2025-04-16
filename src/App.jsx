@@ -4,8 +4,6 @@ import Header from './layout/Header';
 import Footer from './layout/Footer';
 import ScrollToTop from './components/ScrollToTop';
 import { useEffect, useState } from 'react';
-// import { OrderContext } from './pages/order/BookingPage';
-// import defaultOrder from './pages/order/BookingPage';
 import { OrderContext } from './pages/order/OrderContext';
 import { defaultOrder } from './pages/order/DefaultOrder';
 
@@ -20,7 +18,7 @@ function App() {
     const localOrder = localStorage.getItem('orderData');
     return localOrder && localOrder !== 'undefined'  ? JSON.parse(localOrder) : defaultOrder;
   });
-
+  
   // 當 order 更新時，將資料存入 localStorage
   useEffect(() => {
     localStorage.setItem('orderData', JSON.stringify(order));
@@ -33,9 +31,11 @@ function App() {
       <Header />
       <OrderContext.Provider 
         value={{order,setOrder,errorMessage,setErrorMessage}}>
-        <Outlet />
-        <ScrollToTop/>
-        {/* <AboutLoading/> */}
+        <div className="front-container">  {/* 用來包住所有前台頁面 */}
+          <Outlet />
+          <ScrollToTop/>
+          {/* <AboutLoading/> */}
+        </div>
       </OrderContext.Provider>
       <Footer />
     </div>
