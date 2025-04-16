@@ -85,8 +85,6 @@ function BannerSection() {
           </Link>
         </div>
       </div>
-
-
     </section>
   );
 }
