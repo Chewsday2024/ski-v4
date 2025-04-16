@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
-import toast from 'react-hot-toast';
+import Swal from "sweetalert2";
 
 
 const loadFavorites = () => {
@@ -64,7 +64,12 @@ const coachpageSlice = createSlice({
 
         state.error = action.error.message;
 
-        toast.error('請求資訊錯誤！')
+        Swal.fire({
+          title: "取得教練資料失敗",
+          text: action.error.message,
+          icon: "error",
+          confirmButtonText: "確定"
+        })
       })
   }
 });
