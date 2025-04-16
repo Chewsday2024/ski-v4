@@ -28,8 +28,13 @@ export default function BookingPage() {
   const onSubmit = async () => {
     try {
       orderNavigate("/checkout");
-    } catch (errors) {
-      console.error(errors);
+    } catch (error) {
+      Swal.fire({
+        title: "資料送出失敗",
+        text: error.message,
+        icon: "error",
+        confirmButtonText: "確定"
+      });
     }
   };
 
@@ -71,9 +76,9 @@ export default function BookingPage() {
       const res = await axios.get(`${BASE_URL}/skiResorts`);
       setAllSkiHouses(res.data);
     } catch (error) {
-      console.error(error);
       Swal.fire({
         title: "取得雪場資料失敗",
+        text: error.message,
         icon: "error",
         confirmButtonText: "確定"
       });
@@ -86,9 +91,9 @@ export default function BookingPage() {
       const res = await axios.get(`${BASE_URL}/coaches`);
       setAllCoaches(res.data);
     } catch (error) {
-      console.error(error);
       Swal.fire({
         title: "取得教練資料失敗",
+        text: error.message,
         icon: "error",
         confirmButtonText: "確定"
       });
@@ -101,9 +106,9 @@ export default function BookingPage() {
       const res = await axios.get(`${BASE_URL}/classTimeType`);
       setClassTime(Object.entries(res.data));
     } catch (error) {
-      console.error(error);
       Swal.fire({
         title: "取得上課時間資料失敗",
+        text: error.message,
         icon: "error",
         confirmButtonText: "確定"
       });
@@ -116,37 +121,14 @@ export default function BookingPage() {
       const res = await axios.get(`${BASE_URL}/studentSkiLevel`);
       setSkillLevels(Object.entries(res.data));
     } catch (error) {
-      console.error(error);
       Swal.fire({
         title: "取得滑行程度資料失敗",
+        text: error.message,
         icon: "error",
         confirmButtonText: "確定"
       });
     }
   };
-
-  useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    } else {
-      orderNavigate("/sign-in");
-      // alert("請先登入！");
-      Swal.fire({
-        title: "請先登入！",
-        icon: "error",
-        confirmButtonText: "確定"
-      });
-    }
-    init();
-  }, []);
-
-  useEffect(() => {
-    if (apiFinish) {
-      getStorage();
-      setInitFinish(true);
-    }
-  }, [apiFinish]);
 
   const init = async () => {
     await getSkiHouse();
@@ -342,6 +324,7 @@ export default function BookingPage() {
   };
 
   const { order, setOrder } = useContext(OrderContext);
+  
 
   // 把選擇的資料存到 orders 訂單裡
   const handleOrder = () => {
@@ -382,21 +365,7 @@ export default function BookingPage() {
     if (initFinish) {
       handleOrder();
     }
-  }, [
-    selectedSkiHouse,
-    selectedCoach,
-    selectedSkiType,
-    selectedClass,
-    selectedDate,
-    selectedStartDate,
-    selectedEndDate,
-    days,
-    selectedStudentNum,
-    selectedSkillLevel,
-    students,
-    totalHours,
-    totalPrice,
-  ]);
+  }, []);
 
   // 當 Storage 有資料時，則回填
   const getStorage = () => {
@@ -406,7 +375,7 @@ export default function BookingPage() {
         ? JSON.parse(localOrder)
         : undefined;
     if (storageOrder && storageOrder !== undefined) {
-      if (order.skiResortId !== 0) {
+      if (order?.skiResortId !== 0) {
         setSelectedSkiHouse(storageOrder.skiResortId);
         setSelectedSkiHouseName(storageOrder.skiResortName);
         setSelectedCoach(Number(storageOrder.coachId));
@@ -453,6 +422,29 @@ export default function BookingPage() {
       }
     }
   };
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    } else {
+      orderNavigate("/sign-in");
+      // alert("請先登入！");
+      Swal.fire({
+        title: "請先登入！",
+        icon: "error",
+        confirmButtonText: "確定"
+      });
+    }
+    init();
+  }, []);
+
+  useEffect(() => {
+    if (apiFinish) {
+      getStorage();
+      setInitFinish(true);
+    }
+  }, [apiFinish]);
 
   return (
     <div className="container">

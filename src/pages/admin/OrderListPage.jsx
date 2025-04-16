@@ -25,9 +25,9 @@ export default function OrderListPage() {
       setAllOrders(res.data);
       setFilteredOrders(res.data);
     } catch (error) {
-      console.error(error);
       Swal.fire({
         title: "取得訂單資料失敗",
+        text: error.message,
         icon: "error",
         confirmButtonText: "確定"
       });
@@ -96,9 +96,9 @@ export default function OrderListPage() {
       await axios.put(`${BASE_URL}/orders/${id}`, order);
       // alert("資料更新完畢!");
     } catch (error) {
-      console.error(error);
       Swal.fire({
         title: "資料更新失敗",
+        text: error.message,
         icon: "error",
         confirmButtonText: "確定"
       });

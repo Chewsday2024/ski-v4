@@ -31,7 +31,7 @@ export default function CheckoutPage() {
     note: "",
   });
   const [isChecked, setIsChecked] = useState(false); //是否勾選同意條款
-  const { setErrorMessage } = useContext(OrderContext); //錯誤訊息
+  const { setErrorMessage } = useContext(OrderContext);//錯誤訊息
 
   const orderNavigate = useNavigate();
 
@@ -50,9 +50,9 @@ export default function CheckoutPage() {
       localStorage.removeItem("orderData");
       setOrder(defaultOrder);
     } catch (error) {
-      console.error(error);
       Swal.fire({
         title: "預約資料送出失敗",
+        text: error.message,
         icon: "error",
         confirmButtonText: "確定"
       });
@@ -77,16 +77,16 @@ export default function CheckoutPage() {
         const res = await axios.get(`${BASE_URL}/paymentWays`);
         setPayments(res.data);
       } catch (error) {
-        console.error(error);
         Swal.fire({
           title: "取得付款方式資料失敗",
+          text: error.message,
           icon: "error",
           confirmButtonText: "確定"
         });
       }
     };
     getPayments();
-  }, []);
+  }, [orderNavigate]);
 
   const handleContact = (e) => {
     const { name, value } = e.target;
@@ -101,12 +101,11 @@ export default function CheckoutPage() {
     // return now.toLocaleString();
     return now.toISOString();
   };
-
-  // 把填入的資料更新存到 orders 訂單裡
-  const updateOrder = () => {
+  
+  useEffect(() => {
+    // 把填入的資料更新存到 orders 訂單裡
     const tmpOrder = {
       ...order,
-      orderTime: getSubmitTime(),
       contactInfo: {
         name: inputContactData.lastName + inputContactData.firstName,
         phone: inputContactData.phone,
@@ -118,22 +117,22 @@ export default function CheckoutPage() {
       paymentMethod: Number(checkedPayment),
       isPaid: true,
     };
-    setOrder(tmpOrder);
-  };
 
-  useEffect(() => {
-    updateOrder();
-  }, [inputContactData, isChecked, checkedPayment]);
+    if (JSON.stringify(order) !== JSON.stringify(tmpOrder)) {
+      setOrder(tmpOrder);
+    }
+  }, [inputContactData, isChecked, checkedPayment, order, setOrder]);
 
   // 送出訂單
   const submitOrder = async () => {
     try {
+      order.orderTime = getSubmitTime();
       await axios.post(`${BASE_URL}/orders`, order);
       orderNavigate("/checkout-success");
     } catch (error) {
-      console.error(error);
       Swal.fire({
         title: "送出訂單失敗",
+        text: error.message,
         icon: "error",
         confirmButtonText: "確定"
       });
@@ -164,11 +163,11 @@ export default function CheckoutPage() {
                       日期
                     </label>
                     <p className="form-control-plaintext w-70 w-md-80 fw-bold">
-                      {order.class?.timeType === "allday"
-                        ? order.class.startDate !== order.class.endDate
-                          ? `${order.class.startDate} ～ ${order.class.endDate}`
-                          : order.class.startDate
-                        : order.class?.date}
+                      {order?.class?.timeType === "allday"
+                        ? order?.class.startDate !== order?.class.endDate
+                          ? `${order?.class.startDate} ～ ${order?.class.endDate}`
+                          : order?.class.startDate
+                        : order?.class?.date}
                     </p>
                   </div>
                 </div>
@@ -178,7 +177,7 @@ export default function CheckoutPage() {
                       時間
                     </label>
                     <p className="form-control-plaintext w-70 w-md-80  fw-bold">
-                      {order.class?.timeTypeName}
+                      {order?.class?.timeTypeName}
                     </p>
                   </div>
                 </div>
@@ -188,7 +187,7 @@ export default function CheckoutPage() {
                       天數
                     </label>
                     <p className="form-control-plaintext w-70 w-md-80  fw-bold">
-                      {order.class?.days} 天
+                      {order?.class?.days} 天
                     </p>
                   </div>
                 </div>
@@ -198,7 +197,7 @@ export default function CheckoutPage() {
                       雪場
                     </label>
                     <p className="form-control-plaintext w-70 w-md-80 fw-bold">
-                      {order.skiResortName}
+                      {order?.skiResortName}
                     </p>
                   </div>
                 </div>
@@ -208,8 +207,8 @@ export default function CheckoutPage() {
                       類型
                     </label>
                     <p className="form-control-plaintext w-70 w-md-80 fw-bold">
-                      {order.class?.skiType
-                        ? order.class.skiType === "single"
+                      {order?.class?.skiType
+                        ? order?.class.skiType === "single"
                           ? "單板"
                           : "雙板"
                         : ""}
@@ -222,7 +221,7 @@ export default function CheckoutPage() {
                       教練
                     </label>
                     <p className="form-control-plaintext w-70 w-md-80 fw-bold">
-                      {order.coachName}
+                      {order?.coachName}
                     </p>
                   </div>
                 </div>
@@ -242,7 +241,7 @@ export default function CheckoutPage() {
                     上課人數
                   </label>
                   <p className="form-control-plaintext w-70 w-md-80  fw-bold">
-                    {order.studentsData?.studentNum} 人
+                    {order?.studentsData?.studentNum} 人
                   </p>
                 </div>
               </div>
@@ -252,14 +251,14 @@ export default function CheckoutPage() {
                     滑行程度
                   </label>
                   <p className="form-control-plaintext w-70 w-md-80  fw-bold">
-                    {order.studentsData?.skiLevelName}
+                    {order?.studentsData?.skiLevelName}
                   </p>
                 </div>
               </div>
               {/* 區塊：學員資料明細 */}
               <div className="mb-3 form-section">
                 <div className="row g-3">
-                  {order.studentsData?.students.map((student, index) => {
+                  {order?.studentsData?.students.map((student, index) => {
                     return (
                       <div key={index} className="col-md-6">
                         <div className="card border-0">
@@ -319,7 +318,7 @@ export default function CheckoutPage() {
                         價格/每小時
                       </label>
                       <p className="form-control-plaintext w-70 w-md-80 fw-bold">
-                        {`JPY ${order.coachPrice?.toLocaleString()}`}
+                        {`JPY ${order?.coachPrice?.toLocaleString()}`}
                       </p>
                     </div>
                   </div>
@@ -329,7 +328,7 @@ export default function CheckoutPage() {
                         時數
                       </label>
                       <p className="form-control-plaintext w-70 w-md-80 fw-bold">
-                        {order.paymentDetail?.hours} 小時
+                        {order?.paymentDetail?.hours} 小時
                       </p>
                     </div>
                   </div>
@@ -339,7 +338,7 @@ export default function CheckoutPage() {
                         人數
                       </label>
                       <p className="form-control-plaintext w-70 w-md-80 fw-bold">
-                        {order.studentsData?.studentNum} 人
+                        {order?.studentsData?.studentNum} 人
                       </p>
                     </div>
                   </div>
@@ -348,7 +347,7 @@ export default function CheckoutPage() {
                       <label htmlFor="" className="form-label mb-0 fs-4">
                         總金額
                       </label>
-                      <p className="form-control-plaintext w-70 w-md-80 fw-bold fs-3 text-brand-01">{`JPY ${order.paymentDetail?.total.toLocaleString()}`}</p>
+                      <p className="form-control-plaintext w-70 w-md-80 fw-bold fs-3 text-brand-01">{`JPY ${order?.paymentDetail?.total.toLocaleString()}`}</p>
                     </div>
                   </div>
                 </div>

@@ -29,7 +29,7 @@ export default function AdminLayout(){
         });  
       }, 0);
     }
-  }, []);
+  }, [navigate]);
 
   const handleLogout = () => {
     localStorage.removeItem("user");
