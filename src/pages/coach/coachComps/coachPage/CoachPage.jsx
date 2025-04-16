@@ -29,7 +29,7 @@ function CoachPage () {
   
   const favorites = useSelector(getFavorites);
   
-  const isFavorite = favorites.find( item => item.id === coach.id);
+  const isFavorite = favorites?.find( item => item.id === coach.id);
 
   const { id } = useParams();
 
@@ -91,13 +91,12 @@ function CoachPage () {
           <div className="col ">
             <div className='profile-col'>
               <div className="d-sm-flex m-auto gap-4 h-100 coach-profile-container">
-                <div className='position-relative'>
-                  <img
-                    className='w-100  rounded-4  coach-profile-img'
-                    src={coach.profileImg}
-                    alt={coach.name}
-                  />
-                </div>
+                <img
+                  className='rounded-4  coach-profile-img'
+                  src={coach.profileImg}
+                  alt={coach.name}
+                />
+                
 
                 <ul className="d-flex flex-column justify-content-between gap-3 gap-sm-0 p-0 m-0 mt-3 mt-sm-0 w-100 list-unstyled coach-profile-list">
                   <li>
@@ -180,6 +179,7 @@ function CoachPage () {
                         ${ isFavorite ? 'bi-bookmark-fill' : 'bi-bookmark'}
 
                         text-brand-01
+                        p-1
 
                         coach-bookmark
                       `} 
@@ -204,7 +204,7 @@ function CoachPage () {
 
 
           <div className='col about-coach-col'>
-            <ul className="nav row row-cols-2 row-cols-md-5 g-4 m-auto mb-5 text-center">
+            <ul className="nav row row-cols-1 row-cols-md-5 g-4 m-auto mb-5 text-center">
               <li className='col'>
                 <a className="active coach-detail-tab" data-bs-toggle="tab" href="#member">會員中心</a>
               </li>

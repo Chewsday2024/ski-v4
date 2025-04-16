@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { NavLink, useLocation, useNavigate } from 'react-router';
 
 import './Header.scss';
+import { Toaster } from "react-hot-toast";
 
 function Header() {
   const activeClass = ({ isActive }) => `nav-link text-brand-01 ${isActive ? "text-brand-02" : ""}`;

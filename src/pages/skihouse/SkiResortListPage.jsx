@@ -4,15 +4,13 @@ import './SkiHouse.scss';
 import axios from 'axios';
 import ResortCard from './resortComps/ResortCard';
 import BackToTopButton from '../../components/BackToTopButton';
-
-
+import Swal from "sweetalert2";
 
 export default function SkiResortListPage() {
   const [skiResorts, setSkiResorts] = useState([]); 
   const [resortSelect, setResortSelect]= useState("");
   const areas = ["北海道", "東北", "新潟", "長野"];
   const location = useLocation();
-
 
   //分析 URL 篩選出該區域雪場
   useEffect(() =>{
@@ -29,7 +27,13 @@ export default function SkiResortListPage() {
         const res = await axios.get('https://ski-api-m9x9.onrender.com/skiResorts');
         setSkiResorts(res.data);
       } catch (error) {
-        alert(`Error: ${error.message}`)
+        //alert(`Error: ${error.message}`)
+        console.error(error);
+        Swal.fire({
+          title: "取得雪場資料失敗",
+          icon: "error",
+          confirmButtonText: "確定"
+        });
       }
     };
     getSkiResorts();
@@ -44,12 +48,6 @@ export default function SkiResortListPage() {
   const filteredSkiResorts = !resortSelect || resortSelect === "all"
     ? skiResorts
     : skiResorts.filter((resort) => resort.area.trim() === resortSelect.trim());
-
-
-
-
-
-
 
   return(
     <div className="container d-flex flex-column align-items-center pb-5">

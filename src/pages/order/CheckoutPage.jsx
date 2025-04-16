@@ -7,6 +7,8 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import { OrderContext } from "./OrderContext";
 import { defaultOrder } from "./DefaultOrder";
+import Swal from "sweetalert2";
+import StepFlow from "./orderComps/StepFlow";
 
 export default function CheckoutPage() {
   const BASE_URL = "https://ski-api-m9x9.onrender.com"; //正式機
@@ -48,8 +50,12 @@ export default function CheckoutPage() {
       localStorage.removeItem("orderData");
       setOrder(defaultOrder);
     } catch (error) {
-      // console.error(error);
-      alert("預約資料送出失敗");
+      console.error(error);
+      Swal.fire({
+        title: "預約資料送出失敗",
+        icon: "error",
+        confirmButtonText: "確定"
+      });
     }
   };
 
@@ -59,7 +65,11 @@ export default function CheckoutPage() {
       setUser(JSON.parse(storedUser));
     } else {
       orderNavigate("/sign-in");
-      alert("請先登入！");
+      Swal.fire({
+        title: "請先登入！",
+        icon: "error",
+        confirmButtonText: "確定"
+      });
     }
 
     const getPayments = async () => {
@@ -67,8 +77,12 @@ export default function CheckoutPage() {
         const res = await axios.get(`${BASE_URL}/paymentWays`);
         setPayments(res.data);
       } catch (error) {
-        // console.error(error);
-        alert("取得付款方式資料失敗");
+        console.error(error);
+        Swal.fire({
+          title: "取得付款方式資料失敗",
+          icon: "error",
+          confirmButtonText: "確定"
+        });
       }
     };
     getPayments();
@@ -117,8 +131,12 @@ export default function CheckoutPage() {
       await axios.post(`${BASE_URL}/orders`, order);
       orderNavigate("/checkout-success");
     } catch (error) {
-      // console.error(error);
-      alert("送出訂單失敗");
+      console.error(error);
+      Swal.fire({
+        title: "送出訂單失敗",
+        icon: "error",
+        confirmButtonText: "確定"
+      });
       if (error.response.status === 404) {
         setErrorMessage("404 網路連線問題，請重新嘗試");
         orderNavigate("/checkout-fail");
@@ -128,73 +146,7 @@ export default function CheckoutPage() {
 
   return (
     <div className="container">
-      {/* PC Step flow */}
-      <div className="row justify-content-center">
-        <div className="col-lg-8 col">
-          <div className="d-none d-md-block">
-            <div className="d-flex justify-content-between step-sec">
-              <div className="d-flex">
-                <span className="step-circle d-flex justify-content-center align-items-center">
-                  1
-                </span>
-                <h2 className="fs-4 ms-3 text-gray-03">填寫預約資料</h2>
-              </div>
-              <span className="material-symbols-outlined d-flex justify-content-center align-items-center  text-gray-03">
-                play_arrow
-              </span>
-              <div className="d-flex">
-                <span className="step-circle active d-flex justify-content-center align-items-center">
-                  2
-                </span>
-                <h2 className="fs-4 ms-3 text-brand-01">填寫聯繫方式與付款</h2>
-              </div>
-              <span className="material-symbols-outlined d-flex justify-content-center align-items-center text-brand-01">
-                play_arrow
-              </span>
-              <div className="d-flex">
-                <span className="step-circle d-flex justify-content-center align-items-center">
-                  3
-                </span>
-                <h2 className="fs-4 ms-3 text-gray-03">預約完成</h2>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      {/* Mobile Step Flow */}
-      <div className="row">
-        <div className="col">
-          <div className="d-md-none">
-            <ul className="mobile-steps d-flex mt-20 mb-32">
-              <li className="d-flex flex-column align-items-center">
-                <span className="step-circle mobile-step-number d-flex justify-content-center align-items-center mb-3">
-                  1
-                </span>
-                <h2 className="fs-6 text-gray-03 text-nowrap d-none">
-                  填寫預約資料
-                </h2>
-              </li>
-              <li className="d-flex flex-column align-items-center step-active">
-                <span className="step-circle active d-flex justify-content-center align-items-center mb-3">
-                  2
-                </span>
-                <h2 className="fs-6 text-brand-01 text-nowrap">
-                  填寫聯繫方式與付款
-                </h2>
-              </li>
-              <li className="d-flex flex-column align-items-center">
-                <span className="step-circle d-flex justify-content-center align-items-center mb-3">
-                  3
-                </span>
-                <h2 className="fs-6 text-gray-03 text-nowrap d-none">
-                  預約完成
-                </h2>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
+      <StepFlow currentStep={2}/>
       <div className="row justify-content-center">
         <div className="col-lg-8">
           <form
@@ -463,7 +415,7 @@ export default function CheckoutPage() {
                         htmlFor="contactLastName"
                         className="form-label mb-0"
                       >
-                        姓名
+                        <span className="text-danger">*</span> 姓名
                       </label>
                       <div className="w-70 w-md-80 d-flex">
                         <input
@@ -525,7 +477,7 @@ export default function CheckoutPage() {
                   <div className="mb-3 form-section">
                     <div className="d-flex justify-content-between align-items-center">
                       <label htmlFor="contactPhone" className="form-label mb-0">
-                        聯絡電話
+                        <span className="text-danger">*</span> 聯絡電話
                       </label>
                       <input
                         {...register("contactPhone", {
@@ -562,7 +514,7 @@ export default function CheckoutPage() {
                   <div className="mb-3 form-section">
                     <div className="d-flex justify-content-between align-items-center">
                       <label htmlFor="email" className="form-label mb-0">
-                        E-mail
+                        <span className="text-danger">*</span> E-mail
                       </label>
                       <input
                         {...register("email", {
@@ -600,7 +552,7 @@ export default function CheckoutPage() {
                   <div className="mb-3 form-section">
                     <div className="d-flex justify-content-between align-items-center">
                       <label htmlFor="lineId" className="form-label mb-0">
-                        LINE ID
+                        <span className="text-danger">*</span> LINE ID
                       </label>
                       <input
                         {...register("lineId", {
@@ -637,7 +589,7 @@ export default function CheckoutPage() {
                   <div className="mb-3 form-section">
                     <div className="d-flex justify-content-between align-items-start">
                       <label htmlFor="note" className="form-label mb-0">
-                        備註(選填)
+                        備註
                       </label>
                       <textarea
                         value={inputContactData.note}
@@ -674,7 +626,7 @@ export default function CheckoutPage() {
                         htmlFor="isAgreed"
                         className="form-label mb-0 w-70 w-md-80 text-nowrap"
                       >
-                        本人已詳閱並同意
+                        <span className="text-danger">*</span> 本人已詳閱並同意
                         <Link
                           to="/"
                           className="text-brand-02 text-md-20"
