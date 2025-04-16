@@ -23,7 +23,7 @@ function FAQ() {
   ]
 
   return (
-    <div className="container d-flex flex-column mt-5 mb-4 pb-5">
+    <div className="container d-flex flex-column mt-5 pb-5">
       <div className="align-self-center border-1 border-bottom border-gray-03 w-50 mb-4">
         <h3 className="text-center text-brand-01 fw-bold pb-3">常見問題</h3>
       </div>

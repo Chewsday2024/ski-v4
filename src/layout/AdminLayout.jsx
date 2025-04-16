@@ -29,7 +29,7 @@ export default function AdminLayout(){
         });  
       }, 0);
     }
-  }, []);
+  }, [navigate]);
 
   const handleLogout = () => {
     localStorage.removeItem("user");
@@ -39,9 +39,9 @@ export default function AdminLayout(){
 
   return(
     <div className="d-flex">
-      <aside className="aside-navbar navbar bg-body-tertiary align-items-start vh-100 position-fixed">
+      <aside className="aside-navbar navbar bg-body-tertiary w-25">
         <div className="navbar-content container-fluid flex-column align-items-start h-100">
-          <div className="w-100">
+          <div className="w-50">
             <NavLink to="/" className="navbar-brand">
               <img src="logo-2.png" className="img-fluid mb-5" alt="雪伴 LOGO" />
             </NavLink>
@@ -65,9 +65,9 @@ export default function AdminLayout(){
               }
             </ul>
           </div>
-          <div className="admin-user d-flex align-items-center mb-4">
+          <div className="admin-user d-flex align-items-stretch mb-4">
             <div className="flex-shrink-0">
-              <img src="member-sherry.svg" className="rounded-circle img-fluid admin-head-shot" alt="雪粒"/>
+              <img src="member-sherry.svg" className="rounded-circle img-fluid admin-head-shot" alt="host"/>
             </div>
             <div className="flex-grow-1 ms-3">
               <div className="dropdown dropend">

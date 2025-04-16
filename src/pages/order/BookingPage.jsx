@@ -139,6 +139,7 @@ export default function BookingPage() {
       });
     }
     init();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -146,6 +147,7 @@ export default function BookingPage() {
       getStorage();
       setInitFinish(true);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [apiFinish]);
 
   const init = async () => {
@@ -303,6 +305,7 @@ export default function BookingPage() {
 
   useEffect(() => {
     countHours();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedClass, selectedStartDate, selectedEndDate, selectedDate]);
 
   // 計算總金額
@@ -313,6 +316,7 @@ export default function BookingPage() {
 
   useEffect(() => {
     countTotalPrice();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedCoachPrice, totalHours, selectedStudentNum]);
 
   const [students, setStudents] = useState([]); //學員資料
@@ -382,6 +386,7 @@ export default function BookingPage() {
     if (initFinish) {
       handleOrder();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     selectedSkiHouse,
     selectedCoach,

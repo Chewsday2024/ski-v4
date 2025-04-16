@@ -1,14 +1,11 @@
 import { Outlet } from 'react-router';
 import './App.scss';
-import Header from './layout/Header';
-import Footer from './layout/Footer';
 import ScrollToTop from './components/ScrollToTop';
 import { useEffect, useState } from 'react';
 // import { OrderContext } from './pages/order/BookingPage';
 // import defaultOrder from './pages/order/BookingPage';
 import { OrderContext } from './pages/order/OrderContext';
 import { defaultOrder } from './pages/order/DefaultOrder';
-
 // import AboutLoading from './component/AboutLoading';
 
 
@@ -30,14 +27,12 @@ function App() {
 
   return (
     <div className='d-flex flex-column justify-content-between min-vh-100'>
-      <Header />
       <OrderContext.Provider 
         value={{order,setOrder,errorMessage,setErrorMessage}}>
         <Outlet />
         <ScrollToTop/>
         {/* <AboutLoading/> */}
       </OrderContext.Provider>
-      <Footer />
     </div>
   )
 }

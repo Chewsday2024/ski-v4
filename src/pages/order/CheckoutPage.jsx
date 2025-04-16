@@ -86,6 +86,7 @@ export default function CheckoutPage() {
       }
     };
     getPayments();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleContact = (e) => {
@@ -123,6 +124,7 @@ export default function CheckoutPage() {
 
   useEffect(() => {
     updateOrder();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inputContactData, isChecked, checkedPayment]);
 
   // 送出訂單
