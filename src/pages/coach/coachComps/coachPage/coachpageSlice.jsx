@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
+import toast from 'react-hot-toast';
 
 
 const loadFavorites = () => {
@@ -63,7 +64,7 @@ const coachpageSlice = createSlice({
 
         state.error = action.error.message;
 
-        alert('請求資訊錯誤！');
+        toast.error('請求資訊錯誤！')
       })
   }
 });
