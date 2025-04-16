@@ -324,7 +324,6 @@ export default function BookingPage() {
   };
 
   const { order, setOrder } = useContext(OrderContext);
-  console.log("order",order);
   
 
   // 把選擇的資料存到 orders 訂單裡

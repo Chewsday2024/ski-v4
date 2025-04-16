@@ -31,7 +31,7 @@ export default function CheckoutPage() {
     note: "",
   });
   const [isChecked, setIsChecked] = useState(false); //是否勾選同意條款
-  const { setErrorMessage } = useContext(OrderContext); //錯誤訊息
+  const { setErrorMessage } = useContext(OrderContext);//錯誤訊息
 
   const orderNavigate = useNavigate();
 
@@ -86,7 +86,7 @@ export default function CheckoutPage() {
       }
     };
     getPayments();
-  }, []);
+  }, [orderNavigate]);
 
   const handleContact = (e) => {
     const { name, value } = e.target;
@@ -101,12 +101,11 @@ export default function CheckoutPage() {
     // return now.toLocaleString();
     return now.toISOString();
   };
-
-  // 把填入的資料更新存到 orders 訂單裡
-  const updateOrder = () => {
+  
+  useEffect(() => {
+    // 把填入的資料更新存到 orders 訂單裡
     const tmpOrder = {
       ...order,
-      orderTime: getSubmitTime(),
       contactInfo: {
         name: inputContactData.lastName + inputContactData.firstName,
         phone: inputContactData.phone,
@@ -118,16 +117,16 @@ export default function CheckoutPage() {
       paymentMethod: Number(checkedPayment),
       isPaid: true,
     };
-    setOrder(tmpOrder);
-  };
 
-  useEffect(() => {
-    updateOrder();
-  }, [inputContactData, isChecked, checkedPayment]);
+    if (JSON.stringify(order) !== JSON.stringify(tmpOrder)) {
+      setOrder(tmpOrder);
+    }
+  }, [inputContactData, isChecked, checkedPayment, order, setOrder]);
 
   // 送出訂單
   const submitOrder = async () => {
     try {
+      order.orderTime = getSubmitTime();
       await axios.post(`${BASE_URL}/orders`, order);
       orderNavigate("/checkout-success");
     } catch (error) {

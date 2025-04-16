@@ -309,7 +309,7 @@ export default function OrderDetailPage() {
                           付款方式：
                         </label>
                         <p className="fw-bold">
-                          {order.paymentMethod === "1" ? "信用卡" : "銀行轉帳"}
+                          {order.paymentMethod === 1 ? "信用卡" : "銀行轉帳"}
                         </p>
                       </div>
                     </div>
