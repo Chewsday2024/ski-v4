@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import "./Order.scss";
 import { Link, useNavigate } from "react-router";
 import { useContext, useEffect, useRef, useState } from "react";

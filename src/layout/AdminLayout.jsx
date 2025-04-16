@@ -67,7 +67,7 @@ export default function AdminLayout(){
           </div>
           <div className="admin-user d-flex align-items-center mb-4">
             <div className="flex-shrink-0">
-              <img src="member-sherry.svg" className="rounded-circle img-fluid admin-head-shot" alt="雪粒"/>
+              <img src="member-sherry.svg" className="rounded-circle img-fluid admin-head-shot" alt="host"/>
             </div>
             <div className="flex-grow-1 ms-3">
               <div className="dropdown dropend">

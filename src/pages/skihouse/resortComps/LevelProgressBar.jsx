@@ -14,9 +14,9 @@ export default function LevelProgressBar(){
         const res = await axios.get(`https://ski-api-m9x9.onrender.com/skiResorts/${id}`)
         setSkiResorts(res.data);
       } catch (error) {
-        console.error(error);
         Swal.fire({
           title: "取得雪道分級資料失敗",
+          text: error.message,
           icon: "error",
           confirmButtonText: "確定"
         });

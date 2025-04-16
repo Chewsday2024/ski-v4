@@ -21,10 +21,9 @@ export default  function SkiResortDetailPage() {
         const res = await axios.get(`https://ski-api-m9x9.onrender.com/skiResorts/${id}`)
         setSkiResorts(res.data);
       } catch (error) {
-        //alert(`Error: ${error.message}`);
-        console.error(error);
         Swal.fire({
           title: "取得雪場資料失敗",
+          text: error.message,
           icon: "error",
           confirmButtonText: "確定"
         });
@@ -40,10 +39,9 @@ export default  function SkiResortDetailPage() {
         setCoaches(res.data);
         
       } catch (error) {
-        //alert(`Error: ${error.message}`);
-        console.error(error);
         Swal.fire({
           title: "取得教練資料失敗",
+          text: error.message,
           icon: "error",
           confirmButtonText: "確定"
         });

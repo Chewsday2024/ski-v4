@@ -27,10 +27,9 @@ export default function SkiResortListPage() {
         const res = await axios.get('https://ski-api-m9x9.onrender.com/skiResorts');
         setSkiResorts(res.data);
       } catch (error) {
-        //alert(`Error: ${error.message}`)
-        console.error(error);
         Swal.fire({
           title: "取得雪場資料失敗",
+          text: error.message,
           icon: "error",
           confirmButtonText: "確定"
         });

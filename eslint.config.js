@@ -37,7 +37,7 @@ export default [
         { allowConstantExport: true },
       ],
       'react/no-unknown-property': ['error', { ignore: ['for'] }],  // 檢查是否有出現不符合 jsx 的屬性
-      // 'no-console': 'warn', // 檢查是否有出現console
+      'no-console': 'warn', // 檢查是否有出現console
       indent: ["error", 2], // 檢查文件縮排，不包含 css
     },
   },
