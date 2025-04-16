@@ -22,32 +22,34 @@ function FAQ() {
     },
   ]
 
-  return (<div className="container d-flex flex-column mt-5 mb-4 pb-5">
-    <div className="align-self-center border-1 border-bottom border-gray-03 w-50 mb-4">
-      <h3 className="text-center text-brand-01 fw-bold pb-3">常見問題</h3>
-    </div>
-    <div className="row justify-content-center">
-      <div className="col-10">
-        <div className="row row-cols-1 row-cols-lg-2">
-          {
-            questions.map(item => {
-              return (
-                <div key={item.id} className="col">
-                  <div className="card bg-gray-05 border-0 p-lg-3">
-                    <div className="card-body">
-                      <h5 className="card-title text-brand-02 fw-bold border-bottom border-gray-03 mb-3 pb-2">Ｑ：{item.topic}</h5>
-                      <p className="card-text">{item.answer}</p>
+  return (
+    <div className="container d-flex flex-column mt-5 mb-4 pb-5">
+      <div className="align-self-center border-1 border-bottom border-gray-03 w-50 mb-4">
+        <h3 className="text-center text-brand-01 fw-bold pb-3">常見問題</h3>
+      </div>
+      <div className="row justify-content-center">
+        <div className="col-10">
+          <div className="row row-cols-1 row-cols-lg-2">
+            {
+              questions.map(item => {
+                return (
+                  <div key={item.id} className="col">
+                    <div className="card bg-gray-05 border-0 p-lg-3">
+                      <div className="card-body">
+                        <h5 className="card-title text-brand-02 fw-bold border-bottom border-gray-03 mb-3 pb-2">Ｑ：{item.topic}</h5>
+                        <p className="card-text">{item.answer}</p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              )
-            })
-          }
-        </div>
+                )
+              })
+            }
+          </div>
 
+        </div>
       </div>
     </div>
-  </div>)
+  )
 }
 
 export default FAQ;

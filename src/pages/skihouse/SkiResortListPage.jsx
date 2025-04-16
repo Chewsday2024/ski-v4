@@ -4,6 +4,7 @@ import './SkiHouse.scss';
 import axios from 'axios';
 import ResortCard from './resortComps/ResortCard';
 import BackToTopButton from '../../components/BackToTopButton';
+import Swal from "sweetalert2";
 
 export default function SkiResortListPage() {
   const [skiResorts, setSkiResorts] = useState([]); 
@@ -26,7 +27,13 @@ export default function SkiResortListPage() {
         const res = await axios.get('https://ski-api-m9x9.onrender.com/skiResorts');
         setSkiResorts(res.data);
       } catch (error) {
-        alert(`Error: ${error.message}`)
+        //alert(`Error: ${error.message}`)
+        console.error(error);
+        Swal.fire({
+          title: "取得雪場資料失敗",
+          icon: "error",
+          confirmButtonText: "確定"
+        });
       }
     };
     getSkiResorts();

@@ -2,10 +2,10 @@ import AOS from 'aos';
 import 'aos/dist/aos.css'; 
 AOS.init();
 import './homeComps.scss'
-
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from 'react-router';
+import Swal from "sweetalert2";
 
 function SkiHouseSection() {
   const [skiHouse , setSkiHouse] = useState([])
@@ -21,13 +21,18 @@ function SkiHouseSection() {
         const res = await axios.get('https://ski-api-m9x9.onrender.com/skiResorts');
         setSkiHouse(res.data)
       } catch (error) {
-        alert(`Error: ${error.message}`);
+        Swal.fire({
+          title: "取得雪場資料失敗",
+          text: error.message,
+          icon: "error",
+          confirmButtonText: "確定"
+        });
       }
     };
     getData();
   }, []);
 
-  return (<>
+  return (
     <section className="container d-flex flex-column mb-xxl">
       <div className="align-self-center border-1 border-bottom border-gray-03 w-50 mb-5">
         <h3 className="text-center text-brand-01 fw-bold pb-4">推薦雪場</h3>
@@ -67,7 +72,7 @@ function SkiHouseSection() {
         <Link to="/ski-house" className="btn btn-outline-brand-01 home-btn-hover bg-white rounded-pill fs-4 fw-bold px-middle py-3 z-3"><span className="material-symbols-outlined icon-unfill align-bottom me-3 mb-1">arrow_circle_right</span>查看更多雪場</Link>
       </div>
     </section>
-  </>)
+  )
 }
 
 export default SkiHouseSection;

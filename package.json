@@ -10,6 +10,9 @@
     "preview": "vite preview",
     "deploy": "gh-pages -d dist"
   },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "4.6.1"
+  },
   "dependencies": {
     "@fullcalendar/bootstrap5": "^6.1.15",
     "@fullcalendar/daygrid": "^6.1.15",
