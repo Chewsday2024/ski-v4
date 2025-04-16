@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
+import Swal from 'sweetalert2';
  
  
  
@@ -40,7 +41,12 @@ const coachlistSlice = createSlice({
 
         state.error = action.error.message;
 
-        alert('請求資訊錯誤！');
+        Swal.fire({
+          title: "取得教練資料失敗",
+          text: action.error.message,
+          icon: "error",
+          confirmButtonText: "確定"
+        })
       })
   }
 });
