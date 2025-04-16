@@ -1,17 +1,14 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 function SignInForm() {
   const [emailSignIn, setEmailSignIn] = useState("ming@ggmail.com");
   const [passwordSignIn, setPasswordSignIn] = useState("123123");
-  const [responseMessage, setResponseMessage] = useState("");
-  const [isErrorMessage, setIsErrorMessage] = useState(false);
   // eslint-disable-next-line no-unused-vars
   const [user, setUser] = useState(null);
-
   const api = "https://ski-api-m9x9.onrender.com";
-
   const navigate = useNavigate();
 
   const signIn = async () => {
@@ -26,18 +23,29 @@ function SignInForm() {
       );
 
       if (foundUser) {
-        setResponseMessage("登入成功！");
-        setIsErrorMessage(false);
+        Swal.fire({
+          title: "登入成功",
+          icon: "success",
+          showConfirmButton: false,
+          timer: 1500
+        });
         setUser(foundUser); // 設定登入的用戶資訊
         localStorage.setItem("user", JSON.stringify(foundUser)); // 存入 localStorage
         navigate("/booking");
       } else {
-        setResponseMessage("帳號或密碼錯誤");
-        setIsErrorMessage(true);
+        Swal.fire({
+          title: "帳號或密碼錯誤",
+          icon: "error",
+          confirmButtonText: "確定"
+        });
       }
     } catch (error) {
-      setResponseMessage(`登入失敗: ${error.message}`);
-      setIsErrorMessage(true);
+      Swal.fire({
+        title: "取得雪場資料失敗",
+        text: error.message,
+        icon: "error",
+        confirmButtonText: "確定"
+      });
     }
   };
 
@@ -76,7 +84,7 @@ function SignInForm() {
             </div>
             <button
               type="button"
-              className="btn btn-brand-01 home-btn-hover rounded-pill align-self-center w-25 mb-4"
+              className="btn btn-brand-01 home-btn-hover rounded-pill align-self-center px-5 mb-4"
               onClick={signIn}
             >
               登入
@@ -85,11 +93,6 @@ function SignInForm() {
               註冊
             </Link>
           </form>
-          {responseMessage && (
-            <p className={`h3 my-3 ${isErrorMessage ? "text-danger" : "text-success"}`}>
-              {responseMessage}
-            </p>
-          )}
           {/* {user && (
             <div className="mt-3">
               <h3>歡迎, {user.user}!</h3>

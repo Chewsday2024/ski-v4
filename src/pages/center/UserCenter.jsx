@@ -10,7 +10,7 @@ export default function UserCenter() {
     }, 4000)
 
     return  () => clearTimeout(timer);
-  }, [])
+  }, [navigate])
 
   return (
     <>

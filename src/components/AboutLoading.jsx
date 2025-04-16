@@ -1,5 +1,6 @@
 import { useState } from "react"
 import ReactLoading from 'react-loading';
+import Swal from "sweetalert2";
 // import BounceLoader from "react-spinners/BounceLoader";
 
 const promiseSetTimeout = (status) => {
@@ -23,7 +24,12 @@ function AboutLoading() {
     try {
       await promiseSetTimeout(true)
     } catch (error) {
-      alert(`Error: ${error.message}`);
+      Swal.fire({
+        title: "讀取失敗",
+        text: error.message,
+        icon: "error",
+        confirmButtonText: "確定"
+      });
     } finally {
       setLoadingState(false)
     }
