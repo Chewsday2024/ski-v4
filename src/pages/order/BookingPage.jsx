@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import "./Order.scss";
 import { Link, useNavigate } from "react-router";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { OrderContext } from "./OrderContext";
@@ -131,14 +131,14 @@ export default function BookingPage() {
     }
   };
 
-  const init = async () => {
+  const init = useCallback(async () => {
     await getSkiHouse();
     await getCoaches();
     await getClassTime();
     await getSkillLevel();
     handleDate();
     setApiFinish(true);
-  };
+  },[]);
 
   let coachesData = [];
   // 篩選對應的雪場教練
@@ -155,11 +155,11 @@ export default function BookingPage() {
   const [coachImg, setCoachImg] = useState("");
 
   // 取得教練其他資訊(圖片、價格)
-  const getCoachOtherData = (id) => {
+  const getCoachOtherData = useCallback((id) => {
     const coach = allCoaches.find((coach) => coach.id == id);
     setCoachImg(coach?.profileImg);
     setSelectedCoachPrice(coach?.charge);
-  };
+  }, [allCoaches]);
 
   // 取得雪場名稱
   const getSkiHouseName = (id) => {
@@ -262,7 +262,7 @@ export default function BookingPage() {
   };
 
   // 計算總時數
-  const countHours = () => {
+  const countHours = useCallback(() => {
     if (selectedClass) {
       const selectedHours = classTime.find(
         (item) => item[0] == selectedClass
@@ -282,21 +282,23 @@ export default function BookingPage() {
       setDays(computedDays);
       setTotalHours(Number(selectedHours) * computedDays);
     }
-  };
+  },[classTime, selectedClass, selectedDate, selectedStartDate, selectedEndDate]);
 
   useEffect(() => {
     countHours();
-  }, [selectedClass, selectedStartDate, selectedEndDate, selectedDate]);
+  }, [selectedClass, selectedStartDate, selectedEndDate, selectedDate,countHours]);
 
   // 計算總金額
-  const countTotalPrice = () => {
+  const countTotalPrice = useCallback(() => {
     const total = selectedCoachPrice * totalHours * selectedStudentNum;
     setTotalPrice(total);
-  };
+  }, [selectedCoachPrice, totalHours, selectedStudentNum]);
 
   useEffect(() => {
-    countTotalPrice();
-  }, [selectedCoachPrice, totalHours, selectedStudentNum]);
+    if (selectedCoachPrice) {
+      countTotalPrice();
+    }
+  }, [selectedCoachPrice, totalHours, selectedStudentNum, countTotalPrice]);
 
   const [students, setStudents] = useState([]); //學員資料
 
@@ -326,9 +328,8 @@ export default function BookingPage() {
 
   const { order, setOrder } = useContext(OrderContext);
   
-
   // 把選擇的資料存到 orders 訂單裡
-  const handleOrder = () => {
+  const handleOrder = useCallback(() => {
     const tmpOrder = {
       ...order,
       orderStatus: 0,
@@ -359,70 +360,86 @@ export default function BookingPage() {
         total: totalPrice,
       },
     };
-    setOrder(tmpOrder);
-  };
 
-  useEffect(() => {
-    if (initFinish) {
-      handleOrder();
+    if (JSON.stringify(order) !== JSON.stringify(tmpOrder)) {
+      setOrder(tmpOrder);
     }
-  }, []);
+  },[
+    days,
+    order,
+    selectedClass,
+    selectedClassName,
+    selectedCoach,
+    selectedCoachName,
+    selectedCoachPrice,
+    selectedDate,
+    selectedEndDate,
+    selectedSkiHouse,
+    selectedSkiHouseName,
+    selectedSkiType,
+    selectedSkillLevel,
+    selectedSkillLevelName,
+    selectedStartDate,
+    selectedStudentNum,
+    setOrder,
+    students,
+    totalHours,
+    totalPrice,
+    user
+    // setValue
+  ] )
 
-  // 當 Storage 有資料時，則回填
-  const getStorage = () => {
-    const localOrder = localStorage.getItem("orderData");
-    const storageOrder =
-      localOrder && localOrder !== "undefined"
-        ? JSON.parse(localOrder)
-        : undefined;
-    if (storageOrder && storageOrder !== undefined) {
+  const setOrderToState = useCallback((order) => {
+    if (order && order !== undefined) {
       if (order?.skiResortId !== 0) {
-        setSelectedSkiHouse(storageOrder.skiResortId);
-        setSelectedSkiHouseName(storageOrder.skiResortName);
-        setSelectedCoach(Number(storageOrder.coachId));
-        setSelectedSkiType(storageOrder.class?.skiType);
-        setSelectedClassName(storageOrder.class?.timeTypeName);
-        setSelectedClass(storageOrder.class?.timeType);
-        setSelectedStudentNum(storageOrder.studentsData?.studentNum);
-        setSelectedSkillLevel(storageOrder.studentsData?.skiLevel);
-        setSelectedSkillLevelName(storageOrder.studentsData?.skiLevelName);
-        setStudents(storageOrder.studentsData?.students);
-        setSelectedDate(storageOrder.class?.date);
-        setSelectedStartDate(storageOrder.class?.startDate);
-        setSelectedEndDate(storageOrder.class?.endDate);
-        setSelectedCoachName(storageOrder.coachName);
-        setTotalPrice(storageOrder.paymentDetail?.total);
+        setSelectedSkiHouse(order.skiResortId);
+        setSelectedSkiHouseName(order.skiResortName);
+        setSelectedCoach(Number(order.coachId));
+        setSelectedSkiType(order.class?.skiType);
+        setSelectedClassName(order.class?.timeTypeName);
+        setSelectedClass(order.class?.timeType);
+        setSelectedStudentNum(order.studentsData?.studentNum);
+        setSelectedSkillLevel(order.studentsData?.skiLevel);
+        setSelectedSkillLevelName(order.studentsData?.skiLevelName);
+        setStudents(order.studentsData?.students);
+        setSelectedDate(order.class?.date);
+        setSelectedStartDate(order.class?.startDate);
+        setSelectedEndDate(order.class?.endDate);
+        setSelectedCoachName(order.coachName);
+        setTotalPrice(order.paymentDetail?.total);
 
-        setValue("snowHouse", Number(storageOrder.skiResortId), {
-          shouldValidate: true,
-        });
-        setValue("skiCoach", Number(storageOrder.coachId), {
-          shouldValidate: true,
-        });
-        setValue("snowBoard", storageOrder.class?.skiType, {
-          shouldValidate: true,
-        });
-        setValue("classTime", storageOrder.class?.timeType, {
-          shouldValidate: true,
-        });
-        setValue("numOfStudents", storageOrder.studentsData?.studentNum, {
-          shouldValidate: true,
-        });
-        setValue("level", storageOrder.studentsData?.skiLevel, {
-          shouldValidate: true,
-        });
-        setValue("date", storageOrder.class?.date, { shouldValidate: true });
-        setValue("startDate", storageOrder.class?.startDate, {
-          shouldValidate: true,
-        });
-        setValue("endDate", storageOrder.class?.endDate, {
-          shouldValidate: true,
-        });
-
-        getCoachOtherData(Number(storageOrder.coachId));
+        getCoachOtherData(Number(order.coachId));
       }
     }
-  };
+  },[getCoachOtherData]);
+
+  const setHookFormValue = () => {
+    setValue("snowHouse", Number(order.skiResortId), {
+      shouldValidate: true,
+    });
+    setValue("skiCoach", Number(order.coachId), {
+      shouldValidate: true,
+    });
+    setValue("snowBoard", order.class?.skiType, {
+      shouldValidate: true,
+    });
+    setValue("classTime", order.class?.timeType, {
+      shouldValidate: true,
+    });
+    setValue("numOfStudents", order.studentsData?.studentNum, {
+      shouldValidate: true,
+    });
+    setValue("level", order.studentsData?.skiLevel, {
+      shouldValidate: true,
+    });
+    setValue("date", order.class?.date, { shouldValidate: true });
+    setValue("startDate", order.class?.startDate, {
+      shouldValidate: true,
+    });
+    setValue("endDate", order.class?.endDate, {
+      shouldValidate: true,
+    });
+  }
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
@@ -438,14 +455,23 @@ export default function BookingPage() {
       });
     }
     init();
-  }, []);
+  }, [init, orderNavigate]);
 
   useEffect(() => {
     if (apiFinish) {
-      getStorage();
-      setInitFinish(true);
+      // 當 Storage 有資料時，則回填
+      const localOrderString = localStorage.getItem("orderData");
+      const localOrder = localOrderString && localOrderString !== "undefined" ? JSON.parse(localOrderString) : undefined;
+      setOrderToState(localOrder)
+      setInitFinish(true)
     }
-  }, [apiFinish]);
+  }, [apiFinish,setOrderToState]);
+
+  useEffect(() => {
+    if (initFinish) {
+      handleOrder();
+    }
+  }, [initFinish, handleOrder]);
 
   return (
     <div className="container">
@@ -458,7 +484,7 @@ export default function BookingPage() {
               <div className="mb-3 form-section">
                 <div className="d-flex justify-content-between align-items-center">
                   <label htmlFor="snowHouse" className="form-label mb-0">
-                    <span className="text-danger">*</span> 雪場
+                    雪場 <span className="text-danger">*</span>
                   </label>
                   <select
                     {...register("snowHouse", {
@@ -512,7 +538,7 @@ export default function BookingPage() {
               <div className="mb-3 form-section">
                 <div className="d-flex justify-content-between align-items-center">
                   <label htmlFor="snowBoard" className="form-label mb-0">
-                    <span className="text-danger">*</span> 類型
+                    類型 <span className="text-danger">*</span>
                   </label>
                   <select
                     {...register("snowBoard", {
@@ -555,7 +581,7 @@ export default function BookingPage() {
               <div className="mb-3 form-section">
                 <div className="d-flex justify-content-between align-items-center">
                   <label htmlFor="skiCoach" className="form-label mb-0">
-                    <span className="text-danger">*</span> 教練
+                    教練 <span className="text-danger">*</span>
                   </label>
                   <div className="w-70 w-md-80 d-flex">
                     <div className="flex-shrink-0 me-3">
@@ -630,7 +656,7 @@ export default function BookingPage() {
               <div className="mb-3 form-section">
                 <div className="d-flex justify-content-between align-items-center">
                   <label htmlFor="classTime" className="form-label mb-0">
-                    <span className="text-danger">*</span> 時間
+                    時間 <span className="text-danger">*</span>
                   </label>
                   <select
                     {...register("classTime", {
@@ -675,7 +701,7 @@ export default function BookingPage() {
                   <div className="mb-3 form-section">
                     <div className="d-flex justify-content-between align-items-center date-select">
                       <label htmlFor="startDate" className="form-label mb-0">
-                        <span className="text-danger">*</span> 開始日期
+                        開始日期 <span className="text-danger">*</span>
                       </label>
                       <input
                         {...register("startDate", {
@@ -713,7 +739,7 @@ export default function BookingPage() {
                   <div className="mb-3 form-section">
                     <div className="d-flex justify-content-between align-items-center date-select">
                       <label htmlFor="endDate" className="form-label mb-0">
-                        <span className="text-danger">*</span> 結束日期
+                        結束日期 <span className="text-danger">*</span>
                       </label>
                       <input
                         {...register("endDate", {
@@ -753,7 +779,7 @@ export default function BookingPage() {
                 <div className="mb-3 form-section">
                   <div className="d-flex justify-content-between align-items-center date-select">
                     <label htmlFor="date" className="form-label mb-0">
-                      <span className="text-danger">*</span> 日期
+                      日期 <span className="text-danger">*</span>
                     </label>
                     <input
                       {...register("date", {
@@ -797,7 +823,7 @@ export default function BookingPage() {
               <div className="mb-3 form-section">
                 <div className="d-flex justify-content-between align-items-center">
                   <label htmlFor="numOfStudents" className="form-label mb-0">
-                    <span className="text-danger">*</span> 上課人數
+                    上課人數 <span className="text-danger">*</span>
                   </label>
                   <select
                     {...register("numOfStudents", {
@@ -867,7 +893,7 @@ export default function BookingPage() {
               <div className="mb-3 form-section">
                 <div className="d-flex justify-content-between align-items-center">
                   <label htmlFor="level" className="form-label mb-0">
-                    <span className="text-danger">*</span> 滑行程度
+                    滑行程度 <span className="text-danger">*</span>
                   </label>
                   <select
                     {...register("level", {
@@ -929,7 +955,7 @@ export default function BookingPage() {
                           htmlFor={`lastName${index + 1}`}
                           className="form-label mb-0"
                         >
-                          <span className="text-danger">*</span> 姓名
+                          姓名 <span className="text-danger">*</span>
                         </label>
                         <div className="w-70 w-md-80 d-flex">
                           <input
@@ -1002,7 +1028,7 @@ export default function BookingPage() {
                           htmlFor={`sex${index + 1}`}
                           className="form-label mb-0"
                         >
-                          <span className="text-danger">*</span> 性別
+                          性別 <span className="text-danger">*</span>
                         </label>
                         <select
                           {...register(`sex${index + 1}`, {
@@ -1042,7 +1068,7 @@ export default function BookingPage() {
                           htmlFor={`age${index + 1}`}
                           className="form-label mb-0"
                         >
-                          <span className="text-danger">*</span> 年齡
+                          年齡 <span className="text-danger">*</span>
                         </label>
                         <input
                           {...register(`age${index + 1}`, {
@@ -1088,7 +1114,7 @@ export default function BookingPage() {
                           htmlFor={`phone${index + 1}`}
                           className="form-label mb-0"
                         >
-                          <span className="text-danger">*</span> 聯絡電話
+                          聯絡電話 <span className="text-danger">*</span>
                         </label>
                         <input
                           {...register(`phone${index + 1}`, {
@@ -1178,8 +1204,9 @@ export default function BookingPage() {
           type="button"
           form="bookingForm"
           onClick={() => {
-            handleSubmit(onSubmit)();
             handleOrder();
+            setHookFormValue()
+            handleSubmit(onSubmit)();
           }}
           className="btn-custom btn-custom-filled w-lg-25 w-md-50 w-xs-100 text-nowrap"
         >
