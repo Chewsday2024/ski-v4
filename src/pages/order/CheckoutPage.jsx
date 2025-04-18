@@ -414,7 +414,7 @@ export default function CheckoutPage() {
                         htmlFor="contactLastName"
                         className="form-label mb-0"
                       >
-                        <span className="text-danger">*</span> 姓名
+                        姓名 <span className="text-danger">*</span>
                       </label>
                       <div className="w-70 w-md-80 d-flex">
                         <input
@@ -476,7 +476,7 @@ export default function CheckoutPage() {
                   <div className="mb-3 form-section">
                     <div className="d-flex justify-content-between align-items-center">
                       <label htmlFor="contactPhone" className="form-label mb-0">
-                        <span className="text-danger">*</span> 聯絡電話
+                        聯絡電話 <span className="text-danger">*</span>
                       </label>
                       <input
                         {...register("contactPhone", {
@@ -513,7 +513,7 @@ export default function CheckoutPage() {
                   <div className="mb-3 form-section">
                     <div className="d-flex justify-content-between align-items-center">
                       <label htmlFor="email" className="form-label mb-0">
-                        <span className="text-danger">*</span> E-mail
+                        E-mail <span className="text-danger">*</span>
                       </label>
                       <input
                         {...register("email", {
@@ -551,7 +551,7 @@ export default function CheckoutPage() {
                   <div className="mb-3 form-section">
                     <div className="d-flex justify-content-between align-items-center">
                       <label htmlFor="lineId" className="form-label mb-0">
-                        <span className="text-danger">*</span> LINE ID
+                        LINE ID <span className="text-danger">*</span>
                       </label>
                       <input
                         {...register("lineId", {
@@ -625,14 +625,14 @@ export default function CheckoutPage() {
                         htmlFor="isAgreed"
                         className="form-label mb-0 w-70 w-md-80 text-nowrap"
                       >
-                        <span className="text-danger">*</span> 本人已詳閱並同意
+                        本人已詳閱並同意
                         <Link
                           to="/"
                           className="text-brand-02 text-md-20"
                           target="_blank"
                         >
                           預約訂單注意事項
-                        </Link>
+                        </Link> <span className="text-danger">*</span>
                       </label>
                     </div>
                     <div className="d-flex align-items-center w-70 w-md-80">
